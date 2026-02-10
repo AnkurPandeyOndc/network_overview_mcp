@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ondc
+      POSTGRES_PASSWORD: ondc_secret
+      POSTGRES_DB: ondc_analytics
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./schema/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ondc -d ondc_analytics"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  mcp-server:
+    build: .
+    environment:
+      DATABASE_URL: postgresql://ondc:ondc_secret@postgres:5432/ondc_analytics
+      REDIS_URL: redis://redis:6379/0
+      TRANSPORT: http
+      LOG_LEVEL: INFO
+      AUDIT_LOG_PATH: /app/logs/audit.jsonl
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+
+volumes:
+  pgdata:

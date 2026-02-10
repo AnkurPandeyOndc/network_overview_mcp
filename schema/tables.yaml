@@ -1,0 +1,45 @@
+schema: opendata_nodata
+tables:
+  model_for_all_domain:
+    description: "Order counts by domain, category, network participant, and type"
+    date_column: order_date
+    require_date_filter: true
+    columns:
+      order_date: { type: date, description: "Order date" }
+      buyer_np: { type: varchar, description: "Buyer network participant name" }
+      seller_np: { type: varchar, description: "Seller network participant name" }
+      category: { type: varchar, description: "Product/service category" }
+      domain: { type: varchar, description: "Business domain (Retail B2C, Logistics, etc.)" }
+      np_type: { type: varchar, description: "Network participant type: Inter NP, Intra NP, or null" }
+      orders: { type: int4, description: "Number of orders" }
+    allowed_join_columns: [order_date, domain]
+
+  model_for_all_domain_pincode:
+    description: "Order counts by domain, delivery city, and seller city"
+    date_column: order_date
+    require_date_filter: true
+    columns:
+      order_date: { type: date, description: "Order date" }
+      domain: { type: varchar, description: "Business domain" }
+      delivery_city: { type: varchar, description: "City where order is delivered" }
+      seller_city: { type: varchar, description: "City where seller is located" }
+      orders: { type: int8, description: "Number of orders" }
+    allowed_join_columns: [order_date, domain]
+
+domain_categories:
+  Finance: [Mutual Fund, Personal Loan]
+  Home Services: [Appliance Repair Services, Infra Services, Personal Care Services]
+  Logistics: [BPC, Electronics, Fashion, "F&B", Grocery, "Health & Wellness", "Home & Kitchen", Hyperlocal, Intercity]
+  Public Transport: [Bus, Metro]
+  Retail B2B: [B2B]
+  Retail B2C: [Agriculture, Appliances, "Auto Components & Accessories", BPC, Electronics, Fashion, "F&B", Grocery, "Health & Wellness", "Home & Kitchen", Others]
+  Retail Voucher: [Gift Card]
+  Ride Hailing: ["Cabs/Auto"]
+
+np_types: ["Inter NP", "Intra NP"]
+
+roles:
+  analyst:
+    allowed_tables: [model_for_all_domain, model_for_all_domain_pincode]
+  viewer:
+    allowed_tables: [model_for_all_domain]

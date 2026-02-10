@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "ondc-analytics-mcp"
+version = "0.1.0"
+description = "Governed MCP server for conversational analytics over ONDC e-commerce data"
+authors = ["ONDC Analytics Team"]
+packages = [{include = "ondc_mcp", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+mcp = {extras = ["cli"], version = "^1.0"}
+fastapi = "^0.115"
+uvicorn = "^0.34"
+asyncpg = "^0.30"
+sqlglot = "^26"
+pydantic-settings = "^2.7"
+redis = "^5.2"
+pyyaml = "^6.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+pytest-asyncio = "^0.24"
+
+[tool.poetry.group.rag]
+optional = true
+
+[tool.poetry.group.rag.dependencies]
+faiss-cpu = "^1.9"
+sentence-transformers = "^3.4"
+
+[tool.poetry.scripts]
+ondc-mcp = "ondc_mcp.server:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
