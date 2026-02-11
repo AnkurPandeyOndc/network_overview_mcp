@@ -75,8 +75,70 @@ The system covers **8 ONDC business domains** with their sub-categories:
 
 ### 2.4 Example Analytics Questions
 
-The system is designed to answer questions such as:
+The system is designed to answer the following business questions (sourced from the RFP curated question dataset). In addition to these, the system should handle many variations and follow-up questions.
 
+#### Order Volume & Status
+
+1. How many orders are confirmed / delivered / in-process / cancelled for each Category?
+2. What is the geographical split of confirmed / delivered / in-process / cancelled orders?
+
+#### Fill Rate
+
+3. What is the Fill Rate for each Category?
+26. What is the Fill Rate at Seller Level?
+
+#### TAT & Delivery Performance
+
+4. What is the TAT Breach at the Category Level?
+5. What is Avg. Delivery Time at the Category Level? Benchmarked to industry standards?
+6. What is Avg. Promised time for a category? Is it as per industry standards?
+18. Out of the delivered orders, how many orders have been delivered on time for each category?
+19. Out of the delivered orders, how many orders have breached TAT for each category?
+20. Out of cancelled orders, how many have breached TAT for each category?
+21. Out of in-process orders, how many have breached TAT for each category?
+22. What are the top contributing NPs, Sellers & LSP to TAT Breach for each category?
+23. What are the reasons for TAT Breach for each category?
+24. How is the delivery placed wrt time — for instance, in which time range is major delivery happening?
+25. How is the delivery placed wrt TAT — e.g., how many orders have been delivered between 0-6 hrs after TAT Breach?
+
+#### Geographic Analysis
+
+7. What are the Active Seller cities MTD?
+8. What are the Active Delivery cities MTD?
+
+#### Logistics
+
+9. What % / no. of orders are on network vs off network logistics?
+10. What is the split of hyperlocal vs intercity orders?
+
+#### Cancellation Analysis
+
+11. What are the confirmed / delivered / cancelled / in-process orders by Sellers?
+12. What are the top reasons for cancellation at each category?
+13. For the cancelled orders, what % of orders are cancelled by buyer vs seller vs logistics for each category?
+14. How is the cancellation at the Seller NP level for each category?
+15. How is the cancellation at the Seller level for each category?
+16. How is the Cancellation rate bucketing (orders not accepted, 0-2%, 2-4%) for each category?
+17. At which time of the day are major cancellations happening?
+
+#### Sub-Category & Seller Insights
+
+27. What are the confirmed / delivered / cancelled / in-process orders at sub-category level?
+28. What are the confirmed / delivered / cancelled / in-process orders at sub-category level by seller?
+30. Seller insights — Which sellers are repeat sellers? Which sellers are doing mid-sized orders consistently?
+31. Top items per category that are being ordered on the network.
+
+#### Trends & Growth
+
+29. Trend and trajectory by category — what is the growth looking like, when were there peak orders, where were the peak orders, which sellers have peak orders, which subcategories?
+
+#### Example Variation Questions
+
+In addition to the above, there could be many variations that a user would like to know, such as:
+
+- *Which sellers have a cancellation rate higher than the average?*
+- *Which restaurants have a high wait time due to which it results in high breaches on the promised time?*
+- *What is the distance beyond which the TAT breaches spike?*
 - *"How many Retail B2C orders were placed in January 2025?"*
 - *"Which buyer NPs had the most Grocery orders last week?"*
 - *"Compare Inter NP vs Intra NP order volumes for Finance domain in Q1."*
