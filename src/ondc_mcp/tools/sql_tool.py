@@ -5,7 +5,9 @@ from typing import Any
 
 from ondc_mcp.cache import redis_cache
 from ondc_mcp.db.connection import execute_readonly
+from ondc_mcp.security.monitor import security_monitor
 from ondc_mcp.security.query_logger import query_logger
+from ondc_mcp.security.rate_limiter import rate_limiter
 from ondc_mcp.security.role_access import role_access
 from ondc_mcp.validation.sql_validator import SQLValidator
 
@@ -23,6 +25,23 @@ async def run_safe_sql(sql: str, role: str = "analyst") -> dict[str, Any]:
         Dict with 'status', 'data' or 'errors', and metadata
     """
     start = time.monotonic()
+    user_id = "anonymous"  # MCP doesn't pass user context yet
+
+    # Step 0: Rate limit check
+    allowed, rate_error = rate_limiter.check(user_id)
+    if not allowed:
+        query_logger.log_query(
+            raw_sql=sql,
+            role=role,
+            user_id=user_id,
+            status="rate_limited",
+            execution_time_ms=(time.monotonic() - start) * 1000,
+        )
+        security_monitor.record_event(user_id, "rate_limited", rate_error or "")
+        return {
+            "status": "rate_limited",
+            "errors": [rate_error],
+        }
 
     # Step 1: SQL validation
     result = validator.validate(sql)
@@ -34,6 +53,7 @@ async def run_safe_sql(sql: str, role: str = "analyst") -> dict[str, Any]:
             rejection_reasons=result.errors,
             execution_time_ms=(time.monotonic() - start) * 1000,
         )
+        security_monitor.record_event(user_id, "rejected", "; ".join(result.errors))
         return {
             "status": "rejected",
             "errors": result.errors,
@@ -63,6 +83,7 @@ async def run_safe_sql(sql: str, role: str = "analyst") -> dict[str, Any]:
                 rejection_reasons=errors,
                 execution_time_ms=(time.monotonic() - start) * 1000,
             )
+            security_monitor.record_event(user_id, "access_denied", "; ".join(errors))
             return {
                 "status": "rejected",
                 "errors": errors,
@@ -79,6 +100,7 @@ async def run_safe_sql(sql: str, role: str = "analyst") -> dict[str, Any]:
             row_count=len(cached),
             execution_time_ms=(time.monotonic() - start) * 1000,
         )
+        security_monitor.record_event(user_id, "success", "cache hit")
         return {
             "status": "success",
             "data": cached,
@@ -102,6 +124,7 @@ async def run_safe_sql(sql: str, role: str = "analyst") -> dict[str, Any]:
             row_count=len(rows),
             execution_time_ms=elapsed_ms,
         )
+        security_monitor.record_event(user_id, "success", f"{len(rows)} rows")
         return {
             "status": "success",
             "data": rows,
@@ -119,6 +142,7 @@ async def run_safe_sql(sql: str, role: str = "analyst") -> dict[str, Any]:
             error_message=str(e),
             execution_time_ms=elapsed_ms,
         )
+        security_monitor.record_event(user_id, "error", str(e))
         return {
             "status": "error",
             "errors": [str(e)],

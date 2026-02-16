@@ -40,6 +40,13 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     audit_log_path: str = "logs/audit.jsonl"
 
+    # Rate limiting
+    rate_limit_per_minute: int = 30
+
+    # Security monitoring
+    security_monitor_enabled: bool = True
+    security_alert_log_path: str = "logs/security_alerts.jsonl"
+
     schema_config_path: str = str(
         Path(__file__).resolve().parent.parent.parent / "schema" / "tables.yaml"
     )
