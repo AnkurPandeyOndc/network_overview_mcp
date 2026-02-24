@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "ondc-analytics": {
+      "command": "/Users/ankurpandey/Library/Caches/pypoetry/virtualenvs/ondc-analytics-mcp-ZCzZnJ1b-py3.12/bin/python",
+      "args": ["-m", "ondc_mcp.server"],
+      "cwd": "/Users/ankurpandey/work/ondc/rnd/ondc-analytics-mcp",
+      "env": {
+        "PYTHONPATH": "/Users/ankurpandey/work/ondc/rnd/ondc-analytics-mcp/src",
+        "DATABASE_HOST": "ondc-prod-prod-open-data-db.cuvt1j5xqeya.ap-south-1.rds.amazonaws.com",
+        "DATABASE_PORT": "5432",
+        "DATABASE_NAME": "open_data_stage",
+        "DATABASE_USER": "ondc-open-data-webapp-staging-user",
+        "DATABASE_PASSWORD": "ss4XN8U10GeU98",
+        "DATABASE_SCHEMA": "opendata_nodata",
+        "REDIS_ENABLED": "false",
+        "TRANSPORT": "stdio",
+        "LANCEDB_PATH": "data/vector_db",
+        "CONVERSATION_DB_PATH": "data/conversations.db",
+        "AUDIT_LOG_PATH": "logs/audit.jsonl",
+        "LOG_LEVEL": "INFO"
+      }
+    }
+  }
+}

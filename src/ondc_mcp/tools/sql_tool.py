@@ -44,7 +44,7 @@ async def run_safe_sql(sql: str, role: str = "analyst") -> dict[str, Any]:
         }
 
     # Step 1: SQL validation
-    result = validator.validate(sql)
+    result = validator.validate(sql, role=role)
     if not result.valid:
         query_logger.log_query(
             raw_sql=sql,
@@ -62,32 +62,37 @@ async def run_safe_sql(sql: str, role: str = "analyst") -> dict[str, Any]:
 
     sanitized = result.sanitized_sql
 
-    # Step 2: Role-based access check
+    # Step 2: Role-based access check (skipped for unrestricted roles)
     from ondc_mcp.db.schema_registry import registry
     import sqlglot
     from sqlglot import exp
 
-    parsed = sqlglot.parse(sanitized, dialect="postgres")
-    if parsed:
-        tables_in_query = [t.name for t in parsed[0].find_all(exp.Table)]
-        denied = role_access.check_tables(role, tables_in_query)
-        if denied:
-            errors = [
-                f"Role '{role}' does not have access to tables: {', '.join(denied)}"
+    if not registry.role_unrestricted_select(role):
+        parsed = sqlglot.parse(sanitized, dialect="postgres")
+        if parsed:
+            stmt = parsed[0]
+            cte_names = {cte.alias for cte in stmt.find_all(exp.CTE)}
+            tables_in_query = [
+                t.name for t in stmt.find_all(exp.Table) if t.name not in cte_names
             ]
-            query_logger.log_query(
-                raw_sql=sql,
-                validated_sql=sanitized,
-                role=role,
-                status="rejected",
-                rejection_reasons=errors,
-                execution_time_ms=(time.monotonic() - start) * 1000,
-            )
-            security_monitor.record_event(user_id, "access_denied", "; ".join(errors))
-            return {
-                "status": "rejected",
-                "errors": errors,
-            }
+            denied = role_access.check_tables(role, tables_in_query)
+            if denied:
+                errors = [
+                    f"Role '{role}' does not have access to tables: {', '.join(denied)}"
+                ]
+                query_logger.log_query(
+                    raw_sql=sql,
+                    validated_sql=sanitized,
+                    role=role,
+                    status="rejected",
+                    rejection_reasons=errors,
+                    execution_time_ms=(time.monotonic() - start) * 1000,
+                )
+                security_monitor.record_event(user_id, "access_denied", "; ".join(errors))
+                return {
+                    "status": "rejected",
+                    "errors": errors,
+                }
 
     # Step 3: Cache check
     cached = await redis_cache.get_cached(sanitized, role)

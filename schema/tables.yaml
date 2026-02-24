@@ -41,5 +41,8 @@ np_types: ["Inter NP", "Intra NP"]
 roles:
   analyst:
     allowed_tables: [model_for_all_domain, model_for_all_domain_pincode]
+  digital_analyst:
+    allowed_tables: [model_for_all_domain, model_for_all_domain_pincode]
+    unrestricted_select: true
   viewer:
     allowed_tables: [model_for_all_domain]

@@ -103,6 +103,73 @@ class TestTableAccess:
         assert any("not allowed" in e for e in result.errors)
 
 
+class TestUnionSupport:
+    def test_union_all_allowed(self, sql_validator):
+        """UNION ALL across allowed tables must pass validation."""
+        result = sql_validator.validate(
+            "SELECT domain, SUM(orders) AS orders"
+            " FROM opendata_nodata.model_for_all_domain"
+            " WHERE order_date >= '2025-11-01' AND order_date <= '2025-11-30'"
+            " GROUP BY domain"
+            " UNION ALL"
+            " SELECT domain, SUM(orders) AS orders"
+            " FROM opendata_nodata.model_for_all_domain"
+            " WHERE order_date >= '2025-12-01' AND order_date <= '2025-12-31'"
+            " GROUP BY domain"
+        )
+        assert result.valid, result.errors
+
+    def test_cte_union_all_allowed(self, sql_validator):
+        """CTE followed by UNION ALL in the final SELECT must pass."""
+        result = sql_validator.validate(
+            "WITH nov AS ("
+            "  SELECT domain, SUM(orders) AS orders"
+            "  FROM opendata_nodata.model_for_all_domain"
+            "  WHERE order_date >= '2025-11-01' AND order_date <= '2025-11-30'"
+            "  GROUP BY domain"
+            "), dec AS ("
+            "  SELECT domain, SUM(orders) AS orders"
+            "  FROM opendata_nodata.model_for_all_domain"
+            "  WHERE order_date >= '2025-12-01' AND order_date <= '2025-12-31'"
+            "  GROUP BY domain"
+            ")"
+            " SELECT 'Nov' AS month, domain, orders FROM nov"
+            " UNION ALL"
+            " SELECT 'Dec' AS month, domain, orders FROM dec"
+            " ORDER BY month, orders DESC"
+        )
+        assert result.valid, result.errors
+
+
+class TestCTESupport:
+    def test_cte_aliases_not_treated_as_tables(self, sql_validator):
+        """CTE names must not trigger 'table not allowed' errors."""
+        result = sql_validator.validate(
+            "WITH monthly AS ("
+            "  SELECT domain, date_trunc('month', order_date) AS month, SUM(orders) AS orders"
+            "  FROM opendata_nodata.model_for_all_domain"
+            "  WHERE order_date >= '2025-11-01'"
+            "  GROUP BY 1, 2"
+            "), totals AS ("
+            "  SELECT domain, SUM(orders) AS total FROM monthly GROUP BY 1"
+            ")"
+            " SELECT domain, total FROM totals ORDER BY 2 DESC"
+        )
+        assert result.valid, result.errors
+
+    def test_cte_with_disallowed_base_table_rejected(self, sql_validator):
+        """A CTE over a disallowed real table must still be rejected."""
+        result = sql_validator.validate(
+            "WITH bad AS ("
+            "  SELECT id FROM opendata_nodata.users"
+            "  WHERE order_date = '2025-01-01'"
+            ")"
+            " SELECT id FROM bad"
+        )
+        assert not result.valid
+        assert any("not allowed" in e for e in result.errors)
+
+
 class TestLimitEnforcement:
     def test_auto_inject_limit(self, sql_validator):
         result = sql_validator.validate(

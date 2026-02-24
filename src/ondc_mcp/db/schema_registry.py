@@ -69,6 +69,10 @@ class SchemaRegistry:
             return False
         return info.get("require_date_filter", False)
 
+    def role_unrestricted_select(self, role: str) -> bool:
+        """Return True if the role may run any SELECT without shape restrictions."""
+        return self.roles.get(role, {}).get("unrestricted_select", False)
+
     def get_date_column(self, table_name: str) -> str | None:
         info = self.get_table_info(table_name)
         if info is None:

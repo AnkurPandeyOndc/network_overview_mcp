@@ -29,8 +29,9 @@ class SQLValidator:
     def __init__(self, schema_registry: SchemaRegistry | None = None):
         self.registry = schema_registry or default_registry
 
-    def validate(self, sql: str) -> ValidationResult:
+    def validate(self, sql: str, role: str = "") -> ValidationResult:
         errors: list[str] = []
+        unrestricted = self.registry.role_unrestricted_select(role)
 
         # Parse
         try:
@@ -41,32 +42,33 @@ class SQLValidator:
         if not parsed:
             return ValidationResult(valid=False, errors=["Empty SQL statement"])
 
-        # Only single statement allowed
-        if len(parsed) > 1:
+        # Only single statement allowed (skipped for unrestricted roles)
+        if not unrestricted and len(parsed) > 1:
             errors.append("Only single SQL statements are allowed")
             return ValidationResult(valid=False, errors=errors)
 
-        statement = parsed[0]
-
-        # Rule: Only SELECT
-        if not isinstance(statement, exp.Select):
-            errors.append(
-                f"Only SELECT statements are allowed, got: {type(statement).__name__}"
-            )
+        # Rule: Only SELECT — always enforced regardless of role
+        for stmt in parsed:
+            if not isinstance(stmt, (exp.Select, exp.Union)):
+                errors.append(
+                    f"Only SELECT statements are allowed, got: {type(stmt).__name__}"
+                )
+        if errors:
             return ValidationResult(valid=False, errors=errors)
 
-        # Rule: No SELECT *
-        self._check_no_star(statement, errors)
+        # Unrestricted roles: multi-statement passes through as-is (no further checks)
+        if unrestricted and len(parsed) > 1:
+            return ValidationResult(valid=True, errors=[], sanitized_sql=sql)
 
-        # Rule: Only allowed tables and schema
-        tables_found = self._extract_tables(statement)
-        self._check_allowed_tables(tables_found, errors)
+        statement = parsed[0]
 
-        # Rule: Date filter required
-        self._check_date_filter(statement, tables_found, errors)
-
-        # Rule: Join validation
-        self._check_joins(statement, errors)
+        # Remaining rules skipped entirely for unrestricted roles
+        if not unrestricted:
+            tables_found = self._extract_tables(statement)
+            self._check_allowed_tables(tables_found, errors)
+            self._check_no_star(statement, errors)
+            self._check_date_filter(statement, tables_found, errors)
+            self._check_joins(statement, errors)
 
         if errors:
             return ValidationResult(valid=False, errors=errors)
@@ -88,11 +90,15 @@ class SQLValidator:
             return
 
     def _extract_tables(self, stmt: exp.Select) -> list[str]:
-        """Extract bare table names from the query."""
-        tables = []
-        for table in stmt.find_all(exp.Table):
-            tables.append(table.name)
-        return tables
+        """Extract bare table names from the query, excluding CTE aliases."""
+        # CTE names (e.g. monthly_orders, pivoted) are referenced as exp.Table
+        # nodes in the main query body but are not real tables — exclude them.
+        cte_names = {cte.alias for cte in stmt.find_all(exp.CTE)}
+        return [
+            table.name
+            for table in stmt.find_all(exp.Table)
+            if table.name not in cte_names
+        ]
 
     def _check_allowed_tables(
         self, tables: list[str], errors: list[str]
