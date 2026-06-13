@@ -62,23 +62,11 @@ mcp = FastMCP(
 async def run_safe_sql(sql: str, role: str = "analyst") -> str:
     """Execute a validated, read-only SQL query against ONDC analytics data.
 
-    IMPORTANT — you MUST call get_schema first to discover exact table names,
+    IMPORTANT — you MUST call search_schema first to discover exact table names,
     column names, and valid domain/category values before writing any SQL.
-
-    Available tables (schema: opendata_nodata):
-      - opendata_nodata.model_for_all_domain: order counts by domain, category,
-        buyer_np, seller_np, np_type.  Columns: order_date, domain, category,
-        buyer_np, seller_np, np_type, orders.
-      - opendata_nodata.model_for_all_domain_pincode: order counts by domain,
-        delivery_city, seller_city.  Columns: order_date, domain, delivery_city,
-        seller_city, orders.
-
-    There are NO other tables — do NOT invent table names.
 
     Validation rules enforced:
       - SELECT only (no INSERT/UPDATE/DELETE/DDL)
-      - No SELECT *  — list columns explicitly
-      - WHERE must include an order_date filter
       - LIMIT is auto-added (max 1000)
 
     Args:
@@ -126,21 +114,23 @@ async def get_data_freshness() -> str:
     return json.dumps(result, default=str, indent=2)
 
 
-# --- Tool: search_docs ---
+# --- Tool: search_schema ---
 @mcp.tool()
-async def search_docs(query: str) -> str:
-    """Search indexed ONDC business documents for relevant context.
+async def search_schema(query: str, top_k: int = 5) -> str:
+    """Search the database schema metadata for relevant tables and views.
 
-    Currently a skeleton — no documents are indexed yet.
+    Use this tool to find tables matching your business context. It returns the
+    Table Name, DDL/View Logic, and available Columns.
 
     Args:
         query: Natural language search query
+        top_k: Number of results to return
 
     Returns:
         JSON string with search results
     """
-    from ondc_mcp.tools.rag_tool import search_docs as _search
-    result = await _search(query)
+    from ondc_mcp.tools.search_tool import search_schema as _search
+    result = await _search(query, top_k)
     return json.dumps(result, default=str, indent=2)
 
 

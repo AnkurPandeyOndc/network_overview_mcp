@@ -1,0 +1,31 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s),DDL & Indexes
+"▼ ondc_entity_analysis   (base table, 12 cols)",,,auto_insights.ondc_entity_analysis,"CREATE UNIQUE INDEX ondc_entity_analysis_pkey ON auto_insights.ondc_entity_analysis USING btree (id)
+
+CREATE UNIQUE INDEX ondc_entity_analysis_entity_type_entity_value_analysis_date_key ON auto_insights.ondc_entity_analysis USING btree (entity_type, entity_value, analysis_date)"
+id,Unique identifier for id.,"auto_insights.ondc_entity_analysis.""id""",auto_insights.ondc_entity_analysis,
+entity_type,Data representing the entity type.,"auto_insights.ondc_entity_analysis.""entity_type""",auto_insights.ondc_entity_analysis,
+entity_value,Data representing the entity value.,"auto_insights.ondc_entity_analysis.""entity_value""",auto_insights.ondc_entity_analysis,
+analysis_date,Timestamp or date indicating when analysis date occurred.,"auto_insights.ondc_entity_analysis.""analysis_date""",auto_insights.ondc_entity_analysis,
+data_start_date,Timestamp or date indicating when data start date occurred.,"auto_insights.ondc_entity_analysis.""data_start_date""",auto_insights.ondc_entity_analysis,
+data_end_date,Timestamp or date indicating when data end date occurred.,"auto_insights.ondc_entity_analysis.""data_end_date""",auto_insights.ondc_entity_analysis,
+avg_daily_orders,Data representing the avg daily orders.,"auto_insights.ondc_entity_analysis.""avg_daily_orders""",auto_insights.ondc_entity_analysis,
+anomalies,Data representing the anomalies.,"auto_insights.ondc_entity_analysis.""anomalies""",auto_insights.ondc_entity_analysis,
+contributors,Data representing the contributors.,"auto_insights.ondc_entity_analysis.""contributors""",auto_insights.ondc_entity_analysis,
+nearby_events,Data representing the nearby events.,"auto_insights.ondc_entity_analysis.""nearby_events""",auto_insights.ondc_entity_analysis,
+created_at,Timestamp when the record was created.,"auto_insights.ondc_entity_analysis.""created_at""",auto_insights.ondc_entity_analysis,
+updated_at,Timestamp when the record was last updated.,"auto_insights.ondc_entity_analysis.""updated_at""",auto_insights.ondc_entity_analysis,
+"▼ ondc_insights   (base table, 14 cols)",,,auto_insights.ondc_insights,CREATE UNIQUE INDEX ondc_insights_pkey ON auto_insights.ondc_insights USING btree (id)
+id,Unique identifier for id.,"auto_insights.ondc_insights.""id""",auto_insights.ondc_insights,
+analysis_id,Unique identifier for analysis.,"auto_insights.ondc_insights.""analysis_id""",auto_insights.ondc_insights,
+entity_type,Data representing the entity type.,"auto_insights.ondc_insights.""entity_type""",auto_insights.ondc_insights,
+entity_value,Data representing the entity value.,"auto_insights.ondc_insights.""entity_value""",auto_insights.ondc_insights,
+analysis_date,Timestamp or date indicating when analysis date occurred.,"auto_insights.ondc_insights.""analysis_date""",auto_insights.ondc_insights,
+title,Data representing the title.,"auto_insights.ondc_insights.""title""",auto_insights.ondc_insights,
+insight_text,Data representing the insight text.,"auto_insights.ondc_insights.""insight_text""",auto_insights.ondc_insights,
+signal,Data representing the signal.,"auto_insights.ondc_insights.""signal""",auto_insights.ondc_insights,
+actions,Data representing the actions.,"auto_insights.ondc_insights.""actions""",auto_insights.ondc_insights,
+status,Turn-Around-Time (TAT) measurement.,"auto_insights.ondc_insights.""status""",auto_insights.ondc_insights,
+snoozed_until,Data representing the snoozed until.,"auto_insights.ondc_insights.""snoozed_until""",auto_insights.ondc_insights,
+notes,Data representing the notes.,"auto_insights.ondc_insights.""notes""",auto_insights.ondc_insights,
+created_at,Timestamp when the record was created.,"auto_insights.ondc_insights.""created_at""",auto_insights.ondc_insights,
+updated_at,Timestamp when the record was last updated.,"auto_insights.ondc_insights.""updated_at""",auto_insights.ondc_insights,

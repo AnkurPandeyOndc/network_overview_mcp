@@ -1,0 +1,1624 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s),DDL & Indexes
+"▼ logistics_stck_mv   (materialized view, 20 cols)",,,analytics_insight_preprod.logistics_stck_mv,"WITH table1 AS (
+         SELECT master_log.bap_id,
+            master_log.bpp_id,
+            master_log.order_id,
+            master_log.transaction_id,
+            master_log.date,
+            master_log.order_created_at,
+            master_log.cancellation_code,
+            master_log.retail_order_id,
+            master_log.pick_up_pincode,
+            master_log.delivery_pincode,
+            master_log.retail_category,
+            master_log.shipment_type,
+            master_log.provider_name,
+                CASE
+                    WHEN master_log.f_agent_assigned_at_date IS NULL THEN 0
+                    ELSE 1
+                END AS assigned,
+            master_log.cancelled_date,
+            master_log.picked_date,
+                CASE
+                    WHEN master_log.delivered_date IS NULL AND master_log.cancelled_date IS NOT NULL THEN 'Cancelled'::character varying
+                    WHEN master_log.delivered_date IS NOT NULL AND master_log.cancelled_date IS NULL THEN 'Completed'::character varying
+                    ELSE master_log.latest_order_status
+                END AS order_status,
+            row_number() OVER (PARTITION BY (COALESCE(master_log.retail_order_id, master_log.order_id)) ORDER BY master_log.order_created_at DESC) AS dedup,
+            row_number() OVER (PARTITION BY master_log.order_id, master_log.transaction_id, master_log.bap_id, master_log.bpp_id, master_log.order_created_at ORDER BY master_log.order_created_at DESC) AS rn_order
+           FROM logistics.master_log
+          WHERE master_log.date >= (date(now()) - '30 days'::interval day) AND master_log.drop_row = 0
+        )
+ SELECT t1.bap_id,
+    t1.bpp_id,
+    t1.order_id,
+    t1.retail_order_id,
+    t1.transaction_id,
+    t1.date,
+    t1.order_created_at,
+    t1.cancellation_code,
+    t1.order_status AS latest_order_status,
+        CASE
+            WHEN t2.""Network order id"" IS NULL THEN 'Independent'::text
+            ELSE 'Linked'::text
+        END AS ""Linked"",
+    t1.shipment_type,
+    COALESCE(t1.provider_name, 'Undefined'::character varying) AS provider_name,
+    t1.pick_up_pincode,
+    t1.delivery_pincode,
+    t1.retail_category,
+    t1.assigned,
+    t1.cancelled_date,
+    t1.picked_date,
+    t1.dedup,
+    t1.rn_order
+   FROM table1 t1
+     LEFT JOIN analytics_insight.order_level_60days_mv t2 ON t1.retail_order_id::text = t2.""Network order id""::text;"
+bap_id,Unique identifier for the Buyer App (BAP).,"analytics_insight_preprod.logistics_stck_mv.""bap_id""",analytics_insight_preprod.logistics_stck_mv,
+bpp_id,Unique identifier for the Seller App (BPP).,"analytics_insight_preprod.logistics_stck_mv.""bpp_id""",analytics_insight_preprod.logistics_stck_mv,
+order_id,Unique identifier for order.,"analytics_insight_preprod.logistics_stck_mv.""order_id""",analytics_insight_preprod.logistics_stck_mv,
+retail_order_id,Unique identifier for retail order.,"analytics_insight_preprod.logistics_stck_mv.""retail_order_id""",analytics_insight_preprod.logistics_stck_mv,
+transaction_id,Unique ONDC transaction identifier.,"analytics_insight_preprod.logistics_stck_mv.""transaction_id""",analytics_insight_preprod.logistics_stck_mv,
+date,Timestamp or date indicating when date occurred.,"analytics_insight_preprod.logistics_stck_mv.""date""",analytics_insight_preprod.logistics_stck_mv,
+order_created_at,Timestamp when the record was created.,"analytics_insight_preprod.logistics_stck_mv.""order_created_at""",analytics_insight_preprod.logistics_stck_mv,
+cancellation_code,Timestamp or date indicating when cancellation code occurred.,"analytics_insight_preprod.logistics_stck_mv.""cancellation_code""",analytics_insight_preprod.logistics_stck_mv,
+latest_order_status,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.logistics_stck_mv.""latest_order_status""",analytics_insight_preprod.logistics_stck_mv,
+Linked,Data representing the linked.,"analytics_insight_preprod.logistics_stck_mv.""Linked""",analytics_insight_preprod.logistics_stck_mv,
+shipment_type,Data representing the shipment type.,"analytics_insight_preprod.logistics_stck_mv.""shipment_type""",analytics_insight_preprod.logistics_stck_mv,
+provider_name,Unique identifier for provider name.,"analytics_insight_preprod.logistics_stck_mv.""provider_name""",analytics_insight_preprod.logistics_stck_mv,
+pick_up_pincode,Indian postal code (pincode).,"analytics_insight_preprod.logistics_stck_mv.""pick_up_pincode""",analytics_insight_preprod.logistics_stck_mv,
+delivery_pincode,Indian postal code (pincode).,"analytics_insight_preprod.logistics_stck_mv.""delivery_pincode""",analytics_insight_preprod.logistics_stck_mv,
+retail_category,Timestamp or date indicating when retail category occurred.,"analytics_insight_preprod.logistics_stck_mv.""retail_category""",analytics_insight_preprod.logistics_stck_mv,
+assigned,Data representing the assigned.,"analytics_insight_preprod.logistics_stck_mv.""assigned""",analytics_insight_preprod.logistics_stck_mv,
+cancelled_date,Timestamp or date indicating when cancelled date occurred.,"analytics_insight_preprod.logistics_stck_mv.""cancelled_date""",analytics_insight_preprod.logistics_stck_mv,
+picked_date,Timestamp or date indicating when picked date occurred.,"analytics_insight_preprod.logistics_stck_mv.""picked_date""",analytics_insight_preprod.logistics_stck_mv,
+dedup,Data representing the dedup.,"analytics_insight_preprod.logistics_stck_mv.""dedup""",analytics_insight_preprod.logistics_stck_mv,
+rn_order,Data representing the rn order.,"analytics_insight_preprod.logistics_stck_mv.""rn_order""",analytics_insight_preprod.logistics_stck_mv,
+"▼ logistics_stock_bv   (view, 87 cols)",,,analytics_insight_preprod.logistics_stock_bv,"SELECT s.bap_id,
+    s.bpp_id,
+    s.order_id,
+    s.retail_order_id,
+    s.transaction_id,
+    s.date,
+    s.order_created_at,
+    s.cancellation_code,
+    s.latest_order_status,
+    s.""Linked"",
+    s.shipment_type,
+    s.provider_name,
+    s.pick_up_pincode,
+    s.delivery_pincode,
+    s.retail_category,
+    s.assigned,
+    s.cancelled_date,
+    s.picked_date,
+    s.dedup,
+    s.rn_order,
+    cc.attributed_to AS ""Cancellation Attributed to"",
+    cc.by AS ""Cancellation By"",
+        CASE
+            WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+            ELSE NULL::numeric
+        END AS ""Cancel sec"",
+    lnp.logistics_np_name AS ""Logistics NP Name"",
+    lnp.lnp_mask AS ""LNP Mask"",
+    lnp.tsp_powered AS ""TSP Powered"",
+    s.rn_order AS ""Overall"",
+    s.rn_order AS ""Overall Orders"",
+    s.rn_order AS ""Overall Orders Dedup"",
+        CASE
+            WHEN s.dedup = 1 THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Overall Deduped"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Cancelled Overall"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Driver Assigned"",
+        CASE
+            WHEN s.dedup = 1 AND s.latest_order_status::text = 'Completed'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Delivered Ded"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.picked_date IS NOT NULL AND s.latest_order_status::text = 'Cancelled'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Post assgn Post Pickup SO Dedup Cancelled"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Preassigned SO Dedup"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 0 AND s.dedup = 1 THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Pre Assigned SO"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.dedup = 1 AND s.assigned = 1 THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Post Assigned SO Dedup"",
+        CASE
+            WHEN NOT (s.date >= '2024-05-01'::date AND s.assigned = 0 AND upper(s.latest_order_status::text) = 'CANCELLED'::text AND
+            CASE
+                WHEN s.bpp_id::text = 'ondc-lsp.olacabs.com'::text THEN 'P2P'::character varying
+                ELSE s.shipment_type
+            END::text = 'P2P'::text) THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Confirmed"",
+        CASE
+            WHEN s.dedup = 1 AND s.assigned = 0 AND cc.attributed_to::text = 'Buyer App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Buyer Led SO Dedup PA"",
+        CASE
+            WHEN s.dedup = 1 AND cc.attributed_to::text = 'Seller App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led SO Dedup"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Buyer App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Buyer Led SO Preassgn"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Buyer App'::text AND cc.by::text = 'Seller App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Buyer Led - Seller by"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.by::text = 'Logistics Provider'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Log By Pre Assigned SO"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Logistics Provider'::text AND cc.by::text = 'Buyer App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Logistics Led - Buyer by(PA)"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 1 AND s.dedup = 1 AND s.picked_date IS NULL AND cc.attributed_to::text = 'Logistics Provider'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END < 1200::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""LSP Led SO (Postassgn) < 20 mins (Not Picked)"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 0 AND s.dedup = 1 AND cc.attributed_to::text = 'Seller App'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END >= 900::numeric AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END < 1200::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led SO (Preassgn) 15-20 mins"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 0 AND s.dedup = 1 AND cc.attributed_to::text = 'Seller App'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END >= 600::numeric AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END < 900::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led SO (Preassgn) 10-15 mins"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 1 AND s.picked_date IS NULL AND s.dedup = 1 AND cc.attributed_to::text = 'Seller App'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END >= 120::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led SO (Postassgn) > 2 mins (Not Picked)"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 1 AND s.picked_date IS NOT NULL AND s.dedup = 1 AND cc.attributed_to::text = 'Seller App'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END >= 120::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led SO (Postassgn) > 2 mins (Picked)"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Logistics Provider'::text AND s.dedup = 1 AND s.assigned = 1 THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Log Led SO Postassgn"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND cc.by::text = 'Logistics Provider'::text AND s.dedup = 1 AND s.assigned = 1 THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Log By SO Postassgn"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 1 AND s.dedup = 1 AND s.picked_date IS NULL AND cc.attributed_to::text = 'Logistics Provider'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END > 1200::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""LSP Led SO (Postassgn) > 20 mins (Not Picked)"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 0 AND s.dedup = 1 AND cc.attributed_to::text = 'Logistics Provider'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END < 120::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""LSP Led SO (Preassgn) 0-2 mins"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 0 AND s.dedup = 1 AND cc.attributed_to::text = 'Logistics Provider'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END >= 120::numeric AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END < 300::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""LSP Led SO (Preassgn) 2-5 mins"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 0 AND s.dedup = 1 AND cc.attributed_to::text = 'Logistics Provider'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END >= 300::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""LSP Led SO (Preassgn) >5 mins"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 1 AND s.dedup = 1 AND cc.attributed_to::text = 'Logistics Provider'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END < 120::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""LSP Led SO (Postassgn) 0-2 mins"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 1 AND s.dedup = 1 AND cc.attributed_to::text = 'Seller App'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END < 120::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led SO (Postassgn) 0-2 mins"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 0 AND s.dedup = 1 AND cc.attributed_to::text = 'Seller App'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END >= 1200::numeric AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END < 1800::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led SO (Preassgn) 20-30 mins"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 0 AND s.dedup = 1 AND cc.attributed_to::text = 'Seller App'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END >= 1800::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led SO (Preassgn) >30 mins"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 0 AND s.dedup = 1 AND cc.attributed_to::text = 'Seller App'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END >= 360::numeric AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END < 600::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led SO (Preassgn) 6-10 mins"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 0 AND s.dedup = 1 AND cc.attributed_to::text = 'Seller App'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END >= 120::numeric AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END < 360::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led SO (Preassgn) 2-6 mins"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND s.assigned = 0 AND s.dedup = 1 AND cc.attributed_to::text = 'Seller App'::text AND
+            CASE
+                WHEN s.cancelled_date IS NOT NULL THEN EXTRACT(epoch FROM s.cancelled_date - s.order_created_at)
+                ELSE NULL::numeric
+            END < 120::numeric THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led SO (Preassgn) 0-2 mins"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Logistics Provider'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Logistics Led Post Assigned Cancel"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Buyer App'::text AND cc.by::text = 'Seller App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Buyer Led - Seller by(PA)"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Seller App'::text AND cc.by::text = 'Seller App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led - Seller by"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.by::text = 'Seller App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant By Pre Assigned SO"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Logistics Provider'::text AND cc.by::text = 'Seller App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Logistics Led - Seller by"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Seller App'::text AND cc.by::text = 'Buyer App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led - Buyer by"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Seller App'::text AND cc.by::text = 'Logistics Provider'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led - Logistics by (Post Assigned)"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Seller App'::text AND cc.by::text = 'Buyer App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led - Buyer by (PA)"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Logistics Provider'::text AND cc.by::text = 'Logistics Provider'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Logistics Led - Logistics by"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Logistics Provider'::text AND cc.by::text = 'Buyer App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Logistics Led - Buyer by"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Logistics Provider'::text AND cc.by::text = 'Seller App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Logistics Led - Seller by(PA)"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Buyer App'::text AND cc.by::text = 'Logistics Provider'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Buyer Led - Logistics by(PA)"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.by::text = 'Logistics Provider'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Logistics By SO Dedup Preassigned"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Buyer App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Buyer Led Post Assigned Cancel"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Logistics Provider'::text AND cc.by::text = 'Logistics Provider'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Logistics Led - Logistics by(PA)"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Seller App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led Pre Assigned SO"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Buyer App'::text AND cc.by::text = 'Buyer App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Buyer Led - Buyer by(PA)"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Buyer App'::text AND cc.by::text = 'Logistics Provider'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Buyer Led - Logistics by"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Logistics Provider'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Logistics Led SO Dedup"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Seller App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led Post Assigned Cancel"",
+        CASE
+            WHEN s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Seller App'::text AND s.dedup = 1 AND s.assigned = 1 THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led SO Postassgn"",
+        CASE
+            WHEN cc.attributed_to::text = 'Seller App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led Preassigned SO"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Seller App'::text AND cc.by::text = 'Logistics Provider'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led - Logistics by"",
+        CASE
+            WHEN s.assigned = 0 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Buyer App'::text AND cc.by::text = 'Buyer App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Buyer Led - Buyer by"",
+        CASE
+            WHEN s.assigned = 1 AND s.dedup = 1 AND s.latest_order_status::text = 'Cancelled'::text AND cc.attributed_to::text = 'Seller App'::text AND cc.by::text = 'Seller App'::text THEN s.rn_order
+            ELSE 0::bigint
+        END AS ""Merchant Led - Seller by (Post)""
+   FROM analytics_insight_preprod.logistics_stck_mv s
+     LEFT JOIN dimension.dim_cancellation_code cc ON s.cancellation_code::text = cc.code::text
+     LEFT JOIN dimension.dim_logistics_np lnp ON s.bpp_id::text = lnp.logistics_np::text;"
+bap_id,Unique identifier for the Buyer App (BAP).,"analytics_insight_preprod.logistics_stock_bv.""bap_id""",analytics_insight_preprod.logistics_stock_bv,
+bpp_id,Unique identifier for the Seller App (BPP).,"analytics_insight_preprod.logistics_stock_bv.""bpp_id""",analytics_insight_preprod.logistics_stock_bv,
+order_id,Unique identifier for order.,"analytics_insight_preprod.logistics_stock_bv.""order_id""",analytics_insight_preprod.logistics_stock_bv,
+retail_order_id,Unique identifier for retail order.,"analytics_insight_preprod.logistics_stock_bv.""retail_order_id""",analytics_insight_preprod.logistics_stock_bv,
+transaction_id,Unique ONDC transaction identifier.,"analytics_insight_preprod.logistics_stock_bv.""transaction_id""",analytics_insight_preprod.logistics_stock_bv,
+date,Timestamp or date indicating when date occurred.,"analytics_insight_preprod.logistics_stock_bv.""date""",analytics_insight_preprod.logistics_stock_bv,
+order_created_at,Timestamp when the record was created.,"analytics_insight_preprod.logistics_stock_bv.""order_created_at""",analytics_insight_preprod.logistics_stock_bv,
+cancellation_code,Timestamp or date indicating when cancellation code occurred.,"analytics_insight_preprod.logistics_stock_bv.""cancellation_code""",analytics_insight_preprod.logistics_stock_bv,
+latest_order_status,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.logistics_stock_bv.""latest_order_status""",analytics_insight_preprod.logistics_stock_bv,
+Linked,Data representing the linked.,"analytics_insight_preprod.logistics_stock_bv.""Linked""",analytics_insight_preprod.logistics_stock_bv,
+shipment_type,Data representing the shipment type.,"analytics_insight_preprod.logistics_stock_bv.""shipment_type""",analytics_insight_preprod.logistics_stock_bv,
+provider_name,Unique identifier for provider name.,"analytics_insight_preprod.logistics_stock_bv.""provider_name""",analytics_insight_preprod.logistics_stock_bv,
+pick_up_pincode,Indian postal code (pincode).,"analytics_insight_preprod.logistics_stock_bv.""pick_up_pincode""",analytics_insight_preprod.logistics_stock_bv,
+delivery_pincode,Indian postal code (pincode).,"analytics_insight_preprod.logistics_stock_bv.""delivery_pincode""",analytics_insight_preprod.logistics_stock_bv,
+retail_category,Timestamp or date indicating when retail category occurred.,"analytics_insight_preprod.logistics_stock_bv.""retail_category""",analytics_insight_preprod.logistics_stock_bv,
+assigned,Data representing the assigned.,"analytics_insight_preprod.logistics_stock_bv.""assigned""",analytics_insight_preprod.logistics_stock_bv,
+cancelled_date,Timestamp or date indicating when cancelled date occurred.,"analytics_insight_preprod.logistics_stock_bv.""cancelled_date""",analytics_insight_preprod.logistics_stock_bv,
+picked_date,Timestamp or date indicating when picked date occurred.,"analytics_insight_preprod.logistics_stock_bv.""picked_date""",analytics_insight_preprod.logistics_stock_bv,
+dedup,Data representing the dedup.,"analytics_insight_preprod.logistics_stock_bv.""dedup""",analytics_insight_preprod.logistics_stock_bv,
+rn_order,Data representing the rn order.,"analytics_insight_preprod.logistics_stock_bv.""rn_order""",analytics_insight_preprod.logistics_stock_bv,
+Cancellation Attributed to,Timestamp or date indicating when cancellation attributed to occurred.,"analytics_insight_preprod.logistics_stock_bv.""Cancellation Attributed to""",analytics_insight_preprod.logistics_stock_bv,
+Cancellation By,Timestamp or date indicating when cancellation by occurred.,"analytics_insight_preprod.logistics_stock_bv.""Cancellation By""",analytics_insight_preprod.logistics_stock_bv,
+Cancel sec,Data representing the cancel sec.,"analytics_insight_preprod.logistics_stock_bv.""Cancel sec""",analytics_insight_preprod.logistics_stock_bv,
+Logistics NP Name,Name of the logistics np.,"analytics_insight_preprod.logistics_stock_bv.""Logistics NP Name""",analytics_insight_preprod.logistics_stock_bv,
+LNP Mask,Data representing the lnp mask.,"analytics_insight_preprod.logistics_stock_bv.""LNP Mask""",analytics_insight_preprod.logistics_stock_bv,
+TSP Powered,Data representing the tsp powered.,"analytics_insight_preprod.logistics_stock_bv.""TSP Powered""",analytics_insight_preprod.logistics_stock_bv,
+Overall,Data representing the overall.,"analytics_insight_preprod.logistics_stock_bv.""Overall""",analytics_insight_preprod.logistics_stock_bv,
+Overall Orders,Data representing the overall orders.,"analytics_insight_preprod.logistics_stock_bv.""Overall Orders""",analytics_insight_preprod.logistics_stock_bv,
+Overall Orders Dedup,Data representing the overall orders dedup.,"analytics_insight_preprod.logistics_stock_bv.""Overall Orders Dedup""",analytics_insight_preprod.logistics_stock_bv,
+Overall Deduped,Data representing the overall deduped.,"analytics_insight_preprod.logistics_stock_bv.""Overall Deduped""",analytics_insight_preprod.logistics_stock_bv,
+Cancelled Overall,Data representing the cancelled overall.,"analytics_insight_preprod.logistics_stock_bv.""Cancelled Overall""",analytics_insight_preprod.logistics_stock_bv,
+Driver Assigned,Data representing the driver assigned.,"analytics_insight_preprod.logistics_stock_bv.""Driver Assigned""",analytics_insight_preprod.logistics_stock_bv,
+Delivered Ded,Data representing the delivered ded.,"analytics_insight_preprod.logistics_stock_bv.""Delivered Ded""",analytics_insight_preprod.logistics_stock_bv,
+Post assgn Post Pickup SO Dedup Cancelled,Data representing the post assgn post pickup so dedup cancelled.,"analytics_insight_preprod.logistics_stock_bv.""Post assgn Post Pickup SO Dedup Cancelled""",analytics_insight_preprod.logistics_stock_bv,
+Preassigned SO Dedup,Data representing the preassigned so dedup.,"analytics_insight_preprod.logistics_stock_bv.""Preassigned SO Dedup""",analytics_insight_preprod.logistics_stock_bv,
+Pre Assigned SO,Data representing the pre assigned so.,"analytics_insight_preprod.logistics_stock_bv.""Pre Assigned SO""",analytics_insight_preprod.logistics_stock_bv,
+Post Assigned SO Dedup,Data representing the post assigned so dedup.,"analytics_insight_preprod.logistics_stock_bv.""Post Assigned SO Dedup""",analytics_insight_preprod.logistics_stock_bv,
+Confirmed,Data representing the confirmed.,"analytics_insight_preprod.logistics_stock_bv.""Confirmed""",analytics_insight_preprod.logistics_stock_bv,
+Buyer Led SO Dedup PA,Data representing the buyer led so dedup pa.,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led SO Dedup PA""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led SO Dedup,Data representing the merchant led so dedup.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO Dedup""",analytics_insight_preprod.logistics_stock_bv,
+Buyer Led SO Preassgn,Data representing the buyer led so preassgn.,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led SO Preassgn""",analytics_insight_preprod.logistics_stock_bv,
+Buyer Led - Seller by,Data representing the buyer led - seller by.,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led - Seller by""",analytics_insight_preprod.logistics_stock_bv,
+Log By Pre Assigned SO,Data representing the log by pre assigned so.,"analytics_insight_preprod.logistics_stock_bv.""Log By Pre Assigned SO""",analytics_insight_preprod.logistics_stock_bv,
+Logistics Led - Buyer by(PA),Data representing the logistics led - buyer by(pa).,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led - Buyer by(PA)""",analytics_insight_preprod.logistics_stock_bv,
+LSP Led SO (Postassgn) < 20 mins (Not Picked),Logistics Service Provider reference.,"analytics_insight_preprod.logistics_stock_bv.""LSP Led SO (Postassgn) < 20 mins (Not Picked)""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led SO (Preassgn) 15-20 mins,Data representing the merchant led so (preassgn) 15-20 mins.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) 15-20 mins""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led SO (Preassgn) 10-15 mins,Data representing the merchant led so (preassgn) 10-15 mins.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) 10-15 mins""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led SO (Postassgn) > 2 mins (Not Picked),Data representing the merchant led so (postassgn) > 2 mins (not picked).,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Postassgn) > 2 mins (Not Picked)""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led SO (Postassgn) > 2 mins (Picked),Data representing the merchant led so (postassgn) > 2 mins (picked).,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Postassgn) > 2 mins (Picked)""",analytics_insight_preprod.logistics_stock_bv,
+Log Led SO Postassgn,Data representing the log led so postassgn.,"analytics_insight_preprod.logistics_stock_bv.""Log Led SO Postassgn""",analytics_insight_preprod.logistics_stock_bv,
+Log By SO Postassgn,Data representing the log by so postassgn.,"analytics_insight_preprod.logistics_stock_bv.""Log By SO Postassgn""",analytics_insight_preprod.logistics_stock_bv,
+LSP Led SO (Postassgn) > 20 mins (Not Picked),Logistics Service Provider reference.,"analytics_insight_preprod.logistics_stock_bv.""LSP Led SO (Postassgn) > 20 mins (Not Picked)""",analytics_insight_preprod.logistics_stock_bv,
+LSP Led SO (Preassgn) 0-2 mins,Logistics Service Provider reference.,"analytics_insight_preprod.logistics_stock_bv.""LSP Led SO (Preassgn) 0-2 mins""",analytics_insight_preprod.logistics_stock_bv,
+LSP Led SO (Preassgn) 2-5 mins,Logistics Service Provider reference.,"analytics_insight_preprod.logistics_stock_bv.""LSP Led SO (Preassgn) 2-5 mins""",analytics_insight_preprod.logistics_stock_bv,
+LSP Led SO (Preassgn) >5 mins,Logistics Service Provider reference.,"analytics_insight_preprod.logistics_stock_bv.""LSP Led SO (Preassgn) >5 mins""",analytics_insight_preprod.logistics_stock_bv,
+LSP Led SO (Postassgn) 0-2 mins,Logistics Service Provider reference.,"analytics_insight_preprod.logistics_stock_bv.""LSP Led SO (Postassgn) 0-2 mins""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led SO (Postassgn) 0-2 mins,Data representing the merchant led so (postassgn) 0-2 mins.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Postassgn) 0-2 mins""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led SO (Preassgn) 20-30 mins,Data representing the merchant led so (preassgn) 20-30 mins.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) 20-30 mins""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led SO (Preassgn) >30 mins,Data representing the merchant led so (preassgn) >30 mins.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) >30 mins""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led SO (Preassgn) 6-10 mins,Data representing the merchant led so (preassgn) 6-10 mins.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) 6-10 mins""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led SO (Preassgn) 2-6 mins,Data representing the merchant led so (preassgn) 2-6 mins.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) 2-6 mins""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led SO (Preassgn) 0-2 mins,Data representing the merchant led so (preassgn) 0-2 mins.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) 0-2 mins""",analytics_insight_preprod.logistics_stock_bv,
+Logistics Led Post Assigned Cancel,Data representing the logistics led post assigned cancel.,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led Post Assigned Cancel""",analytics_insight_preprod.logistics_stock_bv,
+Buyer Led - Seller by(PA),Data representing the buyer led - seller by(pa).,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led - Seller by(PA)""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led - Seller by,Data representing the merchant led - seller by.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led - Seller by""",analytics_insight_preprod.logistics_stock_bv,
+Merchant By Pre Assigned SO,Data representing the merchant by pre assigned so.,"analytics_insight_preprod.logistics_stock_bv.""Merchant By Pre Assigned SO""",analytics_insight_preprod.logistics_stock_bv,
+Logistics Led - Seller by,Data representing the logistics led - seller by.,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led - Seller by""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led - Buyer by,Data representing the merchant led - buyer by.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led - Buyer by""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led - Logistics by (Post Assigned),Data representing the merchant led - logistics by (post assigned).,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led - Logistics by (Post Assigned)""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led - Buyer by (PA),Data representing the merchant led - buyer by (pa).,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led - Buyer by (PA)""",analytics_insight_preprod.logistics_stock_bv,
+Logistics Led - Logistics by,Data representing the logistics led - logistics by.,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led - Logistics by""",analytics_insight_preprod.logistics_stock_bv,
+Logistics Led - Buyer by,Data representing the logistics led - buyer by.,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led - Buyer by""",analytics_insight_preprod.logistics_stock_bv,
+Logistics Led - Seller by(PA),Data representing the logistics led - seller by(pa).,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led - Seller by(PA)""",analytics_insight_preprod.logistics_stock_bv,
+Buyer Led - Logistics by(PA),Data representing the buyer led - logistics by(pa).,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led - Logistics by(PA)""",analytics_insight_preprod.logistics_stock_bv,
+Logistics By SO Dedup Preassigned,Data representing the logistics by so dedup preassigned.,"analytics_insight_preprod.logistics_stock_bv.""Logistics By SO Dedup Preassigned""",analytics_insight_preprod.logistics_stock_bv,
+Buyer Led Post Assigned Cancel,Data representing the buyer led post assigned cancel.,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led Post Assigned Cancel""",analytics_insight_preprod.logistics_stock_bv,
+Logistics Led - Logistics by(PA),Data representing the logistics led - logistics by(pa).,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led - Logistics by(PA)""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led Pre Assigned SO,Data representing the merchant led pre assigned so.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led Pre Assigned SO""",analytics_insight_preprod.logistics_stock_bv,
+Buyer Led - Buyer by(PA),Data representing the buyer led - buyer by(pa).,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led - Buyer by(PA)""",analytics_insight_preprod.logistics_stock_bv,
+Buyer Led - Logistics by,Data representing the buyer led - logistics by.,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led - Logistics by""",analytics_insight_preprod.logistics_stock_bv,
+Logistics Led SO Dedup,Data representing the logistics led so dedup.,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led SO Dedup""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led Post Assigned Cancel,Data representing the merchant led post assigned cancel.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led Post Assigned Cancel""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led SO Postassgn,Data representing the merchant led so postassgn.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO Postassgn""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led Preassigned SO,Data representing the merchant led preassigned so.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led Preassigned SO""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led - Logistics by,Data representing the merchant led - logistics by.,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led - Logistics by""",analytics_insight_preprod.logistics_stock_bv,
+Buyer Led - Buyer by,Data representing the buyer led - buyer by.,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led - Buyer by""",analytics_insight_preprod.logistics_stock_bv,
+Merchant Led - Seller by (Post),Data representing the merchant led - seller by (post).,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led - Seller by (Post)""",analytics_insight_preprod.logistics_stock_bv,
+"▼ order_aggregated_metrics   (materialized view, 27 cols)",,,analytics_insight_preprod.order_aggregated_metrics,"SELECT ""Date"",
+    ""Category"",
+    ""Buyer NP"",
+    ""Seller NP"",
+    ""Order type"",
+    ""Delivery Type"",
+    ""Delivery Zone"",
+    ""Seller Zone"",
+    ""Delivery Tier"",
+    ""Seller Tier"",
+    sum(""Confirmed"") AS confirmed_orders,
+    sum(""Delivered"") AS delivered_orders,
+    sum(""Cancelled"") AS cancelled_orders,
+    sum(""In Process"") AS in_process_orders,
+        CASE
+            WHEN sum(""Confirmed"") > 0 THEN sum(""Delivered"")::double precision / sum(""Confirmed"")::double precision
+            ELSE 0::double precision
+        END AS delivery_rate,
+        CASE
+            WHEN sum(""Confirmed"") > 0 THEN sum(""Cancelled"")::double precision / sum(""Confirmed"")::double precision
+            ELSE 0::double precision
+        END AS cancel_rate,
+        CASE
+            WHEN sum(""Confirmed"") > 0 THEN sum(""In Process"")::double precision / sum(""Confirmed"")::double precision
+            ELSE 0::double precision
+        END AS inprocess_rate,
+    sum(""Delivered with TAT"") AS delivered_within_tat,
+    sum(""Delivered beyond TAT"") AS delivered_beyond_tat,
+        CASE
+            WHEN sum(""Delivered"") > 0 THEN sum(""Delivered beyond TAT"")::double precision / sum(""Delivered"")::double precision
+            ELSE 0::double precision
+        END AS tat_breach_pct,
+    sum(""Buyer cancel"") AS buyer_cancel,
+    sum(""Seller cancel"") AS seller_cancel,
+    sum(""Logistic cancel"") AS logistics_cancel,
+        CASE
+            WHEN sum(""Cancelled"") > 0 THEN sum(""Seller cancel"")::double precision / sum(""Cancelled"")::double precision
+            ELSE 0::double precision
+        END AS seller_cancel_pct,
+        CASE
+            WHEN sum(""Cancelled"") > 0 THEN sum(""Buyer cancel"")::double precision / sum(""Cancelled"")::double precision
+            ELSE 0::double precision
+        END AS buyer_cancel_pct,
+        CASE
+            WHEN sum(""Cancelled"") > 0 THEN sum(""Logistic cancel"")::double precision / sum(""Cancelled"")::double precision
+            ELSE 0::double precision
+        END AS logistics_cancel_pct,
+        CASE
+            WHEN sum(""Confirmed"") > 0 THEN sum(""Delivered"")::double precision / sum(""Confirmed"")::double precision
+            ELSE 0::double precision
+        END AS fill_rate
+   FROM analytics_insight.ordernhm_v2
+  GROUP BY ""Date"", ""Category"", ""Buyer NP"", ""Seller NP"", ""Order type"", ""Delivery Type"", ""Delivery Zone"", ""Seller Zone"", ""Delivery Tier"", ""Seller Tier"";"
+Date,Timestamp or date indicating when date occurred.,"analytics_insight_preprod.order_aggregated_metrics.""Date""",analytics_insight_preprod.order_aggregated_metrics,
+Category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.order_aggregated_metrics.""Category""",analytics_insight_preprod.order_aggregated_metrics,
+Buyer NP,Data representing the buyer np.,"analytics_insight_preprod.order_aggregated_metrics.""Buyer NP""",analytics_insight_preprod.order_aggregated_metrics,
+Seller NP,Data representing the seller np.,"analytics_insight_preprod.order_aggregated_metrics.""Seller NP""",analytics_insight_preprod.order_aggregated_metrics,
+Order type,Data representing the order type.,"analytics_insight_preprod.order_aggregated_metrics.""Order type""",analytics_insight_preprod.order_aggregated_metrics,
+Delivery Type,Data representing the delivery type.,"analytics_insight_preprod.order_aggregated_metrics.""Delivery Type""",analytics_insight_preprod.order_aggregated_metrics,
+Delivery Zone,Data representing the delivery zone.,"analytics_insight_preprod.order_aggregated_metrics.""Delivery Zone""",analytics_insight_preprod.order_aggregated_metrics,
+Seller Zone,Data representing the seller zone.,"analytics_insight_preprod.order_aggregated_metrics.""Seller Zone""",analytics_insight_preprod.order_aggregated_metrics,
+Delivery Tier,Data representing the delivery tier.,"analytics_insight_preprod.order_aggregated_metrics.""Delivery Tier""",analytics_insight_preprod.order_aggregated_metrics,
+Seller Tier,Data representing the seller tier.,"analytics_insight_preprod.order_aggregated_metrics.""Seller Tier""",analytics_insight_preprod.order_aggregated_metrics,
+confirmed_orders,Data representing the confirmed orders.,"analytics_insight_preprod.order_aggregated_metrics.""confirmed_orders""",analytics_insight_preprod.order_aggregated_metrics,
+delivered_orders,Data representing the delivered orders.,"analytics_insight_preprod.order_aggregated_metrics.""delivered_orders""",analytics_insight_preprod.order_aggregated_metrics,
+cancelled_orders,Data representing the cancelled orders.,"analytics_insight_preprod.order_aggregated_metrics.""cancelled_orders""",analytics_insight_preprod.order_aggregated_metrics,
+in_process_orders,Data representing the in process orders.,"analytics_insight_preprod.order_aggregated_metrics.""in_process_orders""",analytics_insight_preprod.order_aggregated_metrics,
+delivery_rate,Timestamp or date indicating when delivery rate occurred.,"analytics_insight_preprod.order_aggregated_metrics.""delivery_rate""",analytics_insight_preprod.order_aggregated_metrics,
+cancel_rate,Timestamp or date indicating when cancel rate occurred.,"analytics_insight_preprod.order_aggregated_metrics.""cancel_rate""",analytics_insight_preprod.order_aggregated_metrics,
+inprocess_rate,Timestamp or date indicating when inprocess rate occurred.,"analytics_insight_preprod.order_aggregated_metrics.""inprocess_rate""",analytics_insight_preprod.order_aggregated_metrics,
+delivered_within_tat,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_aggregated_metrics.""delivered_within_tat""",analytics_insight_preprod.order_aggregated_metrics,
+delivered_beyond_tat,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_aggregated_metrics.""delivered_beyond_tat""",analytics_insight_preprod.order_aggregated_metrics,
+tat_breach_pct,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_aggregated_metrics.""tat_breach_pct""",analytics_insight_preprod.order_aggregated_metrics,
+buyer_cancel,Data representing the buyer cancel.,"analytics_insight_preprod.order_aggregated_metrics.""buyer_cancel""",analytics_insight_preprod.order_aggregated_metrics,
+seller_cancel,Data representing the seller cancel.,"analytics_insight_preprod.order_aggregated_metrics.""seller_cancel""",analytics_insight_preprod.order_aggregated_metrics,
+logistics_cancel,Data representing the logistics cancel.,"analytics_insight_preprod.order_aggregated_metrics.""logistics_cancel""",analytics_insight_preprod.order_aggregated_metrics,
+seller_cancel_pct,Data representing the seller cancel pct.,"analytics_insight_preprod.order_aggregated_metrics.""seller_cancel_pct""",analytics_insight_preprod.order_aggregated_metrics,
+buyer_cancel_pct,Data representing the buyer cancel pct.,"analytics_insight_preprod.order_aggregated_metrics.""buyer_cancel_pct""",analytics_insight_preprod.order_aggregated_metrics,
+logistics_cancel_pct,Data representing the logistics cancel pct.,"analytics_insight_preprod.order_aggregated_metrics.""logistics_cancel_pct""",analytics_insight_preprod.order_aggregated_metrics,
+fill_rate,Timestamp or date indicating when fill rate occurred.,"analytics_insight_preprod.order_aggregated_metrics.""fill_rate""",analytics_insight_preprod.order_aggregated_metrics,
+"▼ order_retail_b2b_category_subcategory_preagg   (base table, 21 cols)",,,analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+agg_level,Data representing the agg level.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""agg_level""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""domain""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""sub_domain""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+order_year,Data representing the order year.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""order_year""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+order_month,Data representing the order month.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""order_month""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+order_week,Data representing the order week.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""order_week""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""category""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+sub_category,Timestamp or date indicating when sub category occurred.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""sub_category""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+delivery_district,Data representing the delivery district.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""delivery_district""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+delivery_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""delivery_state""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""delivery_state_code""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+seller_district,Data representing the seller district.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""seller_district""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+seller_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""seller_state""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""seller_state_code""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+total_orders_delivered,Data representing the total orders delivered.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""total_orders_delivered""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+pincode_count,Indian postal code (pincode).,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""pincode_count""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+total_items,Data representing the total items.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""total_items""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+intrastate_orders,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""intrastate_orders""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+interstate_orders,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""interstate_orders""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+intradistrict_orders,Data representing the intradistrict orders.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""intradistrict_orders""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+interdistrict_orders,Data representing the interdistrict orders.,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""interdistrict_orders""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg,
+"▼ order_retail_b2b_district_preagg   (base table, 18 cols)",,,analytics_insight_preprod.order_retail_b2b_district_preagg,
+domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.order_retail_b2b_district_preagg.""domain""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.order_retail_b2b_district_preagg.""sub_domain""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+order_year,Data representing the order year.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""order_year""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+order_month,Data representing the order month.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""order_month""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+order_week,Data representing the order week.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""order_week""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+delivery_district,Data representing the delivery district.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""delivery_district""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+delivery_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""delivery_state""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""delivery_state_code""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+seller_district,Data representing the seller district.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""seller_district""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+seller_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""seller_state""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""seller_state_code""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+total_orders_delivered,Data representing the total orders delivered.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""total_orders_delivered""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+pincode_count,Indian postal code (pincode).,"analytics_insight_preprod.order_retail_b2b_district_preagg.""pincode_count""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+total_items,Data representing the total items.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""total_items""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+intrastate_orders,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""intrastate_orders""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+interstate_orders,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""interstate_orders""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+intradistrict_orders,Data representing the intradistrict orders.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""intradistrict_orders""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+interdistrict_orders,Data representing the interdistrict orders.,"analytics_insight_preprod.order_retail_b2b_district_preagg.""interdistrict_orders""",analytics_insight_preprod.order_retail_b2b_district_preagg,
+"▼ order_retail_b2b_pc_level_preagg   (base table, 8 cols)",,,analytics_insight_preprod.order_retail_b2b_pc_level_preagg,
+order_year,Data representing the order year.,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""order_year""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg,
+order_month,Data representing the order month.,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""order_month""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg,
+domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""domain""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""sub_domain""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg,
+seller_pincode,Indian postal code (pincode).,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""seller_pincode""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg,
+delivery_pincode,Indian postal code (pincode).,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""delivery_pincode""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg,
+total_orders,Data representing the total orders.,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""total_orders""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg,
+total_items,Data representing the total items.,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""total_items""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg,
+"▼ order_retail_b2b_scat_pc_preagg   (base table, 10 cols)",,,analytics_insight_preprod.order_retail_b2b_scat_pc_preagg,
+order_year,Data representing the order year.,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""order_year""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg,
+order_month,Data representing the order month.,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""order_month""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg,
+domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""domain""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""sub_domain""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg,
+seller_pincode,Indian postal code (pincode).,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""seller_pincode""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg,
+delivery_pincode,Indian postal code (pincode).,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""delivery_pincode""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg,
+category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""category""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg,
+sub_category,Timestamp or date indicating when sub category occurred.,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""sub_category""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg,
+total_orders,Data representing the total orders.,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""total_orders""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg,
+total_items,Data representing the total items.,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""total_items""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg,
+"▼ order_retail_b2c_daily_report   (materialized view, 9 cols)",,,analytics_insight_preprod.order_retail_b2c_daily_report,"SELECT ""Seller NP"",
+    ""Buyer NP"",
+    ""Date"",
+    ""Delivery Type"",
+    ""Order type"",
+    ""Delivery City"",
+    ""Seller City"",
+    ""Category"",
+    sum(""Confirmed"") AS ""Confirmed""
+   FROM analytics_insight.ordernhm
+  GROUP BY ""Seller NP"", ""Buyer NP"", ""Date"", ""Delivery Type"", ""Order type"", ""Delivery City"", ""Seller City"", ""Category"";"
+Seller NP,Data representing the seller np.,"analytics_insight_preprod.order_retail_b2c_daily_report.""Seller NP""",analytics_insight_preprod.order_retail_b2c_daily_report,
+Buyer NP,Data representing the buyer np.,"analytics_insight_preprod.order_retail_b2c_daily_report.""Buyer NP""",analytics_insight_preprod.order_retail_b2c_daily_report,
+Date,Timestamp or date indicating when date occurred.,"analytics_insight_preprod.order_retail_b2c_daily_report.""Date""",analytics_insight_preprod.order_retail_b2c_daily_report,
+Delivery Type,Data representing the delivery type.,"analytics_insight_preprod.order_retail_b2c_daily_report.""Delivery Type""",analytics_insight_preprod.order_retail_b2c_daily_report,
+Order type,Data representing the order type.,"analytics_insight_preprod.order_retail_b2c_daily_report.""Order type""",analytics_insight_preprod.order_retail_b2c_daily_report,
+Delivery City,City name for the given context.,"analytics_insight_preprod.order_retail_b2c_daily_report.""Delivery City""",analytics_insight_preprod.order_retail_b2c_daily_report,
+Seller City,City name for the given context.,"analytics_insight_preprod.order_retail_b2c_daily_report.""Seller City""",analytics_insight_preprod.order_retail_b2c_daily_report,
+Category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.order_retail_b2c_daily_report.""Category""",analytics_insight_preprod.order_retail_b2c_daily_report,
+Confirmed,Data representing the confirmed.,"analytics_insight_preprod.order_retail_b2c_daily_report.""Confirmed""",analytics_insight_preprod.order_retail_b2c_daily_report,
+"▼ order_seller_np_view   (materialized view, 19 cols)",,,analytics_insight_preprod.order_seller_np_view,"SELECT ""Date"",
+    ""Category"",
+    ""Buyer NP"",
+    ""Seller NP"",
+    ""Order type"",
+    ""Delivery Type"",
+    ""Delivery Zone"",
+    ""Seller Zone"",
+    ""Delivery Tier"",
+    ""Seller Tier"",
+    sum(""Confirmed"") AS ""Confirmed"",
+    sum(""Delivered"") AS ""Delivered"",
+    sum(""Cancelled"") AS ""Cancelled"",
+    sum(""In Process"") AS ""In Process"",
+    sum(""Delivered with TAT"") AS ""Delivered with TAT"",
+    sum(""Delivered beyond TAT"") AS ""Delivered beyond TAT"",
+    sum(""Buyer cancel"") AS ""Buyer cancel"",
+    sum(""Seller cancel"") AS ""Seller cancel"",
+    sum(""Logistic cancel"") AS ""Logistic cancel""
+   FROM analytics_insight.ordernhm
+  GROUP BY ""Date"", ""Category"", ""Buyer NP"", ""Seller NP"", ""Order type"", ""Delivery Type"", ""Delivery Zone"", ""Seller Zone"", ""Delivery Tier"", ""Seller Tier"";"
+Date,Timestamp or date indicating when date occurred.,"analytics_insight_preprod.order_seller_np_view.""Date""",analytics_insight_preprod.order_seller_np_view,
+Category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.order_seller_np_view.""Category""",analytics_insight_preprod.order_seller_np_view,
+Buyer NP,Data representing the buyer np.,"analytics_insight_preprod.order_seller_np_view.""Buyer NP""",analytics_insight_preprod.order_seller_np_view,
+Seller NP,Data representing the seller np.,"analytics_insight_preprod.order_seller_np_view.""Seller NP""",analytics_insight_preprod.order_seller_np_view,
+Order type,Data representing the order type.,"analytics_insight_preprod.order_seller_np_view.""Order type""",analytics_insight_preprod.order_seller_np_view,
+Delivery Type,Data representing the delivery type.,"analytics_insight_preprod.order_seller_np_view.""Delivery Type""",analytics_insight_preprod.order_seller_np_view,
+Delivery Zone,Data representing the delivery zone.,"analytics_insight_preprod.order_seller_np_view.""Delivery Zone""",analytics_insight_preprod.order_seller_np_view,
+Seller Zone,Data representing the seller zone.,"analytics_insight_preprod.order_seller_np_view.""Seller Zone""",analytics_insight_preprod.order_seller_np_view,
+Delivery Tier,Data representing the delivery tier.,"analytics_insight_preprod.order_seller_np_view.""Delivery Tier""",analytics_insight_preprod.order_seller_np_view,
+Seller Tier,Data representing the seller tier.,"analytics_insight_preprod.order_seller_np_view.""Seller Tier""",analytics_insight_preprod.order_seller_np_view,
+Confirmed,Data representing the confirmed.,"analytics_insight_preprod.order_seller_np_view.""Confirmed""",analytics_insight_preprod.order_seller_np_view,
+Delivered,Data representing the delivered.,"analytics_insight_preprod.order_seller_np_view.""Delivered""",analytics_insight_preprod.order_seller_np_view,
+Cancelled,Data representing the cancelled.,"analytics_insight_preprod.order_seller_np_view.""Cancelled""",analytics_insight_preprod.order_seller_np_view,
+In Process,Data representing the in process.,"analytics_insight_preprod.order_seller_np_view.""In Process""",analytics_insight_preprod.order_seller_np_view,
+Delivered with TAT,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_seller_np_view.""Delivered with TAT""",analytics_insight_preprod.order_seller_np_view,
+Delivered beyond TAT,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_seller_np_view.""Delivered beyond TAT""",analytics_insight_preprod.order_seller_np_view,
+Buyer cancel,Data representing the buyer cancel.,"analytics_insight_preprod.order_seller_np_view.""Buyer cancel""",analytics_insight_preprod.order_seller_np_view,
+Seller cancel,Data representing the seller cancel.,"analytics_insight_preprod.order_seller_np_view.""Seller cancel""",analytics_insight_preprod.order_seller_np_view,
+Logistic cancel,Data representing the logistic cancel.,"analytics_insight_preprod.order_seller_np_view.""Logistic cancel""",analytics_insight_preprod.order_seller_np_view,
+"▼ order_status_tat_view   (materialized view, 12 cols)",,,analytics_insight_preprod.order_status_tat_view,"SELECT ""Date"",
+    ""Buyer NP"",
+    ""Seller NP"",
+    ""Order type"",
+    ""Delivery Type"",
+    ""Category"",
+    ""ONDC order_status"" AS ""Order Status"",
+    sum(""Delivered"") AS ""Delivered"",
+    sum(""Delivered beyond TAT"") AS ""Delivered TAT Breached"",
+    sum(""In Process"") AS ""In Process"",
+    sum(
+        CASE
+            WHEN ""ONDC order_status""::text = 'In Process'::text AND ""Breach"" = 1 THEN ""In Process""
+            ELSE 0
+        END) AS ""In Process TAT Breach"",
+    sum(
+        CASE
+            WHEN ""ONDC order_status""::text = 'Cancelled'::text AND ""Cancelled att""::text = 'Buyer App'::text AND ""Breach"" = 1 THEN ""Buyer cancel""
+            ELSE 0
+        END) AS ""Buyer Cancel TAT Breach""
+   FROM analytics_insight.ordernhm
+  WHERE ""ONDC order_status""::text = ANY (ARRAY['Delivered'::character varying, 'In Process'::character varying, 'Cancelled'::character varying]::text[])
+  GROUP BY ""Date"", ""Buyer NP"", ""Seller NP"", ""Order type"", ""Delivery Type"", ""Category"", ""ONDC order_status"";"
+Date,Timestamp or date indicating when date occurred.,"analytics_insight_preprod.order_status_tat_view.""Date""",analytics_insight_preprod.order_status_tat_view,
+Buyer NP,Data representing the buyer np.,"analytics_insight_preprod.order_status_tat_view.""Buyer NP""",analytics_insight_preprod.order_status_tat_view,
+Seller NP,Data representing the seller np.,"analytics_insight_preprod.order_status_tat_view.""Seller NP""",analytics_insight_preprod.order_status_tat_view,
+Order type,Data representing the order type.,"analytics_insight_preprod.order_status_tat_view.""Order type""",analytics_insight_preprod.order_status_tat_view,
+Delivery Type,Data representing the delivery type.,"analytics_insight_preprod.order_status_tat_view.""Delivery Type""",analytics_insight_preprod.order_status_tat_view,
+Category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.order_status_tat_view.""Category""",analytics_insight_preprod.order_status_tat_view,
+Order Status,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_status_tat_view.""Order Status""",analytics_insight_preprod.order_status_tat_view,
+Delivered,Data representing the delivered.,"analytics_insight_preprod.order_status_tat_view.""Delivered""",analytics_insight_preprod.order_status_tat_view,
+Delivered TAT Breached,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_status_tat_view.""Delivered TAT Breached""",analytics_insight_preprod.order_status_tat_view,
+In Process,Data representing the in process.,"analytics_insight_preprod.order_status_tat_view.""In Process""",analytics_insight_preprod.order_status_tat_view,
+In Process TAT Breach,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_status_tat_view.""In Process TAT Breach""",analytics_insight_preprod.order_status_tat_view,
+Buyer Cancel TAT Breach,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.order_status_tat_view.""Buyer Cancel TAT Breach""",analytics_insight_preprod.order_status_tat_view,
+"▼ retail_b2c_ordernhm_bv   (view, 101 cols)",,,analytics_insight_preprod.retail_b2c_ordernhm_bv,"SELECT ol.""Date"",
+    snp.seller_np_name AS ""Seller NP"",
+    bnp.buyer_np_name AS ""Buyer NP"",
+    ol.""Network order id"",
+    lower((ol.""Seller NP""::text || '_'::text) || ol.""Provider Id""::text) AS ""provider key"",
+    ol.""Provider Id"",
+    ol.""Seller Name"",
+    ol.""Seller Pincode"",
+    ol.""Delivery Pincode"",
+    ol.cancellation_code,
+    ol.""Created at"",
+    ol.""Updated at"",
+    ol.""Updated at""::date AS ""Updated"",
+    ol.""Shipped at"",
+    ol.""Ready to Ship"",
+    ol.""Promised time"",
+    ol.domain,
+    ol.""on-time-del"",
+    ol.tat_dif,
+    ol.tat_diff_days,
+    ol.day_diff,
+    ol.min_diff,
+    ol.tat_time,
+    ol.""Category"",
+    ol.""Consolidated_category"",
+    ol.""ONDC order_status"",
+    ol.no_key,
+    ol.no_key AS ""Confirmed"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text THEN ol.no_key
+            ELSE 0
+        END AS ""Delivered"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Cancelled'::text THEN ol.no_key
+            ELSE 0
+        END AS ""Cancelled"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'In Process'::text THEN ol.no_key
+            ELSE 0
+        END AS ""In Process"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Part Delivered'::text THEN ol.no_key
+            ELSE 0
+        END AS ""Part Delivered"",
+    COALESCE(snp.seller_np, 'Others'::character varying) AS ""SNP"",
+    COALESCE(bnp.buyer_np, 'Others'::character varying) AS ""BNP"",
+        CASE
+            WHEN ol.cancellation_code IS NOT NULL THEN 1
+            ELSE 0
+        END AS ""Cancellation code cal"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND COALESCE(ol.tat_dif, 0::double precision) = 0::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""Delivered with TAT"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND COALESCE(ol.tat_dif, 0::double precision) > 0::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""Delivered beyond TAT"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Updated at"" IS NOT NULL AND ol.""Updated at"" <= ol.""Promised time"" THEN ol.no_key
+            ELSE 0
+        END AS ""DBO"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Date"" >= '2023-11-01'::date AND ol.""Updated at""::date > ol.""Promised time""::date THEN ol.no_key
+            ELSE 0
+        END AS ""Delivered beyond P.TAT"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Date"" >= '2023-11-01'::date AND ol.""Updated at""::date <= ol.""Promised time""::date THEN ol.no_key
+            ELSE 0
+        END AS ""Delivered within P.TAT"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = ANY (ARRAY['Delivered'::character varying::text, 'Cancelled'::character varying::text]) THEN EXTRACT(epoch FROM ol.""Updated at"" - ol.""Promised time"") / 60.0
+            WHEN ol.""ONDC order_status""::text = 'In Process'::text THEN EXTRACT(epoch FROM CURRENT_TIMESTAMP - ol.""Promised time""::timestamp with time zone) / 60.0
+            ELSE NULL::numeric
+        END AS ""Breach (mins)"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = ANY (ARRAY['Delivered'::character varying::text, 'Cancelled'::character varying::text]) THEN EXTRACT(epoch FROM ol.""Updated at"" - ol.""Promised time"") / 3600.0
+            WHEN ol.""ONDC order_status""::text = 'In Process'::text THEN EXTRACT(epoch FROM CURRENT_TIMESTAMP - ol.""Promised time""::timestamp with time zone) / 3600.0
+            ELSE NULL::numeric
+        END AS ""Breach (hrs)"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = ANY (ARRAY['Delivered'::character varying::text, 'Cancelled'::character varying::text]) THEN EXTRACT(epoch FROM ol.""Updated at"" - ol.""Promised time"") / 86400.0
+            WHEN ol.""ONDC order_status""::text = 'In Process'::text THEN EXTRACT(epoch FROM CURRENT_TIMESTAMP - ol.""Promised time""::timestamp with time zone) / 86400.0
+            ELSE NULL::numeric
+        END AS ""Breach (days)"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.day_diff = 0::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""Same Day"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.day_diff = 1::double precision THEN 1
+            ELSE 0
+        END AS ""Next Day"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.day_diff = 2::double precision THEN 1
+            ELSE 0
+        END AS ""Day + 2"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.day_diff > 2::double precision THEN 1
+            ELSE 0
+        END AS ""More than 2 Days"",
+    COALESCE(ol.""on-time-del"", 0::double precision) AS ""On time deliveries"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Category""::text = 'F&B'::text THEN EXTRACT(epoch FROM ol.""Updated at"" - ol.""Created at"") / 60.0
+            ELSE NULL::numeric
+        END AS ""F&B mins diff"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Category""::text = 'F&B'::text AND ol.min_diff <= 15::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""Within 15 mins"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Category""::text = 'F&B'::text AND ol.min_diff > 15::double precision AND ol.min_diff <= 30::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""15 - 30 mins"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Category""::text = 'F&B'::text AND ol.min_diff > 30::double precision AND ol.min_diff <= 45::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""30 - 45 mins"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Category""::text = 'F&B'::text AND ol.min_diff > 45::double precision AND ol.min_diff <= 60::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""45 - 60 mins"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Category""::text = 'F&B'::text AND ol.min_diff > 60::double precision AND ol.min_diff <= 120::double precision THEN 1
+            ELSE 0
+        END AS ""60 - 120 mins"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Category""::text = 'F&B'::text AND ol.min_diff > 120::double precision THEN 1
+            ELSE 0
+        END AS ""Above 120 mins"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_dif > 0::double precision AND ol.tat_dif <= 300::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT < 5 mins"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_dif > 300::double precision AND ol.tat_dif <= 900::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT 5-15 mins"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_dif > 900::double precision AND ol.tat_dif <= 1800::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT 15-30 mins"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_dif > 1800::double precision AND ol.tat_dif <= 3600::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT 30-60 mins"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_dif > 3600::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT > 60 mins"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_dif > 0::double precision AND ol.tat_dif <= 21600::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT 0-6 hrs"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_dif > 21600::double precision AND ol.tat_dif <= 43200::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT 6-12 hrs"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_dif > 43200::double precision AND ol.tat_dif <= 86400::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT 12-24 hrs"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_dif > 86400::double precision AND ol.tat_dif <= 172800::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT 24-48 hrs"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_dif > 172800::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT >48 hrs"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_diff_days = 1::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT+1"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_diff_days = 2::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT + 2"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_diff_days = 3::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT + 3"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_diff_days = 4::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT + 4"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_diff_days > 4::double precision THEN ol.no_key
+            ELSE 0
+        END AS ""TAT > 4"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.tat_diff_days < 1::double precision AND ol.""Promised time"" < ol.""Updated at"" THEN ol.no_key
+            ELSE 0
+        END AS ""TAT (Same day)"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Category""::text <> 'F&B'::text THEN EXTRACT(day FROM ol.""Updated at"" - ol.""Created at"")
+            ELSE NULL::numeric
+        END AS ""Non F&B days diff"",
+        CASE
+            WHEN ol.""Shipped at"" IS NOT NULL THEN ol.no_key
+            ELSE 0
+        END AS ""Shipped mark"",
+    sp.statename AS ""Seller State"",
+    dp.statename AS ""Delivery State"",
+    COALESCE(sp.districtname, 'Undefined'::character varying) AS ""Seller City"",
+    COALESCE(dp.districtname, 'Undefined'::character varying) AS ""Delivery City"",
+    COALESCE(sp.tier, 'Undefined'::character varying) AS ""Seller Tier"",
+    COALESCE(dp.tier, 'Undefined'::character varying) AS ""Delivery Tier"",
+    COALESCE(sp.zones, 'Undefined'::character varying) AS ""Seller Zone"",
+    COALESCE(dp.zones, 'Undefined'::character varying) AS ""Delivery Zone"",
+        CASE
+            WHEN ol.""Category""::text = 'F&B'::text THEN 'Hyperlocal'::text
+            WHEN COALESCE(dp.districtname, 'Undefined'::character varying)::text = 'Undefined'::text THEN 'Undefined'::text
+            WHEN COALESCE(sp.districtname, 'Undefined'::character varying)::text = 'Undefined'::text THEN 'Undefined'::text
+            WHEN dp.districtname::text <> sp.districtname::text THEN 'Intercity'::text
+            ELSE 'Hyperlocal'::text
+        END AS ""Delivery Type"",
+        CASE
+            WHEN bnp.buyer_np_name::text <> snp.seller_np_name::text THEN 'Inter NP'::text
+            ELSE 'Intra NP'::text
+        END AS ""Order type"",
+        CASE
+            WHEN ol.""Date"" < '2023-11-01'::date THEN NULL::integer
+            WHEN
+            CASE
+                WHEN ol.""Category""::text = 'F&B'::text THEN 'Hyperlocal'::text
+                WHEN COALESCE(dp.districtname, 'Undefined'::character varying)::text = 'Undefined'::text THEN 'Undefined'::text
+                WHEN COALESCE(sp.districtname, 'Undefined'::character varying)::text = 'Undefined'::text THEN 'Undefined'::text
+                WHEN dp.districtname::text <> sp.districtname::text THEN 'Intercity'::text
+                ELSE 'Hyperlocal'::text
+            END = 'Intercity'::text THEN
+            CASE
+                WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Updated at""::date > ol.""Promised time""::date THEN 1
+                WHEN ol.""ONDC order_status""::text = 'Cancelled'::text AND cc.attributed_to::text = 'Buyer app'::text AND ol.""Updated at""::date > ol.""Promised time""::date THEN 1
+                WHEN ol.""ONDC order_status""::text = 'In Process'::text AND ol.""Date"" >= '2024-02-01'::date AND CURRENT_DATE > ol.""Promised time""::date THEN 1
+                ELSE 0
+            END
+            ELSE
+            CASE
+                WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Updated at""::date > ol.""Promised time""::date THEN 1
+                WHEN ol.""ONDC order_status""::text = 'Cancelled'::text AND cc.attributed_to::text = 'Buyer app'::text AND ol.""Updated at""::date > ol.""Promised time""::date THEN 1
+                WHEN ol.""ONDC order_status""::text = 'In Process'::text AND ol.""Date"" >= '2024-02-01'::date AND CURRENT_TIMESTAMP > ol.""Promised time"" THEN 1
+                ELSE 0
+            END
+        END AS ""Breach"",
+        CASE
+            WHEN ol.""ONDC order_status""::text <> 'In Process'::text THEN 0
+            WHEN ol.""Date"" < '2023-11-01'::date THEN 0
+            WHEN
+            CASE
+                WHEN ol.""Category""::text = 'F&B'::text THEN 'Hyperlocal'::text
+                WHEN COALESCE(dp.districtname, 'Undefined'::character varying)::text = 'Undefined'::text THEN 'Undefined'::text
+                WHEN COALESCE(sp.districtname, 'Undefined'::character varying)::text = 'Undefined'::text THEN 'Undefined'::text
+                WHEN dp.districtname::text <> sp.districtname::text THEN 'Intercity'::text
+                ELSE 'Hyperlocal'::text
+            END = 'Intercity'::text THEN
+            CASE
+                WHEN ol.""Date"" >= '2024-02-01'::date AND CURRENT_DATE > ol.""Promised time""::date THEN 1
+                ELSE 0
+            END
+            ELSE
+            CASE
+                WHEN ol.""Date"" >= '2024-02-01'::date AND CURRENT_TIMESTAMP > ol.""Promised time"" THEN 1
+                ELSE 0
+            END
+        END AS ""Inprocessnew(tat)"",
+        CASE
+            WHEN ol.""ONDC order_status""::text <> 'In Process'::text THEN 0
+            WHEN ol.""Date"" < '2024-02-01'::date THEN 0
+            WHEN
+            CASE
+                WHEN ol.""Category""::text = 'F&B'::text THEN 'Hyperlocal'::text
+                WHEN COALESCE(dp.districtname, 'Undefined'::character varying)::text = 'Undefined'::text THEN 'Undefined'::text
+                WHEN COALESCE(sp.districtname, 'Undefined'::character varying)::text = 'Undefined'::text THEN 'Undefined'::text
+                WHEN dp.districtname::text <> sp.districtname::text THEN 'Intercity'::text
+                ELSE 'Hyperlocal'::text
+            END = 'Intercity'::text THEN
+            CASE
+                WHEN CURRENT_DATE > ol.""Promised time""::date THEN 1
+                ELSE 0
+            END
+            ELSE
+            CASE
+                WHEN CURRENT_TIMESTAMP > ol.""Promised time"" THEN 1
+                ELSE 0
+            END
+        END AS ""inprocess(tat)"",
+        CASE
+            WHEN ol.""ONDC order_status""::text <> 'Cancelled'::text THEN 0
+            WHEN cc.attributed_to IS NULL OR (cc.attributed_to::text <> ALL (ARRAY['Buyer App'::text, 'Buyer app'::text])) THEN 0
+            WHEN ol.""Date"" < '2023-11-01'::date THEN 0
+            WHEN ol.""Updated at""::date > ol.""Promised time""::date THEN 1
+            ELSE 0
+        END AS ""Buyer cancelled(tat)"",
+        CASE
+            WHEN ol.""ONDC order_status""::text <> 'Cancelled'::text THEN 0
+            WHEN cc.attributed_to IS NULL OR cc.attributed_to::text <> 'Logistics Provider'::text THEN 0
+            WHEN ol.""Date"" < '2023-11-01'::date THEN 0
+            WHEN ol.""Updated at""::date > ol.""Promised time""::date THEN 1
+            ELSE 0
+        END AS ""Logistics cancelled(tat)"",
+    cc.attributed_to,
+    cc.reason_for_cancellation,
+    cc.is_triggers_rto,
+    cc.by AS cancelled_by,
+    cc.whether_applicable_for_part_cancel,
+    cc.sorting,
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Cancelled'::text AND cc.attributed_to::text = 'Buyer App'::text THEN ol.no_key
+            ELSE 0
+        END AS ""Buyer Cancel"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Cancelled'::text AND cc.attributed_to::text = 'Seller App'::text THEN ol.no_key
+            ELSE 0
+        END AS ""Seller Cancel"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Cancelled'::text AND cc.attributed_to::text = 'Logistics Provider'::text THEN ol.no_key
+            ELSE 0
+        END AS ""Logistics Cancel"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Cancelled'::text THEN cc.attributed_to
+            ELSE NULL::character varying
+        END AS ""Cancelled att"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'In Process'::text AND ol.""Updated at"" >= '2024-02-01'::date THEN ol.no_key
+            ELSE 0
+        END AS ""In Process (Dt)"",
+        CASE
+            WHEN ol.""ONDC order_status""::text = 'Delivered'::text AND ol.""Updated at"" > ol.""Promised time"" THEN 1
+            ELSE 0
+        END AS ""delivered(tat)"",
+        CASE
+            WHEN (EXISTS ( SELECT 1
+               FROM dimension.dim_provider_cred pc
+              WHERE pc.provider_key = lower((ol.""Seller NP""::text || '_'::text) || ol.""Provider Id""::text) AND pc.cred_code = 'Social Sector'::text)) THEN ol.no_key
+            ELSE 0
+        END AS ""Social Cred Orders""
+   FROM analytics_insight.order_level ol
+     LEFT JOIN dimension.dim_retail_seller_np snp ON ol.""Seller NP""::text = snp.seller_np::text
+     LEFT JOIN dimension.dim_retail_buyer_np bnp ON ol.""Buyer NP""::text = bnp.buyer_np::text
+     LEFT JOIN dimension.dim_pincode sp ON ol.""Seller Pincode""::text = sp.pincode::text
+     LEFT JOIN dimension.dim_pincode dp ON ol.""Delivery Pincode""::text = dp.pincode::text
+     LEFT JOIN dimension.dim_cancellation_code cc ON ol.cancellation_code::text = cc.code::text;"
+Date,Timestamp or date indicating when date occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Date""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Seller NP,Data representing the seller np.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller NP""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Buyer NP,Data representing the buyer np.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Buyer NP""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Network order id,Data representing the network order id.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Network order id""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+provider key,Unique identifier for provider key.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""provider key""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Provider Id,Unique identifier for the provider.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Provider Id""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Seller Name,Name of the seller.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller Name""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Seller Pincode,Indian postal code (pincode).,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller Pincode""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Delivery Pincode,Indian postal code (pincode).,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivery Pincode""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+cancellation_code,Timestamp or date indicating when cancellation code occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""cancellation_code""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Created at,Timestamp when the record was created.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Created at""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Updated at,Timestamp when the record was last updated.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Updated at""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Updated,Timestamp or date indicating when updated occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Updated""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Shipped at,Timestamp or date indicating when shipped at occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Shipped at""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Ready to Ship,Data representing the ready to ship.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Ready to Ship""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Promised time,Timestamp or date indicating when promised time occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Promised time""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.retail_b2c_ordernhm_bv.""domain""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+on-time-del,Timestamp or date indicating when on-time-del occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""on-time-del""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+tat_dif,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""tat_dif""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+tat_diff_days,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""tat_diff_days""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+day_diff,Data representing the day diff.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""day_diff""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+min_diff,Data representing the min diff.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""min_diff""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+tat_time,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""tat_time""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Category""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Consolidated_category,Timestamp or date indicating when consolidated category occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Consolidated_category""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+ONDC order_status,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""ONDC order_status""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+no_key,Data representing the no key.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""no_key""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Confirmed,Data representing the confirmed.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Confirmed""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Delivered,Data representing the delivered.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivered""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Cancelled,Data representing the cancelled.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Cancelled""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+In Process,Data representing the in process.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""In Process""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Part Delivered,Data representing the part delivered.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Part Delivered""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+SNP,Data representing the snp.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""SNP""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+BNP,Data representing the bnp.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""BNP""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Cancellation code cal,Timestamp or date indicating when cancellation code cal occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Cancellation code cal""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Delivered with TAT,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivered with TAT""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Delivered beyond TAT,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivered beyond TAT""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+DBO,Data representing the dbo.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""DBO""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Delivered beyond P.TAT,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivered beyond P.TAT""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Delivered within P.TAT,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivered within P.TAT""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Breach (mins),Data representing the breach (mins).,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Breach (mins)""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Breach (hrs),Data representing the breach (hrs).,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Breach (hrs)""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Breach (days),Data representing the breach (days).,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Breach (days)""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Same Day,Data representing the same day.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Same Day""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Next Day,Data representing the next day.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Next Day""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Day + 2,Data representing the day + 2.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Day + 2""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+More than 2 Days,Data representing the more than 2 days.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""More than 2 Days""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+On time deliveries,Timestamp or date indicating when on time deliveries occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""On time deliveries""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+F&B mins diff,Data representing the f&b mins diff.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""F&B mins diff""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Within 15 mins,Data representing the within 15 mins.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Within 15 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+15 - 30 mins,Data representing the 15 - 30 mins.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""15 - 30 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+30 - 45 mins,Data representing the 30 - 45 mins.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""30 - 45 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+45 - 60 mins,Data representing the 45 - 60 mins.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""45 - 60 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+60 - 120 mins,Data representing the 60 - 120 mins.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""60 - 120 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Above 120 mins,Data representing the above 120 mins.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Above 120 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT < 5 mins,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT < 5 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT 5-15 mins,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 5-15 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT 15-30 mins,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 15-30 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT 30-60 mins,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 30-60 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT > 60 mins,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT > 60 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT 0-6 hrs,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 0-6 hrs""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT 6-12 hrs,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 6-12 hrs""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT 12-24 hrs,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 12-24 hrs""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT 24-48 hrs,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 24-48 hrs""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT >48 hrs,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT >48 hrs""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT+1,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT+1""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT + 2,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT + 2""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT + 3,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT + 3""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT + 4,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT + 4""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT > 4,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT > 4""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+TAT (Same day),Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT (Same day)""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Non F&B days diff,Data representing the non f&b days diff.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Non F&B days diff""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Shipped mark,Data representing the shipped mark.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Shipped mark""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Seller State,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller State""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Delivery State,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivery State""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Seller City,City name for the given context.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller City""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Delivery City,City name for the given context.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivery City""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Seller Tier,Data representing the seller tier.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller Tier""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Delivery Tier,Data representing the delivery tier.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivery Tier""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Seller Zone,Data representing the seller zone.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller Zone""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Delivery Zone,Data representing the delivery zone.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivery Zone""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Delivery Type,Data representing the delivery type.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivery Type""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Order type,Data representing the order type.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Order type""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Breach,Data representing the breach.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Breach""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Inprocessnew(tat),Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Inprocessnew(tat)""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+inprocess(tat),Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""inprocess(tat)""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Buyer cancelled(tat),Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Buyer cancelled(tat)""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Logistics cancelled(tat),Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Logistics cancelled(tat)""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+attributed_to,Timestamp or date indicating when attributed to occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""attributed_to""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+reason_for_cancellation,Timestamp or date indicating when reason for cancellation occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""reason_for_cancellation""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+is_triggers_rto,Indicates Return To Origin (RTO) status.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""is_triggers_rto""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+cancelled_by,Data representing the cancelled by.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""cancelled_by""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+whether_applicable_for_part_cancel,Data representing the whether applicable for part cancel.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""whether_applicable_for_part_cancel""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+sorting,Data representing the sorting.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""sorting""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Buyer Cancel,Data representing the buyer cancel.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Buyer Cancel""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Seller Cancel,Data representing the seller cancel.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller Cancel""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Logistics Cancel,Data representing the logistics cancel.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Logistics Cancel""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Cancelled att,Timestamp or date indicating when cancelled att occurred.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Cancelled att""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+In Process (Dt),Data representing the in process (dt).,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""In Process (Dt)""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+delivered(tat),Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""delivered(tat)""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+Social Cred Orders,Data representing the social cred orders.,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Social Cred Orders""",analytics_insight_preprod.retail_b2c_ordernhm_bv,
+"▼ retail_funnel_bv   (view, 64 cols)",,,analytics_insight_preprod.retail_funnel_bv,"SELECT f.bpp_id,
+    f.bap_id,
+    dm.domain,
+    f.transaction_id,
+    f.provider_id,
+    f.order_status,
+    f.cancellation_type,
+    f.seller_pincode,
+    f.provider_name,
+    f.delivery_pincode,
+    f.is_error,
+    f.error_code,
+    f.first_seen_date,
+    f.hour_of_day,
+    f.min_trans_type_sp,
+    f.max_trans_type_sp,
+    f.max_error_trans_type_sp,
+    f.end_trans_type,
+    f.qsr,
+    snp.seller_np_name AS ""Seller NP"",
+    bnp.buyer_np_name AS ""Buyer NP"",
+        CASE
+            WHEN COALESCE(TRIM(BOTH FROM snp.seller_np_name), ''::text) = COALESCE(TRIM(BOTH FROM bnp.buyer_np_name), ''::text) THEN 'Intra NP'::text
+            ELSE 'Inter NP'::text
+        END AS ""Call Type"",
+    ecc.category AS error_category,
+        CASE
+            WHEN NULLIF(TRIM(BOTH FROM f.provider_id), ''::text) IS NULL THEN NULL::text
+            ELSE (COALESCE(TRIM(BOTH FROM f.bpp_id), ''::text) || '_'::text) || TRIM(BOTH FROM f.provider_id)
+        END AS provider_key,
+    (f.min_trans_type_sp = 1)::integer AS ""Select"",
+    (f.max_trans_type_sp >= 2)::integer AS on_select,
+    (f.max_trans_type_sp >= 3)::integer AS ""Init"",
+    (f.max_trans_type_sp >= 4)::integer AS on_init,
+    (f.max_trans_type_sp >= 5)::integer AS ""Confirm_"",
+    (f.max_trans_type_sp = 6)::integer AS on_confirm,
+    (f.max_trans_type_sp >= 6 AND lower(TRIM(BOTH FROM f.end_trans_type)) = 'confirm'::text AND (f.max_error_trans_type_sp IS NULL OR f.max_error_trans_type_sp <> 6))::integer AS ""Confirm"",
+    (lower(TRIM(BOTH FROM f.end_trans_type)) = 'confirm'::text AND lower(TRIM(BOTH FROM f.order_status)) = 'delivered'::text)::integer AS ""Select to Delivered"",
+    (lower(TRIM(BOTH FROM f.end_trans_type)) = 'confirm'::text AND lower(TRIM(BOTH FROM f.order_status)) = 'cancelled'::text)::integer AS ""Select to Cancelled"",
+    (lower(TRIM(BOTH FROM f.end_trans_type)) = 'confirm'::text AND lower(TRIM(BOTH FROM f.order_status)) = 'in process'::text)::integer AS ""Confirm to inprocess"",
+    (lower(TRIM(BOTH FROM f.end_trans_type)) = 'confirm'::text AND lower(TRIM(BOTH FROM f.order_status)) = 'delivered'::text)::integer AS ""Confirm to Delivered"",
+    (lower(TRIM(BOTH FROM f.end_trans_type)) = 'confirm'::text AND lower(TRIM(BOTH FROM f.order_status)) = 'in process'::text)::integer AS ""In Process"",
+    (f.max_trans_type_sp <= 2 AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text)::integer AS ""On_Select Error"",
+    (f.max_trans_type_sp >= 5 AND f.max_trans_type_sp <= 6 AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text)::integer AS ""On_Confirm Error"",
+    (f.max_trans_type_sp = 2 AND lower(TRIM(BOTH FROM f.is_error)) = 'no'::text)::integer AS ""Drop not due to Error (Select-Init) absolute"",
+    (f.max_trans_type_sp <= 2 AND TRIM(BOTH FROM ecc.category) = 'Logistics'::text AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text)::integer AS ""Drop due to Error (Select-Init) (logistics) absolute"",
+    (f.max_trans_type_sp <= 2 AND TRIM(BOTH FROM ecc.category) = 'Merchant Not Available'::text AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text)::integer AS ""Drop due to Error (Select-Init) (merchant) absolute"",
+    (f.max_trans_type_sp <= 2 AND TRIM(BOTH FROM ecc.category) = 'Inventory'::text AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text)::integer AS ""Drop due to Error (Select-Init) (inventory) absolute"",
+    (f.max_trans_type_sp <= 2 AND TRIM(BOTH FROM ecc.category) = 'Others'::text AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text)::integer AS ""Drop due to Error (Select-Init) (others) absolute"",
+    (f.max_trans_type_sp = 4 AND lower(TRIM(BOTH FROM f.is_error)) = 'no'::text)::integer AS ""Drop not due to Error (Init-Confirm) absolute"",
+    (f.max_trans_type_sp >= 3 AND f.max_trans_type_sp <= 4 AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text AND TRIM(BOTH FROM ecc.category) = 'Logistics'::text AND f.max_error_trans_type_sp = f.max_trans_type_sp)::integer AS ""Drop due to Error (Init-Confirm) (logistics) absolute"",
+    (f.max_trans_type_sp >= 3 AND f.max_trans_type_sp <= 4 AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text AND TRIM(BOTH FROM ecc.category) = 'Merchant Not Available'::text AND f.max_trans_type_sp = f.max_error_trans_type_sp)::integer AS ""Drop due to Error (Init-Confirm) (merchant) absolute"",
+    (f.max_trans_type_sp >= 5 AND f.max_trans_type_sp <= 6 AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text AND TRIM(BOTH FROM ecc.category) = 'Logistics'::text AND f.max_error_trans_type_sp = f.max_trans_type_sp)::integer AS ""Drop due to Error (Confirm-on_confirm) (logistics) absolute"",
+    (f.max_trans_type_sp >= 1 AND f.max_trans_type_sp <= 6 AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text AND TRIM(BOTH FROM ecc.category) = 'Others'::text AND f.max_trans_type_sp = f.max_error_trans_type_sp)::integer AS ""Drop due to Error (select-Confirm) (others) absolute"",
+    (f.max_trans_type_sp >= 1 AND f.max_trans_type_sp <= 6 AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text AND TRIM(BOTH FROM ecc.category) = 'Logistics'::text AND f.max_trans_type_sp = f.max_error_trans_type_sp)::integer AS ""Drop due to Error (select-Confirm) (logistics) absolute"",
+    (f.max_trans_type_sp >= 1 AND f.max_trans_type_sp <= 6 AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text AND TRIM(BOTH FROM ecc.category) = 'Merchant Not Available'::text AND f.max_trans_type_sp = f.max_error_trans_type_sp)::integer AS ""Drop due to Error (select-Confirm) (merchant) absolute"",
+    (f.max_trans_type_sp >= 1 AND f.max_trans_type_sp <= 6 AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text AND TRIM(BOTH FROM ecc.category) = 'Inventory'::text AND f.max_trans_type_sp = f.max_error_trans_type_sp)::integer AS ""Drop due to Error (Select-Confirm) (inventory) absolute"",
+    (f.max_trans_type_sp >= 3 AND f.max_trans_type_sp <= 4 AND lower(TRIM(BOTH FROM f.is_error)) = 'yes'::text AND TRIM(BOTH FROM ecc.category) = 'Inventory'::text AND f.max_error_trans_type_sp = f.max_trans_type_sp)::integer AS ""Drop due to Error (Init-Confirm) (inventory) absolute"",
+    ((f.max_trans_type_sp = ANY (ARRAY[2, 4])) AND (f.max_error_trans_type_sp IS NULL OR f.max_trans_type_sp <> f.max_error_trans_type_sp))::integer AS ""Drop not due to Error (Select-Confirm) absolute"",
+    (lower(TRIM(BOTH FROM f.end_trans_type)) = 'confirm'::text AND lower(TRIM(BOTH FROM f.order_status)) = 'cancelled'::text AND lower(TRIM(BOTH FROM f.cancellation_type)) = 'seller'::text)::integer AS ""Cancelled (Select - Seller)"",
+    (lower(TRIM(BOTH FROM f.end_trans_type)) = 'confirm'::text AND lower(TRIM(BOTH FROM f.order_status)) = 'cancelled'::text AND lower(TRIM(BOTH FROM f.cancellation_type)) = 'buyer'::text)::integer AS ""Cancelled (Select - Buyer)"",
+    (lower(TRIM(BOTH FROM f.end_trans_type)) = 'confirm'::text AND lower(TRIM(BOTH FROM f.order_status)) = 'cancelled'::text AND lower(TRIM(BOTH FROM f.cancellation_type)) = 'logistics'::text)::integer AS ""Cancelled (Select - Logistics)"",
+    sp.statename AS ""Seller State"",
+    dp.statename AS ""Delivery State"",
+    COALESCE(sp.districtname, 'Undefined'::character varying) AS ""Seller City"",
+    COALESCE(dp.districtname, 'Undefined'::character varying) AS ""Delivery City"",
+    COALESCE(sp.tier, 'Undefined'::character varying) AS ""Seller Tier"",
+    COALESCE(dp.tier, 'Undefined'::character varying) AS ""Delivery Tier"",
+    COALESCE(sp.zones, 'Undefined'::character varying) AS ""Seller Zone"",
+    COALESCE(dp.zones, 'Undefined'::character varying) AS ""Delivery Zone""
+   FROM analytics_insight.retail_order_funnel f
+     LEFT JOIN dimension.dim_error_code_category ecc ON TRIM(BOTH FROM f.error_code) = TRIM(BOTH FROM ecc.error_code)
+     LEFT JOIN dimension.dim_retail_seller_np snp ON f.bpp_id = snp.seller_np::text
+     LEFT JOIN dimension.dim_retail_buyer_np bnp ON f.bap_id = bnp.buyer_np::text
+     LEFT JOIN dimension.dim_domain_mapping dm ON f.domain = dm.code::text
+     LEFT JOIN dimension.dim_pincode sp ON f.seller_pincode = sp.pincode::text
+     LEFT JOIN dimension.dim_pincode dp ON f.delivery_pincode = dp.pincode::text;"
+bpp_id,Unique identifier for the Seller App (BPP).,"analytics_insight_preprod.retail_funnel_bv.""bpp_id""",analytics_insight_preprod.retail_funnel_bv,
+bap_id,Unique identifier for the Buyer App (BAP).,"analytics_insight_preprod.retail_funnel_bv.""bap_id""",analytics_insight_preprod.retail_funnel_bv,
+domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.retail_funnel_bv.""domain""",analytics_insight_preprod.retail_funnel_bv,
+transaction_id,Unique ONDC transaction identifier.,"analytics_insight_preprod.retail_funnel_bv.""transaction_id""",analytics_insight_preprod.retail_funnel_bv,
+provider_id,Unique identifier for the provider.,"analytics_insight_preprod.retail_funnel_bv.""provider_id""",analytics_insight_preprod.retail_funnel_bv,
+order_status,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_funnel_bv.""order_status""",analytics_insight_preprod.retail_funnel_bv,
+cancellation_type,Timestamp or date indicating when cancellation type occurred.,"analytics_insight_preprod.retail_funnel_bv.""cancellation_type""",analytics_insight_preprod.retail_funnel_bv,
+seller_pincode,Indian postal code (pincode).,"analytics_insight_preprod.retail_funnel_bv.""seller_pincode""",analytics_insight_preprod.retail_funnel_bv,
+provider_name,Unique identifier for provider name.,"analytics_insight_preprod.retail_funnel_bv.""provider_name""",analytics_insight_preprod.retail_funnel_bv,
+delivery_pincode,Indian postal code (pincode).,"analytics_insight_preprod.retail_funnel_bv.""delivery_pincode""",analytics_insight_preprod.retail_funnel_bv,
+is_error,Boolean flag indicating is error.,"analytics_insight_preprod.retail_funnel_bv.""is_error""",analytics_insight_preprod.retail_funnel_bv,
+error_code,Error code associated with a failure or issue.,"analytics_insight_preprod.retail_funnel_bv.""error_code""",analytics_insight_preprod.retail_funnel_bv,
+first_seen_date,Timestamp or date indicating when first seen date occurred.,"analytics_insight_preprod.retail_funnel_bv.""first_seen_date""",analytics_insight_preprod.retail_funnel_bv,
+hour_of_day,Data representing the hour of day.,"analytics_insight_preprod.retail_funnel_bv.""hour_of_day""",analytics_insight_preprod.retail_funnel_bv,
+min_trans_type_sp,Data representing the min trans type sp.,"analytics_insight_preprod.retail_funnel_bv.""min_trans_type_sp""",analytics_insight_preprod.retail_funnel_bv,
+max_trans_type_sp,Data representing the max trans type sp.,"analytics_insight_preprod.retail_funnel_bv.""max_trans_type_sp""",analytics_insight_preprod.retail_funnel_bv,
+max_error_trans_type_sp,Data representing the max error trans type sp.,"analytics_insight_preprod.retail_funnel_bv.""max_error_trans_type_sp""",analytics_insight_preprod.retail_funnel_bv,
+end_trans_type,Data representing the end trans type.,"analytics_insight_preprod.retail_funnel_bv.""end_trans_type""",analytics_insight_preprod.retail_funnel_bv,
+qsr,Data representing the qsr.,"analytics_insight_preprod.retail_funnel_bv.""qsr""",analytics_insight_preprod.retail_funnel_bv,
+Seller NP,Data representing the seller np.,"analytics_insight_preprod.retail_funnel_bv.""Seller NP""",analytics_insight_preprod.retail_funnel_bv,
+Buyer NP,Data representing the buyer np.,"analytics_insight_preprod.retail_funnel_bv.""Buyer NP""",analytics_insight_preprod.retail_funnel_bv,
+Call Type,Data representing the call type.,"analytics_insight_preprod.retail_funnel_bv.""Call Type""",analytics_insight_preprod.retail_funnel_bv,
+error_category,Timestamp or date indicating when error category occurred.,"analytics_insight_preprod.retail_funnel_bv.""error_category""",analytics_insight_preprod.retail_funnel_bv,
+provider_key,Unique identifier for provider key.,"analytics_insight_preprod.retail_funnel_bv.""provider_key""",analytics_insight_preprod.retail_funnel_bv,
+Select,Data representing the select.,"analytics_insight_preprod.retail_funnel_bv.""Select""",analytics_insight_preprod.retail_funnel_bv,
+on_select,Data representing the on select.,"analytics_insight_preprod.retail_funnel_bv.""on_select""",analytics_insight_preprod.retail_funnel_bv,
+Init,Data representing the init.,"analytics_insight_preprod.retail_funnel_bv.""Init""",analytics_insight_preprod.retail_funnel_bv,
+on_init,Data representing the on init.,"analytics_insight_preprod.retail_funnel_bv.""on_init""",analytics_insight_preprod.retail_funnel_bv,
+Confirm_,Data representing the confirm .,"analytics_insight_preprod.retail_funnel_bv.""Confirm_""",analytics_insight_preprod.retail_funnel_bv,
+on_confirm,Data representing the on confirm.,"analytics_insight_preprod.retail_funnel_bv.""on_confirm""",analytics_insight_preprod.retail_funnel_bv,
+Confirm,Data representing the confirm.,"analytics_insight_preprod.retail_funnel_bv.""Confirm""",analytics_insight_preprod.retail_funnel_bv,
+Select to Delivered,Data representing the select to delivered.,"analytics_insight_preprod.retail_funnel_bv.""Select to Delivered""",analytics_insight_preprod.retail_funnel_bv,
+Select to Cancelled,Data representing the select to cancelled.,"analytics_insight_preprod.retail_funnel_bv.""Select to Cancelled""",analytics_insight_preprod.retail_funnel_bv,
+Confirm to inprocess,Data representing the confirm to inprocess.,"analytics_insight_preprod.retail_funnel_bv.""Confirm to inprocess""",analytics_insight_preprod.retail_funnel_bv,
+Confirm to Delivered,Data representing the confirm to delivered.,"analytics_insight_preprod.retail_funnel_bv.""Confirm to Delivered""",analytics_insight_preprod.retail_funnel_bv,
+In Process,Data representing the in process.,"analytics_insight_preprod.retail_funnel_bv.""In Process""",analytics_insight_preprod.retail_funnel_bv,
+On_Select Error,Data representing the on select error.,"analytics_insight_preprod.retail_funnel_bv.""On_Select Error""",analytics_insight_preprod.retail_funnel_bv,
+On_Confirm Error,Data representing the on confirm error.,"analytics_insight_preprod.retail_funnel_bv.""On_Confirm Error""",analytics_insight_preprod.retail_funnel_bv,
+Drop not due to Error (Select-Init) absolute,Data representing the drop not due to error (select-init) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop not due to Error (Select-Init) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop due to Error (Select-Init) (logistics) absolute,Data representing the drop due to error (select-init) (logistics) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Select-Init) (logistics) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop due to Error (Select-Init) (merchant) absolute,Data representing the drop due to error (select-init) (merchant) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Select-Init) (merchant) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop due to Error (Select-Init) (inventory) absolute,Data representing the drop due to error (select-init) (inventory) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Select-Init) (inventory) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop due to Error (Select-Init) (others) absolute,Data representing the drop due to error (select-init) (others) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Select-Init) (others) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop not due to Error (Init-Confirm) absolute,Data representing the drop not due to error (init-confirm) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop not due to Error (Init-Confirm) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop due to Error (Init-Confirm) (logistics) absolute,Data representing the drop due to error (init-confirm) (logistics) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Init-Confirm) (logistics) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop due to Error (Init-Confirm) (merchant) absolute,Data representing the drop due to error (init-confirm) (merchant) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Init-Confirm) (merchant) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop due to Error (Confirm-on_confirm) (logistics) absolute,Data representing the drop due to error (confirm-on confirm) (logistics) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Confirm-on_confirm) (logistics) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop due to Error (select-Confirm) (others) absolute,Data representing the drop due to error (select-confirm) (others) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (select-Confirm) (others) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop due to Error (select-Confirm) (logistics) absolute,Data representing the drop due to error (select-confirm) (logistics) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (select-Confirm) (logistics) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop due to Error (select-Confirm) (merchant) absolute,Data representing the drop due to error (select-confirm) (merchant) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (select-Confirm) (merchant) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop due to Error (Select-Confirm) (inventory) absolute,Data representing the drop due to error (select-confirm) (inventory) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Select-Confirm) (inventory) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop due to Error (Init-Confirm) (inventory) absolute,Data representing the drop due to error (init-confirm) (inventory) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Init-Confirm) (inventory) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Drop not due to Error (Select-Confirm) absolute,Data representing the drop not due to error (select-confirm) absolute.,"analytics_insight_preprod.retail_funnel_bv.""Drop not due to Error (Select-Confirm) absolute""",analytics_insight_preprod.retail_funnel_bv,
+Cancelled (Select - Seller),Data representing the cancelled (select - seller).,"analytics_insight_preprod.retail_funnel_bv.""Cancelled (Select - Seller)""",analytics_insight_preprod.retail_funnel_bv,
+Cancelled (Select - Buyer),Data representing the cancelled (select - buyer).,"analytics_insight_preprod.retail_funnel_bv.""Cancelled (Select - Buyer)""",analytics_insight_preprod.retail_funnel_bv,
+Cancelled (Select - Logistics),Data representing the cancelled (select - logistics).,"analytics_insight_preprod.retail_funnel_bv.""Cancelled (Select - Logistics)""",analytics_insight_preprod.retail_funnel_bv,
+Seller State,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_funnel_bv.""Seller State""",analytics_insight_preprod.retail_funnel_bv,
+Delivery State,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.retail_funnel_bv.""Delivery State""",analytics_insight_preprod.retail_funnel_bv,
+Seller City,City name for the given context.,"analytics_insight_preprod.retail_funnel_bv.""Seller City""",analytics_insight_preprod.retail_funnel_bv,
+Delivery City,City name for the given context.,"analytics_insight_preprod.retail_funnel_bv.""Delivery City""",analytics_insight_preprod.retail_funnel_bv,
+Seller Tier,Data representing the seller tier.,"analytics_insight_preprod.retail_funnel_bv.""Seller Tier""",analytics_insight_preprod.retail_funnel_bv,
+Delivery Tier,Data representing the delivery tier.,"analytics_insight_preprod.retail_funnel_bv.""Delivery Tier""",analytics_insight_preprod.retail_funnel_bv,
+Seller Zone,Data representing the seller zone.,"analytics_insight_preprod.retail_funnel_bv.""Seller Zone""",analytics_insight_preprod.retail_funnel_bv,
+Delivery Zone,Data representing the delivery zone.,"analytics_insight_preprod.retail_funnel_bv.""Delivery Zone""",analytics_insight_preprod.retail_funnel_bv,
+"▼ sub_cat_active_sellers_agg   (base table, 8 cols)",,,analytics_insight_preprod.sub_cat_active_sellers_agg,"CREATE INDEX idx_sub_cat_active_sellers_agg_date ON analytics_insight_preprod.sub_cat_active_sellers_agg USING btree (year_value, month_value)
+
+CREATE INDEX idx_sub_cat_active_sellers_agg_category ON analytics_insight_preprod.sub_cat_active_sellers_agg USING btree (category, sub_category)
+
+CREATE INDEX idx_sub_cat_active_sellers_agg_district ON analytics_insight_preprod.sub_cat_active_sellers_agg USING btree (seller_district)
+
+CREATE INDEX idx_sub_cat_active_sellers_agg_stage ON analytics_insight_preprod.sub_cat_active_sellers_agg USING btree (seller_state)"
+year_value,Data representing the year value.,"analytics_insight_preprod.sub_cat_active_sellers_agg.""year_value""",analytics_insight_preprod.sub_cat_active_sellers_agg,
+month_value,Data representing the month value.,"analytics_insight_preprod.sub_cat_active_sellers_agg.""month_value""",analytics_insight_preprod.sub_cat_active_sellers_agg,
+seller_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_active_sellers_agg.""seller_state""",analytics_insight_preprod.sub_cat_active_sellers_agg,
+seller_district,Data representing the seller district.,"analytics_insight_preprod.sub_cat_active_sellers_agg.""seller_district""",analytics_insight_preprod.sub_cat_active_sellers_agg,
+category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.sub_cat_active_sellers_agg.""category""",analytics_insight_preprod.sub_cat_active_sellers_agg,
+sub_category,Timestamp or date indicating when sub category occurred.,"analytics_insight_preprod.sub_cat_active_sellers_agg.""sub_category""",analytics_insight_preprod.sub_cat_active_sellers_agg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_active_sellers_agg.""seller_state_code""",analytics_insight_preprod.sub_cat_active_sellers_agg,
+active_sellers,Data representing the active sellers.,"analytics_insight_preprod.sub_cat_active_sellers_agg.""active_sellers""",analytics_insight_preprod.sub_cat_active_sellers_agg,
+"▼ sub_cat_district_wise_agg   (base table, 21 cols)",,,analytics_insight_preprod.sub_cat_district_wise_agg,
+agg_level,Data representing the agg level.,"analytics_insight_preprod.sub_cat_district_wise_agg.""agg_level""",analytics_insight_preprod.sub_cat_district_wise_agg,
+domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.sub_cat_district_wise_agg.""domain""",analytics_insight_preprod.sub_cat_district_wise_agg,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.sub_cat_district_wise_agg.""sub_domain""",analytics_insight_preprod.sub_cat_district_wise_agg,
+order_year,Data representing the order year.,"analytics_insight_preprod.sub_cat_district_wise_agg.""order_year""",analytics_insight_preprod.sub_cat_district_wise_agg,
+order_month,Data representing the order month.,"analytics_insight_preprod.sub_cat_district_wise_agg.""order_month""",analytics_insight_preprod.sub_cat_district_wise_agg,
+order_week,Data representing the order week.,"analytics_insight_preprod.sub_cat_district_wise_agg.""order_week""",analytics_insight_preprod.sub_cat_district_wise_agg,
+category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.sub_cat_district_wise_agg.""category""",analytics_insight_preprod.sub_cat_district_wise_agg,
+sub_category,Timestamp or date indicating when sub category occurred.,"analytics_insight_preprod.sub_cat_district_wise_agg.""sub_category""",analytics_insight_preprod.sub_cat_district_wise_agg,
+delivery_district,Data representing the delivery district.,"analytics_insight_preprod.sub_cat_district_wise_agg.""delivery_district""",analytics_insight_preprod.sub_cat_district_wise_agg,
+delivery_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_district_wise_agg.""delivery_state""",analytics_insight_preprod.sub_cat_district_wise_agg,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_district_wise_agg.""delivery_state_code""",analytics_insight_preprod.sub_cat_district_wise_agg,
+seller_district,Data representing the seller district.,"analytics_insight_preprod.sub_cat_district_wise_agg.""seller_district""",analytics_insight_preprod.sub_cat_district_wise_agg,
+seller_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_district_wise_agg.""seller_state""",analytics_insight_preprod.sub_cat_district_wise_agg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_district_wise_agg.""seller_state_code""",analytics_insight_preprod.sub_cat_district_wise_agg,
+total_orders_delivered,Data representing the total orders delivered.,"analytics_insight_preprod.sub_cat_district_wise_agg.""total_orders_delivered""",analytics_insight_preprod.sub_cat_district_wise_agg,
+pincode_count,Indian postal code (pincode).,"analytics_insight_preprod.sub_cat_district_wise_agg.""pincode_count""",analytics_insight_preprod.sub_cat_district_wise_agg,
+total_items,Data representing the total items.,"analytics_insight_preprod.sub_cat_district_wise_agg.""total_items""",analytics_insight_preprod.sub_cat_district_wise_agg,
+intrastate_orders,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_district_wise_agg.""intrastate_orders""",analytics_insight_preprod.sub_cat_district_wise_agg,
+interstate_orders,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_district_wise_agg.""interstate_orders""",analytics_insight_preprod.sub_cat_district_wise_agg,
+intradistrict_orders,Data representing the intradistrict orders.,"analytics_insight_preprod.sub_cat_district_wise_agg.""intradistrict_orders""",analytics_insight_preprod.sub_cat_district_wise_agg,
+interdistrict_orders,Data representing the interdistrict orders.,"analytics_insight_preprod.sub_cat_district_wise_agg.""interdistrict_orders""",analytics_insight_preprod.sub_cat_district_wise_agg,
+"▼ sub_cat_pc_level_agg   (base table, 10 cols)",,,analytics_insight_preprod.sub_cat_pc_level_agg,
+order_year,Data representing the order year.,"analytics_insight_preprod.sub_cat_pc_level_agg.""order_year""",analytics_insight_preprod.sub_cat_pc_level_agg,
+order_month,Data representing the order month.,"analytics_insight_preprod.sub_cat_pc_level_agg.""order_month""",analytics_insight_preprod.sub_cat_pc_level_agg,
+domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.sub_cat_pc_level_agg.""domain""",analytics_insight_preprod.sub_cat_pc_level_agg,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","analytics_insight_preprod.sub_cat_pc_level_agg.""sub_domain""",analytics_insight_preprod.sub_cat_pc_level_agg,
+seller_pincode,Indian postal code (pincode).,"analytics_insight_preprod.sub_cat_pc_level_agg.""seller_pincode""",analytics_insight_preprod.sub_cat_pc_level_agg,
+delivery_pincode,Indian postal code (pincode).,"analytics_insight_preprod.sub_cat_pc_level_agg.""delivery_pincode""",analytics_insight_preprod.sub_cat_pc_level_agg,
+category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.sub_cat_pc_level_agg.""category""",analytics_insight_preprod.sub_cat_pc_level_agg,
+sub_category,Timestamp or date indicating when sub category occurred.,"analytics_insight_preprod.sub_cat_pc_level_agg.""sub_category""",analytics_insight_preprod.sub_cat_pc_level_agg,
+total_orders,Data representing the total orders.,"analytics_insight_preprod.sub_cat_pc_level_agg.""total_orders""",analytics_insight_preprod.sub_cat_pc_level_agg,
+total_items,Data representing the total items.,"analytics_insight_preprod.sub_cat_pc_level_agg.""total_items""",analytics_insight_preprod.sub_cat_pc_level_agg,
+"▼ sub_cat_pc_sellers_agg   (view, 11 cols)",,,analytics_insight_preprod.sub_cat_pc_sellers_agg,"SELECT COALESCE(sa.year_value::numeric, ts.year_value) AS year_value,
+    COALESCE(sa.month_value::numeric, ts.month_value) AS month_value,
+    COALESCE(sa.category, ts.category::character varying) AS category,
+    COALESCE(sa.sub_category, ts.sub_category::character varying) AS sub_category,
+    COALESCE(sa.seller_state, ts.seller_state::character varying) AS seller_state,
+    COALESCE(sa.seller_district, ts.seller_district::character varying) AS seller_district,
+    COALESCE(sa.seller_state_code, ts.seller_state_code::character varying) AS seller_state_code,
+    COALESCE(sum(sa.active_sellers), 0::bigint) AS active_sellers,
+    COALESCE(sum(ts.total_sellers), 0::numeric) AS total_sellers,
+    COALESCE(sa.pincode, ts.pincode) AS pincode,
+        CASE
+            WHEN sum(ts.total_sellers) > 0::numeric THEN round(sum(sa.active_sellers)::numeric / sum(ts.total_sellers) * 100::numeric, 2)
+            ELSE NULL::numeric
+        END AS active_seller_pct
+   FROM analytics_insight_preprod.total_sellers_pc_agg ts
+     FULL JOIN analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg sa ON sa.year_value::numeric = ts.year_value AND sa.month_value::numeric = ts.month_value AND sa.category::text = ts.category AND sa.sub_category::text = ts.sub_category AND sa.seller_state::text = ts.seller_state AND sa.seller_district::text = ts.seller_district AND sa.pincode = ts.pincode AND sa.seller_state_code::text = ts.seller_state_code
+  GROUP BY (COALESCE(sa.year_value::numeric, ts.year_value)), (COALESCE(sa.month_value::numeric, ts.month_value)), (COALESCE(sa.seller_state, ts.seller_state::character varying)), (COALESCE(sa.seller_district, ts.seller_district::character varying)), (COALESCE(sa.pincode, ts.pincode)), (COALESCE(sa.seller_state_code, ts.seller_state_code::character varying)), (COALESCE(sa.category, ts.category::character varying)), (COALESCE(sa.sub_category, ts.sub_category::character varying))
+  ORDER BY (COALESCE(sa.year_value::numeric, ts.year_value)), (COALESCE(sa.month_value::numeric, ts.month_value));"
+year_value,Data representing the year value.,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""year_value""",analytics_insight_preprod.sub_cat_pc_sellers_agg,
+month_value,Data representing the month value.,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""month_value""",analytics_insight_preprod.sub_cat_pc_sellers_agg,
+category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""category""",analytics_insight_preprod.sub_cat_pc_sellers_agg,
+sub_category,Timestamp or date indicating when sub category occurred.,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""sub_category""",analytics_insight_preprod.sub_cat_pc_sellers_agg,
+seller_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""seller_state""",analytics_insight_preprod.sub_cat_pc_sellers_agg,
+seller_district,Data representing the seller district.,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""seller_district""",analytics_insight_preprod.sub_cat_pc_sellers_agg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""seller_state_code""",analytics_insight_preprod.sub_cat_pc_sellers_agg,
+active_sellers,Data representing the active sellers.,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""active_sellers""",analytics_insight_preprod.sub_cat_pc_sellers_agg,
+total_sellers,Data representing the total sellers.,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""total_sellers""",analytics_insight_preprod.sub_cat_pc_sellers_agg,
+pincode,Indian postal code (pincode).,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""pincode""",analytics_insight_preprod.sub_cat_pc_sellers_agg,
+active_seller_pct,Data representing the active seller pct.,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""active_seller_pct""",analytics_insight_preprod.sub_cat_pc_sellers_agg,
+"▼ sub_cat_pincode_active_sellers_wise_agg   (base table, 9 cols)",,,analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg,"CREATE INDEX idx_sub_cat_pc_sellers_agg_date ON analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg USING btree (year_value, month_value)
+
+CREATE INDEX idx_sub_cat_pc_sellers_agg_category ON analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg USING btree (category, sub_category)
+
+CREATE INDEX idx_sub_cat_pc_sellers_agg_composite ON analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg USING btree (year_value, month_value, seller_state, seller_district, pincode, category, sub_category)"
+year_value,Data representing the year value.,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""year_value""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg,
+month_value,Data representing the month value.,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""month_value""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg,
+seller_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""seller_state""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg,
+seller_district,Data representing the seller district.,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""seller_district""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg,
+pincode,Indian postal code (pincode).,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""pincode""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg,
+category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""category""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg,
+sub_category,Timestamp or date indicating when sub category occurred.,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""sub_category""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""seller_state_code""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg,
+active_sellers,Data representing the active sellers.,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""active_sellers""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg,
+"▼ sub_cat_sellers_agg   (materialized view, 10 cols)",,,analytics_insight_preprod.sub_cat_sellers_agg,"SELECT COALESCE(sa.year_value::numeric, ts.year_value) AS year_value,
+    COALESCE(sa.month_value::numeric, ts.month_value) AS month_value,
+    COALESCE(sa.category, ts.category::character varying) AS category,
+    COALESCE(sa.sub_category, ts.sub_category::character varying) AS sub_category,
+    COALESCE(sa.seller_state, ts.seller_state::character varying) AS seller_state,
+    COALESCE(sa.seller_district, ts.seller_district::character varying) AS seller_district,
+    COALESCE(sa.seller_state_code, ts.seller_state_code::character varying) AS seller_state_code,
+    COALESCE(sum(sa.active_sellers), 0::bigint) AS active_sellers,
+    COALESCE(sum(ts.total_sellers), 0::numeric) AS total_sellers,
+        CASE
+            WHEN sum(ts.total_sellers) > 0::numeric THEN round(sum(sa.active_sellers)::numeric / sum(ts.total_sellers) * 100::numeric, 2)
+            ELSE NULL::numeric
+        END AS active_seller_pct
+   FROM analytics_insight_preprod.total_sellers_agg_view ts
+     FULL JOIN analytics_insight_preprod.sub_cat_active_sellers_agg sa ON sa.year_value::numeric = ts.year_value AND sa.month_value::numeric = ts.month_value AND sa.category::text = ts.category AND sa.sub_category::text = ts.sub_category AND sa.seller_state::text = ts.seller_state AND sa.seller_district::text = ts.seller_district AND sa.seller_state_code::text = ts.seller_state_code
+  GROUP BY (COALESCE(sa.year_value::numeric, ts.year_value)), (COALESCE(sa.month_value::numeric, ts.month_value)), (COALESCE(sa.category, ts.category::character varying)), (COALESCE(sa.sub_category, ts.sub_category::character varying)), (COALESCE(sa.seller_state, ts.seller_state::character varying)), (COALESCE(sa.seller_district, ts.seller_district::character varying)), (COALESCE(sa.seller_state_code, ts.seller_state_code::character varying))
+  ORDER BY (COALESCE(sa.year_value::numeric, ts.year_value)), (COALESCE(sa.month_value::numeric, ts.month_value));"
+year_value,Data representing the year value.,"analytics_insight_preprod.sub_cat_sellers_agg.""year_value""",analytics_insight_preprod.sub_cat_sellers_agg,
+month_value,Data representing the month value.,"analytics_insight_preprod.sub_cat_sellers_agg.""month_value""",analytics_insight_preprod.sub_cat_sellers_agg,
+category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.sub_cat_sellers_agg.""category""",analytics_insight_preprod.sub_cat_sellers_agg,
+sub_category,Timestamp or date indicating when sub category occurred.,"analytics_insight_preprod.sub_cat_sellers_agg.""sub_category""",analytics_insight_preprod.sub_cat_sellers_agg,
+seller_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_sellers_agg.""seller_state""",analytics_insight_preprod.sub_cat_sellers_agg,
+seller_district,Data representing the seller district.,"analytics_insight_preprod.sub_cat_sellers_agg.""seller_district""",analytics_insight_preprod.sub_cat_sellers_agg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.sub_cat_sellers_agg.""seller_state_code""",analytics_insight_preprod.sub_cat_sellers_agg,
+active_sellers,Data representing the active sellers.,"analytics_insight_preprod.sub_cat_sellers_agg.""active_sellers""",analytics_insight_preprod.sub_cat_sellers_agg,
+total_sellers,Data representing the total sellers.,"analytics_insight_preprod.sub_cat_sellers_agg.""total_sellers""",analytics_insight_preprod.sub_cat_sellers_agg,
+active_seller_pct,Data representing the active seller pct.,"analytics_insight_preprod.sub_cat_sellers_agg.""active_seller_pct""",analytics_insight_preprod.sub_cat_sellers_agg,
+"▼ total_sellers_agg   (base table, 8 cols)",,,analytics_insight_preprod.total_sellers_agg,
+year_value,Data representing the year value.,"analytics_insight_preprod.total_sellers_agg.""year_value""",analytics_insight_preprod.total_sellers_agg,
+month_value,Data representing the month value.,"analytics_insight_preprod.total_sellers_agg.""month_value""",analytics_insight_preprod.total_sellers_agg,
+seller_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.total_sellers_agg.""seller_state""",analytics_insight_preprod.total_sellers_agg,
+seller_district,Data representing the seller district.,"analytics_insight_preprod.total_sellers_agg.""seller_district""",analytics_insight_preprod.total_sellers_agg,
+category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.total_sellers_agg.""category""",analytics_insight_preprod.total_sellers_agg,
+sub_category,Timestamp or date indicating when sub category occurred.,"analytics_insight_preprod.total_sellers_agg.""sub_category""",analytics_insight_preprod.total_sellers_agg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.total_sellers_agg.""seller_state_code""",analytics_insight_preprod.total_sellers_agg,
+total_sellers,Data representing the total sellers.,"analytics_insight_preprod.total_sellers_agg.""total_sellers""",analytics_insight_preprod.total_sellers_agg,
+"▼ total_sellers_agg_view   (materialized view, 8 cols)",,,analytics_insight_preprod.total_sellers_agg_view,"WITH base_data AS (
+         SELECT EXTRACT(year FROM sm.""Date"") AS year_value,
+            EXTRACT(month FROM sm.""Date"") AS month_value,
+            concat(sm.""Seller App"", concat('__', sm.provider_id)) AS provider_key,
+            TRIM(BOTH FROM sm.category) AS category,
+            TRIM(BOTH FROM sm.""Sub - Category"") AS sub_category,
+                CASE
+                    WHEN upper(sm.pin_code::text) ~~ '%XXX%'::text OR upper(sm.pin_code::text) ~~ '%*%'::text THEN NULL::character varying
+                    ELSE sm.pin_code
+                END AS pincode,
+            COALESCE(pc.""Districtname"", 'Missing'::text) AS seller_district,
+            COALESCE(pc.""Statename"", 'Missing'::text) AS seller_state,
+            COALESCE(pc.""Statecode"", 'Missing'::text) AS seller_state_code
+           FROM analytics_insight.sku_master sm
+             LEFT JOIN analytics_insight.od_pincode pc ON
+                CASE
+                    WHEN upper(sm.pin_code::text) ~~ '%XXX%'::text OR upper(sm.pin_code::text) ~~ '%*%'::text THEN NULL::character varying
+                    ELSE sm.pin_code
+                END::text = pc.""Pincode""
+          WHERE sm.""Date"" IS NOT NULL
+        ), enriched_data AS (
+         SELECT base_data.year_value,
+            base_data.month_value,
+            base_data.provider_key,
+                CASE
+                    WHEN base_data.category IS NULL OR TRIM(BOTH FROM base_data.category) = ''::text THEN 'Missing'::text
+                    ELSE base_data.category
+                END AS category,
+                CASE
+                    WHEN base_data.sub_category IS NULL OR TRIM(BOTH FROM base_data.sub_category) = ''::text THEN 'Missing'::text
+                    ELSE base_data.sub_category
+                END AS sub_category,
+            base_data.seller_state,
+            base_data.seller_district,
+            base_data.seller_state_code
+           FROM base_data
+        )
+ SELECT enriched_data.year_value,
+    enriched_data.month_value,
+    enriched_data.seller_state,
+    enriched_data.seller_district,
+    enriched_data.category,
+    enriched_data.sub_category,
+    enriched_data.seller_state_code,
+    count(DISTINCT enriched_data.provider_key) AS total_sellers
+   FROM enriched_data
+  GROUP BY enriched_data.year_value, enriched_data.month_value, enriched_data.seller_state, enriched_data.seller_district, enriched_data.category, enriched_data.sub_category, enriched_data.seller_state_code
+UNION ALL
+ SELECT enriched_data.year_value,
+    enriched_data.month_value,
+    enriched_data.seller_state,
+    enriched_data.seller_district,
+    enriched_data.category,
+    'AGG'::text AS sub_category,
+    enriched_data.seller_state_code,
+    count(DISTINCT enriched_data.provider_key) AS total_sellers
+   FROM enriched_data
+  GROUP BY enriched_data.year_value, enriched_data.month_value, enriched_data.seller_state, enriched_data.seller_district, enriched_data.category, enriched_data.seller_state_code
+UNION ALL
+ SELECT enriched_data.year_value,
+    enriched_data.month_value,
+    enriched_data.seller_state,
+    enriched_data.seller_district,
+    'AGG'::text AS category,
+    'AGG'::text AS sub_category,
+    enriched_data.seller_state_code,
+    count(DISTINCT enriched_data.provider_key) AS total_sellers
+   FROM enriched_data
+  GROUP BY enriched_data.year_value, enriched_data.month_value, enriched_data.seller_state, enriched_data.seller_district, enriched_data.seller_state_code
+UNION ALL
+ SELECT enriched_data.year_value,
+    enriched_data.month_value,
+    enriched_data.seller_state,
+    'AGG'::text AS seller_district,
+    'AGG'::text AS category,
+    'AGG'::text AS sub_category,
+    enriched_data.seller_state_code,
+    count(DISTINCT enriched_data.provider_key) AS total_sellers
+   FROM enriched_data
+  GROUP BY enriched_data.year_value, enriched_data.month_value, enriched_data.seller_state, enriched_data.seller_state_code
+UNION ALL
+ SELECT enriched_data.year_value,
+    enriched_data.month_value,
+    'AGG'::text AS seller_state,
+    'AGG'::text AS seller_district,
+    'AGG'::text AS category,
+    'AGG'::text AS sub_category,
+    'AGG'::text AS seller_state_code,
+    count(DISTINCT enriched_data.provider_key) AS total_sellers
+   FROM enriched_data
+  GROUP BY enriched_data.year_value, enriched_data.month_value
+UNION ALL
+ SELECT enriched_data.year_value,
+    enriched_data.month_value,
+    'AGG'::text AS seller_state,
+    'AGG'::text AS seller_district,
+    enriched_data.category,
+    enriched_data.sub_category,
+    'AGG'::text AS seller_state_code,
+    count(DISTINCT enriched_data.provider_key) AS total_sellers
+   FROM enriched_data
+  GROUP BY enriched_data.year_value, enriched_data.month_value, enriched_data.category, enriched_data.sub_category
+UNION ALL
+ SELECT enriched_data.year_value,
+    enriched_data.month_value,
+    enriched_data.seller_state,
+    'AGG'::text AS seller_district,
+    enriched_data.category,
+    enriched_data.sub_category,
+    enriched_data.seller_state_code,
+    count(DISTINCT enriched_data.provider_key) AS total_sellers
+   FROM enriched_data
+  GROUP BY enriched_data.year_value, enriched_data.month_value, enriched_data.seller_state, enriched_data.category, enriched_data.sub_category, enriched_data.seller_state_code
+UNION ALL
+ SELECT enriched_data.year_value,
+    enriched_data.month_value,
+    'AGG'::text AS seller_state,
+    'AGG'::text AS seller_district,
+    enriched_data.category,
+    'AGG'::text AS sub_category,
+    'AGG'::text AS seller_state_code,
+    count(DISTINCT enriched_data.provider_key) AS total_sellers
+   FROM enriched_data
+  GROUP BY enriched_data.year_value, enriched_data.month_value, enriched_data.category
+UNION ALL
+ SELECT enriched_data.year_value,
+    enriched_data.month_value,
+    enriched_data.seller_state,
+    'AGG'::text AS seller_district,
+    enriched_data.category,
+    'AGG'::text AS sub_category,
+    enriched_data.seller_state_code,
+    count(DISTINCT enriched_data.provider_key) AS total_sellers
+   FROM enriched_data
+  GROUP BY enriched_data.year_value, enriched_data.month_value, enriched_data.seller_state, enriched_data.category, enriched_data.seller_state_code
+  ORDER BY 1, 2, 3, 4, 5, 6;"
+year_value,Data representing the year value.,"analytics_insight_preprod.total_sellers_agg_view.""year_value""",analytics_insight_preprod.total_sellers_agg_view,
+month_value,Data representing the month value.,"analytics_insight_preprod.total_sellers_agg_view.""month_value""",analytics_insight_preprod.total_sellers_agg_view,
+seller_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.total_sellers_agg_view.""seller_state""",analytics_insight_preprod.total_sellers_agg_view,
+seller_district,Data representing the seller district.,"analytics_insight_preprod.total_sellers_agg_view.""seller_district""",analytics_insight_preprod.total_sellers_agg_view,
+category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.total_sellers_agg_view.""category""",analytics_insight_preprod.total_sellers_agg_view,
+sub_category,Timestamp or date indicating when sub category occurred.,"analytics_insight_preprod.total_sellers_agg_view.""sub_category""",analytics_insight_preprod.total_sellers_agg_view,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.total_sellers_agg_view.""seller_state_code""",analytics_insight_preprod.total_sellers_agg_view,
+total_sellers,Data representing the total sellers.,"analytics_insight_preprod.total_sellers_agg_view.""total_sellers""",analytics_insight_preprod.total_sellers_agg_view,
+"▼ total_sellers_pc_agg   (base table, 9 cols)",,,analytics_insight_preprod.total_sellers_pc_agg,
+year_value,Data representing the year value.,"analytics_insight_preprod.total_sellers_pc_agg.""year_value""",analytics_insight_preprod.total_sellers_pc_agg,
+month_value,Data representing the month value.,"analytics_insight_preprod.total_sellers_pc_agg.""month_value""",analytics_insight_preprod.total_sellers_pc_agg,
+seller_state,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.total_sellers_pc_agg.""seller_state""",analytics_insight_preprod.total_sellers_pc_agg,
+seller_district,Data representing the seller district.,"analytics_insight_preprod.total_sellers_pc_agg.""seller_district""",analytics_insight_preprod.total_sellers_pc_agg,
+pincode,Indian postal code (pincode).,"analytics_insight_preprod.total_sellers_pc_agg.""pincode""",analytics_insight_preprod.total_sellers_pc_agg,
+category,Timestamp or date indicating when category occurred.,"analytics_insight_preprod.total_sellers_pc_agg.""category""",analytics_insight_preprod.total_sellers_pc_agg,
+sub_category,Timestamp or date indicating when sub category occurred.,"analytics_insight_preprod.total_sellers_pc_agg.""sub_category""",analytics_insight_preprod.total_sellers_pc_agg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"analytics_insight_preprod.total_sellers_pc_agg.""seller_state_code""",analytics_insight_preprod.total_sellers_pc_agg,
+total_sellers,Data representing the total sellers.,"analytics_insight_preprod.total_sellers_pc_agg.""total_sellers""",analytics_insight_preprod.total_sellers_pc_agg,

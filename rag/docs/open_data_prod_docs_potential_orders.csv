@@ -1,0 +1,8 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s)
+"▼ seller_gps   (base table, 6 cols)",,,potential_orders.seller_gps
+Date,Calendar date on which the potential order data was recorded,"potential_orders.seller_gps.""Date""",potential_orders.seller_gps
+pin_code,Indian postal pincode identifying the geographic area of the seller's location,"potential_orders.seller_gps.""pin_code""",potential_orders.seller_gps
+provider_long,Longitude coordinate of the seller's registered location on the ONDC network,"potential_orders.seller_gps.""provider_long""",potential_orders.seller_gps
+provider_lat,Latitude coordinate of the seller's registered location on the ONDC network,"potential_orders.seller_gps.""provider_lat""",potential_orders.seller_gps
+seller_count,Total number of active sellers (providers) observed in the given pincode on that date,"potential_orders.seller_gps.""seller_count""",potential_orders.seller_gps
+Qsr Seller,Number of Quick Service Restaurant sellers active in the given pincode on that date,"potential_orders.seller_gps.""Qsr Seller""",potential_orders.seller_gps

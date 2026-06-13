@@ -1,0 +1,139 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s)
+"▼ dim_bap_mobility   (base table, 4 cols)",,,dimension.dim_bap_mobility
+bap_id,,"dimension.dim_bap_mobility.""bap_id""",dimension.dim_bap_mobility
+bap_name,,"dimension.dim_bap_mobility.""bap_name""",dimension.dim_bap_mobility
+domain,,"dimension.dim_bap_mobility.""domain""",dimension.dim_bap_mobility
+tsp_powered,,"dimension.dim_bap_mobility.""tsp_powered""",dimension.dim_bap_mobility
+"▼ dim_bpp_mobility   (base table, 3 cols)",,,dimension.dim_bpp_mobility
+bpp_id,,"dimension.dim_bpp_mobility.""bpp_id""",dimension.dim_bpp_mobility
+bpp_name,,"dimension.dim_bpp_mobility.""bpp_name""",dimension.dim_bpp_mobility
+tsp_powered,,"dimension.dim_bpp_mobility.""tsp_powered""",dimension.dim_bpp_mobility
+"▼ dim_cancellation_code   (base table, 7 cols)",,,dimension.dim_cancellation_code
+code,,"dimension.dim_cancellation_code.""code""",dimension.dim_cancellation_code
+reason_for_cancellation,,"dimension.dim_cancellation_code.""reason_for_cancellation""",dimension.dim_cancellation_code
+is_triggers_rto,,"dimension.dim_cancellation_code.""is_triggers_rto""",dimension.dim_cancellation_code
+by,,"dimension.dim_cancellation_code.""by""",dimension.dim_cancellation_code
+attributed_to,,"dimension.dim_cancellation_code.""attributed_to""",dimension.dim_cancellation_code
+whether_applicable_for_part_cancel,,"dimension.dim_cancellation_code.""whether_applicable_for_part_cancel""",dimension.dim_cancellation_code
+sorting,,"dimension.dim_cancellation_code.""sorting""",dimension.dim_cancellation_code
+"▼ dim_domain_mapping   (base table, 2 cols)",,,dimension.dim_domain_mapping
+code,,"dimension.dim_domain_mapping.""code""",dimension.dim_domain_mapping
+domain,,"dimension.dim_domain_mapping.""domain""",dimension.dim_domain_mapping
+"▼ dim_error_code_category   (base table, 4 cols)",,,dimension.dim_error_code_category
+error_code,,"dimension.dim_error_code_category.""error_code""",dimension.dim_error_code_category
+message,,"dimension.dim_error_code_category.""message""",dimension.dim_error_code_category
+error_description,,"dimension.dim_error_code_category.""error_description""",dimension.dim_error_code_category
+category,,"dimension.dim_error_code_category.""category""",dimension.dim_error_code_category
+"▼ dim_error_code_mapping   (base table, 4 cols)",,,dimension.dim_error_code_mapping
+code,,"dimension.dim_error_code_mapping.""code""",dimension.dim_error_code_mapping
+type,,"dimension.dim_error_code_mapping.""type""",dimension.dim_error_code_mapping
+message,,"dimension.dim_error_code_mapping.""message""",dimension.dim_error_code_mapping
+description,,"dimension.dim_error_code_mapping.""description""",dimension.dim_error_code_mapping
+"▼ dim_f_b_tag   (base table, 4 cols)",,,dimension.dim_f_b_tag
+NP,,"dimension.dim_f_b_tag.""NP""",dimension.dim_f_b_tag
+Most likely to churn,,"dimension.dim_f_b_tag.""Most likely to churn""",dimension.dim_f_b_tag
+Type,,"dimension.dim_f_b_tag.""Type""",dimension.dim_f_b_tag
+Category,,"dimension.dim_f_b_tag.""Category""",dimension.dim_f_b_tag
+"▼ dim_grocery_tag   (base table, 4 cols)",,,dimension.dim_grocery_tag
+NP,,"dimension.dim_grocery_tag.""NP""",dimension.dim_grocery_tag
+Most likely to churn,,"dimension.dim_grocery_tag.""Most likely to churn""",dimension.dim_grocery_tag
+Type,,"dimension.dim_grocery_tag.""Type""",dimension.dim_grocery_tag
+Category,,"dimension.dim_grocery_tag.""Category""",dimension.dim_grocery_tag
+"▼ dim_home_service_buyer_np   (base table, 5 cols)",,,dimension.dim_home_service_buyer_np
+Bap Id,,"dimension.dim_home_service_buyer_np.""Bap Id""",dimension.dim_home_service_buyer_np
+Buyer NP,,"dimension.dim_home_service_buyer_np.""Buyer NP""",dimension.dim_home_service_buyer_np
+Domain,,"dimension.dim_home_service_buyer_np.""Domain""",dimension.dim_home_service_buyer_np
+Date,,"dimension.dim_home_service_buyer_np.""Date""",dimension.dim_home_service_buyer_np
+TSP Powered,,"dimension.dim_home_service_buyer_np.""TSP Powered""",dimension.dim_home_service_buyer_np
+"▼ dim_home_service_seller_np   (base table, 5 cols)",,,dimension.dim_home_service_seller_np
+Domain,,"dimension.dim_home_service_seller_np.""Domain""",dimension.dim_home_service_seller_np
+Date,,"dimension.dim_home_service_seller_np.""Date""",dimension.dim_home_service_seller_np
+TSP Powered,,"dimension.dim_home_service_seller_np.""TSP Powered""",dimension.dim_home_service_seller_np
+Bpp Id,,"dimension.dim_home_service_seller_np.""Bpp Id""",dimension.dim_home_service_seller_np
+Seller NP,,"dimension.dim_home_service_seller_np.""Seller NP""",dimension.dim_home_service_seller_np
+"▼ dim_igm_bap   (base table, 2 cols)",,,dimension.dim_igm_bap
+bap_id,,"dimension.dim_igm_bap.""bap_id""",dimension.dim_igm_bap
+bap_name,,"dimension.dim_igm_bap.""bap_name""",dimension.dim_igm_bap
+"▼ dim_igm_bpp   (base table, 2 cols)",,,dimension.dim_igm_bpp
+bpp_id,,"dimension.dim_igm_bpp.""bpp_id""",dimension.dim_igm_bpp
+bpp_name,,"dimension.dim_igm_bpp.""bpp_name""",dimension.dim_igm_bpp
+"▼ dim_insurance_bap   (base table, 2 cols)",,,dimension.dim_insurance_bap
+subscriber_id,,"dimension.dim_insurance_bap.""subscriber_id""",dimension.dim_insurance_bap
+np_name,,"dimension.dim_insurance_bap.""np_name""",dimension.dim_insurance_bap
+"▼ dim_insurance_bpp   (base table, 2 cols)",,,dimension.dim_insurance_bpp
+subscriber_id,,"dimension.dim_insurance_bpp.""subscriber_id""",dimension.dim_insurance_bpp
+np_name,,"dimension.dim_insurance_bpp.""np_name""",dimension.dim_insurance_bpp
+"▼ dim_logistics_cancellation_code   (base table, 11 cols)",,,dimension.dim_logistics_cancellation_code
+code,,"dimension.dim_logistics_cancellation_code.""code""",dimension.dim_logistics_cancellation_code
+type,,"dimension.dim_logistics_cancellation_code.""type""",dimension.dim_logistics_cancellation_code
+delivery_type,,"dimension.dim_logistics_cancellation_code.""delivery_type""",dimension.dim_logistics_cancellation_code
+phase,,"dimension.dim_logistics_cancellation_code.""phase""",dimension.dim_logistics_cancellation_code
+reason_for_cancellation,,"dimension.dim_logistics_cancellation_code.""reason_for_cancellation""",dimension.dim_logistics_cancellation_code
+is_triggers_rto,,"dimension.dim_logistics_cancellation_code.""is_triggers_rto""",dimension.dim_logistics_cancellation_code
+by,,"dimension.dim_logistics_cancellation_code.""by""",dimension.dim_logistics_cancellation_code
+attributed_to,,"dimension.dim_logistics_cancellation_code.""attributed_to""",dimension.dim_logistics_cancellation_code
+whether_applicable_for_part_cancel,,"dimension.dim_logistics_cancellation_code.""whether_applicable_for_part_cancel""",dimension.dim_logistics_cancellation_code
+sorting,,"dimension.dim_logistics_cancellation_code.""sorting""",dimension.dim_logistics_cancellation_code
+settlement_suggestions_to_be_incorporated,,"dimension.dim_logistics_cancellation_code.""settlement_suggestions_to_be_incorporated""",dimension.dim_logistics_cancellation_code
+"▼ dim_logistics_category   (base table, 2 cols)",,,dimension.dim_logistics_category
+network_retail_order_category,,"dimension.dim_logistics_category.""network_retail_order_category""",dimension.dim_logistics_category
+category,,"dimension.dim_logistics_category.""category""",dimension.dim_logistics_category
+"▼ dim_logistics_np   (base table, 4 cols)",,,dimension.dim_logistics_np
+logistics_np_name,,"dimension.dim_logistics_np.""logistics_np_name""",dimension.dim_logistics_np
+logistics_np,,"dimension.dim_logistics_np.""logistics_np""",dimension.dim_logistics_np
+lnp_mask,,"dimension.dim_logistics_np.""lnp_mask""",dimension.dim_logistics_np
+tsp_powered,,"dimension.dim_logistics_np.""tsp_powered""",dimension.dim_logistics_np
+"▼ dim_logistics_seller_np   (base table, 4 cols)",,,dimension.dim_logistics_seller_np
+seller_np_name,,"dimension.dim_logistics_seller_np.""seller_np_name""",dimension.dim_logistics_seller_np
+seller_np,,"dimension.dim_logistics_seller_np.""seller_np""",dimension.dim_logistics_seller_np
+snp_mask,,"dimension.dim_logistics_seller_np.""snp_mask""",dimension.dim_logistics_seller_np
+tsp_powered,,"dimension.dim_logistics_seller_np.""tsp_powered""",dimension.dim_logistics_seller_np
+"▼ dim_mf_buyer_np   (base table, 4 cols)",,,dimension.dim_mf_buyer_np
+subscriber_id,,"dimension.dim_mf_buyer_np.""subscriber_id""",dimension.dim_mf_buyer_np
+np_name,,"dimension.dim_mf_buyer_np.""np_name""",dimension.dim_mf_buyer_np
+domain,,"dimension.dim_mf_buyer_np.""domain""",dimension.dim_mf_buyer_np
+tsp_powered,,"dimension.dim_mf_buyer_np.""tsp_powered""",dimension.dim_mf_buyer_np
+"▼ dim_mf_seller_np   (base table, 3 cols)",,,dimension.dim_mf_seller_np
+subscriber_id,,"dimension.dim_mf_seller_np.""subscriber_id""",dimension.dim_mf_seller_np
+np_name,,"dimension.dim_mf_seller_np.""np_name""",dimension.dim_mf_seller_np
+tsp_powered,,"dimension.dim_mf_seller_np.""tsp_powered""",dimension.dim_mf_seller_np
+"▼ dim_pincode   (base table, 5 cols)",,,dimension.dim_pincode
+pincode,,"dimension.dim_pincode.""pincode""",dimension.dim_pincode
+districtname,,"dimension.dim_pincode.""districtname""",dimension.dim_pincode
+statename,,"dimension.dim_pincode.""statename""",dimension.dim_pincode
+tier,,"dimension.dim_pincode.""tier""",dimension.dim_pincode
+zones,,"dimension.dim_pincode.""zones""",dimension.dim_pincode
+"▼ dim_provider_cred   (base table, 7 cols)",,,dimension.dim_provider_cred
+bpp_id,,"dimension.dim_provider_cred.""bpp_id""",dimension.dim_provider_cred
+provider_id,,"dimension.dim_provider_cred.""provider_id""",dimension.dim_provider_cred
+provider_name,,"dimension.dim_provider_cred.""provider_name""",dimension.dim_provider_cred
+provider_key,,"dimension.dim_provider_cred.""provider_key""",dimension.dim_provider_cred
+cred_code,,"dimension.dim_provider_cred.""cred_code""",dimension.dim_provider_cred
+cred_short_desc,,"dimension.dim_provider_cred.""cred_short_desc""",dimension.dim_provider_cred
+insert_date,,"dimension.dim_provider_cred.""insert_date""",dimension.dim_provider_cred
+"▼ dim_retail_buyer_np   (base table, 7 cols)",,,dimension.dim_retail_buyer_np
+buyer_np_name,,"dimension.dim_retail_buyer_np.""buyer_np_name""",dimension.dim_retail_buyer_np
+buyer_np,,"dimension.dim_retail_buyer_np.""buyer_np""",dimension.dim_retail_buyer_np
+updated_date,,"dimension.dim_retail_buyer_np.""updated_date""",dimension.dim_retail_buyer_np
+bnp_mask,,"dimension.dim_retail_buyer_np.""bnp_mask""",dimension.dim_retail_buyer_np
+domain,,"dimension.dim_retail_buyer_np.""domain""",dimension.dim_retail_buyer_np
+tsp_powered,,"dimension.dim_retail_buyer_np.""tsp_powered""",dimension.dim_retail_buyer_np
+spoc_email,,"dimension.dim_retail_buyer_np.""spoc_email""",dimension.dim_retail_buyer_np
+"▼ dim_retail_igm_categories   (base table, 5 cols)",,,dimension.dim_retail_igm_categories
+category,,"dimension.dim_retail_igm_categories.""category""",dimension.dim_retail_igm_categories
+sub_category,,"dimension.dim_retail_igm_categories.""sub_category""",dimension.dim_retail_igm_categories
+enums,,"dimension.dim_retail_igm_categories.""enums""",dimension.dim_retail_igm_categories
+main_category,,"dimension.dim_retail_igm_categories.""main_category""",dimension.dim_retail_igm_categories
+key,,"dimension.dim_retail_igm_categories.""key""",dimension.dim_retail_igm_categories
+"▼ dim_retail_seller_np   (base table, 6 cols)",,,dimension.dim_retail_seller_np
+seller_np_name,,"dimension.dim_retail_seller_np.""seller_np_name""",dimension.dim_retail_seller_np
+seller_np,,"dimension.dim_retail_seller_np.""seller_np""",dimension.dim_retail_seller_np
+updated_date,,"dimension.dim_retail_seller_np.""updated_date""",dimension.dim_retail_seller_np
+snp_mask,,"dimension.dim_retail_seller_np.""snp_mask""",dimension.dim_retail_seller_np
+tsp_powered,,"dimension.dim_retail_seller_np.""tsp_powered""",dimension.dim_retail_seller_np
+spoc_email,,"dimension.dim_retail_seller_np.""spoc_email""",dimension.dim_retail_seller_np
+"▼ dim_retail_tag   (base table, 4 cols)",,,dimension.dim_retail_tag
+NP,,"dimension.dim_retail_tag.""NP""",dimension.dim_retail_tag
+Most likely to churn,,"dimension.dim_retail_tag.""Most likely to churn""",dimension.dim_retail_tag
+Type,,"dimension.dim_retail_tag.""Type""",dimension.dim_retail_tag
+Category,,"dimension.dim_retail_tag.""Category""",dimension.dim_retail_tag

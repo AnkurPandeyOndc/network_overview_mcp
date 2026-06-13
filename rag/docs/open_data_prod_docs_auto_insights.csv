@@ -1,0 +1,29 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s)
+"▼ ondc_entity_analysis   (base table, 12 cols)",,,auto_insights.ondc_entity_analysis
+id,,"auto_insights.ondc_entity_analysis.""id""",auto_insights.ondc_entity_analysis
+entity_type,,"auto_insights.ondc_entity_analysis.""entity_type""",auto_insights.ondc_entity_analysis
+entity_value,,"auto_insights.ondc_entity_analysis.""entity_value""",auto_insights.ondc_entity_analysis
+analysis_date,,"auto_insights.ondc_entity_analysis.""analysis_date""",auto_insights.ondc_entity_analysis
+data_start_date,,"auto_insights.ondc_entity_analysis.""data_start_date""",auto_insights.ondc_entity_analysis
+data_end_date,,"auto_insights.ondc_entity_analysis.""data_end_date""",auto_insights.ondc_entity_analysis
+avg_daily_orders,,"auto_insights.ondc_entity_analysis.""avg_daily_orders""",auto_insights.ondc_entity_analysis
+anomalies,,"auto_insights.ondc_entity_analysis.""anomalies""",auto_insights.ondc_entity_analysis
+contributors,,"auto_insights.ondc_entity_analysis.""contributors""",auto_insights.ondc_entity_analysis
+nearby_events,,"auto_insights.ondc_entity_analysis.""nearby_events""",auto_insights.ondc_entity_analysis
+created_at,,"auto_insights.ondc_entity_analysis.""created_at""",auto_insights.ondc_entity_analysis
+updated_at,,"auto_insights.ondc_entity_analysis.""updated_at""",auto_insights.ondc_entity_analysis
+"▼ ondc_insights   (base table, 14 cols)",,,auto_insights.ondc_insights
+id,,"auto_insights.ondc_insights.""id""",auto_insights.ondc_insights
+analysis_id,,"auto_insights.ondc_insights.""analysis_id""",auto_insights.ondc_insights
+entity_type,,"auto_insights.ondc_insights.""entity_type""",auto_insights.ondc_insights
+entity_value,,"auto_insights.ondc_insights.""entity_value""",auto_insights.ondc_insights
+analysis_date,,"auto_insights.ondc_insights.""analysis_date""",auto_insights.ondc_insights
+title,,"auto_insights.ondc_insights.""title""",auto_insights.ondc_insights
+insight_text,,"auto_insights.ondc_insights.""insight_text""",auto_insights.ondc_insights
+signal,,"auto_insights.ondc_insights.""signal""",auto_insights.ondc_insights
+actions,,"auto_insights.ondc_insights.""actions""",auto_insights.ondc_insights
+status,,"auto_insights.ondc_insights.""status""",auto_insights.ondc_insights
+snoozed_until,,"auto_insights.ondc_insights.""snoozed_until""",auto_insights.ondc_insights
+notes,,"auto_insights.ondc_insights.""notes""",auto_insights.ondc_insights
+created_at,,"auto_insights.ondc_insights.""created_at""",auto_insights.ondc_insights
+updated_at,,"auto_insights.ondc_insights.""updated_at""",auto_insights.ondc_insights

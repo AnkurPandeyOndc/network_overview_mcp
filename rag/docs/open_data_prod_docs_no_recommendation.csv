@@ -1,0 +1,474 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s)
+"▼ bnp_view_potential_order   (base table, 9 cols)",,,no_recommendation.bnp_view_potential_order
+date,,"no_recommendation.bnp_view_potential_order.""date""",no_recommendation.bnp_view_potential_order
+time_frame,,"no_recommendation.bnp_view_potential_order.""time_frame""",no_recommendation.bnp_view_potential_order
+pincode,,"no_recommendation.bnp_view_potential_order.""pincode""",no_recommendation.bnp_view_potential_order
+seller_count,,"no_recommendation.bnp_view_potential_order.""seller_count""",no_recommendation.bnp_view_potential_order
+qsr_seller,,"no_recommendation.bnp_view_potential_order.""qsr_seller""",no_recommendation.bnp_view_potential_order
+potential_orders,,"no_recommendation.bnp_view_potential_order.""potential_orders""",no_recommendation.bnp_view_potential_order
+select_calls,,"no_recommendation.bnp_view_potential_order.""select_calls""",no_recommendation.bnp_view_potential_order
+error,,"no_recommendation.bnp_view_potential_order.""error""",no_recommendation.bnp_view_potential_order
+logistics_cancel,,"no_recommendation.bnp_view_potential_order.""logistics_cancel""",no_recommendation.bnp_view_potential_order
+"▼ bnp_view_potential_order_old   (base table, 9 cols)",,,no_recommendation.bnp_view_potential_order_old
+date,,"no_recommendation.bnp_view_potential_order_old.""date""",no_recommendation.bnp_view_potential_order_old
+time_frame,,"no_recommendation.bnp_view_potential_order_old.""time_frame""",no_recommendation.bnp_view_potential_order_old
+pincode,,"no_recommendation.bnp_view_potential_order_old.""pincode""",no_recommendation.bnp_view_potential_order_old
+seller_count,,"no_recommendation.bnp_view_potential_order_old.""seller_count""",no_recommendation.bnp_view_potential_order_old
+qsr_seller,,"no_recommendation.bnp_view_potential_order_old.""qsr_seller""",no_recommendation.bnp_view_potential_order_old
+potential_orders,,"no_recommendation.bnp_view_potential_order_old.""potential_orders""",no_recommendation.bnp_view_potential_order_old
+select_calls,,"no_recommendation.bnp_view_potential_order_old.""select_calls""",no_recommendation.bnp_view_potential_order_old
+error,,"no_recommendation.bnp_view_potential_order_old.""error""",no_recommendation.bnp_view_potential_order_old
+logistics_cancel,,"no_recommendation.bnp_view_potential_order_old.""logistics_cancel""",no_recommendation.bnp_view_potential_order_old
+"▼ dim_pincode   (base table, 4 cols)",,,no_recommendation.dim_pincode
+pincode,,"no_recommendation.dim_pincode.""pincode""",no_recommendation.dim_pincode
+state_name,,"no_recommendation.dim_pincode.""state_name""",no_recommendation.dim_pincode
+district_name,,"no_recommendation.dim_pincode.""district_name""",no_recommendation.dim_pincode
+state_code,,"no_recommendation.dim_pincode.""state_code""",no_recommendation.dim_pincode
+"▼ dim_pincode_new   (base table, 3 cols)",,,no_recommendation.dim_pincode_new
+pincode,,"no_recommendation.dim_pincode_new.""pincode""",no_recommendation.dim_pincode_new
+state_name,,"no_recommendation.dim_pincode_new.""state_name""",no_recommendation.dim_pincode_new
+district_name,,"no_recommendation.dim_pincode_new.""district_name""",no_recommendation.dim_pincode_new
+"▼ dim_seller_np   (base table, 2 cols)",,,no_recommendation.dim_seller_np
+name,,"no_recommendation.dim_seller_np.""name""",no_recommendation.dim_seller_np
+seller_np,,"no_recommendation.dim_seller_np.""seller_np""",no_recommendation.dim_seller_np
+"▼ logistics_gold_test   (view, 48 cols)",,,no_recommendation.logistics_gold_test
+bap_id,,"no_recommendation.logistics_gold_test.""bap_id""",no_recommendation.logistics_gold_test
+bpp_id,,"no_recommendation.logistics_gold_test.""bpp_id""",no_recommendation.logistics_gold_test
+order_id,,"no_recommendation.logistics_gold_test.""order_id""",no_recommendation.logistics_gold_test
+transaction_id,,"no_recommendation.logistics_gold_test.""transaction_id""",no_recommendation.logistics_gold_test
+retail_order_id,,"no_recommendation.logistics_gold_test.""retail_order_id""",no_recommendation.logistics_gold_test
+f_ready_to_ship_at_date,,"no_recommendation.logistics_gold_test.""f_ready_to_ship_at_date""",no_recommendation.logistics_gold_test
+fulfillment_status,,"no_recommendation.logistics_gold_test.""fulfillment_status""",no_recommendation.logistics_gold_test
+fulfillment_type,,"no_recommendation.logistics_gold_test.""fulfillment_type""",no_recommendation.logistics_gold_test
+cod_order,,"no_recommendation.logistics_gold_test.""cod_order""",no_recommendation.logistics_gold_test
+date,,"no_recommendation.logistics_gold_test.""date""",no_recommendation.logistics_gold_test
+order_created_at,,"no_recommendation.logistics_gold_test.""order_created_at""",no_recommendation.logistics_gold_test
+cancellation_code,,"no_recommendation.logistics_gold_test.""cancellation_code""",no_recommendation.logistics_gold_test
+latest_order_status,,"no_recommendation.logistics_gold_test.""latest_order_status""",no_recommendation.logistics_gold_test
+pick_up_pincode,,"no_recommendation.logistics_gold_test.""pick_up_pincode""",no_recommendation.logistics_gold_test
+delivery_pincode,,"no_recommendation.logistics_gold_test.""delivery_pincode""",no_recommendation.logistics_gold_test
+retail_category,,"no_recommendation.logistics_gold_test.""retail_category""",no_recommendation.logistics_gold_test
+shipment_type,,"no_recommendation.logistics_gold_test.""shipment_type""",no_recommendation.logistics_gold_test
+motorable_distance,,"no_recommendation.logistics_gold_test.""motorable_distance""",no_recommendation.logistics_gold_test
+provider_name,,"no_recommendation.logistics_gold_test.""provider_name""",no_recommendation.logistics_gold_test
+pickup_tat,,"no_recommendation.logistics_gold_test.""pickup_tat""",no_recommendation.logistics_gold_test
+rts_tat,,"no_recommendation.logistics_gold_test.""rts_tat""",no_recommendation.logistics_gold_test
+f_at_pickup_from_date,,"no_recommendation.logistics_gold_test.""f_at_pickup_from_date""",no_recommendation.logistics_gold_test
+f_agent_assigned_at_date,,"no_recommendation.logistics_gold_test.""f_agent_assigned_at_date""",no_recommendation.logistics_gold_test
+delivered_date,,"no_recommendation.logistics_gold_test.""delivered_date""",no_recommendation.logistics_gold_test
+cancelled_date,,"no_recommendation.logistics_gold_test.""cancelled_date""",no_recommendation.logistics_gold_test
+picked_date,,"no_recommendation.logistics_gold_test.""picked_date""",no_recommendation.logistics_gold_test
+promised_time_to_deliver,,"no_recommendation.logistics_gold_test.""promised_time_to_deliver""",no_recommendation.logistics_gold_test
+awbnumber,,"no_recommendation.logistics_gold_test.""awbnumber""",no_recommendation.logistics_gold_test
+buyer_np,,"no_recommendation.logistics_gold_test.""buyer_np""",no_recommendation.logistics_gold_test
+retail_snp,,"no_recommendation.logistics_gold_test.""retail_snp""",no_recommendation.logistics_gold_test
+Linked Orders,,"no_recommendation.logistics_gold_test.""Linked Orders""",no_recommendation.logistics_gold_test
+dedup,,"no_recommendation.logistics_gold_test.""dedup""",no_recommendation.logistics_gold_test
+order_count,,"no_recommendation.logistics_gold_test.""order_count""",no_recommendation.logistics_gold_test
+avg_del,,"no_recommendation.logistics_gold_test.""avg_del""",no_recommendation.logistics_gold_test
+del_tat_duration,,"no_recommendation.logistics_gold_test.""del_tat_duration""",no_recommendation.logistics_gold_test
+del_adherence,,"no_recommendation.logistics_gold_test.""del_adherence""",no_recommendation.logistics_gold_test
+del_breach_diff,,"no_recommendation.logistics_gold_test.""del_breach_diff""",no_recommendation.logistics_gold_test
+rtsvscrt,,"no_recommendation.logistics_gold_test.""rtsvscrt""",no_recommendation.logistics_gold_test
+rtsvspck,,"no_recommendation.logistics_gold_test.""rtsvspck""",no_recommendation.logistics_gold_test
+delage,,"no_recommendation.logistics_gold_test.""delage""",no_recommendation.logistics_gold_test
+cancel_secs,,"no_recommendation.logistics_gold_test.""cancel_secs""",no_recommendation.logistics_gold_test
+in_process_ageing,,"no_recommendation.logistics_gold_test.""in_process_ageing""",no_recommendation.logistics_gold_test
+rider_waiting,,"no_recommendation.logistics_gold_test.""rider_waiting""",no_recommendation.logistics_gold_test
+rider_assigning,,"no_recommendation.logistics_gold_test.""rider_assigning""",no_recommendation.logistics_gold_test
+pick_up_breached,,"no_recommendation.logistics_gold_test.""pick_up_breached""",no_recommendation.logistics_gold_test
+pick_up_tat_diff,,"no_recommendation.logistics_gold_test.""pick_up_tat_diff""",no_recommendation.logistics_gold_test
+rts_breached,,"no_recommendation.logistics_gold_test.""rts_breached""",no_recommendation.logistics_gold_test
+rts_tat_diff,,"no_recommendation.logistics_gold_test.""rts_tat_diff""",no_recommendation.logistics_gold_test
+"▼ logistics_order_bv   (base table, 206 cols)",,,no_recommendation.logistics_order_bv
+bap_id,,"no_recommendation.logistics_order_bv.""bap_id""",no_recommendation.logistics_order_bv
+bpp_id,,"no_recommendation.logistics_order_bv.""bpp_id""",no_recommendation.logistics_order_bv
+order_id,,"no_recommendation.logistics_order_bv.""order_id""",no_recommendation.logistics_order_bv
+transaction_id,,"no_recommendation.logistics_order_bv.""transaction_id""",no_recommendation.logistics_order_bv
+fulfillment_status,,"no_recommendation.logistics_order_bv.""fulfillment_status""",no_recommendation.logistics_order_bv
+fulfillment_type,,"no_recommendation.logistics_order_bv.""fulfillment_type""",no_recommendation.logistics_order_bv
+cod_order,,"no_recommendation.logistics_order_bv.""cod_order""",no_recommendation.logistics_order_bv
+date,,"no_recommendation.logistics_order_bv.""date""",no_recommendation.logistics_order_bv
+order_created_at,,"no_recommendation.logistics_order_bv.""order_created_at""",no_recommendation.logistics_order_bv
+cancellation_code,,"no_recommendation.logistics_order_bv.""cancellation_code""",no_recommendation.logistics_order_bv
+latest_order_status,,"no_recommendation.logistics_order_bv.""latest_order_status""",no_recommendation.logistics_order_bv
+retail_order_id,,"no_recommendation.logistics_order_bv.""retail_order_id""",no_recommendation.logistics_order_bv
+pick_up_pincode,,"no_recommendation.logistics_order_bv.""pick_up_pincode""",no_recommendation.logistics_order_bv
+delivery_pincode,,"no_recommendation.logistics_order_bv.""delivery_pincode""",no_recommendation.logistics_order_bv
+retail_category,,"no_recommendation.logistics_order_bv.""retail_category""",no_recommendation.logistics_order_bv
+shipment_type,,"no_recommendation.logistics_order_bv.""shipment_type""",no_recommendation.logistics_order_bv
+motorable_distance,,"no_recommendation.logistics_order_bv.""motorable_distance""",no_recommendation.logistics_order_bv
+provider_name,,"no_recommendation.logistics_order_bv.""provider_name""",no_recommendation.logistics_order_bv
+pickup_tat,,"no_recommendation.logistics_order_bv.""pickup_tat""",no_recommendation.logistics_order_bv
+rts_tat,,"no_recommendation.logistics_order_bv.""rts_tat""",no_recommendation.logistics_order_bv
+f_ready_to_ship_at_date,,"no_recommendation.logistics_order_bv.""f_ready_to_ship_at_date""",no_recommendation.logistics_order_bv
+f_at_pickup_from_date,,"no_recommendation.logistics_order_bv.""f_at_pickup_from_date""",no_recommendation.logistics_order_bv
+f_agent_assigned_at_date,,"no_recommendation.logistics_order_bv.""f_agent_assigned_at_date""",no_recommendation.logistics_order_bv
+delivered_date,,"no_recommendation.logistics_order_bv.""delivered_date""",no_recommendation.logistics_order_bv
+cancelled_date,,"no_recommendation.logistics_order_bv.""cancelled_date""",no_recommendation.logistics_order_bv
+picked_date,,"no_recommendation.logistics_order_bv.""picked_date""",no_recommendation.logistics_order_bv
+promised_time_to_deliver,,"no_recommendation.logistics_order_bv.""promised_time_to_deliver""",no_recommendation.logistics_order_bv
+buyer_np,,"no_recommendation.logistics_order_bv.""buyer_np""",no_recommendation.logistics_order_bv
+retail_snp,,"no_recommendation.logistics_order_bv.""retail_snp""",no_recommendation.logistics_order_bv
+Linked Orders,,"no_recommendation.logistics_order_bv.""Linked Orders""",no_recommendation.logistics_order_bv
+dedup,,"no_recommendation.logistics_order_bv.""dedup""",no_recommendation.logistics_order_bv
+order_count,,"no_recommendation.logistics_order_bv.""order_count""",no_recommendation.logistics_order_bv
+avg_del,,"no_recommendation.logistics_order_bv.""avg_del""",no_recommendation.logistics_order_bv
+del_tat_duration,,"no_recommendation.logistics_order_bv.""del_tat_duration""",no_recommendation.logistics_order_bv
+del_adherence,,"no_recommendation.logistics_order_bv.""del_adherence""",no_recommendation.logistics_order_bv
+del_breach_diff,,"no_recommendation.logistics_order_bv.""del_breach_diff""",no_recommendation.logistics_order_bv
+rtsvscrt,,"no_recommendation.logistics_order_bv.""rtsvscrt""",no_recommendation.logistics_order_bv
+rtsvspck,,"no_recommendation.logistics_order_bv.""rtsvspck""",no_recommendation.logistics_order_bv
+delage,,"no_recommendation.logistics_order_bv.""delage""",no_recommendation.logistics_order_bv
+cancel_secs,,"no_recommendation.logistics_order_bv.""cancel_secs""",no_recommendation.logistics_order_bv
+in_process_ageing,,"no_recommendation.logistics_order_bv.""in_process_ageing""",no_recommendation.logistics_order_bv
+rider_waiting,,"no_recommendation.logistics_order_bv.""rider_waiting""",no_recommendation.logistics_order_bv
+rider_assigning,,"no_recommendation.logistics_order_bv.""rider_assigning""",no_recommendation.logistics_order_bv
+Pickup TAT Breached,,"no_recommendation.logistics_order_bv.""Pickup TAT Breached""",no_recommendation.logistics_order_bv
+pick_up_tat_diff,,"no_recommendation.logistics_order_bv.""pick_up_tat_diff""",no_recommendation.logistics_order_bv
+RTS Breached,,"no_recommendation.logistics_order_bv.""RTS Breached""",no_recommendation.logistics_order_bv
+rts_tat_diff,,"no_recommendation.logistics_order_bv.""rts_tat_diff""",no_recommendation.logistics_order_bv
+order_status,,"no_recommendation.logistics_order_bv.""order_status""",no_recommendation.logistics_order_bv
+Order Category,,"no_recommendation.logistics_order_bv.""Order Category""",no_recommendation.logistics_order_bv
+Order Picked,,"no_recommendation.logistics_order_bv.""Order Picked""",no_recommendation.logistics_order_bv
+Rider Assignment Type,,"no_recommendation.logistics_order_bv.""Rider Assignment Type""",no_recommendation.logistics_order_bv
+confirmed,,"no_recommendation.logistics_order_bv.""confirmed""",no_recommendation.logistics_order_bv
+delivered,,"no_recommendation.logistics_order_bv.""delivered""",no_recommendation.logistics_order_bv
+cancelled,,"no_recommendation.logistics_order_bv.""cancelled""",no_recommendation.logistics_order_bv
+inprocess,,"no_recommendation.logistics_order_bv.""inprocess""",no_recommendation.logistics_order_bv
+logistics_cancelled,,"no_recommendation.logistics_order_bv.""logistics_cancelled""",no_recommendation.logistics_order_bv
+buyer_cancelled,,"no_recommendation.logistics_order_bv.""buyer_cancelled""",no_recommendation.logistics_order_bv
+seller_cancelled,,"no_recommendation.logistics_order_bv.""seller_cancelled""",no_recommendation.logistics_order_bv
+Confirmed with RTS,,"no_recommendation.logistics_order_bv.""Confirmed with RTS""",no_recommendation.logistics_order_bv
+confirmed with No RTS,,"no_recommendation.logistics_order_bv.""confirmed with No RTS""",no_recommendation.logistics_order_bv
+COD Orders,,"no_recommendation.logistics_order_bv.""COD Orders""",no_recommendation.logistics_order_bv
+Unique retail orders by snp,,"no_recommendation.logistics_order_bv.""Unique retail orders by snp""",no_recommendation.logistics_order_bv
+Promised TAT (in days),,"no_recommendation.logistics_order_bv.""Promised TAT (in days)""",no_recommendation.logistics_order_bv
+Avg Motorable Distance,,"no_recommendation.logistics_order_bv.""Avg Motorable Distance""",no_recommendation.logistics_order_bv
+No Motorable Distance,,"no_recommendation.logistics_order_bv.""No Motorable Distance""",no_recommendation.logistics_order_bv
+Within 0-3 kms,,"no_recommendation.logistics_order_bv.""Within 0-3 kms""",no_recommendation.logistics_order_bv
+Within 3-4 kms,,"no_recommendation.logistics_order_bv.""Within 3-4 kms""",no_recommendation.logistics_order_bv
+Within 4-5 kms,,"no_recommendation.logistics_order_bv.""Within 4-5 kms""",no_recommendation.logistics_order_bv
+Within 5-7 kms,,"no_recommendation.logistics_order_bv.""Within 5-7 kms""",no_recommendation.logistics_order_bv
+Within 7-10 kms,,"no_recommendation.logistics_order_bv.""Within 7-10 kms""",no_recommendation.logistics_order_bv
+Beyond 10 kms,,"no_recommendation.logistics_order_bv.""Beyond 10 kms""",no_recommendation.logistics_order_bv
+Adherence %,,"no_recommendation.logistics_order_bv.""Adherence %""",no_recommendation.logistics_order_bv
+Breached,,"no_recommendation.logistics_order_bv.""Breached""",no_recommendation.logistics_order_bv
+Breached 0-5 mins,,"no_recommendation.logistics_order_bv.""Breached 0-5 mins""",no_recommendation.logistics_order_bv
+Breached 5-10 mins,,"no_recommendation.logistics_order_bv.""Breached 5-10 mins""",no_recommendation.logistics_order_bv
+Breached 10-20 mins,,"no_recommendation.logistics_order_bv.""Breached 10-20 mins""",no_recommendation.logistics_order_bv
+Breached 20-30 mins,,"no_recommendation.logistics_order_bv.""Breached 20-30 mins""",no_recommendation.logistics_order_bv
+Breached > 30 mins,,"no_recommendation.logistics_order_bv.""Breached > 30 mins""",no_recommendation.logistics_order_bv
+Breached 0-15 mins,,"no_recommendation.logistics_order_bv.""Breached 0-15 mins""",no_recommendation.logistics_order_bv
+Breached 15-30 mins,,"no_recommendation.logistics_order_bv.""Breached 15-30 mins""",no_recommendation.logistics_order_bv
+Breached 30-60 mins,,"no_recommendation.logistics_order_bv.""Breached 30-60 mins""",no_recommendation.logistics_order_bv
+Breached 1-2 hrs,,"no_recommendation.logistics_order_bv.""Breached 1-2 hrs""",no_recommendation.logistics_order_bv
+Breached 2-6 hrs,,"no_recommendation.logistics_order_bv.""Breached 2-6 hrs""",no_recommendation.logistics_order_bv
+Breached >6 hrs,,"no_recommendation.logistics_order_bv.""Breached >6 hrs""",no_recommendation.logistics_order_bv
+Breached 0-1 day,,"no_recommendation.logistics_order_bv.""Breached 0-1 day""",no_recommendation.logistics_order_bv
+Breached 1-2 day,,"no_recommendation.logistics_order_bv.""Breached 1-2 day""",no_recommendation.logistics_order_bv
+Breached 2-3 day,,"no_recommendation.logistics_order_bv.""Breached 2-3 day""",no_recommendation.logistics_order_bv
+Breached 3-4 day,,"no_recommendation.logistics_order_bv.""Breached 3-4 day""",no_recommendation.logistics_order_bv
+Breached > 4 day,,"no_recommendation.logistics_order_bv.""Breached > 4 day""",no_recommendation.logistics_order_bv
+D TAT Breached,,"no_recommendation.logistics_order_bv.""D TAT Breached""",no_recommendation.logistics_order_bv
+Average Delivery Time for Intercity,,"no_recommendation.logistics_order_bv.""Average Delivery Time for Intercity""",no_recommendation.logistics_order_bv
+Average Delivery Time for Hyperlocal,,"no_recommendation.logistics_order_bv.""Average Delivery Time for Hyperlocal""",no_recommendation.logistics_order_bv
+Average Delivery Time for F&B,,"no_recommendation.logistics_order_bv.""Average Delivery Time for F&B""",no_recommendation.logistics_order_bv
+Picked Within 0-10 mins,,"no_recommendation.logistics_order_bv.""Picked Within 0-10 mins""",no_recommendation.logistics_order_bv
+Picked Within 10-20 mins,,"no_recommendation.logistics_order_bv.""Picked Within 10-20 mins""",no_recommendation.logistics_order_bv
+Picked Within 20-30 mins,,"no_recommendation.logistics_order_bv.""Picked Within 20-30 mins""",no_recommendation.logistics_order_bv
+Picked Within 30-60 mins,,"no_recommendation.logistics_order_bv.""Picked Within 30-60 mins""",no_recommendation.logistics_order_bv
+Picked Within 60-120 mins,,"no_recommendation.logistics_order_bv.""Picked Within 60-120 mins""",no_recommendation.logistics_order_bv
+Picked Beyond 120 mins,,"no_recommendation.logistics_order_bv.""Picked Beyond 120 mins""",no_recommendation.logistics_order_bv
+Picked Within 0-1 hrs,,"no_recommendation.logistics_order_bv.""Picked Within 0-1 hrs""",no_recommendation.logistics_order_bv
+Picked Within 1-3 hrs,,"no_recommendation.logistics_order_bv.""Picked Within 1-3 hrs""",no_recommendation.logistics_order_bv
+Picked Within 3-5 hrs,,"no_recommendation.logistics_order_bv.""Picked Within 3-5 hrs""",no_recommendation.logistics_order_bv
+Picked Within 5-10 hrs,,"no_recommendation.logistics_order_bv.""Picked Within 5-10 hrs""",no_recommendation.logistics_order_bv
+Picked Above 10 hrs,,"no_recommendation.logistics_order_bv.""Picked Above 10 hrs""",no_recommendation.logistics_order_bv
+Average Pickup Time,,"no_recommendation.logistics_order_bv.""Average Pickup Time""",no_recommendation.logistics_order_bv
+F&B Average Pickup Time (in mins),,"no_recommendation.logistics_order_bv.""F&B Average Pickup Time (in mins)""",no_recommendation.logistics_order_bv
+Hyperlocal Non F&B Average Pickup Time (in mins),,"no_recommendation.logistics_order_bv.""Hyperlocal Non F&B Average Pickup Time (in mins)""",no_recommendation.logistics_order_bv
+Intercity Average Pickup Time (in days),,"no_recommendation.logistics_order_bv.""Intercity Average Pickup Time (in days)""",no_recommendation.logistics_order_bv
+Intercity Average Pickup Time,,"no_recommendation.logistics_order_bv.""Intercity Average Pickup Time""",no_recommendation.logistics_order_bv
+Del 0-30 mins,,"no_recommendation.logistics_order_bv.""Del 0-30 mins""",no_recommendation.logistics_order_bv
+Del 30-35 mins,,"no_recommendation.logistics_order_bv.""Del 30-35 mins""",no_recommendation.logistics_order_bv
+Del 35-40 mins,,"no_recommendation.logistics_order_bv.""Del 35-40 mins""",no_recommendation.logistics_order_bv
+Del 40-45 mins,,"no_recommendation.logistics_order_bv.""Del 40-45 mins""",no_recommendation.logistics_order_bv
+Del 45-60 mins,,"no_recommendation.logistics_order_bv.""Del 45-60 mins""",no_recommendation.logistics_order_bv
+Del Above 60 mins,,"no_recommendation.logistics_order_bv.""Del Above 60 mins""",no_recommendation.logistics_order_bv
+Del > 10 days,,"no_recommendation.logistics_order_bv.""Del > 10 days""",no_recommendation.logistics_order_bv
+Del 0-3 days,,"no_recommendation.logistics_order_bv.""Del 0-3 days""",no_recommendation.logistics_order_bv
+Del 3-5 days,,"no_recommendation.logistics_order_bv.""Del 3-5 days""",no_recommendation.logistics_order_bv
+Del 5-7 days,,"no_recommendation.logistics_order_bv.""Del 5-7 days""",no_recommendation.logistics_order_bv
+Del 7-10 days,,"no_recommendation.logistics_order_bv.""Del 7-10 days""",no_recommendation.logistics_order_bv
+F&B Orders Average Delivery (in mins),,"no_recommendation.logistics_order_bv.""F&B Orders Average Delivery (in mins)""",no_recommendation.logistics_order_bv
+Intercity Orders Average Delivery (in days),,"no_recommendation.logistics_order_bv.""Intercity Orders Average Delivery (in days)""",no_recommendation.logistics_order_bv
+Hyperlocal Non F&B Orders Average Delivery (in mins),,"no_recommendation.logistics_order_bv.""Hyperlocal Non F&B Orders Average Delivery (in mins)""",no_recommendation.logistics_order_bv
+Average Delivery (in mins),,"no_recommendation.logistics_order_bv.""Average Delivery (in mins)""",no_recommendation.logistics_order_bv
+Pending Within 0-1 days,,"no_recommendation.logistics_order_bv.""Pending Within 0-1 days""",no_recommendation.logistics_order_bv
+Pending Within 1-2 days,,"no_recommendation.logistics_order_bv.""Pending Within 1-2 days""",no_recommendation.logistics_order_bv
+Pending Within 2-3 days,,"no_recommendation.logistics_order_bv.""Pending Within 2-3 days""",no_recommendation.logistics_order_bv
+Pending Within 3-4 days,,"no_recommendation.logistics_order_bv.""Pending Within 3-4 days""",no_recommendation.logistics_order_bv
+Pending Within 4-5 days,,"no_recommendation.logistics_order_bv.""Pending Within 4-5 days""",no_recommendation.logistics_order_bv
+Pending Beyond 5 days,,"no_recommendation.logistics_order_bv.""Pending Beyond 5 days""",no_recommendation.logistics_order_bv
+Pending Within 0-2 days,,"no_recommendation.logistics_order_bv.""Pending Within 0-2 days""",no_recommendation.logistics_order_bv
+Pending Within 2-5 days,,"no_recommendation.logistics_order_bv.""Pending Within 2-5 days""",no_recommendation.logistics_order_bv
+Pending Within 5-10 days,,"no_recommendation.logistics_order_bv.""Pending Within 5-10 days""",no_recommendation.logistics_order_bv
+Pending Beyond 10 days,,"no_recommendation.logistics_order_bv.""Pending Beyond 10 days""",no_recommendation.logistics_order_bv
+Waiting within 5 mins,,"no_recommendation.logistics_order_bv.""Waiting within 5 mins""",no_recommendation.logistics_order_bv
+Waiting 5-10 mins,,"no_recommendation.logistics_order_bv.""Waiting 5-10 mins""",no_recommendation.logistics_order_bv
+Waiting 10-20 mins,,"no_recommendation.logistics_order_bv.""Waiting 10-20 mins""",no_recommendation.logistics_order_bv
+Waiting 20-30 mins,,"no_recommendation.logistics_order_bv.""Waiting 20-30 mins""",no_recommendation.logistics_order_bv
+Above 30 mins,,"no_recommendation.logistics_order_bv.""Above 30 mins""",no_recommendation.logistics_order_bv
+Non F&B Orders Average Rider Waiting Time (in mins),,"no_recommendation.logistics_order_bv.""Non F&B Orders Average Rider Waiting Time (in mins)""",no_recommendation.logistics_order_bv
+F&B Orders Average Rider Waiting Time (in mins),,"no_recommendation.logistics_order_bv.""F&B Orders Average Rider Waiting Time (in mins)""",no_recommendation.logistics_order_bv
+Average Rider Waiting Time (in mins),,"no_recommendation.logistics_order_bv.""Average Rider Waiting Time (in mins)""",no_recommendation.logistics_order_bv
+RTS Breached 0-5 mins,,"no_recommendation.logistics_order_bv.""RTS Breached 0-5 mins""",no_recommendation.logistics_order_bv
+RTS Breached 5-10 mins,,"no_recommendation.logistics_order_bv.""RTS Breached 5-10 mins""",no_recommendation.logistics_order_bv
+RTS Breached 10-20 mins,,"no_recommendation.logistics_order_bv.""RTS Breached 10-20 mins""",no_recommendation.logistics_order_bv
+RTS Breached 20-30 mins,,"no_recommendation.logistics_order_bv.""RTS Breached 20-30 mins""",no_recommendation.logistics_order_bv
+RTS Breached Above 30 mins,,"no_recommendation.logistics_order_bv.""RTS Breached Above 30 mins""",no_recommendation.logistics_order_bv
+RTS Breached 0-1 days,,"no_recommendation.logistics_order_bv.""RTS Breached 0-1 days""",no_recommendation.logistics_order_bv
+RTS Breached 1-2 days,,"no_recommendation.logistics_order_bv.""RTS Breached 1-2 days""",no_recommendation.logistics_order_bv
+RTS Breached 2-3 days,,"no_recommendation.logistics_order_bv.""RTS Breached 2-3 days""",no_recommendation.logistics_order_bv
+RTS Breached 3-4 days,,"no_recommendation.logistics_order_bv.""RTS Breached 3-4 days""",no_recommendation.logistics_order_bv
+RTS Breached Above 4 days,,"no_recommendation.logistics_order_bv.""RTS Breached Above 4 days""",no_recommendation.logistics_order_bv
+F&B Order Average RTS (in mins),,"no_recommendation.logistics_order_bv.""F&B Order Average RTS (in mins)""",no_recommendation.logistics_order_bv
+Non F&B Hyperlocal Average RTS (in mins),,"no_recommendation.logistics_order_bv.""Non F&B Hyperlocal Average RTS (in mins)""",no_recommendation.logistics_order_bv
+Intercity Average Promised RTS (in mins),,"no_recommendation.logistics_order_bv.""Intercity Average Promised RTS (in mins)""",no_recommendation.logistics_order_bv
+Pickup Breached 0-5 mins,,"no_recommendation.logistics_order_bv.""Pickup Breached 0-5 mins""",no_recommendation.logistics_order_bv
+Pickup Breached 5-10 mins,,"no_recommendation.logistics_order_bv.""Pickup Breached 5-10 mins""",no_recommendation.logistics_order_bv
+Pickup Breached 10-20 mins,,"no_recommendation.logistics_order_bv.""Pickup Breached 10-20 mins""",no_recommendation.logistics_order_bv
+Pickup Breached 20-30 mins,,"no_recommendation.logistics_order_bv.""Pickup Breached 20-30 mins""",no_recommendation.logistics_order_bv
+Pickup Breached Above 30 mins,,"no_recommendation.logistics_order_bv.""Pickup Breached Above 30 mins""",no_recommendation.logistics_order_bv
+Pickup Breached 0-1 days,,"no_recommendation.logistics_order_bv.""Pickup Breached 0-1 days""",no_recommendation.logistics_order_bv
+Pickup Breached 1-2 days,,"no_recommendation.logistics_order_bv.""Pickup Breached 1-2 days""",no_recommendation.logistics_order_bv
+Pickup Breached 2-3 days,,"no_recommendation.logistics_order_bv.""Pickup Breached 2-3 days""",no_recommendation.logistics_order_bv
+Pickup Breached 3-4 days,,"no_recommendation.logistics_order_bv.""Pickup Breached 3-4 days""",no_recommendation.logistics_order_bv
+Pickup Breached 4-5 days,,"no_recommendation.logistics_order_bv.""Pickup Breached 4-5 days""",no_recommendation.logistics_order_bv
+Pickup Breached Above 5 days,,"no_recommendation.logistics_order_bv.""Pickup Breached Above 5 days""",no_recommendation.logistics_order_bv
+Intercity Order Average Pickup TAT (in days),,"no_recommendation.logistics_order_bv.""Intercity Order Average Pickup TAT (in days)""",no_recommendation.logistics_order_bv
+Hyperlocal Non F&B Order Average Pickup TAT (in mins),,"no_recommendation.logistics_order_bv.""Hyperlocal Non F&B Order Average Pickup TAT (in mins)""",no_recommendation.logistics_order_bv
+F&B Order Average Pickup TAT (in mins),,"no_recommendation.logistics_order_bv.""F&B Order Average Pickup TAT (in mins)""",no_recommendation.logistics_order_bv
+Assigned Within 0-1 mins,,"no_recommendation.logistics_order_bv.""Assigned Within 0-1 mins""",no_recommendation.logistics_order_bv
+Assigned Within 1-3 mins,,"no_recommendation.logistics_order_bv.""Assigned Within 1-3 mins""",no_recommendation.logistics_order_bv
+Assigned Within 3-5 mins,,"no_recommendation.logistics_order_bv.""Assigned Within 3-5 mins""",no_recommendation.logistics_order_bv
+Assigned Within 5-10 mins,,"no_recommendation.logistics_order_bv.""Assigned Within 5-10 mins""",no_recommendation.logistics_order_bv
+Assigned Beyond 10 mins,,"no_recommendation.logistics_order_bv.""Assigned Beyond 10 mins""",no_recommendation.logistics_order_bv
+Assigned Within 1 mins,,"no_recommendation.logistics_order_bv.""Assigned Within 1 mins""",no_recommendation.logistics_order_bv
+Assigned Within 1-3 hr,,"no_recommendation.logistics_order_bv.""Assigned Within 1-3 hr""",no_recommendation.logistics_order_bv
+Assign After RTS,,"no_recommendation.logistics_order_bv.""Assign After RTS""",no_recommendation.logistics_order_bv
+Assign Before RTS,,"no_recommendation.logistics_order_bv.""Assign Before RTS""",no_recommendation.logistics_order_bv
+Average time to Rider Assignment,,"no_recommendation.logistics_order_bv.""Average time to Rider Assignment""",no_recommendation.logistics_order_bv
+Rider Assignment (F&B),,"no_recommendation.logistics_order_bv.""Rider Assignment (F&B)""",no_recommendation.logistics_order_bv
+Hyperlocal Non F&B Average Rider Assignment (in mins),,"no_recommendation.logistics_order_bv.""Hyperlocal Non F&B Average Rider Assignment (in mins)""",no_recommendation.logistics_order_bv
+Intercity Rider Assignment (in mins),,"no_recommendation.logistics_order_bv.""Intercity Rider Assignment (in mins)""",no_recommendation.logistics_order_bv
+RTS Within 0-10 mins,,"no_recommendation.logistics_order_bv.""RTS Within 0-10 mins""",no_recommendation.logistics_order_bv
+RTS Within 10-20 mins,,"no_recommendation.logistics_order_bv.""RTS Within 10-20 mins""",no_recommendation.logistics_order_bv
+RTS Within 20-30 mins,,"no_recommendation.logistics_order_bv.""RTS Within 20-30 mins""",no_recommendation.logistics_order_bv
+RTS Within 30-60 mins,,"no_recommendation.logistics_order_bv.""RTS Within 30-60 mins""",no_recommendation.logistics_order_bv
+RTS Within 60-120 mins,,"no_recommendation.logistics_order_bv.""RTS Within 60-120 mins""",no_recommendation.logistics_order_bv
+RTS Above 120 mins,,"no_recommendation.logistics_order_bv.""RTS Above 120 mins""",no_recommendation.logistics_order_bv
+RTS Within 0-10 hrs,,"no_recommendation.logistics_order_bv.""RTS Within 0-10 hrs""",no_recommendation.logistics_order_bv
+RTS Within 10-24 hrs,,"no_recommendation.logistics_order_bv.""RTS Within 10-24 hrs""",no_recommendation.logistics_order_bv
+RTS Within 1 - 3 Days,,"no_recommendation.logistics_order_bv.""RTS Within 1 - 3 Days""",no_recommendation.logistics_order_bv
+RTS Within >3 Days,,"no_recommendation.logistics_order_bv.""RTS Within >3 Days""",no_recommendation.logistics_order_bv
+Average Ready To Ship,,"no_recommendation.logistics_order_bv.""Average Ready To Ship""",no_recommendation.logistics_order_bv
+F&B Average RTS (in mins),,"no_recommendation.logistics_order_bv.""F&B Average RTS (in mins)""",no_recommendation.logistics_order_bv
+Hyperlocal Average RTS (in mins),,"no_recommendation.logistics_order_bv.""Hyperlocal Average RTS (in mins)""",no_recommendation.logistics_order_bv
+Intercity Average RTS (in days),,"no_recommendation.logistics_order_bv.""Intercity Average RTS (in days)""",no_recommendation.logistics_order_bv
+Logistics Network Partner,,"no_recommendation.logistics_order_bv.""Logistics Network Partner""",no_recommendation.logistics_order_bv
+Seller NP,,"no_recommendation.logistics_order_bv.""Seller NP""",no_recommendation.logistics_order_bv
+Pick Up State,,"no_recommendation.logistics_order_bv.""Pick Up State""",no_recommendation.logistics_order_bv
+Delivery State,,"no_recommendation.logistics_order_bv.""Delivery State""",no_recommendation.logistics_order_bv
+Pick Up City,,"no_recommendation.logistics_order_bv.""Pick Up City""",no_recommendation.logistics_order_bv
+Delivery City,,"no_recommendation.logistics_order_bv.""Delivery City""",no_recommendation.logistics_order_bv
+Pick Up Tier,,"no_recommendation.logistics_order_bv.""Pick Up Tier""",no_recommendation.logistics_order_bv
+Delivery Tier,,"no_recommendation.logistics_order_bv.""Delivery Tier""",no_recommendation.logistics_order_bv
+Pick Up Zone,,"no_recommendation.logistics_order_bv.""Pick Up Zone""",no_recommendation.logistics_order_bv
+Delivery Zone,,"no_recommendation.logistics_order_bv.""Delivery Zone""",no_recommendation.logistics_order_bv
+"▼ logistics_order_test   (base table, 48 cols)",,,no_recommendation.logistics_order_test
+bap_id,,"no_recommendation.logistics_order_test.""bap_id""",no_recommendation.logistics_order_test
+bpp_id,,"no_recommendation.logistics_order_test.""bpp_id""",no_recommendation.logistics_order_test
+order_id,,"no_recommendation.logistics_order_test.""order_id""",no_recommendation.logistics_order_test
+transaction_id,,"no_recommendation.logistics_order_test.""transaction_id""",no_recommendation.logistics_order_test
+fulfillment_status,,"no_recommendation.logistics_order_test.""fulfillment_status""",no_recommendation.logistics_order_test
+fulfillment_type,,"no_recommendation.logistics_order_test.""fulfillment_type""",no_recommendation.logistics_order_test
+cod_order,,"no_recommendation.logistics_order_test.""cod_order""",no_recommendation.logistics_order_test
+date,,"no_recommendation.logistics_order_test.""date""",no_recommendation.logistics_order_test
+order_created_at,,"no_recommendation.logistics_order_test.""order_created_at""",no_recommendation.logistics_order_test
+cancellation_code,,"no_recommendation.logistics_order_test.""cancellation_code""",no_recommendation.logistics_order_test
+latest_order_status,,"no_recommendation.logistics_order_test.""latest_order_status""",no_recommendation.logistics_order_test
+retail_order_id,,"no_recommendation.logistics_order_test.""retail_order_id""",no_recommendation.logistics_order_test
+pick_up_pincode,,"no_recommendation.logistics_order_test.""pick_up_pincode""",no_recommendation.logistics_order_test
+delivery_pincode,,"no_recommendation.logistics_order_test.""delivery_pincode""",no_recommendation.logistics_order_test
+retail_category,,"no_recommendation.logistics_order_test.""retail_category""",no_recommendation.logistics_order_test
+shipment_type,,"no_recommendation.logistics_order_test.""shipment_type""",no_recommendation.logistics_order_test
+motorable_distance,,"no_recommendation.logistics_order_test.""motorable_distance""",no_recommendation.logistics_order_test
+provider_name,,"no_recommendation.logistics_order_test.""provider_name""",no_recommendation.logistics_order_test
+pickup_tat,,"no_recommendation.logistics_order_test.""pickup_tat""",no_recommendation.logistics_order_test
+rts_tat,,"no_recommendation.logistics_order_test.""rts_tat""",no_recommendation.logistics_order_test
+f_ready_to_ship_at_date,,"no_recommendation.logistics_order_test.""f_ready_to_ship_at_date""",no_recommendation.logistics_order_test
+f_at_pickup_from_date,,"no_recommendation.logistics_order_test.""f_at_pickup_from_date""",no_recommendation.logistics_order_test
+f_agent_assigned_at_date,,"no_recommendation.logistics_order_test.""f_agent_assigned_at_date""",no_recommendation.logistics_order_test
+delivered_date,,"no_recommendation.logistics_order_test.""delivered_date""",no_recommendation.logistics_order_test
+cancelled_date,,"no_recommendation.logistics_order_test.""cancelled_date""",no_recommendation.logistics_order_test
+picked_date,,"no_recommendation.logistics_order_test.""picked_date""",no_recommendation.logistics_order_test
+promised_time_to_deliver,,"no_recommendation.logistics_order_test.""promised_time_to_deliver""",no_recommendation.logistics_order_test
+awbnumber,,"no_recommendation.logistics_order_test.""awbnumber""",no_recommendation.logistics_order_test
+buyer_np,,"no_recommendation.logistics_order_test.""buyer_np""",no_recommendation.logistics_order_test
+retail_snp,,"no_recommendation.logistics_order_test.""retail_snp""",no_recommendation.logistics_order_test
+Linked Orders,,"no_recommendation.logistics_order_test.""Linked Orders""",no_recommendation.logistics_order_test
+dedup,,"no_recommendation.logistics_order_test.""dedup""",no_recommendation.logistics_order_test
+order_count,,"no_recommendation.logistics_order_test.""order_count""",no_recommendation.logistics_order_test
+avg_del,,"no_recommendation.logistics_order_test.""avg_del""",no_recommendation.logistics_order_test
+del_tat_duration,,"no_recommendation.logistics_order_test.""del_tat_duration""",no_recommendation.logistics_order_test
+del_adherence,,"no_recommendation.logistics_order_test.""del_adherence""",no_recommendation.logistics_order_test
+del_breach_diff,,"no_recommendation.logistics_order_test.""del_breach_diff""",no_recommendation.logistics_order_test
+rtsvscrt,,"no_recommendation.logistics_order_test.""rtsvscrt""",no_recommendation.logistics_order_test
+rtsvspck,,"no_recommendation.logistics_order_test.""rtsvspck""",no_recommendation.logistics_order_test
+delage,,"no_recommendation.logistics_order_test.""delage""",no_recommendation.logistics_order_test
+cancel_secs,,"no_recommendation.logistics_order_test.""cancel_secs""",no_recommendation.logistics_order_test
+in_process_ageing,,"no_recommendation.logistics_order_test.""in_process_ageing""",no_recommendation.logistics_order_test
+rider_waiting,,"no_recommendation.logistics_order_test.""rider_waiting""",no_recommendation.logistics_order_test
+rider_assigning,,"no_recommendation.logistics_order_test.""rider_assigning""",no_recommendation.logistics_order_test
+pick_up_breached,,"no_recommendation.logistics_order_test.""pick_up_breached""",no_recommendation.logistics_order_test
+pick_up_tat_diff,,"no_recommendation.logistics_order_test.""pick_up_tat_diff""",no_recommendation.logistics_order_test
+rts_breached,,"no_recommendation.logistics_order_test.""rts_breached""",no_recommendation.logistics_order_test
+rts_tat_diff,,"no_recommendation.logistics_order_test.""rts_tat_diff""",no_recommendation.logistics_order_test
+"▼ lsp_view_h3_indexed   (base table, 17 cols)",,,no_recommendation.lsp_view_h3_indexed
+date,,"no_recommendation.lsp_view_h3_indexed.""date""",no_recommendation.lsp_view_h3_indexed
+time_frame,,"no_recommendation.lsp_view_h3_indexed.""time_frame""",no_recommendation.lsp_view_h3_indexed
+pincode,,"no_recommendation.lsp_view_h3_indexed.""pincode""",no_recommendation.lsp_view_h3_indexed
+latitude,,"no_recommendation.lsp_view_h3_indexed.""latitude""",no_recommendation.lsp_view_h3_indexed
+longitude,,"no_recommendation.lsp_view_h3_indexed.""longitude""",no_recommendation.lsp_view_h3_indexed
+potential_orders,,"no_recommendation.lsp_view_h3_indexed.""potential_orders""",no_recommendation.lsp_view_h3_indexed
+assigned,,"no_recommendation.lsp_view_h3_indexed.""assigned""",no_recommendation.lsp_view_h3_indexed
+delivered,,"no_recommendation.lsp_view_h3_indexed.""delivered""",no_recommendation.lsp_view_h3_indexed
+linked_potential_orders,,"no_recommendation.lsp_view_h3_indexed.""linked_potential_orders""",no_recommendation.lsp_view_h3_indexed
+linked_assigned,,"no_recommendation.lsp_view_h3_indexed.""linked_assigned""",no_recommendation.lsp_view_h3_indexed
+linked_delivered,,"no_recommendation.lsp_view_h3_indexed.""linked_delivered""",no_recommendation.lsp_view_h3_indexed
+independent_potential_orders,,"no_recommendation.lsp_view_h3_indexed.""independent_potential_orders""",no_recommendation.lsp_view_h3_indexed
+independent_assigned,,"no_recommendation.lsp_view_h3_indexed.""independent_assigned""",no_recommendation.lsp_view_h3_indexed
+independent_delivered,,"no_recommendation.lsp_view_h3_indexed.""independent_delivered""",no_recommendation.lsp_view_h3_indexed
+unique_logistics_latlong,,"no_recommendation.lsp_view_h3_indexed.""unique_logistics_latlong""",no_recommendation.lsp_view_h3_indexed
+unique_logistics_city,,"no_recommendation.lsp_view_h3_indexed.""unique_logistics_city""",no_recommendation.lsp_view_h3_indexed
+h3_res_8,,"no_recommendation.lsp_view_h3_indexed.""h3_res_8""",no_recommendation.lsp_view_h3_indexed
+"▼ lsp_view_potential_latlong   (base table, 16 cols)",,,no_recommendation.lsp_view_potential_latlong
+date,,"no_recommendation.lsp_view_potential_latlong.""date""",no_recommendation.lsp_view_potential_latlong
+time_frame,,"no_recommendation.lsp_view_potential_latlong.""time_frame""",no_recommendation.lsp_view_potential_latlong
+pincode,,"no_recommendation.lsp_view_potential_latlong.""pincode""",no_recommendation.lsp_view_potential_latlong
+latitude,,"no_recommendation.lsp_view_potential_latlong.""latitude""",no_recommendation.lsp_view_potential_latlong
+longitude,,"no_recommendation.lsp_view_potential_latlong.""longitude""",no_recommendation.lsp_view_potential_latlong
+potential_orders,,"no_recommendation.lsp_view_potential_latlong.""potential_orders""",no_recommendation.lsp_view_potential_latlong
+assigned,,"no_recommendation.lsp_view_potential_latlong.""assigned""",no_recommendation.lsp_view_potential_latlong
+delivered,,"no_recommendation.lsp_view_potential_latlong.""delivered""",no_recommendation.lsp_view_potential_latlong
+linked_potential_orders,,"no_recommendation.lsp_view_potential_latlong.""linked_potential_orders""",no_recommendation.lsp_view_potential_latlong
+linked_assigned,,"no_recommendation.lsp_view_potential_latlong.""linked_assigned""",no_recommendation.lsp_view_potential_latlong
+linked_delivered,,"no_recommendation.lsp_view_potential_latlong.""linked_delivered""",no_recommendation.lsp_view_potential_latlong
+independent_potential_orders,,"no_recommendation.lsp_view_potential_latlong.""independent_potential_orders""",no_recommendation.lsp_view_potential_latlong
+independent_assigned,,"no_recommendation.lsp_view_potential_latlong.""independent_assigned""",no_recommendation.lsp_view_potential_latlong
+independent_delivered,,"no_recommendation.lsp_view_potential_latlong.""independent_delivered""",no_recommendation.lsp_view_potential_latlong
+unique_logistics_latlong,,"no_recommendation.lsp_view_potential_latlong.""unique_logistics_latlong""",no_recommendation.lsp_view_potential_latlong
+unique_logistics_city,,"no_recommendation.lsp_view_potential_latlong.""unique_logistics_city""",no_recommendation.lsp_view_potential_latlong
+"▼ lsp_view_potential_latlong_new   (base table, 19 cols)",,,no_recommendation.lsp_view_potential_latlong_new
+date,,"no_recommendation.lsp_view_potential_latlong_new.""date""",no_recommendation.lsp_view_potential_latlong_new
+time_frame,,"no_recommendation.lsp_view_potential_latlong_new.""time_frame""",no_recommendation.lsp_view_potential_latlong_new
+pincode,,"no_recommendation.lsp_view_potential_latlong_new.""pincode""",no_recommendation.lsp_view_potential_latlong_new
+latitude,,"no_recommendation.lsp_view_potential_latlong_new.""latitude""",no_recommendation.lsp_view_potential_latlong_new
+longitude,,"no_recommendation.lsp_view_potential_latlong_new.""longitude""",no_recommendation.lsp_view_potential_latlong_new
+potential_orders,,"no_recommendation.lsp_view_potential_latlong_new.""potential_orders""",no_recommendation.lsp_view_potential_latlong_new
+assigned,,"no_recommendation.lsp_view_potential_latlong_new.""assigned""",no_recommendation.lsp_view_potential_latlong_new
+delivered,,"no_recommendation.lsp_view_potential_latlong_new.""delivered""",no_recommendation.lsp_view_potential_latlong_new
+linked_potential_orders,,"no_recommendation.lsp_view_potential_latlong_new.""linked_potential_orders""",no_recommendation.lsp_view_potential_latlong_new
+linked_assigned,,"no_recommendation.lsp_view_potential_latlong_new.""linked_assigned""",no_recommendation.lsp_view_potential_latlong_new
+linked_delivered,,"no_recommendation.lsp_view_potential_latlong_new.""linked_delivered""",no_recommendation.lsp_view_potential_latlong_new
+independent_potential_orders,,"no_recommendation.lsp_view_potential_latlong_new.""independent_potential_orders""",no_recommendation.lsp_view_potential_latlong_new
+independent_assigned,,"no_recommendation.lsp_view_potential_latlong_new.""independent_assigned""",no_recommendation.lsp_view_potential_latlong_new
+independent_delivered,,"no_recommendation.lsp_view_potential_latlong_new.""independent_delivered""",no_recommendation.lsp_view_potential_latlong_new
+unique_logistics_latlong,,"no_recommendation.lsp_view_potential_latlong_new.""unique_logistics_latlong""",no_recommendation.lsp_view_potential_latlong_new
+unique_logistics_city,,"no_recommendation.lsp_view_potential_latlong_new.""unique_logistics_city""",no_recommendation.lsp_view_potential_latlong_new
+h3_res_7,,"no_recommendation.lsp_view_potential_latlong_new.""h3_res_7""",no_recommendation.lsp_view_potential_latlong_new
+h3_res_8,,"no_recommendation.lsp_view_potential_latlong_new.""h3_res_8""",no_recommendation.lsp_view_potential_latlong_new
+h3_res_9,,"no_recommendation.lsp_view_potential_latlong_new.""h3_res_9""",no_recommendation.lsp_view_potential_latlong_new
+"▼ lsp_view_potential_order   (base table, 14 cols)",,,no_recommendation.lsp_view_potential_order
+date,,"no_recommendation.lsp_view_potential_order.""date""",no_recommendation.lsp_view_potential_order
+time_frame,,"no_recommendation.lsp_view_potential_order.""time_frame""",no_recommendation.lsp_view_potential_order
+pincode,,"no_recommendation.lsp_view_potential_order.""pincode""",no_recommendation.lsp_view_potential_order
+potential_orders,,"no_recommendation.lsp_view_potential_order.""potential_orders""",no_recommendation.lsp_view_potential_order
+assigned,,"no_recommendation.lsp_view_potential_order.""assigned""",no_recommendation.lsp_view_potential_order
+delivered,,"no_recommendation.lsp_view_potential_order.""delivered""",no_recommendation.lsp_view_potential_order
+linked_potential_orders,,"no_recommendation.lsp_view_potential_order.""linked_potential_orders""",no_recommendation.lsp_view_potential_order
+linked_assigned,,"no_recommendation.lsp_view_potential_order.""linked_assigned""",no_recommendation.lsp_view_potential_order
+linked_delivered,,"no_recommendation.lsp_view_potential_order.""linked_delivered""",no_recommendation.lsp_view_potential_order
+independent_potential_orders,,"no_recommendation.lsp_view_potential_order.""independent_potential_orders""",no_recommendation.lsp_view_potential_order
+independent_assigned,,"no_recommendation.lsp_view_potential_order.""independent_assigned""",no_recommendation.lsp_view_potential_order
+independent_delivered,,"no_recommendation.lsp_view_potential_order.""independent_delivered""",no_recommendation.lsp_view_potential_order
+unique_logistics_pincode,,"no_recommendation.lsp_view_potential_order.""unique_logistics_pincode""",no_recommendation.lsp_view_potential_order
+unique_logistics,,"no_recommendation.lsp_view_potential_order.""unique_logistics""",no_recommendation.lsp_view_potential_order
+"▼ lsp_view_testing_tbl   (base table, 4 cols)",,,no_recommendation.lsp_view_testing_tbl
+date,,"no_recommendation.lsp_view_testing_tbl.""date""",no_recommendation.lsp_view_testing_tbl
+h3_res8,,"no_recommendation.lsp_view_testing_tbl.""h3_res8""",no_recommendation.lsp_view_testing_tbl
+h3_res10,,"no_recommendation.lsp_view_testing_tbl.""h3_res10""",no_recommendation.lsp_view_testing_tbl
+h3_res12,,"no_recommendation.lsp_view_testing_tbl.""h3_res12""",no_recommendation.lsp_view_testing_tbl
+"▼ plan_your_supply_2   (base table, 16 cols)",,,no_recommendation.plan_your_supply_2
+date,,"no_recommendation.plan_your_supply_2.""date""",no_recommendation.plan_your_supply_2
+hour,,"no_recommendation.plan_your_supply_2.""hour""",no_recommendation.plan_your_supply_2
+lbnp,,"no_recommendation.plan_your_supply_2.""lbnp""",no_recommendation.plan_your_supply_2
+provider_name,,"no_recommendation.plan_your_supply_2.""provider_name""",no_recommendation.plan_your_supply_2
+linked,,"no_recommendation.plan_your_supply_2.""linked""",no_recommendation.plan_your_supply_2
+pick_up_lat,,"no_recommendation.plan_your_supply_2.""pick_up_lat""",no_recommendation.plan_your_supply_2
+pick_up_long,,"no_recommendation.plan_your_supply_2.""pick_up_long""",no_recommendation.plan_your_supply_2
+pick_up_pincode,,"no_recommendation.plan_your_supply_2.""pick_up_pincode""",no_recommendation.plan_your_supply_2
+district_name,,"no_recommendation.plan_your_supply_2.""district_name""",no_recommendation.plan_your_supply_2
+fulfillment_type,,"no_recommendation.plan_your_supply_2.""fulfillment_type""",no_recommendation.plan_your_supply_2
+h3_index,,"no_recommendation.plan_your_supply_2.""h3_index""",no_recommendation.plan_your_supply_2
+total_demand,,"no_recommendation.plan_your_supply_2.""total_demand""",no_recommendation.plan_your_supply_2
+delivered_orders,,"no_recommendation.plan_your_supply_2.""delivered_orders""",no_recommendation.plan_your_supply_2
+cancelled_orders,,"no_recommendation.plan_your_supply_2.""cancelled_orders""",no_recommendation.plan_your_supply_2
+assigned_orders,,"no_recommendation.plan_your_supply_2.""assigned_orders""",no_recommendation.plan_your_supply_2
+preassign_cancel,,"no_recommendation.plan_your_supply_2.""preassign_cancel""",no_recommendation.plan_your_supply_2
+"▼ refresh_tokens   (base table, 8 cols)",,,no_recommendation.refresh_tokens
+id,,"no_recommendation.refresh_tokens.""id""",no_recommendation.refresh_tokens
+user_id,,"no_recommendation.refresh_tokens.""user_id""",no_recommendation.refresh_tokens
+token_hash,,"no_recommendation.refresh_tokens.""token_hash""",no_recommendation.refresh_tokens
+expires_at,,"no_recommendation.refresh_tokens.""expires_at""",no_recommendation.refresh_tokens
+revoked_at,,"no_recommendation.refresh_tokens.""revoked_at""",no_recommendation.refresh_tokens
+ip_address,,"no_recommendation.refresh_tokens.""ip_address""",no_recommendation.refresh_tokens
+user_agent,,"no_recommendation.refresh_tokens.""user_agent""",no_recommendation.refresh_tokens
+created_at,,"no_recommendation.refresh_tokens.""created_at""",no_recommendation.refresh_tokens
+"▼ seller_h3   (base table, 7 cols)",,,no_recommendation.seller_h3
+date,,"no_recommendation.seller_h3.""date""",no_recommendation.seller_h3
+pincode,,"no_recommendation.seller_h3.""pincode""",no_recommendation.seller_h3
+provider_long,,"no_recommendation.seller_h3.""provider_long""",no_recommendation.seller_h3
+provider_lat,,"no_recommendation.seller_h3.""provider_lat""",no_recommendation.seller_h3
+seller_count,,"no_recommendation.seller_h3.""seller_count""",no_recommendation.seller_h3
+qsr_seller,,"no_recommendation.seller_h3.""qsr_seller""",no_recommendation.seller_h3
+h3_res_8,,"no_recommendation.seller_h3.""h3_res_8""",no_recommendation.seller_h3
+"▼ sessions   (base table, 9 cols)",,,no_recommendation.sessions
+id,,"no_recommendation.sessions.""id""",no_recommendation.sessions
+user_id,,"no_recommendation.sessions.""user_id""",no_recommendation.sessions
+refresh_token_id,,"no_recommendation.sessions.""refresh_token_id""",no_recommendation.sessions
+session_token,,"no_recommendation.sessions.""session_token""",no_recommendation.sessions
+ip_address,,"no_recommendation.sessions.""ip_address""",no_recommendation.sessions
+user_agent,,"no_recommendation.sessions.""user_agent""",no_recommendation.sessions
+last_activity_at,,"no_recommendation.sessions.""last_activity_at""",no_recommendation.sessions
+created_at,,"no_recommendation.sessions.""created_at""",no_recommendation.sessions
+expires_at,,"no_recommendation.sessions.""expires_at""",no_recommendation.sessions
+"▼ user_devices   (base table, 8 cols)",,,no_recommendation.user_devices
+id,,"no_recommendation.user_devices.""id""",no_recommendation.user_devices
+user_id,,"no_recommendation.user_devices.""user_id""",no_recommendation.user_devices
+device_fingerprint,,"no_recommendation.user_devices.""device_fingerprint""",no_recommendation.user_devices
+device_name,,"no_recommendation.user_devices.""device_name""",no_recommendation.user_devices
+user_agent,,"no_recommendation.user_devices.""user_agent""",no_recommendation.user_devices
+first_seen_at,,"no_recommendation.user_devices.""first_seen_at""",no_recommendation.user_devices
+last_seen_at,,"no_recommendation.user_devices.""last_seen_at""",no_recommendation.user_devices
+last_ip_address,,"no_recommendation.user_devices.""last_ip_address""",no_recommendation.user_devices
+"▼ users   (base table, 7 cols)",,,no_recommendation.users
+id,,"no_recommendation.users.""id""",no_recommendation.users
+email,,"no_recommendation.users.""email""",no_recommendation.users
+name,,"no_recommendation.users.""name""",no_recommendation.users
+profile_picture,,"no_recommendation.users.""profile_picture""",no_recommendation.users
+created_at,,"no_recommendation.users.""created_at""",no_recommendation.users
+updated_at,,"no_recommendation.users.""updated_at""",no_recommendation.users
+last_login,,"no_recommendation.users.""last_login""",no_recommendation.users

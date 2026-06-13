@@ -1,0 +1,550 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s),DDL & Indexes
+"▼ dim_categories   (base table, 2 cols)",,,external.dim_categories,"CREATE INDEX dim_categories_sub_category_idx ON external.dim_categories USING btree (sub_category)
+
+CREATE INDEX dim_categories_category_idx ON external.dim_categories USING btree (category)"
+category,Timestamp or date indicating when category occurred.,"external.dim_categories.""category""",external.dim_categories,
+sub_category,Timestamp or date indicating when sub category occurred.,"external.dim_categories.""sub_category""",external.dim_categories,
+"▼ dim_dates   (base table, 1 cols)",,,external.dim_dates,CREATE INDEX dim_dates_order_date_idx ON external.dim_dates USING btree (order_date)
+order_date,Timestamp or date indicating when order date occurred.,"external.dim_dates.""order_date""",external.dim_dates,
+"▼ dim_districts   (base table, 2 cols)",,,external.dim_districts,"CREATE INDEX dim_districts_delivery_state_idx ON external.dim_districts USING btree (delivery_state)
+
+CREATE INDEX dim_districts_delivery_district_idx ON external.dim_districts USING btree (delivery_district)"
+delivery_state,Turn-Around-Time (TAT) measurement.,"external.dim_districts.""delivery_state""",external.dim_districts,
+delivery_district,Data representing the delivery district.,"external.dim_districts.""delivery_district""",external.dim_districts,
+"▼ dim_pincode   (base table, 4 cols)",,,external.dim_pincode,
+pincode,Indian postal code (pincode).,"external.dim_pincode.""pincode""",external.dim_pincode,
+district_name,Name of the district.,"external.dim_pincode.""district_name""",external.dim_pincode,
+state_name,Turn-Around-Time (TAT) measurement.,"external.dim_pincode.""state_name""",external.dim_pincode,
+state_code,Turn-Around-Time (TAT) measurement.,"external.dim_pincode.""state_code""",external.dim_pincode,
+"▼ dim_providers   (base table, 7 cols)",,,external.dim_providers,
+provider_key,Unique identifier for provider key.,"external.dim_providers.""provider_key""",external.dim_providers,
+order_date,Timestamp or date indicating when order date occurred.,"external.dim_providers.""order_date""",external.dim_providers,
+category,Timestamp or date indicating when category occurred.,"external.dim_providers.""category""",external.dim_providers,
+sub_category,Timestamp or date indicating when sub category occurred.,"external.dim_providers.""sub_category""",external.dim_providers,
+seller_district,Data representing the seller district.,"external.dim_providers.""seller_district""",external.dim_providers,
+seller_state,Turn-Around-Time (TAT) measurement.,"external.dim_providers.""seller_state""",external.dim_providers,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"external.dim_providers.""seller_state_code""",external.dim_providers,
+"▼ district_wise_agg   (base table, 18 cols)",,,external.district_wise_agg,"CREATE INDEX district_wise_agg_domain_idx ON external.district_wise_agg USING btree (domain)
+
+CREATE INDEX district_wise_agg_seller_district_idx ON external.district_wise_agg USING btree (seller_district)
+
+CREATE INDEX district_wise_agg_sub_domain_idx ON external.district_wise_agg USING btree (sub_domain)
+
+CREATE INDEX district_wise_agg_delivery_district_idx ON external.district_wise_agg USING btree (delivery_district)
+
+CREATE INDEX district_wise_agg_delivery_state_idx ON external.district_wise_agg USING btree (delivery_state)
+
+CREATE INDEX district_wise_agg_seller_state_idx ON external.district_wise_agg USING btree (seller_state)"
+domain,"The ONDC network domain (e.g., retail, logistics).","external.district_wise_agg.""domain""",external.district_wise_agg,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","external.district_wise_agg.""sub_domain""",external.district_wise_agg,
+order_month,Data representing the order month.,"external.district_wise_agg.""order_month""",external.district_wise_agg,
+order_year,Data representing the order year.,"external.district_wise_agg.""order_year""",external.district_wise_agg,
+order_week,Data representing the order week.,"external.district_wise_agg.""order_week""",external.district_wise_agg,
+delivery_district,Data representing the delivery district.,"external.district_wise_agg.""delivery_district""",external.district_wise_agg,
+delivery_state,Turn-Around-Time (TAT) measurement.,"external.district_wise_agg.""delivery_state""",external.district_wise_agg,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"external.district_wise_agg.""delivery_state_code""",external.district_wise_agg,
+seller_district,Data representing the seller district.,"external.district_wise_agg.""seller_district""",external.district_wise_agg,
+seller_state,Turn-Around-Time (TAT) measurement.,"external.district_wise_agg.""seller_state""",external.district_wise_agg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"external.district_wise_agg.""seller_state_code""",external.district_wise_agg,
+total_orders_delivered,Data representing the total orders delivered.,"external.district_wise_agg.""total_orders_delivered""",external.district_wise_agg,
+pincode_count,Indian postal code (pincode).,"external.district_wise_agg.""pincode_count""",external.district_wise_agg,
+total_items,Data representing the total items.,"external.district_wise_agg.""total_items""",external.district_wise_agg,
+intrastate_orders,Turn-Around-Time (TAT) measurement.,"external.district_wise_agg.""intrastate_orders""",external.district_wise_agg,
+intradistrict_orders,Data representing the intradistrict orders.,"external.district_wise_agg.""intradistrict_orders""",external.district_wise_agg,
+interstate_orders,Turn-Around-Time (TAT) measurement.,"external.district_wise_agg.""interstate_orders""",external.district_wise_agg,
+interdistrict_orders,Data representing the interdistrict orders.,"external.district_wise_agg.""interdistrict_orders""",external.district_wise_agg,
+"▼ fact_order_detail   (base table, 18 cols)",,,external.fact_order_detail,"CREATE INDEX fact_order_detail_network_order_id_idx ON external.fact_order_detail USING btree (network_order_id)
+
+CREATE INDEX fact_order_detail_provider_key_idx ON external.fact_order_detail USING btree (provider_key)
+
+CREATE INDEX fact_order_detail_domain_idx ON external.fact_order_detail USING btree (domain)
+
+CREATE INDEX fact_order_detail_sub_category_idx ON external.fact_order_detail USING btree (sub_category)
+
+CREATE INDEX fact_order_detail_seller_np_idx ON external.fact_order_detail USING btree (seller_np)"
+network_order_id,Data representing the network order id.,"external.fact_order_detail.""network_order_id""",external.fact_order_detail,
+sub_category,Timestamp or date indicating when sub category occurred.,"external.fact_order_detail.""sub_category""",external.fact_order_detail,
+seller_np,Data representing the seller np.,"external.fact_order_detail.""seller_np""",external.fact_order_detail,
+total_items,Data representing the total items.,"external.fact_order_detail.""total_items""",external.fact_order_detail,
+domain,"The ONDC network domain (e.g., retail, logistics).","external.fact_order_detail.""domain""",external.fact_order_detail,
+provider_key,Unique identifier for provider key.,"external.fact_order_detail.""provider_key""",external.fact_order_detail,
+order_status,Turn-Around-Time (TAT) measurement.,"external.fact_order_detail.""order_status""",external.fact_order_detail,
+seller_pincode,Indian postal code (pincode).,"external.fact_order_detail.""seller_pincode""",external.fact_order_detail,
+delivery_pincode,Indian postal code (pincode).,"external.fact_order_detail.""delivery_pincode""",external.fact_order_detail,
+order_date,Timestamp or date indicating when order date occurred.,"external.fact_order_detail.""order_date""",external.fact_order_detail,
+consolidated_categories,Timestamp or date indicating when consolidated categories occurred.,"external.fact_order_detail.""consolidated_categories""",external.fact_order_detail,
+multi_category_flag,Timestamp or date indicating when multi category flag occurred.,"external.fact_order_detail.""multi_category_flag""",external.fact_order_detail,
+delivery_district,Data representing the delivery district.,"external.fact_order_detail.""delivery_district""",external.fact_order_detail,
+delivery_state,Turn-Around-Time (TAT) measurement.,"external.fact_order_detail.""delivery_state""",external.fact_order_detail,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"external.fact_order_detail.""delivery_state_code""",external.fact_order_detail,
+seller_district,Data representing the seller district.,"external.fact_order_detail.""seller_district""",external.fact_order_detail,
+seller_state,Turn-Around-Time (TAT) measurement.,"external.fact_order_detail.""seller_state""",external.fact_order_detail,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"external.fact_order_detail.""seller_state_code""",external.fact_order_detail,
+"▼ fact_order_detail_b2b   (base table, 11 cols)",,,external.fact_order_detail_b2b,"CREATE INDEX fact_order_detail_b2b_domain_idx ON external.fact_order_detail_b2b USING btree (domain)
+
+CREATE INDEX fact_order_detail_b2b_provider_key_idx ON external.fact_order_detail_b2b USING btree (provider_key)
+
+CREATE INDEX fact_order_detail_b2b_network_order_id_idx ON external.fact_order_detail_b2b USING btree (network_order_id)
+
+CREATE INDEX fact_order_detail_b2b_seller_np_idx ON external.fact_order_detail_b2b USING btree (seller_np)"
+network_order_id,Data representing the network order id.,"external.fact_order_detail_b2b.""network_order_id""",external.fact_order_detail_b2b,
+seller_np,Data representing the seller np.,"external.fact_order_detail_b2b.""seller_np""",external.fact_order_detail_b2b,
+total_items,Data representing the total items.,"external.fact_order_detail_b2b.""total_items""",external.fact_order_detail_b2b,
+domain,"The ONDC network domain (e.g., retail, logistics).","external.fact_order_detail_b2b.""domain""",external.fact_order_detail_b2b,
+provider_key,Unique identifier for provider key.,"external.fact_order_detail_b2b.""provider_key""",external.fact_order_detail_b2b,
+order_status,Turn-Around-Time (TAT) measurement.,"external.fact_order_detail_b2b.""order_status""",external.fact_order_detail_b2b,
+delivery_pincode,Indian postal code (pincode).,"external.fact_order_detail_b2b.""delivery_pincode""",external.fact_order_detail_b2b,
+order_date,Timestamp or date indicating when order date occurred.,"external.fact_order_detail_b2b.""order_date""",external.fact_order_detail_b2b,
+delivery_district,Data representing the delivery district.,"external.fact_order_detail_b2b.""delivery_district""",external.fact_order_detail_b2b,
+delivery_state,Turn-Around-Time (TAT) measurement.,"external.fact_order_detail_b2b.""delivery_state""",external.fact_order_detail_b2b,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"external.fact_order_detail_b2b.""delivery_state_code""",external.fact_order_detail_b2b,
+"▼ landing_page_echart   (base table, 3 cols)",,,external.landing_page_echart,
+month,Data representing the month.,"external.landing_page_echart.""month""",external.landing_page_echart,
+domain,"The ONDC network domain (e.g., retail, logistics).","external.landing_page_echart.""domain""",external.landing_page_echart,
+order_count,Data representing the order count.,"external.landing_page_echart.""order_count""",external.landing_page_echart,
+"▼ landing_page_kpis   (base table, 3 cols)",,,external.landing_page_kpis,
+etl_date,Timestamp or date indicating when etl date occurred.,"external.landing_page_kpis.""etl_date""",external.landing_page_kpis,
+kpi_name,Name of the kpi.,"external.landing_page_kpis.""kpi_name""",external.landing_page_kpis,
+kpi_value,Data representing the kpi value.,"external.landing_page_kpis.""kpi_value""",external.landing_page_kpis,
+"▼ logistic_search_pincode   (base table, 10 cols)",,,external.logistic_search_pincode,"CREATE INDEX logistic_search_pincode_district_name_idx ON external.logistic_search_pincode USING btree (district_name)
+
+CREATE INDEX logistic_search_pincode_state_name_idx ON external.logistic_search_pincode USING btree (state_name)
+
+CREATE INDEX logistic_search_pincode_search_date_idx ON external.logistic_search_pincode USING btree (search_date)
+
+CREATE INDEX logistic_search_pincode_shipment_type_idx ON external.logistic_search_pincode USING btree (shipment_type)
+
+CREATE INDEX logistic_search_pincode_pick_up_pincode_idx ON external.logistic_search_pincode USING btree (pick_up_pincode)
+
+CREATE INDEX logistic_search_pincode_shipment_category_idx ON external.logistic_search_pincode USING btree (shipment_category)
+
+CREATE INDEX logistic_search_pincode_time_interval_idx ON external.logistic_search_pincode USING btree (time_interval)"
+search_date,Timestamp or date indicating when search date occurred.,"external.logistic_search_pincode.""search_date""",external.logistic_search_pincode,
+time_interval,Timestamp or date indicating when time interval occurred.,"external.logistic_search_pincode.""time_interval""",external.logistic_search_pincode,
+shipment_category,Timestamp or date indicating when shipment category occurred.,"external.logistic_search_pincode.""shipment_category""",external.logistic_search_pincode,
+shipment_type,Data representing the shipment type.,"external.logistic_search_pincode.""shipment_type""",external.logistic_search_pincode,
+pick_up_pincode,Indian postal code (pincode).,"external.logistic_search_pincode.""pick_up_pincode""",external.logistic_search_pincode,
+state_name,Turn-Around-Time (TAT) measurement.,"external.logistic_search_pincode.""state_name""",external.logistic_search_pincode,
+district_name,Name of the district.,"external.logistic_search_pincode.""district_name""",external.logistic_search_pincode,
+searched_count,Data representing the searched count.,"external.logistic_search_pincode.""searched_count""",external.logistic_search_pincode,
+confirmed_count,Data representing the confirmed count.,"external.logistic_search_pincode.""confirmed_count""",external.logistic_search_pincode,
+assigned_count,Data representing the assigned count.,"external.logistic_search_pincode.""assigned_count""",external.logistic_search_pincode,
+"▼ logistics_active_sellers   (base table, 6 cols)",,,external.logistics_active_sellers,"CREATE INDEX logistics_active_sellers_provider_key_idx ON external.logistics_active_sellers USING btree (provider_key)
+
+CREATE INDEX logistics_active_sellers_seller_district_idx ON external.logistics_active_sellers USING btree (seller_district)
+
+CREATE INDEX logistics_active_sellers_seller_state_idx ON external.logistics_active_sellers USING btree (seller_state)"
+provider_key,Unique identifier for provider key.,"external.logistics_active_sellers.""provider_key""",external.logistics_active_sellers,
+seller_district,Data representing the seller district.,"external.logistics_active_sellers.""seller_district""",external.logistics_active_sellers,
+seller_state,Turn-Around-Time (TAT) measurement.,"external.logistics_active_sellers.""seller_state""",external.logistics_active_sellers,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"external.logistics_active_sellers.""seller_state_code""",external.logistics_active_sellers,
+order_month,Data representing the order month.,"external.logistics_active_sellers.""order_month""",external.logistics_active_sellers,
+order_year,Data representing the order year.,"external.logistics_active_sellers.""order_year""",external.logistics_active_sellers,
+"▼ logistics_fact_order_detail   (base table, 25 cols)",,,external.logistics_fact_order_detail,"CREATE INDEX logistics_fact_order_detail_delivery_district_idx ON external.logistics_fact_order_detail USING btree (delivery_district)
+
+CREATE INDEX logistics_fact_order_detail_item_id_idx ON external.logistics_fact_order_detail USING btree (item_id)
+
+CREATE INDEX logistics_fact_order_detail_seller_state_idx ON external.logistics_fact_order_detail USING btree (seller_state)
+
+CREATE INDEX logistics_fact_order_detail_bap_id_idx ON external.logistics_fact_order_detail USING btree (bap_id)
+
+CREATE INDEX logistics_fact_order_detail_bpp_id_idx ON external.logistics_fact_order_detail USING btree (bpp_id)
+
+CREATE INDEX logistics_fact_order_detail_delivery_pincode_idx ON external.logistics_fact_order_detail USING btree (delivery_pincode)
+
+CREATE INDEX logistics_fact_order_detail_provider_id_idx ON external.logistics_fact_order_detail USING btree (provider_id)
+
+CREATE INDEX logistics_fact_order_detail_seller_district_idx ON external.logistics_fact_order_detail USING btree (seller_district)
+
+CREATE INDEX logistics_fact_order_detail_delivery_state_idx ON external.logistics_fact_order_detail USING btree (delivery_state)
+
+CREATE INDEX logistics_fact_order_detail_pick_up_pincode_idx ON external.logistics_fact_order_detail USING btree (pick_up_pincode)"
+bap_id,Unique identifier for the Buyer App (BAP).,"external.logistics_fact_order_detail.""bap_id""",external.logistics_fact_order_detail,
+bpp_id,Unique identifier for the Seller App (BPP).,"external.logistics_fact_order_detail.""bpp_id""",external.logistics_fact_order_detail,
+provider_id,Unique identifier for the provider.,"external.logistics_fact_order_detail.""provider_id""",external.logistics_fact_order_detail,
+order_id,Unique identifier for order.,"external.logistics_fact_order_detail.""order_id""",external.logistics_fact_order_detail,
+transaction_id,Unique ONDC transaction identifier.,"external.logistics_fact_order_detail.""transaction_id""",external.logistics_fact_order_detail,
+item_id,Unique identifier for item.,"external.logistics_fact_order_detail.""item_id""",external.logistics_fact_order_detail,
+fulfillment_status,Turn-Around-Time (TAT) measurement.,"external.logistics_fact_order_detail.""fulfillment_status""",external.logistics_fact_order_detail,
+order_date,Timestamp or date indicating when order date occurred.,"external.logistics_fact_order_detail.""order_date""",external.logistics_fact_order_detail,
+domain,"The ONDC network domain (e.g., retail, logistics).","external.logistics_fact_order_detail.""domain""",external.logistics_fact_order_detail,
+f_agent_assigned_at_date,Timestamp or date indicating when f agent assigned at date occurred.,"external.logistics_fact_order_detail.""f_agent_assigned_at_date""",external.logistics_fact_order_detail,
+Log_Ondc_Status,Turn-Around-Time (TAT) measurement.,"external.logistics_fact_order_detail.""Log_Ondc_Status""",external.logistics_fact_order_detail,
+network_retail_order_id,Data representing the network retail order id.,"external.logistics_fact_order_detail.""network_retail_order_id""",external.logistics_fact_order_detail,
+shipment_type,Data representing the shipment type.,"external.logistics_fact_order_detail.""shipment_type""",external.logistics_fact_order_detail,
+pick_up_pincode,Indian postal code (pincode).,"external.logistics_fact_order_detail.""pick_up_pincode""",external.logistics_fact_order_detail,
+delivery_pincode,Indian postal code (pincode).,"external.logistics_fact_order_detail.""delivery_pincode""",external.logistics_fact_order_detail,
+network_retail_order_category,Timestamp or date indicating when network retail order category occurred.,"external.logistics_fact_order_detail.""network_retail_order_category""",external.logistics_fact_order_detail,
+on_confirm_sync_response,Data representing the on confirm sync response.,"external.logistics_fact_order_detail.""on_confirm_sync_response""",external.logistics_fact_order_detail,
+on_confirm_error_code,Error code associated with a failure or issue.,"external.logistics_fact_order_detail.""on_confirm_error_code""",external.logistics_fact_order_detail,
+on_confirm_error_message,Data representing the on confirm error message.,"external.logistics_fact_order_detail.""on_confirm_error_message""",external.logistics_fact_order_detail,
+delivery_district,Data representing the delivery district.,"external.logistics_fact_order_detail.""delivery_district""",external.logistics_fact_order_detail,
+delivery_state,Turn-Around-Time (TAT) measurement.,"external.logistics_fact_order_detail.""delivery_state""",external.logistics_fact_order_detail,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"external.logistics_fact_order_detail.""delivery_state_code""",external.logistics_fact_order_detail,
+seller_district,Data representing the seller district.,"external.logistics_fact_order_detail.""seller_district""",external.logistics_fact_order_detail,
+seller_state,Turn-Around-Time (TAT) measurement.,"external.logistics_fact_order_detail.""seller_state""",external.logistics_fact_order_detail,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"external.logistics_fact_order_detail.""seller_state_code""",external.logistics_fact_order_detail,
+"▼ logistics_providers   (base table, 5 cols)",,,external.logistics_providers,"CREATE INDEX logistics_providers_seller_state_idx ON external.logistics_providers USING btree (seller_state)
+
+CREATE INDEX logistics_providers_seller_district_idx ON external.logistics_providers USING btree (seller_district)
+
+CREATE INDEX logistics_providers_provider_key_idx ON external.logistics_providers USING btree (provider_key)
+
+CREATE INDEX logistics_providers_order_date_idx ON external.logistics_providers USING btree (order_date)"
+provider_key,Unique identifier for provider key.,"external.logistics_providers.""provider_key""",external.logistics_providers,
+order_date,Timestamp or date indicating when order date occurred.,"external.logistics_providers.""order_date""",external.logistics_providers,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"external.logistics_providers.""seller_state_code""",external.logistics_providers,
+seller_state,Turn-Around-Time (TAT) measurement.,"external.logistics_providers.""seller_state""",external.logistics_providers,
+seller_district,Data representing the seller district.,"external.logistics_providers.""seller_district""",external.logistics_providers,
+"▼ map_pincodes   (base table, 2 cols)",,,external.map_pincodes,
+district,Data representing the district.,"external.map_pincodes.""district""",external.map_pincodes,
+pincode,Indian postal code (pincode).,"external.map_pincodes.""pincode""",external.map_pincodes,
+"▼ mob_ride_hailing_agg   (base table, 10 cols)",,,external.mob_ride_hailing_agg,"CREATE INDEX mob_ride_hailing_agg_year_value_idx ON external.mob_ride_hailing_agg USING btree (year_value)
+
+CREATE INDEX mob_ride_hailing_agg_time_interval_idx ON external.mob_ride_hailing_agg USING btree (time_interval)
+
+CREATE INDEX mob_ride_hailing_agg_day_type_idx ON external.mob_ride_hailing_agg USING btree (day_type)
+
+CREATE INDEX mob_ride_hailing_agg_state_name_idx ON external.mob_ride_hailing_agg USING btree (state_name)
+
+CREATE INDEX mob_ride_hailing_agg_month_value_idx ON external.mob_ride_hailing_agg USING btree (month_value)
+
+CREATE INDEX mob_ride_hailing_agg_vehicle_category_idx ON external.mob_ride_hailing_agg USING btree (vehicle_category)
+
+CREATE INDEX mob_ride_hailing_agg_district_name_idx ON external.mob_ride_hailing_agg USING btree (district_name)"
+year_value,Data representing the year value.,"external.mob_ride_hailing_agg.""year_value""",external.mob_ride_hailing_agg,
+month_value,Data representing the month value.,"external.mob_ride_hailing_agg.""month_value""",external.mob_ride_hailing_agg,
+day_type,Data representing the day type.,"external.mob_ride_hailing_agg.""day_type""",external.mob_ride_hailing_agg,
+state_name,Turn-Around-Time (TAT) measurement.,"external.mob_ride_hailing_agg.""state_name""",external.mob_ride_hailing_agg,
+district_name,Name of the district.,"external.mob_ride_hailing_agg.""district_name""",external.mob_ride_hailing_agg,
+time_interval,Timestamp or date indicating when time interval occurred.,"external.mob_ride_hailing_agg.""time_interval""",external.mob_ride_hailing_agg,
+vehicle_category,Timestamp or date indicating when vehicle category occurred.,"external.mob_ride_hailing_agg.""vehicle_category""",external.mob_ride_hailing_agg,
+confirmed_count,Data representing the confirmed count.,"external.mob_ride_hailing_agg.""confirmed_count""",external.mob_ride_hailing_agg,
+assigned_count,Data representing the assigned count.,"external.mob_ride_hailing_agg.""assigned_count""",external.mob_ride_hailing_agg,
+completed_count,Data representing the completed count.,"external.mob_ride_hailing_agg.""completed_count""",external.mob_ride_hailing_agg,
+"▼ mobility_metro   (base table, 17 cols)",,,external.mobility_metro,"CREATE INDEX mobility_metro_transaction_std_code_idx ON external.mobility_metro USING btree (transaction_std_code)
+
+CREATE INDEX mobility_metro_item_category_idx ON external.mobility_metro USING btree (item_category)
+
+CREATE INDEX mobility_metro_order_status_idx ON external.mobility_metro USING btree (order_status)
+
+CREATE INDEX mobility_metro_item_name_idx ON external.mobility_metro USING btree (item_name)
+
+CREATE INDEX mobility_metro_end_location_code_idx ON external.mobility_metro USING btree (end_location_code)
+
+CREATE INDEX mobility_metro_fulfillment_status_idx ON external.mobility_metro USING btree (fulfillment_status)
+
+CREATE INDEX mobility_metro_start_location_code_idx ON external.mobility_metro USING btree (start_location_code)
+
+CREATE INDEX mobility_metro_item_id_idx ON external.mobility_metro USING btree (item_id)
+
+CREATE INDEX mobility_metro_start_location_idx ON external.mobility_metro USING btree (start_location)
+
+CREATE INDEX mobility_metro_fulfillment_id_idx ON external.mobility_metro USING btree (fulfillment_id)
+
+CREATE INDEX mobility_metro_provider_id_idx ON external.mobility_metro USING btree (provider_id)
+
+CREATE INDEX mobility_metro_transaction_city_idx ON external.mobility_metro USING btree (transaction_city)
+
+CREATE INDEX mobility_metro_network_order_id_idx ON external.mobility_metro USING btree (network_order_id)
+
+CREATE INDEX mobility_metro_end_location_idx ON external.mobility_metro USING btree (end_location)
+
+CREATE INDEX mobility_metro_bpp_id_idx ON external.mobility_metro USING btree (bpp_id)
+
+CREATE INDEX mobility_metro_provider_name_idx ON external.mobility_metro USING btree (provider_name)"
+bpp_id,Unique identifier for the Seller App (BPP).,"external.mobility_metro.""bpp_id""",external.mobility_metro,
+provider_id,Unique identifier for the provider.,"external.mobility_metro.""provider_id""",external.mobility_metro,
+provider_name,Unique identifier for provider name.,"external.mobility_metro.""provider_name""",external.mobility_metro,
+o_created_date,Timestamp or date indicating when o created date occurred.,"external.mobility_metro.""o_created_date""",external.mobility_metro,
+network_order_id,Data representing the network order id.,"external.mobility_metro.""network_order_id""",external.mobility_metro,
+item_id,Unique identifier for item.,"external.mobility_metro.""item_id""",external.mobility_metro,
+item_category,Timestamp or date indicating when item category occurred.,"external.mobility_metro.""item_category""",external.mobility_metro,
+item_name,Name of the item.,"external.mobility_metro.""item_name""",external.mobility_metro,
+order_status,Turn-Around-Time (TAT) measurement.,"external.mobility_metro.""order_status""",external.mobility_metro,
+fulfillment_id,Unique identifier for fulfillment.,"external.mobility_metro.""fulfillment_id""",external.mobility_metro,
+fulfillment_status,Turn-Around-Time (TAT) measurement.,"external.mobility_metro.""fulfillment_status""",external.mobility_metro,
+start_location,Timestamp or date indicating when start location occurred.,"external.mobility_metro.""start_location""",external.mobility_metro,
+start_location_code,Timestamp or date indicating when start location code occurred.,"external.mobility_metro.""start_location_code""",external.mobility_metro,
+end_location,Timestamp or date indicating when end location occurred.,"external.mobility_metro.""end_location""",external.mobility_metro,
+end_location_code,Timestamp or date indicating when end location code occurred.,"external.mobility_metro.""end_location_code""",external.mobility_metro,
+transaction_std_code,Data representing the transaction std code.,"external.mobility_metro.""transaction_std_code""",external.mobility_metro,
+transaction_city,City name for the given context.,"external.mobility_metro.""transaction_city""",external.mobility_metro,
+"▼ mobility_ride_hailing   (base table, 16 cols)",,,external.mobility_ride_hailing,"CREATE INDEX mobility_ride_hailing_district_name_idx ON external.mobility_ride_hailing USING btree (district_name)
+
+CREATE INDEX mobility_ride_hailing_std_code_idx ON external.mobility_ride_hailing USING btree (std_code)
+
+CREATE INDEX mobility_ride_hailing_network_order_id_idx ON external.mobility_ride_hailing USING btree (network_order_id)
+
+CREATE INDEX mobility_ride_hailing_order_status_idx ON external.mobility_ride_hailing USING btree (order_status)
+
+CREATE INDEX mobility_ride_hailing_o_completed_at_idx ON external.mobility_ride_hailing USING btree (o_completed_at)
+
+CREATE INDEX mobility_ride_hailing_vehicle_category_idx ON external.mobility_ride_hailing USING btree (vehicle_category)
+
+CREATE INDEX mobility_ride_hailing_f_ride_assigned_at_idx ON external.mobility_ride_hailing USING btree (f_ride_assigned_at)
+
+CREATE INDEX mobility_ride_hailing_state_name_idx ON external.mobility_ride_hailing USING btree (state_name)
+
+CREATE INDEX mobility_ride_hailing_pincode_idx ON external.mobility_ride_hailing USING btree (pincode)
+
+CREATE INDEX mobility_ride_hailing_o_created_date_idx ON external.mobility_ride_hailing USING btree (o_created_date)"
+bpp_id,Unique identifier for the Seller App (BPP).,"external.mobility_ride_hailing.""bpp_id""",external.mobility_ride_hailing,
+o_created_date,Timestamp or date indicating when o created date occurred.,"external.mobility_ride_hailing.""o_created_date""",external.mobility_ride_hailing,
+network_order_id,Data representing the network order id.,"external.mobility_ride_hailing.""network_order_id""",external.mobility_ride_hailing,
+provider_id,Unique identifier for the provider.,"external.mobility_ride_hailing.""provider_id""",external.mobility_ride_hailing,
+item_id,Unique identifier for item.,"external.mobility_ride_hailing.""item_id""",external.mobility_ride_hailing,
+order_status,Turn-Around-Time (TAT) measurement.,"external.mobility_ride_hailing.""order_status""",external.mobility_ride_hailing,
+o_completed_at,Timestamp or date indicating when o completed at occurred.,"external.mobility_ride_hailing.""o_completed_at""",external.mobility_ride_hailing,
+transaction_std_code,Data representing the transaction std code.,"external.mobility_ride_hailing.""transaction_std_code""",external.mobility_ride_hailing,
+fulfillment_id,Unique identifier for fulfillment.,"external.mobility_ride_hailing.""fulfillment_id""",external.mobility_ride_hailing,
+vehicle_category,Timestamp or date indicating when vehicle category occurred.,"external.mobility_ride_hailing.""vehicle_category""",external.mobility_ride_hailing,
+fulfillment_status,Turn-Around-Time (TAT) measurement.,"external.mobility_ride_hailing.""fulfillment_status""",external.mobility_ride_hailing,
+f_ride_assigned_at,Timestamp or date indicating when f ride assigned at occurred.,"external.mobility_ride_hailing.""f_ride_assigned_at""",external.mobility_ride_hailing,
+std_code,Data representing the std code.,"external.mobility_ride_hailing.""std_code""",external.mobility_ride_hailing,
+pincode,Indian postal code (pincode).,"external.mobility_ride_hailing.""pincode""",external.mobility_ride_hailing,
+state_name,Turn-Around-Time (TAT) measurement.,"external.mobility_ride_hailing.""state_name""",external.mobility_ride_hailing,
+district_name,Name of the district.,"external.mobility_ride_hailing.""district_name""",external.mobility_ride_hailing,
+"▼ monthly_providers   (base table, 6 cols)",,,external.monthly_providers,
+provider_key,Unique identifier for provider key.,"external.monthly_providers.""provider_key""",external.monthly_providers,
+seller_district,Data representing the seller district.,"external.monthly_providers.""seller_district""",external.monthly_providers,
+seller_state,Turn-Around-Time (TAT) measurement.,"external.monthly_providers.""seller_state""",external.monthly_providers,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"external.monthly_providers.""seller_state_code""",external.monthly_providers,
+order_month,Data representing the order month.,"external.monthly_providers.""order_month""",external.monthly_providers,
+order_year,Data representing the order year.,"external.monthly_providers.""order_year""",external.monthly_providers,
+"▼ ondc_dashboard_version   (base table, 6 cols)",,,external.ondc_dashboard_version,CREATE UNIQUE INDEX ondc_dashboard_version_pkey ON external.ondc_dashboard_version USING btree (id)
+id,Unique identifier for id.,"external.ondc_dashboard_version.""id""",external.ondc_dashboard_version,
+major,Data representing the major.,"external.ondc_dashboard_version.""major""",external.ondc_dashboard_version,
+minor,Data representing the minor.,"external.ondc_dashboard_version.""minor""",external.ondc_dashboard_version,
+minor_minor,Data representing the minor minor.,"external.ondc_dashboard_version.""minor_minor""",external.ondc_dashboard_version,
+run_date,Timestamp or date indicating when run date occurred.,"external.ondc_dashboard_version.""run_date""",external.ondc_dashboard_version,
+hot_fix_file_name,Name of the hot fix file.,"external.ondc_dashboard_version.""hot_fix_file_name""",external.ondc_dashboard_version,
+"▼ pc_level_agg   (base table, 8 cols)",,,external.pc_level_agg,"CREATE INDEX pc_level_agg_domain_idx ON external.pc_level_agg USING btree (domain)
+
+CREATE INDEX pc_level_agg_sub_domain_idx ON external.pc_level_agg USING btree (sub_domain)"
+order_year,Data representing the order year.,"external.pc_level_agg.""order_year""",external.pc_level_agg,
+order_month,Data representing the order month.,"external.pc_level_agg.""order_month""",external.pc_level_agg,
+domain,"The ONDC network domain (e.g., retail, logistics).","external.pc_level_agg.""domain""",external.pc_level_agg,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","external.pc_level_agg.""sub_domain""",external.pc_level_agg,
+seller_pincode,Indian postal code (pincode).,"external.pc_level_agg.""seller_pincode""",external.pc_level_agg,
+delivery_pincode,Indian postal code (pincode).,"external.pc_level_agg.""delivery_pincode""",external.pc_level_agg,
+total_orders,Data representing the total orders.,"external.pc_level_agg.""total_orders""",external.pc_level_agg,
+total_items,Data representing the total items.,"external.pc_level_agg.""total_items""",external.pc_level_agg,
+"▼ pincode   (base table, 4 cols)",,,external.pincode,
+Pincode,Indian postal code (pincode).,"external.pincode.""Pincode""",external.pincode,
+Districtname,Name of the districtname.,"external.pincode.""Districtname""",external.pincode,
+Statename,Turn-Around-Time (TAT) measurement.,"external.pincode.""Statename""",external.pincode,
+Statecode,Turn-Around-Time (TAT) measurement.,"external.pincode.""Statecode""",external.pincode,
+"▼ retail_b2b_district_level_orders   (base table, 6 cols)",,,external.retail_b2b_district_level_orders,"CREATE INDEX retail_b2b_district_level_orders_delivery_district_idx ON external.retail_b2b_district_level_orders USING btree (delivery_district)
+
+CREATE INDEX retail_b2b_district_level_orders_delivery_state_idx ON external.retail_b2b_district_level_orders USING btree (delivery_state)
+
+CREATE INDEX retail_b2b_district_level_orders_order_date_idx ON external.retail_b2b_district_level_orders USING btree (order_date)"
+order_date,Timestamp or date indicating when order date occurred.,"external.retail_b2b_district_level_orders.""order_date""",external.retail_b2b_district_level_orders,
+delivery_district,Data representing the delivery district.,"external.retail_b2b_district_level_orders.""delivery_district""",external.retail_b2b_district_level_orders,
+delivery_state,Turn-Around-Time (TAT) measurement.,"external.retail_b2b_district_level_orders.""delivery_state""",external.retail_b2b_district_level_orders,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"external.retail_b2b_district_level_orders.""delivery_state_code""",external.retail_b2b_district_level_orders,
+total_orders_delivered,Data representing the total orders delivered.,"external.retail_b2b_district_level_orders.""total_orders_delivered""",external.retail_b2b_district_level_orders,
+total_items,Data representing the total items.,"external.retail_b2b_district_level_orders.""total_items""",external.retail_b2b_district_level_orders,
+"▼ retail_voucher_district_level_orders   (base table, 6 cols)",,,external.retail_voucher_district_level_orders,"CREATE INDEX retail_voucher_district_level_orders_delivery_district_idx ON external.retail_voucher_district_level_orders USING btree (delivery_district)
+
+CREATE INDEX retail_voucher_district_level_orders_delivery_state_idx ON external.retail_voucher_district_level_orders USING btree (delivery_state)
+
+CREATE INDEX retail_voucher_district_level_orders_order_date_idx ON external.retail_voucher_district_level_orders USING btree (order_date)"
+order_date,Timestamp or date indicating when order date occurred.,"external.retail_voucher_district_level_orders.""order_date""",external.retail_voucher_district_level_orders,
+delivery_district,Data representing the delivery district.,"external.retail_voucher_district_level_orders.""delivery_district""",external.retail_voucher_district_level_orders,
+delivery_state,Turn-Around-Time (TAT) measurement.,"external.retail_voucher_district_level_orders.""delivery_state""",external.retail_voucher_district_level_orders,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"external.retail_voucher_district_level_orders.""delivery_state_code""",external.retail_voucher_district_level_orders,
+total_orders_delivered,Data representing the total orders delivered.,"external.retail_voucher_district_level_orders.""total_orders_delivered""",external.retail_voucher_district_level_orders,
+total_items,Data representing the total items.,"external.retail_voucher_district_level_orders.""total_items""",external.retail_voucher_district_level_orders,
+"▼ retail_voucher_fact_order_detail   (base table, 10 cols)",,,external.retail_voucher_fact_order_detail,"CREATE INDEX retail_voucher_fact_order_detail_delivery_state_code_idx ON external.retail_voucher_fact_order_detail USING btree (delivery_state_code)
+
+CREATE INDEX retail_voucher_fact_order_detail_domain_idx ON external.retail_voucher_fact_order_detail USING btree (domain)
+
+CREATE INDEX retail_voucher_fact_order_detail_delivery_state_idx ON external.retail_voucher_fact_order_detail USING btree (delivery_state)
+
+CREATE INDEX retail_voucher_fact_order_detail_provider_key_idx ON external.retail_voucher_fact_order_detail USING btree (provider_key)
+
+CREATE INDEX retail_voucher_fact_order_detail_delivery_district_idx ON external.retail_voucher_fact_order_detail USING btree (delivery_district)
+
+CREATE INDEX retail_voucher_fact_order_detail_network_order_id_idx ON external.retail_voucher_fact_order_detail USING btree (network_order_id)"
+network_order_id,Data representing the network order id.,"external.retail_voucher_fact_order_detail.""network_order_id""",external.retail_voucher_fact_order_detail,
+provider_key,Unique identifier for provider key.,"external.retail_voucher_fact_order_detail.""provider_key""",external.retail_voucher_fact_order_detail,
+total_items,Data representing the total items.,"external.retail_voucher_fact_order_detail.""total_items""",external.retail_voucher_fact_order_detail,
+domain,"The ONDC network domain (e.g., retail, logistics).","external.retail_voucher_fact_order_detail.""domain""",external.retail_voucher_fact_order_detail,
+order_status,Turn-Around-Time (TAT) measurement.,"external.retail_voucher_fact_order_detail.""order_status""",external.retail_voucher_fact_order_detail,
+delivery_pincode,Indian postal code (pincode).,"external.retail_voucher_fact_order_detail.""delivery_pincode""",external.retail_voucher_fact_order_detail,
+order_date,Timestamp or date indicating when order date occurred.,"external.retail_voucher_fact_order_detail.""order_date""",external.retail_voucher_fact_order_detail,
+delivery_district,Data representing the delivery district.,"external.retail_voucher_fact_order_detail.""delivery_district""",external.retail_voucher_fact_order_detail,
+delivery_state,Turn-Around-Time (TAT) measurement.,"external.retail_voucher_fact_order_detail.""delivery_state""",external.retail_voucher_fact_order_detail,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"external.retail_voucher_fact_order_detail.""delivery_state_code""",external.retail_voucher_fact_order_detail,
+"▼ scat_lvl_orders   (base table, 19 cols)",,,external.scat_lvl_orders,"CREATE INDEX scat_lvl_orders_delivery_state_idx ON external.scat_lvl_orders USING btree (delivery_state)
+
+CREATE INDEX scat_lvl_orders_domain_idx ON external.scat_lvl_orders USING btree (domain)
+
+CREATE INDEX scat_lvl_orders_seller_district_idx ON external.scat_lvl_orders USING btree (seller_district)
+
+CREATE INDEX scat_lvl_orders_sub_domain_idx ON external.scat_lvl_orders USING btree (sub_domain)
+
+CREATE INDEX scat_lvl_orders_agg_level_idx ON external.scat_lvl_orders USING btree (agg_level)
+
+CREATE INDEX scat_lvl_orders_delivery_district_idx ON external.scat_lvl_orders USING btree (delivery_district)
+
+CREATE INDEX scat_lvl_orders_order_date_idx ON external.scat_lvl_orders USING btree (order_date)
+
+CREATE INDEX scat_lvl_orders_sub_category_idx ON external.scat_lvl_orders USING btree (sub_category)
+
+CREATE INDEX scat_lvl_orders_category_idx ON external.scat_lvl_orders USING btree (category)"
+agg_level,Data representing the agg level.,"external.scat_lvl_orders.""agg_level""",external.scat_lvl_orders,
+domain,"The ONDC network domain (e.g., retail, logistics).","external.scat_lvl_orders.""domain""",external.scat_lvl_orders,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","external.scat_lvl_orders.""sub_domain""",external.scat_lvl_orders,
+order_date,Timestamp or date indicating when order date occurred.,"external.scat_lvl_orders.""order_date""",external.scat_lvl_orders,
+category,Timestamp or date indicating when category occurred.,"external.scat_lvl_orders.""category""",external.scat_lvl_orders,
+sub_category,Timestamp or date indicating when sub category occurred.,"external.scat_lvl_orders.""sub_category""",external.scat_lvl_orders,
+delivery_district,Data representing the delivery district.,"external.scat_lvl_orders.""delivery_district""",external.scat_lvl_orders,
+delivery_state,Turn-Around-Time (TAT) measurement.,"external.scat_lvl_orders.""delivery_state""",external.scat_lvl_orders,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"external.scat_lvl_orders.""delivery_state_code""",external.scat_lvl_orders,
+seller_district,Data representing the seller district.,"external.scat_lvl_orders.""seller_district""",external.scat_lvl_orders,
+seller_state,Turn-Around-Time (TAT) measurement.,"external.scat_lvl_orders.""seller_state""",external.scat_lvl_orders,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"external.scat_lvl_orders.""seller_state_code""",external.scat_lvl_orders,
+total_orders_delivered,Data representing the total orders delivered.,"external.scat_lvl_orders.""total_orders_delivered""",external.scat_lvl_orders,
+total_items,Data representing the total items.,"external.scat_lvl_orders.""total_items""",external.scat_lvl_orders,
+pincode_count,Indian postal code (pincode).,"external.scat_lvl_orders.""pincode_count""",external.scat_lvl_orders,
+intrastate_orders,Turn-Around-Time (TAT) measurement.,"external.scat_lvl_orders.""intrastate_orders""",external.scat_lvl_orders,
+intradistrict_orders,Data representing the intradistrict orders.,"external.scat_lvl_orders.""intradistrict_orders""",external.scat_lvl_orders,
+interstate_orders,Turn-Around-Time (TAT) measurement.,"external.scat_lvl_orders.""interstate_orders""",external.scat_lvl_orders,
+interdistrict_orders,Data representing the interdistrict orders.,"external.scat_lvl_orders.""interdistrict_orders""",external.scat_lvl_orders,
+"▼ shared_logistics_search   (base table, 21 cols)",,,external.shared_logistics_search,"CREATE INDEX shared_logistics_search_seller_district_idx ON external.shared_logistics_search USING btree (seller_district)
+
+CREATE INDEX shared_logistics_search_delivery_state_idx ON external.shared_logistics_search USING btree (delivery_state)
+
+CREATE INDEX shared_logistics_search_s_category_id_idx ON external.shared_logistics_search USING btree (s_category_id)
+
+CREATE INDEX shared_logistics_search_searched_date_idx ON external.shared_logistics_search USING btree (searched_date)
+
+CREATE INDEX shared_logistics_search_shipment_type_idx ON external.shared_logistics_search USING btree (shipment_type)
+
+CREATE INDEX shared_logistics_search_seller_state_idx ON external.shared_logistics_search USING btree (seller_state)
+
+CREATE INDEX shared_logistics_search_delivery_pincode_idx ON external.shared_logistics_search USING btree (delivery_pincode)
+
+CREATE INDEX shared_logistics_search_delivery_district_idx ON external.shared_logistics_search USING btree (delivery_district)
+
+CREATE INDEX shared_logistics_search_network_transaction_id_idx ON external.shared_logistics_search USING btree (network_transaction_id)
+
+CREATE INDEX shared_logistics_search_bap_id_idx ON external.shared_logistics_search USING btree (bap_id)
+
+CREATE INDEX shared_logistics_search_pick_up_pincode_idx ON external.shared_logistics_search USING btree (pick_up_pincode)"
+bap_id,Unique identifier for the Buyer App (BAP).,"external.shared_logistics_search.""bap_id""",external.shared_logistics_search,
+bpp_id,Unique identifier for the Seller App (BPP).,"external.shared_logistics_search.""bpp_id""",external.shared_logistics_search,
+network_transaction_id,Unique ONDC transaction identifier.,"external.shared_logistics_search.""network_transaction_id""",external.shared_logistics_search,
+searched_date,Timestamp or date indicating when searched date occurred.,"external.shared_logistics_search.""searched_date""",external.shared_logistics_search,
+s_fulfillment_type,Data representing the s fulfillment type.,"external.shared_logistics_search.""s_fulfillment_type""",external.shared_logistics_search,
+s_category_id,Unique identifier for s category.,"external.shared_logistics_search.""s_category_id""",external.shared_logistics_search,
+pick_up_pincode,Indian postal code (pincode).,"external.shared_logistics_search.""pick_up_pincode""",external.shared_logistics_search,
+delivery_pincode,Indian postal code (pincode).,"external.shared_logistics_search.""delivery_pincode""",external.shared_logistics_search,
+s_sync_response,Data representing the s sync response.,"external.shared_logistics_search.""s_sync_response""",external.shared_logistics_search,
+s_error,Data representing the s error.,"external.shared_logistics_search.""s_error""",external.shared_logistics_search,
+o_fulfillment_type,Data representing the o fulfillment type.,"external.shared_logistics_search.""o_fulfillment_type""",external.shared_logistics_search,
+o_category_id,Unique identifier for o category.,"external.shared_logistics_search.""o_category_id""",external.shared_logistics_search,
+shipment_type,Data representing the shipment type.,"external.shared_logistics_search.""shipment_type""",external.shared_logistics_search,
+on_search_received,Data representing the on search received.,"external.shared_logistics_search.""on_search_received""",external.shared_logistics_search,
+on_search_error,Data representing the on search error.,"external.shared_logistics_search.""on_search_error""",external.shared_logistics_search,
+delivery_district,Data representing the delivery district.,"external.shared_logistics_search.""delivery_district""",external.shared_logistics_search,
+delivery_state,Turn-Around-Time (TAT) measurement.,"external.shared_logistics_search.""delivery_state""",external.shared_logistics_search,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"external.shared_logistics_search.""delivery_state_code""",external.shared_logistics_search,
+seller_district,Data representing the seller district.,"external.shared_logistics_search.""seller_district""",external.shared_logistics_search,
+seller_state,Turn-Around-Time (TAT) measurement.,"external.shared_logistics_search.""seller_state""",external.shared_logistics_search,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"external.shared_logistics_search.""seller_state_code""",external.shared_logistics_search,
+"▼ static_summary   (base table, 4 cols)",,,external.static_summary,
+month,Data representing the month.,"external.static_summary.""month""",external.static_summary,
+domain,"The ONDC network domain (e.g., retail, logistics).","external.static_summary.""domain""",external.static_summary,
+order_count,Data representing the order count.,"external.static_summary.""order_count""",external.static_summary,
+updated_at,Timestamp when the record was last updated.,"external.static_summary.""updated_at""",external.static_summary,
+"▼ sub_cat_district_wise_agg   (base table, 20 cols)",,,external.sub_cat_district_wise_agg,"CREATE INDEX sub_cat_district_wise_agg_agg_level_idx ON external.sub_cat_district_wise_agg USING btree (agg_level)
+
+CREATE INDEX sub_cat_district_wise_agg_delivery_district_idx ON external.sub_cat_district_wise_agg USING btree (delivery_district)
+
+CREATE INDEX sub_cat_district_wise_agg_domain_idx ON external.sub_cat_district_wise_agg USING btree (domain)
+
+CREATE INDEX sub_cat_district_wise_agg_delivery_state_idx ON external.sub_cat_district_wise_agg USING btree (delivery_state)
+
+CREATE INDEX sub_cat_district_wise_agg_seller_district_idx ON external.sub_cat_district_wise_agg USING btree (seller_district)
+
+CREATE INDEX sub_cat_district_wise_agg_seller_state_idx ON external.sub_cat_district_wise_agg USING btree (seller_state)
+
+CREATE INDEX sub_cat_district_wise_agg_sub_domain_idx ON external.sub_cat_district_wise_agg USING btree (sub_domain)
+
+CREATE INDEX sub_cat_district_wise_agg_sub_category_idx ON external.sub_cat_district_wise_agg USING btree (sub_category)
+
+CREATE INDEX sub_cat_district_wise_agg_category_idx ON external.sub_cat_district_wise_agg USING btree (category)"
+agg_level,Data representing the agg level.,"external.sub_cat_district_wise_agg.""agg_level""",external.sub_cat_district_wise_agg,
+domain,"The ONDC network domain (e.g., retail, logistics).","external.sub_cat_district_wise_agg.""domain""",external.sub_cat_district_wise_agg,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","external.sub_cat_district_wise_agg.""sub_domain""",external.sub_cat_district_wise_agg,
+order_year,Data representing the order year.,"external.sub_cat_district_wise_agg.""order_year""",external.sub_cat_district_wise_agg,
+order_month,Data representing the order month.,"external.sub_cat_district_wise_agg.""order_month""",external.sub_cat_district_wise_agg,
+order_week,Data representing the order week.,"external.sub_cat_district_wise_agg.""order_week""",external.sub_cat_district_wise_agg,
+category,Timestamp or date indicating when category occurred.,"external.sub_cat_district_wise_agg.""category""",external.sub_cat_district_wise_agg,
+sub_category,Timestamp or date indicating when sub category occurred.,"external.sub_cat_district_wise_agg.""sub_category""",external.sub_cat_district_wise_agg,
+delivery_district,Data representing the delivery district.,"external.sub_cat_district_wise_agg.""delivery_district""",external.sub_cat_district_wise_agg,
+delivery_state,Turn-Around-Time (TAT) measurement.,"external.sub_cat_district_wise_agg.""delivery_state""",external.sub_cat_district_wise_agg,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"external.sub_cat_district_wise_agg.""delivery_state_code""",external.sub_cat_district_wise_agg,
+seller_district,Data representing the seller district.,"external.sub_cat_district_wise_agg.""seller_district""",external.sub_cat_district_wise_agg,
+seller_state,Turn-Around-Time (TAT) measurement.,"external.sub_cat_district_wise_agg.""seller_state""",external.sub_cat_district_wise_agg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"external.sub_cat_district_wise_agg.""seller_state_code""",external.sub_cat_district_wise_agg,
+total_orders_delivered,Data representing the total orders delivered.,"external.sub_cat_district_wise_agg.""total_orders_delivered""",external.sub_cat_district_wise_agg,
+total_items,Data representing the total items.,"external.sub_cat_district_wise_agg.""total_items""",external.sub_cat_district_wise_agg,
+intrastate_orders,Turn-Around-Time (TAT) measurement.,"external.sub_cat_district_wise_agg.""intrastate_orders""",external.sub_cat_district_wise_agg,
+intradistrict_orders,Data representing the intradistrict orders.,"external.sub_cat_district_wise_agg.""intradistrict_orders""",external.sub_cat_district_wise_agg,
+interstate_orders,Turn-Around-Time (TAT) measurement.,"external.sub_cat_district_wise_agg.""interstate_orders""",external.sub_cat_district_wise_agg,
+interdistrict_orders,Data representing the interdistrict orders.,"external.sub_cat_district_wise_agg.""interdistrict_orders""",external.sub_cat_district_wise_agg,
+"▼ sub_cat_pc_level_agg   (base table, 10 cols)",,,external.sub_cat_pc_level_agg,"CREATE INDEX sub_cat_pc_level_agg_sub_category_idx ON external.sub_cat_pc_level_agg USING btree (sub_category)
+
+CREATE INDEX sub_cat_pc_level_agg_sub_domain_idx ON external.sub_cat_pc_level_agg USING btree (sub_domain)
+
+CREATE INDEX sub_cat_pc_level_agg_domain_idx ON external.sub_cat_pc_level_agg USING btree (domain)
+
+CREATE INDEX sub_cat_pc_level_agg_category_idx ON external.sub_cat_pc_level_agg USING btree (category)"
+order_year,Data representing the order year.,"external.sub_cat_pc_level_agg.""order_year""",external.sub_cat_pc_level_agg,
+order_month,Data representing the order month.,"external.sub_cat_pc_level_agg.""order_month""",external.sub_cat_pc_level_agg,
+domain,"The ONDC network domain (e.g., retail, logistics).","external.sub_cat_pc_level_agg.""domain""",external.sub_cat_pc_level_agg,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","external.sub_cat_pc_level_agg.""sub_domain""",external.sub_cat_pc_level_agg,
+seller_pincode,Indian postal code (pincode).,"external.sub_cat_pc_level_agg.""seller_pincode""",external.sub_cat_pc_level_agg,
+delivery_pincode,Indian postal code (pincode).,"external.sub_cat_pc_level_agg.""delivery_pincode""",external.sub_cat_pc_level_agg,
+category,Timestamp or date indicating when category occurred.,"external.sub_cat_pc_level_agg.""category""",external.sub_cat_pc_level_agg,
+sub_category,Timestamp or date indicating when sub category occurred.,"external.sub_cat_pc_level_agg.""sub_category""",external.sub_cat_pc_level_agg,
+total_orders,Data representing the total orders.,"external.sub_cat_pc_level_agg.""total_orders""",external.sub_cat_pc_level_agg,
+total_items,Data representing the total items.,"external.sub_cat_pc_level_agg.""total_items""",external.sub_cat_pc_level_agg,
+"▼ sub_cat_pc_sellers_agg   (base table, 10 cols)",,,external.sub_cat_pc_sellers_agg,"CREATE INDEX sub_cat_pc_sellers_agg_sub_category_idx ON external.sub_cat_pc_sellers_agg USING btree (sub_category)
+
+CREATE INDEX sub_cat_pc_sellers_agg_category_idx ON external.sub_cat_pc_sellers_agg USING btree (category)
+
+CREATE INDEX sub_cat_pc_sellers_agg_seller_district_idx ON external.sub_cat_pc_sellers_agg USING btree (seller_district)
+
+CREATE INDEX sub_cat_pc_sellers_agg_seller_state_idx ON external.sub_cat_pc_sellers_agg USING btree (seller_state)"
+year_value,Data representing the year value.,"external.sub_cat_pc_sellers_agg.""year_value""",external.sub_cat_pc_sellers_agg,
+month_value,Data representing the month value.,"external.sub_cat_pc_sellers_agg.""month_value""",external.sub_cat_pc_sellers_agg,
+seller_state,Turn-Around-Time (TAT) measurement.,"external.sub_cat_pc_sellers_agg.""seller_state""",external.sub_cat_pc_sellers_agg,
+seller_district,Data representing the seller district.,"external.sub_cat_pc_sellers_agg.""seller_district""",external.sub_cat_pc_sellers_agg,
+pincode,Indian postal code (pincode).,"external.sub_cat_pc_sellers_agg.""pincode""",external.sub_cat_pc_sellers_agg,
+category,Timestamp or date indicating when category occurred.,"external.sub_cat_pc_sellers_agg.""category""",external.sub_cat_pc_sellers_agg,
+sub_category,Timestamp or date indicating when sub category occurred.,"external.sub_cat_pc_sellers_agg.""sub_category""",external.sub_cat_pc_sellers_agg,
+total_sellers,Data representing the total sellers.,"external.sub_cat_pc_sellers_agg.""total_sellers""",external.sub_cat_pc_sellers_agg,
+active_sellers,Data representing the active sellers.,"external.sub_cat_pc_sellers_agg.""active_sellers""",external.sub_cat_pc_sellers_agg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"external.sub_cat_pc_sellers_agg.""seller_state_code""",external.sub_cat_pc_sellers_agg,
+"▼ sub_cat_sellers_agg   (base table, 9 cols)",,,external.sub_cat_sellers_agg,"CREATE INDEX sub_cat_sellers_agg_sub_category_idx ON external.sub_cat_sellers_agg USING btree (sub_category)
+
+CREATE INDEX sub_cat_sellers_agg_seller_district_idx ON external.sub_cat_sellers_agg USING btree (seller_district)
+
+CREATE INDEX sub_cat_sellers_agg_seller_state_idx ON external.sub_cat_sellers_agg USING btree (seller_state)
+
+CREATE INDEX sub_cat_sellers_agg_category_idx ON external.sub_cat_sellers_agg USING btree (category)"
+year_value,Data representing the year value.,"external.sub_cat_sellers_agg.""year_value""",external.sub_cat_sellers_agg,
+month_value,Data representing the month value.,"external.sub_cat_sellers_agg.""month_value""",external.sub_cat_sellers_agg,
+seller_state,Turn-Around-Time (TAT) measurement.,"external.sub_cat_sellers_agg.""seller_state""",external.sub_cat_sellers_agg,
+seller_district,Data representing the seller district.,"external.sub_cat_sellers_agg.""seller_district""",external.sub_cat_sellers_agg,
+category,Timestamp or date indicating when category occurred.,"external.sub_cat_sellers_agg.""category""",external.sub_cat_sellers_agg,
+sub_category,Timestamp or date indicating when sub category occurred.,"external.sub_cat_sellers_agg.""sub_category""",external.sub_cat_sellers_agg,
+total_sellers,Data representing the total sellers.,"external.sub_cat_sellers_agg.""total_sellers""",external.sub_cat_sellers_agg,
+active_sellers,Data representing the active sellers.,"external.sub_cat_sellers_agg.""active_sellers""",external.sub_cat_sellers_agg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"external.sub_cat_sellers_agg.""seller_state_code""",external.sub_cat_sellers_agg,

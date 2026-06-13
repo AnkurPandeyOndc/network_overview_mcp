@@ -1,24 +1,55 @@
-"""Vector search skeleton for RAG pipeline.
+"""Vector search for schema RAG pipeline."""
 
-Ready to wire up with FAISS + sentence-transformers when needed.
-"""
+import os
+import json
+import faiss
+import numpy as np
+from pathlib import Path
+from sentence_transformers import SentenceTransformer
+import logging
 
-from typing import Any
+logger = logging.getLogger(__name__)
 
+DOCS_DIR = Path(__file__).resolve().parent.parent.parent.parent / "rag" / "docs"
+INDEX_PATH = DOCS_DIR / "schema_index.faiss"
+METADATA_PATH = DOCS_DIR / "schema_metadata.json"
 
-def search_faiss(query: str, top_k: int = 5) -> list[dict[str, Any]]:
-    """Embed query and search FAISS index for similar document chunks.
+_index = None
+_metadata = None
+_model = None
 
-    Skeleton — requires faiss-cpu and sentence-transformers.
+def _load_resources():
+    global _index, _metadata, _model
+    if _index is None:
+        if not INDEX_PATH.exists() or not METADATA_PATH.exists():
+            raise FileNotFoundError("FAISS index or metadata not found. Run import_docs.py first.")
+        
+        logger.info("Loading FAISS index and model...")
+        _index = faiss.read_index(str(INDEX_PATH))
+        with open(METADATA_PATH, "r", encoding="utf-8") as f:
+            _metadata = json.load(f)
+        _model = SentenceTransformer('all-MiniLM-L6-v2')
+
+def search_schema(query: str, top_k: int = 5) -> list[dict]:
+    """Embed query and search FAISS index for similar tables/views.
 
     Args:
         query: Natural language search query
         top_k: Number of results to return
 
     Returns:
-        List of matching document chunks with scores
+        List of matching table metadata (schema, table_name, content)
     """
-    raise NotImplementedError(
-        "FAISS search not yet configured. "
-        "Install RAG dependencies: poetry install --with rag"
-    )
+    _load_resources()
+    
+    query_vector = _model.encode([query], convert_to_numpy=True)
+    distances, indices = _index.search(query_vector, top_k)
+    
+    results = []
+    for dist, idx in zip(distances[0], indices[0]):
+        if idx != -1 and idx < len(_metadata):
+            match = _metadata[idx].copy()
+            match["distance"] = float(dist)
+            results.append(match)
+            
+    return results

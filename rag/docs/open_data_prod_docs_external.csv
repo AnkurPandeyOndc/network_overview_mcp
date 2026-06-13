@@ -1,0 +1,332 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s)
+"▼ dim_categories   (base table, 2 cols)",,,external.dim_categories
+category,,"external.dim_categories.""category""",external.dim_categories
+sub_category,,"external.dim_categories.""sub_category""",external.dim_categories
+"▼ dim_dates   (base table, 1 cols)",,,external.dim_dates
+order_date,,"external.dim_dates.""order_date""",external.dim_dates
+"▼ dim_districts   (base table, 2 cols)",,,external.dim_districts
+delivery_state,,"external.dim_districts.""delivery_state""",external.dim_districts
+delivery_district,,"external.dim_districts.""delivery_district""",external.dim_districts
+"▼ dim_pincode   (base table, 4 cols)",,,external.dim_pincode
+pincode,,"external.dim_pincode.""pincode""",external.dim_pincode
+district_name,,"external.dim_pincode.""district_name""",external.dim_pincode
+state_name,,"external.dim_pincode.""state_name""",external.dim_pincode
+state_code,,"external.dim_pincode.""state_code""",external.dim_pincode
+"▼ dim_providers   (base table, 7 cols)",,,external.dim_providers
+provider_key,,"external.dim_providers.""provider_key""",external.dim_providers
+order_date,,"external.dim_providers.""order_date""",external.dim_providers
+category,,"external.dim_providers.""category""",external.dim_providers
+sub_category,,"external.dim_providers.""sub_category""",external.dim_providers
+seller_district,,"external.dim_providers.""seller_district""",external.dim_providers
+seller_state,,"external.dim_providers.""seller_state""",external.dim_providers
+seller_state_code,,"external.dim_providers.""seller_state_code""",external.dim_providers
+"▼ district_wise_agg   (base table, 18 cols)",,,external.district_wise_agg
+domain,,"external.district_wise_agg.""domain""",external.district_wise_agg
+sub_domain,,"external.district_wise_agg.""sub_domain""",external.district_wise_agg
+order_month,,"external.district_wise_agg.""order_month""",external.district_wise_agg
+order_year,,"external.district_wise_agg.""order_year""",external.district_wise_agg
+order_week,,"external.district_wise_agg.""order_week""",external.district_wise_agg
+delivery_district,,"external.district_wise_agg.""delivery_district""",external.district_wise_agg
+delivery_state,,"external.district_wise_agg.""delivery_state""",external.district_wise_agg
+delivery_state_code,,"external.district_wise_agg.""delivery_state_code""",external.district_wise_agg
+seller_district,,"external.district_wise_agg.""seller_district""",external.district_wise_agg
+seller_state,,"external.district_wise_agg.""seller_state""",external.district_wise_agg
+seller_state_code,,"external.district_wise_agg.""seller_state_code""",external.district_wise_agg
+total_orders_delivered,,"external.district_wise_agg.""total_orders_delivered""",external.district_wise_agg
+pincode_count,,"external.district_wise_agg.""pincode_count""",external.district_wise_agg
+total_items,,"external.district_wise_agg.""total_items""",external.district_wise_agg
+intrastate_orders,,"external.district_wise_agg.""intrastate_orders""",external.district_wise_agg
+intradistrict_orders,,"external.district_wise_agg.""intradistrict_orders""",external.district_wise_agg
+interstate_orders,,"external.district_wise_agg.""interstate_orders""",external.district_wise_agg
+interdistrict_orders,,"external.district_wise_agg.""interdistrict_orders""",external.district_wise_agg
+"▼ fact_order_detail   (base table, 18 cols)",,,external.fact_order_detail
+network_order_id,,"external.fact_order_detail.""network_order_id""",external.fact_order_detail
+sub_category,,"external.fact_order_detail.""sub_category""",external.fact_order_detail
+seller_np,,"external.fact_order_detail.""seller_np""",external.fact_order_detail
+total_items,,"external.fact_order_detail.""total_items""",external.fact_order_detail
+domain,,"external.fact_order_detail.""domain""",external.fact_order_detail
+provider_key,,"external.fact_order_detail.""provider_key""",external.fact_order_detail
+order_status,,"external.fact_order_detail.""order_status""",external.fact_order_detail
+seller_pincode,,"external.fact_order_detail.""seller_pincode""",external.fact_order_detail
+delivery_pincode,,"external.fact_order_detail.""delivery_pincode""",external.fact_order_detail
+order_date,,"external.fact_order_detail.""order_date""",external.fact_order_detail
+consolidated_categories,,"external.fact_order_detail.""consolidated_categories""",external.fact_order_detail
+multi_category_flag,,"external.fact_order_detail.""multi_category_flag""",external.fact_order_detail
+delivery_district,,"external.fact_order_detail.""delivery_district""",external.fact_order_detail
+delivery_state,,"external.fact_order_detail.""delivery_state""",external.fact_order_detail
+delivery_state_code,,"external.fact_order_detail.""delivery_state_code""",external.fact_order_detail
+seller_district,,"external.fact_order_detail.""seller_district""",external.fact_order_detail
+seller_state,,"external.fact_order_detail.""seller_state""",external.fact_order_detail
+seller_state_code,,"external.fact_order_detail.""seller_state_code""",external.fact_order_detail
+"▼ fact_order_detail_b2b   (base table, 11 cols)",,,external.fact_order_detail_b2b
+network_order_id,,"external.fact_order_detail_b2b.""network_order_id""",external.fact_order_detail_b2b
+seller_np,,"external.fact_order_detail_b2b.""seller_np""",external.fact_order_detail_b2b
+total_items,,"external.fact_order_detail_b2b.""total_items""",external.fact_order_detail_b2b
+domain,,"external.fact_order_detail_b2b.""domain""",external.fact_order_detail_b2b
+provider_key,,"external.fact_order_detail_b2b.""provider_key""",external.fact_order_detail_b2b
+order_status,,"external.fact_order_detail_b2b.""order_status""",external.fact_order_detail_b2b
+delivery_pincode,,"external.fact_order_detail_b2b.""delivery_pincode""",external.fact_order_detail_b2b
+order_date,,"external.fact_order_detail_b2b.""order_date""",external.fact_order_detail_b2b
+delivery_district,,"external.fact_order_detail_b2b.""delivery_district""",external.fact_order_detail_b2b
+delivery_state,,"external.fact_order_detail_b2b.""delivery_state""",external.fact_order_detail_b2b
+delivery_state_code,,"external.fact_order_detail_b2b.""delivery_state_code""",external.fact_order_detail_b2b
+"▼ landing_page_echart   (base table, 3 cols)",,,external.landing_page_echart
+month,,"external.landing_page_echart.""month""",external.landing_page_echart
+domain,,"external.landing_page_echart.""domain""",external.landing_page_echart
+order_count,,"external.landing_page_echart.""order_count""",external.landing_page_echart
+"▼ landing_page_kpis   (base table, 3 cols)",,,external.landing_page_kpis
+etl_date,,"external.landing_page_kpis.""etl_date""",external.landing_page_kpis
+kpi_name,,"external.landing_page_kpis.""kpi_name""",external.landing_page_kpis
+kpi_value,,"external.landing_page_kpis.""kpi_value""",external.landing_page_kpis
+"▼ logistic_search_pincode   (base table, 10 cols)",,,external.logistic_search_pincode
+search_date,,"external.logistic_search_pincode.""search_date""",external.logistic_search_pincode
+time_interval,,"external.logistic_search_pincode.""time_interval""",external.logistic_search_pincode
+shipment_category,,"external.logistic_search_pincode.""shipment_category""",external.logistic_search_pincode
+shipment_type,,"external.logistic_search_pincode.""shipment_type""",external.logistic_search_pincode
+pick_up_pincode,,"external.logistic_search_pincode.""pick_up_pincode""",external.logistic_search_pincode
+state_name,,"external.logistic_search_pincode.""state_name""",external.logistic_search_pincode
+district_name,,"external.logistic_search_pincode.""district_name""",external.logistic_search_pincode
+searched_count,,"external.logistic_search_pincode.""searched_count""",external.logistic_search_pincode
+confirmed_count,,"external.logistic_search_pincode.""confirmed_count""",external.logistic_search_pincode
+assigned_count,,"external.logistic_search_pincode.""assigned_count""",external.logistic_search_pincode
+"▼ logistics_active_sellers   (base table, 6 cols)",,,external.logistics_active_sellers
+provider_key,,"external.logistics_active_sellers.""provider_key""",external.logistics_active_sellers
+seller_district,,"external.logistics_active_sellers.""seller_district""",external.logistics_active_sellers
+seller_state,,"external.logistics_active_sellers.""seller_state""",external.logistics_active_sellers
+seller_state_code,,"external.logistics_active_sellers.""seller_state_code""",external.logistics_active_sellers
+order_month,,"external.logistics_active_sellers.""order_month""",external.logistics_active_sellers
+order_year,,"external.logistics_active_sellers.""order_year""",external.logistics_active_sellers
+"▼ logistics_fact_order_detail   (base table, 25 cols)",,,external.logistics_fact_order_detail
+bap_id,,"external.logistics_fact_order_detail.""bap_id""",external.logistics_fact_order_detail
+bpp_id,,"external.logistics_fact_order_detail.""bpp_id""",external.logistics_fact_order_detail
+provider_id,,"external.logistics_fact_order_detail.""provider_id""",external.logistics_fact_order_detail
+order_id,,"external.logistics_fact_order_detail.""order_id""",external.logistics_fact_order_detail
+transaction_id,,"external.logistics_fact_order_detail.""transaction_id""",external.logistics_fact_order_detail
+item_id,,"external.logistics_fact_order_detail.""item_id""",external.logistics_fact_order_detail
+fulfillment_status,,"external.logistics_fact_order_detail.""fulfillment_status""",external.logistics_fact_order_detail
+order_date,,"external.logistics_fact_order_detail.""order_date""",external.logistics_fact_order_detail
+domain,,"external.logistics_fact_order_detail.""domain""",external.logistics_fact_order_detail
+f_agent_assigned_at_date,,"external.logistics_fact_order_detail.""f_agent_assigned_at_date""",external.logistics_fact_order_detail
+Log_Ondc_Status,,"external.logistics_fact_order_detail.""Log_Ondc_Status""",external.logistics_fact_order_detail
+network_retail_order_id,,"external.logistics_fact_order_detail.""network_retail_order_id""",external.logistics_fact_order_detail
+shipment_type,,"external.logistics_fact_order_detail.""shipment_type""",external.logistics_fact_order_detail
+pick_up_pincode,,"external.logistics_fact_order_detail.""pick_up_pincode""",external.logistics_fact_order_detail
+delivery_pincode,,"external.logistics_fact_order_detail.""delivery_pincode""",external.logistics_fact_order_detail
+network_retail_order_category,,"external.logistics_fact_order_detail.""network_retail_order_category""",external.logistics_fact_order_detail
+on_confirm_sync_response,,"external.logistics_fact_order_detail.""on_confirm_sync_response""",external.logistics_fact_order_detail
+on_confirm_error_code,,"external.logistics_fact_order_detail.""on_confirm_error_code""",external.logistics_fact_order_detail
+on_confirm_error_message,,"external.logistics_fact_order_detail.""on_confirm_error_message""",external.logistics_fact_order_detail
+delivery_district,,"external.logistics_fact_order_detail.""delivery_district""",external.logistics_fact_order_detail
+delivery_state,,"external.logistics_fact_order_detail.""delivery_state""",external.logistics_fact_order_detail
+delivery_state_code,,"external.logistics_fact_order_detail.""delivery_state_code""",external.logistics_fact_order_detail
+seller_district,,"external.logistics_fact_order_detail.""seller_district""",external.logistics_fact_order_detail
+seller_state,,"external.logistics_fact_order_detail.""seller_state""",external.logistics_fact_order_detail
+seller_state_code,,"external.logistics_fact_order_detail.""seller_state_code""",external.logistics_fact_order_detail
+"▼ logistics_providers   (base table, 5 cols)",,,external.logistics_providers
+provider_key,,"external.logistics_providers.""provider_key""",external.logistics_providers
+order_date,,"external.logistics_providers.""order_date""",external.logistics_providers
+seller_state_code,,"external.logistics_providers.""seller_state_code""",external.logistics_providers
+seller_state,,"external.logistics_providers.""seller_state""",external.logistics_providers
+seller_district,,"external.logistics_providers.""seller_district""",external.logistics_providers
+"▼ map_pincodes   (base table, 2 cols)",,,external.map_pincodes
+district,,"external.map_pincodes.""district""",external.map_pincodes
+pincode,,"external.map_pincodes.""pincode""",external.map_pincodes
+"▼ mob_ride_hailing_agg   (base table, 10 cols)",,,external.mob_ride_hailing_agg
+year_value,,"external.mob_ride_hailing_agg.""year_value""",external.mob_ride_hailing_agg
+month_value,,"external.mob_ride_hailing_agg.""month_value""",external.mob_ride_hailing_agg
+day_type,,"external.mob_ride_hailing_agg.""day_type""",external.mob_ride_hailing_agg
+state_name,,"external.mob_ride_hailing_agg.""state_name""",external.mob_ride_hailing_agg
+district_name,,"external.mob_ride_hailing_agg.""district_name""",external.mob_ride_hailing_agg
+time_interval,,"external.mob_ride_hailing_agg.""time_interval""",external.mob_ride_hailing_agg
+vehicle_category,,"external.mob_ride_hailing_agg.""vehicle_category""",external.mob_ride_hailing_agg
+confirmed_count,,"external.mob_ride_hailing_agg.""confirmed_count""",external.mob_ride_hailing_agg
+assigned_count,,"external.mob_ride_hailing_agg.""assigned_count""",external.mob_ride_hailing_agg
+completed_count,,"external.mob_ride_hailing_agg.""completed_count""",external.mob_ride_hailing_agg
+"▼ mobility_metro   (base table, 17 cols)",,,external.mobility_metro
+bpp_id,,"external.mobility_metro.""bpp_id""",external.mobility_metro
+provider_id,,"external.mobility_metro.""provider_id""",external.mobility_metro
+provider_name,,"external.mobility_metro.""provider_name""",external.mobility_metro
+o_created_date,,"external.mobility_metro.""o_created_date""",external.mobility_metro
+network_order_id,,"external.mobility_metro.""network_order_id""",external.mobility_metro
+item_id,,"external.mobility_metro.""item_id""",external.mobility_metro
+item_category,,"external.mobility_metro.""item_category""",external.mobility_metro
+item_name,,"external.mobility_metro.""item_name""",external.mobility_metro
+order_status,,"external.mobility_metro.""order_status""",external.mobility_metro
+fulfillment_id,,"external.mobility_metro.""fulfillment_id""",external.mobility_metro
+fulfillment_status,,"external.mobility_metro.""fulfillment_status""",external.mobility_metro
+start_location,,"external.mobility_metro.""start_location""",external.mobility_metro
+start_location_code,,"external.mobility_metro.""start_location_code""",external.mobility_metro
+end_location,,"external.mobility_metro.""end_location""",external.mobility_metro
+end_location_code,,"external.mobility_metro.""end_location_code""",external.mobility_metro
+transaction_std_code,,"external.mobility_metro.""transaction_std_code""",external.mobility_metro
+transaction_city,,"external.mobility_metro.""transaction_city""",external.mobility_metro
+"▼ mobility_ride_hailing   (base table, 16 cols)",,,external.mobility_ride_hailing
+bpp_id,,"external.mobility_ride_hailing.""bpp_id""",external.mobility_ride_hailing
+o_created_date,,"external.mobility_ride_hailing.""o_created_date""",external.mobility_ride_hailing
+network_order_id,,"external.mobility_ride_hailing.""network_order_id""",external.mobility_ride_hailing
+provider_id,,"external.mobility_ride_hailing.""provider_id""",external.mobility_ride_hailing
+item_id,,"external.mobility_ride_hailing.""item_id""",external.mobility_ride_hailing
+order_status,,"external.mobility_ride_hailing.""order_status""",external.mobility_ride_hailing
+o_completed_at,,"external.mobility_ride_hailing.""o_completed_at""",external.mobility_ride_hailing
+transaction_std_code,,"external.mobility_ride_hailing.""transaction_std_code""",external.mobility_ride_hailing
+fulfillment_id,,"external.mobility_ride_hailing.""fulfillment_id""",external.mobility_ride_hailing
+vehicle_category,,"external.mobility_ride_hailing.""vehicle_category""",external.mobility_ride_hailing
+fulfillment_status,,"external.mobility_ride_hailing.""fulfillment_status""",external.mobility_ride_hailing
+f_ride_assigned_at,,"external.mobility_ride_hailing.""f_ride_assigned_at""",external.mobility_ride_hailing
+std_code,,"external.mobility_ride_hailing.""std_code""",external.mobility_ride_hailing
+pincode,,"external.mobility_ride_hailing.""pincode""",external.mobility_ride_hailing
+state_name,,"external.mobility_ride_hailing.""state_name""",external.mobility_ride_hailing
+district_name,,"external.mobility_ride_hailing.""district_name""",external.mobility_ride_hailing
+"▼ monthly_providers   (base table, 6 cols)",,,external.monthly_providers
+provider_key,,"external.monthly_providers.""provider_key""",external.monthly_providers
+seller_district,,"external.monthly_providers.""seller_district""",external.monthly_providers
+seller_state,,"external.monthly_providers.""seller_state""",external.monthly_providers
+seller_state_code,,"external.monthly_providers.""seller_state_code""",external.monthly_providers
+order_month,,"external.monthly_providers.""order_month""",external.monthly_providers
+order_year,,"external.monthly_providers.""order_year""",external.monthly_providers
+"▼ ondc_dashboard_version   (base table, 6 cols)",,,external.ondc_dashboard_version
+id,,"external.ondc_dashboard_version.""id""",external.ondc_dashboard_version
+major,,"external.ondc_dashboard_version.""major""",external.ondc_dashboard_version
+minor,,"external.ondc_dashboard_version.""minor""",external.ondc_dashboard_version
+minor_minor,,"external.ondc_dashboard_version.""minor_minor""",external.ondc_dashboard_version
+run_date,,"external.ondc_dashboard_version.""run_date""",external.ondc_dashboard_version
+hot_fix_file_name,,"external.ondc_dashboard_version.""hot_fix_file_name""",external.ondc_dashboard_version
+"▼ pc_level_agg   (base table, 8 cols)",,,external.pc_level_agg
+order_year,,"external.pc_level_agg.""order_year""",external.pc_level_agg
+order_month,,"external.pc_level_agg.""order_month""",external.pc_level_agg
+domain,,"external.pc_level_agg.""domain""",external.pc_level_agg
+sub_domain,,"external.pc_level_agg.""sub_domain""",external.pc_level_agg
+seller_pincode,,"external.pc_level_agg.""seller_pincode""",external.pc_level_agg
+delivery_pincode,,"external.pc_level_agg.""delivery_pincode""",external.pc_level_agg
+total_orders,,"external.pc_level_agg.""total_orders""",external.pc_level_agg
+total_items,,"external.pc_level_agg.""total_items""",external.pc_level_agg
+"▼ pincode   (base table, 4 cols)",,,external.pincode
+Pincode,,"external.pincode.""Pincode""",external.pincode
+Districtname,,"external.pincode.""Districtname""",external.pincode
+Statename,,"external.pincode.""Statename""",external.pincode
+Statecode,,"external.pincode.""Statecode""",external.pincode
+"▼ retail_b2b_district_level_orders   (base table, 6 cols)",,,external.retail_b2b_district_level_orders
+order_date,,"external.retail_b2b_district_level_orders.""order_date""",external.retail_b2b_district_level_orders
+delivery_district,,"external.retail_b2b_district_level_orders.""delivery_district""",external.retail_b2b_district_level_orders
+delivery_state,,"external.retail_b2b_district_level_orders.""delivery_state""",external.retail_b2b_district_level_orders
+delivery_state_code,,"external.retail_b2b_district_level_orders.""delivery_state_code""",external.retail_b2b_district_level_orders
+total_orders_delivered,,"external.retail_b2b_district_level_orders.""total_orders_delivered""",external.retail_b2b_district_level_orders
+total_items,,"external.retail_b2b_district_level_orders.""total_items""",external.retail_b2b_district_level_orders
+"▼ retail_voucher_district_level_orders   (base table, 6 cols)",,,external.retail_voucher_district_level_orders
+order_date,,"external.retail_voucher_district_level_orders.""order_date""",external.retail_voucher_district_level_orders
+delivery_district,,"external.retail_voucher_district_level_orders.""delivery_district""",external.retail_voucher_district_level_orders
+delivery_state,,"external.retail_voucher_district_level_orders.""delivery_state""",external.retail_voucher_district_level_orders
+delivery_state_code,,"external.retail_voucher_district_level_orders.""delivery_state_code""",external.retail_voucher_district_level_orders
+total_orders_delivered,,"external.retail_voucher_district_level_orders.""total_orders_delivered""",external.retail_voucher_district_level_orders
+total_items,,"external.retail_voucher_district_level_orders.""total_items""",external.retail_voucher_district_level_orders
+"▼ retail_voucher_fact_order_detail   (base table, 10 cols)",,,external.retail_voucher_fact_order_detail
+network_order_id,,"external.retail_voucher_fact_order_detail.""network_order_id""",external.retail_voucher_fact_order_detail
+provider_key,,"external.retail_voucher_fact_order_detail.""provider_key""",external.retail_voucher_fact_order_detail
+total_items,,"external.retail_voucher_fact_order_detail.""total_items""",external.retail_voucher_fact_order_detail
+domain,,"external.retail_voucher_fact_order_detail.""domain""",external.retail_voucher_fact_order_detail
+order_status,,"external.retail_voucher_fact_order_detail.""order_status""",external.retail_voucher_fact_order_detail
+delivery_pincode,,"external.retail_voucher_fact_order_detail.""delivery_pincode""",external.retail_voucher_fact_order_detail
+order_date,,"external.retail_voucher_fact_order_detail.""order_date""",external.retail_voucher_fact_order_detail
+delivery_district,,"external.retail_voucher_fact_order_detail.""delivery_district""",external.retail_voucher_fact_order_detail
+delivery_state,,"external.retail_voucher_fact_order_detail.""delivery_state""",external.retail_voucher_fact_order_detail
+delivery_state_code,,"external.retail_voucher_fact_order_detail.""delivery_state_code""",external.retail_voucher_fact_order_detail
+"▼ scat_lvl_orders   (base table, 19 cols)",,,external.scat_lvl_orders
+agg_level,,"external.scat_lvl_orders.""agg_level""",external.scat_lvl_orders
+domain,,"external.scat_lvl_orders.""domain""",external.scat_lvl_orders
+sub_domain,,"external.scat_lvl_orders.""sub_domain""",external.scat_lvl_orders
+order_date,,"external.scat_lvl_orders.""order_date""",external.scat_lvl_orders
+category,,"external.scat_lvl_orders.""category""",external.scat_lvl_orders
+sub_category,,"external.scat_lvl_orders.""sub_category""",external.scat_lvl_orders
+delivery_district,,"external.scat_lvl_orders.""delivery_district""",external.scat_lvl_orders
+delivery_state,,"external.scat_lvl_orders.""delivery_state""",external.scat_lvl_orders
+delivery_state_code,,"external.scat_lvl_orders.""delivery_state_code""",external.scat_lvl_orders
+seller_district,,"external.scat_lvl_orders.""seller_district""",external.scat_lvl_orders
+seller_state,,"external.scat_lvl_orders.""seller_state""",external.scat_lvl_orders
+seller_state_code,,"external.scat_lvl_orders.""seller_state_code""",external.scat_lvl_orders
+total_orders_delivered,,"external.scat_lvl_orders.""total_orders_delivered""",external.scat_lvl_orders
+total_items,,"external.scat_lvl_orders.""total_items""",external.scat_lvl_orders
+pincode_count,,"external.scat_lvl_orders.""pincode_count""",external.scat_lvl_orders
+intrastate_orders,,"external.scat_lvl_orders.""intrastate_orders""",external.scat_lvl_orders
+intradistrict_orders,,"external.scat_lvl_orders.""intradistrict_orders""",external.scat_lvl_orders
+interstate_orders,,"external.scat_lvl_orders.""interstate_orders""",external.scat_lvl_orders
+interdistrict_orders,,"external.scat_lvl_orders.""interdistrict_orders""",external.scat_lvl_orders
+"▼ shared_logistics_search   (base table, 21 cols)",,,external.shared_logistics_search
+bap_id,,"external.shared_logistics_search.""bap_id""",external.shared_logistics_search
+bpp_id,,"external.shared_logistics_search.""bpp_id""",external.shared_logistics_search
+network_transaction_id,,"external.shared_logistics_search.""network_transaction_id""",external.shared_logistics_search
+searched_date,,"external.shared_logistics_search.""searched_date""",external.shared_logistics_search
+s_fulfillment_type,,"external.shared_logistics_search.""s_fulfillment_type""",external.shared_logistics_search
+s_category_id,,"external.shared_logistics_search.""s_category_id""",external.shared_logistics_search
+pick_up_pincode,,"external.shared_logistics_search.""pick_up_pincode""",external.shared_logistics_search
+delivery_pincode,,"external.shared_logistics_search.""delivery_pincode""",external.shared_logistics_search
+s_sync_response,,"external.shared_logistics_search.""s_sync_response""",external.shared_logistics_search
+s_error,,"external.shared_logistics_search.""s_error""",external.shared_logistics_search
+o_fulfillment_type,,"external.shared_logistics_search.""o_fulfillment_type""",external.shared_logistics_search
+o_category_id,,"external.shared_logistics_search.""o_category_id""",external.shared_logistics_search
+shipment_type,,"external.shared_logistics_search.""shipment_type""",external.shared_logistics_search
+on_search_received,,"external.shared_logistics_search.""on_search_received""",external.shared_logistics_search
+on_search_error,,"external.shared_logistics_search.""on_search_error""",external.shared_logistics_search
+delivery_district,,"external.shared_logistics_search.""delivery_district""",external.shared_logistics_search
+delivery_state,,"external.shared_logistics_search.""delivery_state""",external.shared_logistics_search
+delivery_state_code,,"external.shared_logistics_search.""delivery_state_code""",external.shared_logistics_search
+seller_district,,"external.shared_logistics_search.""seller_district""",external.shared_logistics_search
+seller_state,,"external.shared_logistics_search.""seller_state""",external.shared_logistics_search
+seller_state_code,,"external.shared_logistics_search.""seller_state_code""",external.shared_logistics_search
+"▼ static_summary   (base table, 4 cols)",,,external.static_summary
+month,,"external.static_summary.""month""",external.static_summary
+domain,,"external.static_summary.""domain""",external.static_summary
+order_count,,"external.static_summary.""order_count""",external.static_summary
+updated_at,,"external.static_summary.""updated_at""",external.static_summary
+"▼ sub_cat_district_wise_agg   (base table, 20 cols)",,,external.sub_cat_district_wise_agg
+agg_level,,"external.sub_cat_district_wise_agg.""agg_level""",external.sub_cat_district_wise_agg
+domain,,"external.sub_cat_district_wise_agg.""domain""",external.sub_cat_district_wise_agg
+sub_domain,,"external.sub_cat_district_wise_agg.""sub_domain""",external.sub_cat_district_wise_agg
+order_year,,"external.sub_cat_district_wise_agg.""order_year""",external.sub_cat_district_wise_agg
+order_month,,"external.sub_cat_district_wise_agg.""order_month""",external.sub_cat_district_wise_agg
+order_week,,"external.sub_cat_district_wise_agg.""order_week""",external.sub_cat_district_wise_agg
+category,,"external.sub_cat_district_wise_agg.""category""",external.sub_cat_district_wise_agg
+sub_category,,"external.sub_cat_district_wise_agg.""sub_category""",external.sub_cat_district_wise_agg
+delivery_district,,"external.sub_cat_district_wise_agg.""delivery_district""",external.sub_cat_district_wise_agg
+delivery_state,,"external.sub_cat_district_wise_agg.""delivery_state""",external.sub_cat_district_wise_agg
+delivery_state_code,,"external.sub_cat_district_wise_agg.""delivery_state_code""",external.sub_cat_district_wise_agg
+seller_district,,"external.sub_cat_district_wise_agg.""seller_district""",external.sub_cat_district_wise_agg
+seller_state,,"external.sub_cat_district_wise_agg.""seller_state""",external.sub_cat_district_wise_agg
+seller_state_code,,"external.sub_cat_district_wise_agg.""seller_state_code""",external.sub_cat_district_wise_agg
+total_orders_delivered,,"external.sub_cat_district_wise_agg.""total_orders_delivered""",external.sub_cat_district_wise_agg
+total_items,,"external.sub_cat_district_wise_agg.""total_items""",external.sub_cat_district_wise_agg
+intrastate_orders,,"external.sub_cat_district_wise_agg.""intrastate_orders""",external.sub_cat_district_wise_agg
+intradistrict_orders,,"external.sub_cat_district_wise_agg.""intradistrict_orders""",external.sub_cat_district_wise_agg
+interstate_orders,,"external.sub_cat_district_wise_agg.""interstate_orders""",external.sub_cat_district_wise_agg
+interdistrict_orders,,"external.sub_cat_district_wise_agg.""interdistrict_orders""",external.sub_cat_district_wise_agg
+"▼ sub_cat_pc_level_agg   (base table, 10 cols)",,,external.sub_cat_pc_level_agg
+order_year,,"external.sub_cat_pc_level_agg.""order_year""",external.sub_cat_pc_level_agg
+order_month,,"external.sub_cat_pc_level_agg.""order_month""",external.sub_cat_pc_level_agg
+domain,,"external.sub_cat_pc_level_agg.""domain""",external.sub_cat_pc_level_agg
+sub_domain,,"external.sub_cat_pc_level_agg.""sub_domain""",external.sub_cat_pc_level_agg
+seller_pincode,,"external.sub_cat_pc_level_agg.""seller_pincode""",external.sub_cat_pc_level_agg
+delivery_pincode,,"external.sub_cat_pc_level_agg.""delivery_pincode""",external.sub_cat_pc_level_agg
+category,,"external.sub_cat_pc_level_agg.""category""",external.sub_cat_pc_level_agg
+sub_category,,"external.sub_cat_pc_level_agg.""sub_category""",external.sub_cat_pc_level_agg
+total_orders,,"external.sub_cat_pc_level_agg.""total_orders""",external.sub_cat_pc_level_agg
+total_items,,"external.sub_cat_pc_level_agg.""total_items""",external.sub_cat_pc_level_agg
+"▼ sub_cat_pc_sellers_agg   (base table, 10 cols)",,,external.sub_cat_pc_sellers_agg
+year_value,,"external.sub_cat_pc_sellers_agg.""year_value""",external.sub_cat_pc_sellers_agg
+month_value,,"external.sub_cat_pc_sellers_agg.""month_value""",external.sub_cat_pc_sellers_agg
+seller_state,,"external.sub_cat_pc_sellers_agg.""seller_state""",external.sub_cat_pc_sellers_agg
+seller_district,,"external.sub_cat_pc_sellers_agg.""seller_district""",external.sub_cat_pc_sellers_agg
+pincode,,"external.sub_cat_pc_sellers_agg.""pincode""",external.sub_cat_pc_sellers_agg
+category,,"external.sub_cat_pc_sellers_agg.""category""",external.sub_cat_pc_sellers_agg
+sub_category,,"external.sub_cat_pc_sellers_agg.""sub_category""",external.sub_cat_pc_sellers_agg
+total_sellers,,"external.sub_cat_pc_sellers_agg.""total_sellers""",external.sub_cat_pc_sellers_agg
+active_sellers,,"external.sub_cat_pc_sellers_agg.""active_sellers""",external.sub_cat_pc_sellers_agg
+seller_state_code,,"external.sub_cat_pc_sellers_agg.""seller_state_code""",external.sub_cat_pc_sellers_agg
+"▼ sub_cat_sellers_agg   (base table, 9 cols)",,,external.sub_cat_sellers_agg
+year_value,,"external.sub_cat_sellers_agg.""year_value""",external.sub_cat_sellers_agg
+month_value,,"external.sub_cat_sellers_agg.""month_value""",external.sub_cat_sellers_agg
+seller_state,,"external.sub_cat_sellers_agg.""seller_state""",external.sub_cat_sellers_agg
+seller_district,,"external.sub_cat_sellers_agg.""seller_district""",external.sub_cat_sellers_agg
+category,,"external.sub_cat_sellers_agg.""category""",external.sub_cat_sellers_agg
+sub_category,,"external.sub_cat_sellers_agg.""sub_category""",external.sub_cat_sellers_agg
+total_sellers,,"external.sub_cat_sellers_agg.""total_sellers""",external.sub_cat_sellers_agg
+active_sellers,,"external.sub_cat_sellers_agg.""active_sellers""",external.sub_cat_sellers_agg
+seller_state_code,,"external.sub_cat_sellers_agg.""seller_state_code""",external.sub_cat_sellers_agg

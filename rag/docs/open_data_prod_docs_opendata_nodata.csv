@@ -1,0 +1,350 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s)
+"▼ dim_pincode   (base table, 4 cols)",,,opendata_nodata.dim_pincode
+pincode,,"opendata_nodata.dim_pincode.""pincode""",opendata_nodata.dim_pincode
+district_name,,"opendata_nodata.dim_pincode.""district_name""",opendata_nodata.dim_pincode
+state_name,,"opendata_nodata.dim_pincode.""state_name""",opendata_nodata.dim_pincode
+state_code,,"opendata_nodata.dim_pincode.""state_code""",opendata_nodata.dim_pincode
+"▼ insurance   (base table, 7 cols)",,,opendata_nodata.insurance
+date,,"opendata_nodata.insurance.""date""",opendata_nodata.insurance
+bap_id,,"opendata_nodata.insurance.""bap_id""",opendata_nodata.insurance
+bpp_id,,"opendata_nodata.insurance.""bpp_id""",opendata_nodata.insurance
+category_code,,"opendata_nodata.insurance.""category_code""",opendata_nodata.insurance
+domain,,"opendata_nodata.insurance.""domain""",opendata_nodata.insurance
+order_count,,"opendata_nodata.insurance.""order_count""",opendata_nodata.insurance
+modified_date,,"opendata_nodata.insurance.""modified_date""",opendata_nodata.insurance
+"▼ insurance_stage   (base table, 6 cols)",,,opendata_nodata.insurance_stage
+date,,"opendata_nodata.insurance_stage.""date""",opendata_nodata.insurance_stage
+bap_id,,"opendata_nodata.insurance_stage.""bap_id""",opendata_nodata.insurance_stage
+bpp_id,,"opendata_nodata.insurance_stage.""bpp_id""",opendata_nodata.insurance_stage
+category_code,,"opendata_nodata.insurance_stage.""category_code""",opendata_nodata.insurance_stage
+domain,,"opendata_nodata.insurance_stage.""domain""",opendata_nodata.insurance_stage
+order_count,,"opendata_nodata.insurance_stage.""order_count""",opendata_nodata.insurance_stage
+"▼ md_b2b_data   (base table, 7 cols)",,,opendata_nodata.md_b2b_data
+Date,,"opendata_nodata.md_b2b_data.""Date""",opendata_nodata.md_b2b_data
+domain,,"opendata_nodata.md_b2b_data.""domain""",opendata_nodata.md_b2b_data
+category,,"opendata_nodata.md_b2b_data.""category""",opendata_nodata.md_b2b_data
+bnp,,"opendata_nodata.md_b2b_data.""bnp""",opendata_nodata.md_b2b_data
+snp,,"opendata_nodata.md_b2b_data.""snp""",opendata_nodata.md_b2b_data
+order_count,,"opendata_nodata.md_b2b_data.""order_count""",opendata_nodata.md_b2b_data
+modified_date,,"opendata_nodata.md_b2b_data.""modified_date""",opendata_nodata.md_b2b_data
+"▼ md_b2b_data_stage   (base table, 6 cols)",,,opendata_nodata.md_b2b_data_stage
+Date,,"opendata_nodata.md_b2b_data_stage.""Date""",opendata_nodata.md_b2b_data_stage
+domain,,"opendata_nodata.md_b2b_data_stage.""domain""",opendata_nodata.md_b2b_data_stage
+category,,"opendata_nodata.md_b2b_data_stage.""category""",opendata_nodata.md_b2b_data_stage
+bnp,,"opendata_nodata.md_b2b_data_stage.""bnp""",opendata_nodata.md_b2b_data_stage
+snp,,"opendata_nodata.md_b2b_data_stage.""snp""",opendata_nodata.md_b2b_data_stage
+order_count,,"opendata_nodata.md_b2b_data_stage.""order_count""",opendata_nodata.md_b2b_data_stage
+"▼ md_b2c_data   (base table, 10 cols)",,,opendata_nodata.md_b2c_data
+Date,,"opendata_nodata.md_b2c_data.""Date""",opendata_nodata.md_b2c_data
+domain,,"opendata_nodata.md_b2c_data.""domain""",opendata_nodata.md_b2c_data
+category,,"opendata_nodata.md_b2c_data.""category""",opendata_nodata.md_b2c_data
+buyer_np,,"opendata_nodata.md_b2c_data.""buyer_np""",opendata_nodata.md_b2c_data
+seller_np,,"opendata_nodata.md_b2c_data.""seller_np""",opendata_nodata.md_b2c_data
+provider_key,,"opendata_nodata.md_b2c_data.""provider_key""",opendata_nodata.md_b2c_data
+seller_pincode,,"opendata_nodata.md_b2c_data.""seller_pincode""",opendata_nodata.md_b2c_data
+delivery_pincode,,"opendata_nodata.md_b2c_data.""delivery_pincode""",opendata_nodata.md_b2c_data
+order_count,,"opendata_nodata.md_b2c_data.""order_count""",opendata_nodata.md_b2c_data
+modified_date,,"opendata_nodata.md_b2c_data.""modified_date""",opendata_nodata.md_b2c_data
+"▼ md_b2c_data_stage   (base table, 9 cols)",,,opendata_nodata.md_b2c_data_stage
+Date,,"opendata_nodata.md_b2c_data_stage.""Date""",opendata_nodata.md_b2c_data_stage
+domain,,"opendata_nodata.md_b2c_data_stage.""domain""",opendata_nodata.md_b2c_data_stage
+category,,"opendata_nodata.md_b2c_data_stage.""category""",opendata_nodata.md_b2c_data_stage
+buyer_np,,"opendata_nodata.md_b2c_data_stage.""buyer_np""",opendata_nodata.md_b2c_data_stage
+seller_np,,"opendata_nodata.md_b2c_data_stage.""seller_np""",opendata_nodata.md_b2c_data_stage
+provider_key,,"opendata_nodata.md_b2c_data_stage.""provider_key""",opendata_nodata.md_b2c_data_stage
+seller_pincode,,"opendata_nodata.md_b2c_data_stage.""seller_pincode""",opendata_nodata.md_b2c_data_stage
+delivery_pincode,,"opendata_nodata.md_b2c_data_stage.""delivery_pincode""",opendata_nodata.md_b2c_data_stage
+order_count,,"opendata_nodata.md_b2c_data_stage.""order_count""",opendata_nodata.md_b2c_data_stage
+"▼ md_data_sheets   (base table, 7 cols)",,,opendata_nodata.md_data_sheets
+id,,"opendata_nodata.md_data_sheets.""id""",opendata_nodata.md_data_sheets
+title,,"opendata_nodata.md_data_sheets.""title""",opendata_nodata.md_data_sheets
+content,,"opendata_nodata.md_data_sheets.""content""",opendata_nodata.md_data_sheets
+owner_id,,"opendata_nodata.md_data_sheets.""owner_id""",opendata_nodata.md_data_sheets
+is_public,,"opendata_nodata.md_data_sheets.""is_public""",opendata_nodata.md_data_sheets
+created_at,,"opendata_nodata.md_data_sheets.""created_at""",opendata_nodata.md_data_sheets
+updated_at,,"opendata_nodata.md_data_sheets.""updated_at""",opendata_nodata.md_data_sheets
+"▼ md_finance_cl   (base table, 6 cols)",,,opendata_nodata.md_finance_cl
+date,,"opendata_nodata.md_finance_cl.""date""",opendata_nodata.md_finance_cl
+domain,,"opendata_nodata.md_finance_cl.""domain""",opendata_nodata.md_finance_cl
+category,,"opendata_nodata.md_finance_cl.""category""",opendata_nodata.md_finance_cl
+bap_id,,"opendata_nodata.md_finance_cl.""bap_id""",opendata_nodata.md_finance_cl
+bpp_id,,"opendata_nodata.md_finance_cl.""bpp_id""",opendata_nodata.md_finance_cl
+orders_count,,"opendata_nodata.md_finance_cl.""orders_count""",opendata_nodata.md_finance_cl
+"▼ md_finance_cl_stage   (base table, 6 cols)",,,opendata_nodata.md_finance_cl_stage
+date,,"opendata_nodata.md_finance_cl_stage.""date""",opendata_nodata.md_finance_cl_stage
+domain,,"opendata_nodata.md_finance_cl_stage.""domain""",opendata_nodata.md_finance_cl_stage
+category,,"opendata_nodata.md_finance_cl_stage.""category""",opendata_nodata.md_finance_cl_stage
+bap_id,,"opendata_nodata.md_finance_cl_stage.""bap_id""",opendata_nodata.md_finance_cl_stage
+bpp_id,,"opendata_nodata.md_finance_cl_stage.""bpp_id""",opendata_nodata.md_finance_cl_stage
+orders_count,,"opendata_nodata.md_finance_cl_stage.""orders_count""",opendata_nodata.md_finance_cl_stage
+"▼ md_finance_gl   (base table, 6 cols)",,,opendata_nodata.md_finance_gl
+date,,"opendata_nodata.md_finance_gl.""date""",opendata_nodata.md_finance_gl
+domain,,"opendata_nodata.md_finance_gl.""domain""",opendata_nodata.md_finance_gl
+category,,"opendata_nodata.md_finance_gl.""category""",opendata_nodata.md_finance_gl
+bap_id,,"opendata_nodata.md_finance_gl.""bap_id""",opendata_nodata.md_finance_gl
+bpp_id,,"opendata_nodata.md_finance_gl.""bpp_id""",opendata_nodata.md_finance_gl
+order_count,,"opendata_nodata.md_finance_gl.""order_count""",opendata_nodata.md_finance_gl
+"▼ md_finance_gl_stage   (base table, 6 cols)",,,opendata_nodata.md_finance_gl_stage
+date,,"opendata_nodata.md_finance_gl_stage.""date""",opendata_nodata.md_finance_gl_stage
+domain,,"opendata_nodata.md_finance_gl_stage.""domain""",opendata_nodata.md_finance_gl_stage
+category,,"opendata_nodata.md_finance_gl_stage.""category""",opendata_nodata.md_finance_gl_stage
+bap_id,,"opendata_nodata.md_finance_gl_stage.""bap_id""",opendata_nodata.md_finance_gl_stage
+bpp_id,,"opendata_nodata.md_finance_gl_stage.""bpp_id""",opendata_nodata.md_finance_gl_stage
+order_count,,"opendata_nodata.md_finance_gl_stage.""order_count""",opendata_nodata.md_finance_gl_stage
+"▼ md_finance_mf   (base table, 8 cols)",,,opendata_nodata.md_finance_mf
+date,,"opendata_nodata.md_finance_mf.""date""",opendata_nodata.md_finance_mf
+domain,,"opendata_nodata.md_finance_mf.""domain""",opendata_nodata.md_finance_mf
+category,,"opendata_nodata.md_finance_mf.""category""",opendata_nodata.md_finance_mf
+bap_id,,"opendata_nodata.md_finance_mf.""bap_id""",opendata_nodata.md_finance_mf
+bpp_id,,"opendata_nodata.md_finance_mf.""bpp_id""",opendata_nodata.md_finance_mf
+fulfillment_type,,"opendata_nodata.md_finance_mf.""fulfillment_type""",opendata_nodata.md_finance_mf
+Units Allocated,,"opendata_nodata.md_finance_mf.""Units Allocated""",opendata_nodata.md_finance_mf
+modified_date,,"opendata_nodata.md_finance_mf.""modified_date""",opendata_nodata.md_finance_mf
+"▼ md_finance_mf_stage   (base table, 7 cols)",,,opendata_nodata.md_finance_mf_stage
+date,,"opendata_nodata.md_finance_mf_stage.""date""",opendata_nodata.md_finance_mf_stage
+domain,,"opendata_nodata.md_finance_mf_stage.""domain""",opendata_nodata.md_finance_mf_stage
+category,,"opendata_nodata.md_finance_mf_stage.""category""",opendata_nodata.md_finance_mf_stage
+bap_id,,"opendata_nodata.md_finance_mf_stage.""bap_id""",opendata_nodata.md_finance_mf_stage
+bpp_id,,"opendata_nodata.md_finance_mf_stage.""bpp_id""",opendata_nodata.md_finance_mf_stage
+fulfillment_type,,"opendata_nodata.md_finance_mf_stage.""fulfillment_type""",opendata_nodata.md_finance_mf_stage
+Units Allocated,,"opendata_nodata.md_finance_mf_stage.""Units Allocated""",opendata_nodata.md_finance_mf_stage
+"▼ md_finance_pl   (base table, 8 cols)",,,opendata_nodata.md_finance_pl
+date,,"opendata_nodata.md_finance_pl.""date""",opendata_nodata.md_finance_pl
+domain,,"opendata_nodata.md_finance_pl.""domain""",opendata_nodata.md_finance_pl
+category,,"opendata_nodata.md_finance_pl.""category""",opendata_nodata.md_finance_pl
+bap_id,,"opendata_nodata.md_finance_pl.""bap_id""",opendata_nodata.md_finance_pl
+bpp_id,,"opendata_nodata.md_finance_pl.""bpp_id""",opendata_nodata.md_finance_pl
+sub_domain,,"opendata_nodata.md_finance_pl.""sub_domain""",opendata_nodata.md_finance_pl
+orders_count,,"opendata_nodata.md_finance_pl.""orders_count""",opendata_nodata.md_finance_pl
+modified_date,,"opendata_nodata.md_finance_pl.""modified_date""",opendata_nodata.md_finance_pl
+"▼ md_finance_pl_stage   (base table, 7 cols)",,,opendata_nodata.md_finance_pl_stage
+date,,"opendata_nodata.md_finance_pl_stage.""date""",opendata_nodata.md_finance_pl_stage
+domain,,"opendata_nodata.md_finance_pl_stage.""domain""",opendata_nodata.md_finance_pl_stage
+category,,"opendata_nodata.md_finance_pl_stage.""category""",opendata_nodata.md_finance_pl_stage
+bap_id,,"opendata_nodata.md_finance_pl_stage.""bap_id""",opendata_nodata.md_finance_pl_stage
+bpp_id,,"opendata_nodata.md_finance_pl_stage.""bpp_id""",opendata_nodata.md_finance_pl_stage
+sub_domain,,"opendata_nodata.md_finance_pl_stage.""sub_domain""",opendata_nodata.md_finance_pl_stage
+orders_count,,"opendata_nodata.md_finance_pl_stage.""orders_count""",opendata_nodata.md_finance_pl_stage
+"▼ md_gift_voucher   (base table, 7 cols)",,,opendata_nodata.md_gift_voucher
+date,,"opendata_nodata.md_gift_voucher.""date""",opendata_nodata.md_gift_voucher
+domain,,"opendata_nodata.md_gift_voucher.""domain""",opendata_nodata.md_gift_voucher
+category,,"opendata_nodata.md_gift_voucher.""category""",opendata_nodata.md_gift_voucher
+bap_id,,"opendata_nodata.md_gift_voucher.""bap_id""",opendata_nodata.md_gift_voucher
+bpp_id,,"opendata_nodata.md_gift_voucher.""bpp_id""",opendata_nodata.md_gift_voucher
+order_count,,"opendata_nodata.md_gift_voucher.""order_count""",opendata_nodata.md_gift_voucher
+modified_date,,"opendata_nodata.md_gift_voucher.""modified_date""",opendata_nodata.md_gift_voucher
+"▼ md_gift_voucher_stage   (base table, 6 cols)",,,opendata_nodata.md_gift_voucher_stage
+date,,"opendata_nodata.md_gift_voucher_stage.""date""",opendata_nodata.md_gift_voucher_stage
+domain,,"opendata_nodata.md_gift_voucher_stage.""domain""",opendata_nodata.md_gift_voucher_stage
+category,,"opendata_nodata.md_gift_voucher_stage.""category""",opendata_nodata.md_gift_voucher_stage
+bap_id,,"opendata_nodata.md_gift_voucher_stage.""bap_id""",opendata_nodata.md_gift_voucher_stage
+bpp_id,,"opendata_nodata.md_gift_voucher_stage.""bpp_id""",opendata_nodata.md_gift_voucher_stage
+order_count,,"opendata_nodata.md_gift_voucher_stage.""order_count""",opendata_nodata.md_gift_voucher_stage
+"▼ md_gift_vouchers_gsheet_stage   (base table, 9 cols)",,,opendata_nodata.md_gift_vouchers_gsheet_stage
+date,,"opendata_nodata.md_gift_vouchers_gsheet_stage.""date""",opendata_nodata.md_gift_vouchers_gsheet_stage
+domain,,"opendata_nodata.md_gift_vouchers_gsheet_stage.""domain""",opendata_nodata.md_gift_vouchers_gsheet_stage
+category,,"opendata_nodata.md_gift_vouchers_gsheet_stage.""category""",opendata_nodata.md_gift_vouchers_gsheet_stage
+bap_id,,"opendata_nodata.md_gift_vouchers_gsheet_stage.""bap_id""",opendata_nodata.md_gift_vouchers_gsheet_stage
+bpp_id,,"opendata_nodata.md_gift_vouchers_gsheet_stage.""bpp_id""",opendata_nodata.md_gift_vouchers_gsheet_stage
+buyer_np,,"opendata_nodata.md_gift_vouchers_gsheet_stage.""buyer_np""",opendata_nodata.md_gift_vouchers_gsheet_stage
+seller_np,,"opendata_nodata.md_gift_vouchers_gsheet_stage.""seller_np""",opendata_nodata.md_gift_vouchers_gsheet_stage
+order_count,,"opendata_nodata.md_gift_vouchers_gsheet_stage.""order_count""",opendata_nodata.md_gift_vouchers_gsheet_stage
+type_new,,"opendata_nodata.md_gift_vouchers_gsheet_stage.""type_new""",opendata_nodata.md_gift_vouchers_gsheet_stage
+"▼ md_home_service   (base table, 7 cols)",,,opendata_nodata.md_home_service
+date,,"opendata_nodata.md_home_service.""date""",opendata_nodata.md_home_service
+domain,,"opendata_nodata.md_home_service.""domain""",opendata_nodata.md_home_service
+category,,"opendata_nodata.md_home_service.""category""",opendata_nodata.md_home_service
+bap_id,,"opendata_nodata.md_home_service.""bap_id""",opendata_nodata.md_home_service
+bpp_id,,"opendata_nodata.md_home_service.""bpp_id""",opendata_nodata.md_home_service
+order_count,,"opendata_nodata.md_home_service.""order_count""",opendata_nodata.md_home_service
+modified_date,,"opendata_nodata.md_home_service.""modified_date""",opendata_nodata.md_home_service
+"▼ md_home_service_stage   (base table, 6 cols)",,,opendata_nodata.md_home_service_stage
+date,,"opendata_nodata.md_home_service_stage.""date""",opendata_nodata.md_home_service_stage
+domain,,"opendata_nodata.md_home_service_stage.""domain""",opendata_nodata.md_home_service_stage
+category,,"opendata_nodata.md_home_service_stage.""category""",opendata_nodata.md_home_service_stage
+bap_id,,"opendata_nodata.md_home_service_stage.""bap_id""",opendata_nodata.md_home_service_stage
+bpp_id,,"opendata_nodata.md_home_service_stage.""bpp_id""",opendata_nodata.md_home_service_stage
+order_count,,"opendata_nodata.md_home_service_stage.""order_count""",opendata_nodata.md_home_service_stage
+"▼ md_logistics   (base table, 10 cols)",,,opendata_nodata.md_logistics
+date,,"opendata_nodata.md_logistics.""date""",opendata_nodata.md_logistics
+domain,,"opendata_nodata.md_logistics.""domain""",opendata_nodata.md_logistics
+category,,"opendata_nodata.md_logistics.""category""",opendata_nodata.md_logistics
+bap_id,,"opendata_nodata.md_logistics.""bap_id""",opendata_nodata.md_logistics
+bpp_id,,"opendata_nodata.md_logistics.""bpp_id""",opendata_nodata.md_logistics
+sub_cat,,"opendata_nodata.md_logistics.""sub_cat""",opendata_nodata.md_logistics
+order_count,,"opendata_nodata.md_logistics.""order_count""",opendata_nodata.md_logistics
+modified_date,,"opendata_nodata.md_logistics.""modified_date""",opendata_nodata.md_logistics
+pick_up_pincode,,"opendata_nodata.md_logistics.""pick_up_pincode""",opendata_nodata.md_logistics
+delivery_pincode,,"opendata_nodata.md_logistics.""delivery_pincode""",opendata_nodata.md_logistics
+"▼ md_logistics_stage   (base table, 9 cols)",,,opendata_nodata.md_logistics_stage
+date,,"opendata_nodata.md_logistics_stage.""date""",opendata_nodata.md_logistics_stage
+domain,,"opendata_nodata.md_logistics_stage.""domain""",opendata_nodata.md_logistics_stage
+category,,"opendata_nodata.md_logistics_stage.""category""",opendata_nodata.md_logistics_stage
+bap_id,,"opendata_nodata.md_logistics_stage.""bap_id""",opendata_nodata.md_logistics_stage
+bpp_id,,"opendata_nodata.md_logistics_stage.""bpp_id""",opendata_nodata.md_logistics_stage
+sub_cat,,"opendata_nodata.md_logistics_stage.""sub_cat""",opendata_nodata.md_logistics_stage
+order_count,,"opendata_nodata.md_logistics_stage.""order_count""",opendata_nodata.md_logistics_stage
+pick_up_pincode,,"opendata_nodata.md_logistics_stage.""pick_up_pincode""",opendata_nodata.md_logistics_stage
+delivery_pincode,,"opendata_nodata.md_logistics_stage.""delivery_pincode""",opendata_nodata.md_logistics_stage
+"▼ md_mobility_bus   (base table, 8 cols)",,,opendata_nodata.md_mobility_bus
+date,,"opendata_nodata.md_mobility_bus.""date""",opendata_nodata.md_mobility_bus
+domain,,"opendata_nodata.md_mobility_bus.""domain""",opendata_nodata.md_mobility_bus
+category,,"opendata_nodata.md_mobility_bus.""category""",opendata_nodata.md_mobility_bus
+bap_id,,"opendata_nodata.md_mobility_bus.""bap_id""",opendata_nodata.md_mobility_bus
+bpp_id,,"opendata_nodata.md_mobility_bus.""bpp_id""",opendata_nodata.md_mobility_bus
+tickets,,"opendata_nodata.md_mobility_bus.""tickets""",opendata_nodata.md_mobility_bus
+rides_qty,,"opendata_nodata.md_mobility_bus.""rides_qty""",opendata_nodata.md_mobility_bus
+modified_date,,"opendata_nodata.md_mobility_bus.""modified_date""",opendata_nodata.md_mobility_bus
+"▼ md_mobility_bus_stage   (base table, 7 cols)",,,opendata_nodata.md_mobility_bus_stage
+date,,"opendata_nodata.md_mobility_bus_stage.""date""",opendata_nodata.md_mobility_bus_stage
+domain,,"opendata_nodata.md_mobility_bus_stage.""domain""",opendata_nodata.md_mobility_bus_stage
+category,,"opendata_nodata.md_mobility_bus_stage.""category""",opendata_nodata.md_mobility_bus_stage
+bap_id,,"opendata_nodata.md_mobility_bus_stage.""bap_id""",opendata_nodata.md_mobility_bus_stage
+bpp_id,,"opendata_nodata.md_mobility_bus_stage.""bpp_id""",opendata_nodata.md_mobility_bus_stage
+tickets,,"opendata_nodata.md_mobility_bus_stage.""tickets""",opendata_nodata.md_mobility_bus_stage
+rides_qty,,"opendata_nodata.md_mobility_bus_stage.""rides_qty""",opendata_nodata.md_mobility_bus_stage
+"▼ md_mobility_metro   (base table, 9 cols)",,,opendata_nodata.md_mobility_metro
+Date,,"opendata_nodata.md_mobility_metro.""Date""",opendata_nodata.md_mobility_metro
+domain,,"opendata_nodata.md_mobility_metro.""domain""",opendata_nodata.md_mobility_metro
+category,,"opendata_nodata.md_mobility_metro.""category""",opendata_nodata.md_mobility_metro
+bpp_id,,"opendata_nodata.md_mobility_metro.""bpp_id""",opendata_nodata.md_mobility_metro
+bap_id,,"opendata_nodata.md_mobility_metro.""bap_id""",opendata_nodata.md_mobility_metro
+buyer_np,,"opendata_nodata.md_mobility_metro.""buyer_np""",opendata_nodata.md_mobility_metro
+seller_np,,"opendata_nodata.md_mobility_metro.""seller_np""",opendata_nodata.md_mobility_metro
+type,,"opendata_nodata.md_mobility_metro.""type""",opendata_nodata.md_mobility_metro
+order_count,,"opendata_nodata.md_mobility_metro.""order_count""",opendata_nodata.md_mobility_metro
+"▼ md_mobility_metro_stage   (base table, 9 cols)",,,opendata_nodata.md_mobility_metro_stage
+Date,,"opendata_nodata.md_mobility_metro_stage.""Date""",opendata_nodata.md_mobility_metro_stage
+domain,,"opendata_nodata.md_mobility_metro_stage.""domain""",opendata_nodata.md_mobility_metro_stage
+category,,"opendata_nodata.md_mobility_metro_stage.""category""",opendata_nodata.md_mobility_metro_stage
+bpp_id,,"opendata_nodata.md_mobility_metro_stage.""bpp_id""",opendata_nodata.md_mobility_metro_stage
+bap_id,,"opendata_nodata.md_mobility_metro_stage.""bap_id""",opendata_nodata.md_mobility_metro_stage
+buyer_np,,"opendata_nodata.md_mobility_metro_stage.""buyer_np""",opendata_nodata.md_mobility_metro_stage
+seller_np,,"opendata_nodata.md_mobility_metro_stage.""seller_np""",opendata_nodata.md_mobility_metro_stage
+type,,"opendata_nodata.md_mobility_metro_stage.""type""",opendata_nodata.md_mobility_metro_stage
+order_count,,"opendata_nodata.md_mobility_metro_stage.""order_count""",opendata_nodata.md_mobility_metro_stage
+"▼ md_mobility_metro_trv11   (base table, 8 cols)",,,opendata_nodata.md_mobility_metro_trv11
+bap_id,,"opendata_nodata.md_mobility_metro_trv11.""bap_id""",opendata_nodata.md_mobility_metro_trv11
+bpp_id,,"opendata_nodata.md_mobility_metro_trv11.""bpp_id""",opendata_nodata.md_mobility_metro_trv11
+date,,"opendata_nodata.md_mobility_metro_trv11.""date""",opendata_nodata.md_mobility_metro_trv11
+category,,"opendata_nodata.md_mobility_metro_trv11.""category""",opendata_nodata.md_mobility_metro_trv11
+igm_key,,"opendata_nodata.md_mobility_metro_trv11.""igm_key""",opendata_nodata.md_mobility_metro_trv11
+domain,,"opendata_nodata.md_mobility_metro_trv11.""domain""",opendata_nodata.md_mobility_metro_trv11
+rides_qty,,"opendata_nodata.md_mobility_metro_trv11.""rides_qty""",opendata_nodata.md_mobility_metro_trv11
+modified_date,,"opendata_nodata.md_mobility_metro_trv11.""modified_date""",opendata_nodata.md_mobility_metro_trv11
+"▼ md_mobility_metro_trv11_stage   (base table, 7 cols)",,,opendata_nodata.md_mobility_metro_trv11_stage
+bap_id,,"opendata_nodata.md_mobility_metro_trv11_stage.""bap_id""",opendata_nodata.md_mobility_metro_trv11_stage
+bpp_id,,"opendata_nodata.md_mobility_metro_trv11_stage.""bpp_id""",opendata_nodata.md_mobility_metro_trv11_stage
+date,,"opendata_nodata.md_mobility_metro_trv11_stage.""date""",opendata_nodata.md_mobility_metro_trv11_stage
+category,,"opendata_nodata.md_mobility_metro_trv11_stage.""category""",opendata_nodata.md_mobility_metro_trv11_stage
+igm_key,,"opendata_nodata.md_mobility_metro_trv11_stage.""igm_key""",opendata_nodata.md_mobility_metro_trv11_stage
+domain,,"opendata_nodata.md_mobility_metro_trv11_stage.""domain""",opendata_nodata.md_mobility_metro_trv11_stage
+rides_qty,,"opendata_nodata.md_mobility_metro_trv11_stage.""rides_qty""",opendata_nodata.md_mobility_metro_trv11_stage
+"▼ md_travel_experience   (base table, 7 cols)",,,opendata_nodata.md_travel_experience
+order_date,,"opendata_nodata.md_travel_experience.""order_date""",opendata_nodata.md_travel_experience
+bap_id,,"opendata_nodata.md_travel_experience.""bap_id""",opendata_nodata.md_travel_experience
+bpp_id,,"opendata_nodata.md_travel_experience.""bpp_id""",opendata_nodata.md_travel_experience
+category,,"opendata_nodata.md_travel_experience.""category""",opendata_nodata.md_travel_experience
+domain,,"opendata_nodata.md_travel_experience.""domain""",opendata_nodata.md_travel_experience
+orders,,"opendata_nodata.md_travel_experience.""orders""",opendata_nodata.md_travel_experience
+modified_date,,"opendata_nodata.md_travel_experience.""modified_date""",opendata_nodata.md_travel_experience
+"▼ md_travel_experience_stage   (base table, 6 cols)",,,opendata_nodata.md_travel_experience_stage
+order_date,,"opendata_nodata.md_travel_experience_stage.""order_date""",opendata_nodata.md_travel_experience_stage
+bap_id,,"opendata_nodata.md_travel_experience_stage.""bap_id""",opendata_nodata.md_travel_experience_stage
+bpp_id,,"opendata_nodata.md_travel_experience_stage.""bpp_id""",opendata_nodata.md_travel_experience_stage
+category,,"opendata_nodata.md_travel_experience_stage.""category""",opendata_nodata.md_travel_experience_stage
+domain,,"opendata_nodata.md_travel_experience_stage.""domain""",opendata_nodata.md_travel_experience_stage
+orders,,"opendata_nodata.md_travel_experience_stage.""orders""",opendata_nodata.md_travel_experience_stage
+"▼ md_users   (base table, 9 cols)",,,opendata_nodata.md_users
+id,,"opendata_nodata.md_users.""id""",opendata_nodata.md_users
+email,,"opendata_nodata.md_users.""email""",opendata_nodata.md_users
+name,,"opendata_nodata.md_users.""name""",opendata_nodata.md_users
+picture,,"opendata_nodata.md_users.""picture""",opendata_nodata.md_users
+google_id,,"opendata_nodata.md_users.""google_id""",opendata_nodata.md_users
+is_active,,"opendata_nodata.md_users.""is_active""",opendata_nodata.md_users
+created_at,,"opendata_nodata.md_users.""created_at""",opendata_nodata.md_users
+updated_at,,"opendata_nodata.md_users.""updated_at""",opendata_nodata.md_users
+role_id,,"opendata_nodata.md_users.""role_id""",opendata_nodata.md_users
+"▼ mobility_snp_wise   (base table, 6 cols)",,,opendata_nodata.mobility_snp_wise
+date,,"opendata_nodata.mobility_snp_wise.""date""",opendata_nodata.mobility_snp_wise
+bpp_id,,"opendata_nodata.mobility_snp_wise.""bpp_id""",opendata_nodata.mobility_snp_wise
+bap_id,,"opendata_nodata.mobility_snp_wise.""bap_id""",opendata_nodata.mobility_snp_wise
+category,,"opendata_nodata.mobility_snp_wise.""category""",opendata_nodata.mobility_snp_wise
+order_count,,"opendata_nodata.mobility_snp_wise.""order_count""",opendata_nodata.mobility_snp_wise
+modified_date,,"opendata_nodata.mobility_snp_wise.""modified_date""",opendata_nodata.mobility_snp_wise
+"▼ mobility_snp_wise_stage   (base table, 5 cols)",,,opendata_nodata.mobility_snp_wise_stage
+date,,"opendata_nodata.mobility_snp_wise_stage.""date""",opendata_nodata.mobility_snp_wise_stage
+bpp_id,,"opendata_nodata.mobility_snp_wise_stage.""bpp_id""",opendata_nodata.mobility_snp_wise_stage
+bap_id,,"opendata_nodata.mobility_snp_wise_stage.""bap_id""",opendata_nodata.mobility_snp_wise_stage
+category,,"opendata_nodata.mobility_snp_wise_stage.""category""",opendata_nodata.mobility_snp_wise_stage
+order_count,,"opendata_nodata.mobility_snp_wise_stage.""order_count""",opendata_nodata.mobility_snp_wise_stage
+"▼ model_for_all_d_old_orders   (base table, 9 cols)",,,opendata_nodata.model_for_all_d_old_orders
+Date,,"opendata_nodata.model_for_all_d_old_orders.""Date""",opendata_nodata.model_for_all_d_old_orders
+bap_id,,"opendata_nodata.model_for_all_d_old_orders.""bap_id""",opendata_nodata.model_for_all_d_old_orders
+bpp_id,,"opendata_nodata.model_for_all_d_old_orders.""bpp_id""",opendata_nodata.model_for_all_d_old_orders
+buyer_np,,"opendata_nodata.model_for_all_d_old_orders.""buyer_np""",opendata_nodata.model_for_all_d_old_orders
+seller_np,,"opendata_nodata.model_for_all_d_old_orders.""seller_np""",opendata_nodata.model_for_all_d_old_orders
+category,,"opendata_nodata.model_for_all_d_old_orders.""category""",opendata_nodata.model_for_all_d_old_orders
+domain,,"opendata_nodata.model_for_all_d_old_orders.""domain""",opendata_nodata.model_for_all_d_old_orders
+order_count,,"opendata_nodata.model_for_all_d_old_orders.""order_count""",opendata_nodata.model_for_all_d_old_orders
+Type New,,"opendata_nodata.model_for_all_d_old_orders.""Type New""",opendata_nodata.model_for_all_d_old_orders
+"▼ no_model_for_all_domain_pincode   (base table, 8 cols)",,,opendata_nodata.no_model_for_all_domain_pincode
+order_date,,"opendata_nodata.no_model_for_all_domain_pincode.""order_date""",opendata_nodata.no_model_for_all_domain_pincode
+domain,,"opendata_nodata.no_model_for_all_domain_pincode.""domain""",opendata_nodata.no_model_for_all_domain_pincode
+delivery_city,,"opendata_nodata.no_model_for_all_domain_pincode.""delivery_city""",opendata_nodata.no_model_for_all_domain_pincode
+seller_city,,"opendata_nodata.no_model_for_all_domain_pincode.""seller_city""",opendata_nodata.no_model_for_all_domain_pincode
+orders,,"opendata_nodata.no_model_for_all_domain_pincode.""orders""",opendata_nodata.no_model_for_all_domain_pincode
+delivery_pincode,,"opendata_nodata.no_model_for_all_domain_pincode.""delivery_pincode""",opendata_nodata.no_model_for_all_domain_pincode
+seller_pincode,,"opendata_nodata.no_model_for_all_domain_pincode.""seller_pincode""",opendata_nodata.no_model_for_all_domain_pincode
+category,,"opendata_nodata.no_model_for_all_domain_pincode.""category""",opendata_nodata.no_model_for_all_domain_pincode
+"▼ no_model_for_all_domain_pincode_stage   (base table, 8 cols)",,,opendata_nodata.no_model_for_all_domain_pincode_stage
+order_date,,"opendata_nodata.no_model_for_all_domain_pincode_stage.""order_date""",opendata_nodata.no_model_for_all_domain_pincode_stage
+domain,,"opendata_nodata.no_model_for_all_domain_pincode_stage.""domain""",opendata_nodata.no_model_for_all_domain_pincode_stage
+delivery_city,,"opendata_nodata.no_model_for_all_domain_pincode_stage.""delivery_city""",opendata_nodata.no_model_for_all_domain_pincode_stage
+seller_city,,"opendata_nodata.no_model_for_all_domain_pincode_stage.""seller_city""",opendata_nodata.no_model_for_all_domain_pincode_stage
+orders,,"opendata_nodata.no_model_for_all_domain_pincode_stage.""orders""",opendata_nodata.no_model_for_all_domain_pincode_stage
+delivery_pincode,,"opendata_nodata.no_model_for_all_domain_pincode_stage.""delivery_pincode""",opendata_nodata.no_model_for_all_domain_pincode_stage
+seller_pincode,,"opendata_nodata.no_model_for_all_domain_pincode_stage.""seller_pincode""",opendata_nodata.no_model_for_all_domain_pincode_stage
+category,,"opendata_nodata.no_model_for_all_domain_pincode_stage.""category""",opendata_nodata.no_model_for_all_domain_pincode_stage
+"▼ processed_reports   (base table, 4 cols)",,,opendata_nodata.processed_reports
+id,,"opendata_nodata.processed_reports.""id""",opendata_nodata.processed_reports
+report_data,,"opendata_nodata.processed_reports.""report_data""",opendata_nodata.processed_reports
+pdf_filename,,"opendata_nodata.processed_reports.""pdf_filename""",opendata_nodata.processed_reports
+processed_at,,"opendata_nodata.processed_reports.""processed_at""",opendata_nodata.processed_reports
+"▼ processing_status   (base table, 4 cols)",,,opendata_nodata.processing_status
+id,,"opendata_nodata.processing_status.""id""",opendata_nodata.processing_status
+status,,"opendata_nodata.processing_status.""status""",opendata_nodata.processing_status
+error_message,,"opendata_nodata.processing_status.""error_message""",opendata_nodata.processing_status
+updated_at,,"opendata_nodata.processing_status.""updated_at""",opendata_nodata.processing_status
+"▼ refresh_tokens   (base table, 6 cols)",,,opendata_nodata.refresh_tokens
+id,,"opendata_nodata.refresh_tokens.""id""",opendata_nodata.refresh_tokens
+token,,"opendata_nodata.refresh_tokens.""token""",opendata_nodata.refresh_tokens
+user_id,,"opendata_nodata.refresh_tokens.""user_id""",opendata_nodata.refresh_tokens
+expires_at,,"opendata_nodata.refresh_tokens.""expires_at""",opendata_nodata.refresh_tokens
+is_active,,"opendata_nodata.refresh_tokens.""is_active""",opendata_nodata.refresh_tokens
+created_at,,"opendata_nodata.refresh_tokens.""created_at""",opendata_nodata.refresh_tokens
+"▼ roles   (base table, 5 cols)",,,opendata_nodata.roles
+id,,"opendata_nodata.roles.""id""",opendata_nodata.roles
+name,,"opendata_nodata.roles.""name""",opendata_nodata.roles
+description,,"opendata_nodata.roles.""description""",opendata_nodata.roles
+created_at,,"opendata_nodata.roles.""created_at""",opendata_nodata.roles
+updated_at,,"opendata_nodata.roles.""updated_at""",opendata_nodata.roles
+"▼ token_blacklist   (base table, 6 cols)",,,opendata_nodata.token_blacklist
+id,,"opendata_nodata.token_blacklist.""id""",opendata_nodata.token_blacklist
+token,,"opendata_nodata.token_blacklist.""token""",opendata_nodata.token_blacklist
+user_id,,"opendata_nodata.token_blacklist.""user_id""",opendata_nodata.token_blacklist
+blacklisted_at,,"opendata_nodata.token_blacklist.""blacklisted_at""",opendata_nodata.token_blacklist
+expires_at,,"opendata_nodata.token_blacklist.""expires_at""",opendata_nodata.token_blacklist
+reason,,"opendata_nodata.token_blacklist.""reason""",opendata_nodata.token_blacklist
+"▼ user_queries   (base table, 11 cols)",,,opendata_nodata.user_queries
+id,,"opendata_nodata.user_queries.""id""",opendata_nodata.user_queries
+user_id,,"opendata_nodata.user_queries.""user_id""",opendata_nodata.user_queries
+subject,,"opendata_nodata.user_queries.""subject""",opendata_nodata.user_queries
+category,,"opendata_nodata.user_queries.""category""",opendata_nodata.user_queries
+query_text,,"opendata_nodata.user_queries.""query_text""",opendata_nodata.user_queries
+status,,"opendata_nodata.user_queries.""status""",opendata_nodata.user_queries
+admin_response,,"opendata_nodata.user_queries.""admin_response""",opendata_nodata.user_queries
+created_at,,"opendata_nodata.user_queries.""created_at""",opendata_nodata.user_queries
+updated_at,,"opendata_nodata.user_queries.""updated_at""",opendata_nodata.user_queries
+resolved_at,,"opendata_nodata.user_queries.""resolved_at""",opendata_nodata.user_queries
+resolved_by,,"opendata_nodata.user_queries.""resolved_by""",opendata_nodata.user_queries

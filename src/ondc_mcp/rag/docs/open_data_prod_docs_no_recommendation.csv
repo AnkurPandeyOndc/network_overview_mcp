@@ -1,0 +1,902 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s),DDL & Indexes
+"▼ bnp_view_potential_order   (base table, 9 cols)",,,no_recommendation.bnp_view_potential_order,
+date,Timestamp or date indicating when date occurred.,"no_recommendation.bnp_view_potential_order.""date""",no_recommendation.bnp_view_potential_order,
+time_frame,Timestamp or date indicating when time frame occurred.,"no_recommendation.bnp_view_potential_order.""time_frame""",no_recommendation.bnp_view_potential_order,
+pincode,Indian postal code (pincode).,"no_recommendation.bnp_view_potential_order.""pincode""",no_recommendation.bnp_view_potential_order,
+seller_count,Data representing the seller count.,"no_recommendation.bnp_view_potential_order.""seller_count""",no_recommendation.bnp_view_potential_order,
+qsr_seller,Data representing the qsr seller.,"no_recommendation.bnp_view_potential_order.""qsr_seller""",no_recommendation.bnp_view_potential_order,
+potential_orders,Data representing the potential orders.,"no_recommendation.bnp_view_potential_order.""potential_orders""",no_recommendation.bnp_view_potential_order,
+select_calls,Data representing the select calls.,"no_recommendation.bnp_view_potential_order.""select_calls""",no_recommendation.bnp_view_potential_order,
+error,Data representing the error.,"no_recommendation.bnp_view_potential_order.""error""",no_recommendation.bnp_view_potential_order,
+logistics_cancel,Data representing the logistics cancel.,"no_recommendation.bnp_view_potential_order.""logistics_cancel""",no_recommendation.bnp_view_potential_order,
+"▼ bnp_view_potential_order_old   (base table, 9 cols)",,,no_recommendation.bnp_view_potential_order_old,
+date,Timestamp or date indicating when date occurred.,"no_recommendation.bnp_view_potential_order_old.""date""",no_recommendation.bnp_view_potential_order_old,
+time_frame,Timestamp or date indicating when time frame occurred.,"no_recommendation.bnp_view_potential_order_old.""time_frame""",no_recommendation.bnp_view_potential_order_old,
+pincode,Indian postal code (pincode).,"no_recommendation.bnp_view_potential_order_old.""pincode""",no_recommendation.bnp_view_potential_order_old,
+seller_count,Data representing the seller count.,"no_recommendation.bnp_view_potential_order_old.""seller_count""",no_recommendation.bnp_view_potential_order_old,
+qsr_seller,Data representing the qsr seller.,"no_recommendation.bnp_view_potential_order_old.""qsr_seller""",no_recommendation.bnp_view_potential_order_old,
+potential_orders,Data representing the potential orders.,"no_recommendation.bnp_view_potential_order_old.""potential_orders""",no_recommendation.bnp_view_potential_order_old,
+select_calls,Data representing the select calls.,"no_recommendation.bnp_view_potential_order_old.""select_calls""",no_recommendation.bnp_view_potential_order_old,
+error,Data representing the error.,"no_recommendation.bnp_view_potential_order_old.""error""",no_recommendation.bnp_view_potential_order_old,
+logistics_cancel,Data representing the logistics cancel.,"no_recommendation.bnp_view_potential_order_old.""logistics_cancel""",no_recommendation.bnp_view_potential_order_old,
+"▼ dim_pincode   (base table, 4 cols)",,,no_recommendation.dim_pincode,CREATE INDEX idx_dim_pincode ON no_recommendation.dim_pincode USING btree (pincode)
+pincode,Indian postal code (pincode).,"no_recommendation.dim_pincode.""pincode""",no_recommendation.dim_pincode,
+state_name,Turn-Around-Time (TAT) measurement.,"no_recommendation.dim_pincode.""state_name""",no_recommendation.dim_pincode,
+district_name,Name of the district.,"no_recommendation.dim_pincode.""district_name""",no_recommendation.dim_pincode,
+state_code,Turn-Around-Time (TAT) measurement.,"no_recommendation.dim_pincode.""state_code""",no_recommendation.dim_pincode,
+"▼ dim_pincode_new   (base table, 3 cols)",,,no_recommendation.dim_pincode_new,
+pincode,Indian postal code (pincode).,"no_recommendation.dim_pincode_new.""pincode""",no_recommendation.dim_pincode_new,
+state_name,Turn-Around-Time (TAT) measurement.,"no_recommendation.dim_pincode_new.""state_name""",no_recommendation.dim_pincode_new,
+district_name,Name of the district.,"no_recommendation.dim_pincode_new.""district_name""",no_recommendation.dim_pincode_new,
+"▼ dim_seller_np   (base table, 2 cols)",,,no_recommendation.dim_seller_np,
+name,Name of the name.,"no_recommendation.dim_seller_np.""name""",no_recommendation.dim_seller_np,
+seller_np,Data representing the seller np.,"no_recommendation.dim_seller_np.""seller_np""",no_recommendation.dim_seller_np,
+"▼ logistics_gold_test   (view, 48 cols)",,,no_recommendation.logistics_gold_test,"WITH base_master AS (
+         SELECT ml.bap_id,
+            ml.bpp_id,
+            ml.order_id,
+            ml.transaction_id,
+            ml.fulfillment_status,
+            ml.cod_order,
+            ml.date,
+            ml.order_created_at,
+            ml.cancellation_code,
+            ml.latest_order_status,
+            ml.retail_order_id,
+            ml.pick_up_pincode,
+            ml.delivery_pincode,
+            ml.retail_category,
+            ml.shipment_type,
+            ml.motorable_distance,
+            ml.provider_name,
+            ml.pickup_tat,
+            ml.rts_tat,
+            ml.f_ready_to_ship_at_date,
+            ml.f_at_pickup_from_date,
+            ml.f_agent_assigned_at_date,
+            ml.delivered_date,
+            ml.cancelled_date,
+            ml.picked_date,
+            ml.promised_time_to_deliver,
+            ml.fulfillment_type,
+            ml.awb_number,
+            ml.pick_up_lat,
+            ml.pick_up_long,
+                CASE
+                    WHEN ml.delivered_date IS NULL AND ml.cancelled_date IS NOT NULL THEN 'Cancelled'::character varying
+                    WHEN ml.delivered_date IS NOT NULL AND ml.cancelled_date IS NULL THEN 'Completed'::character varying
+                    ELSE ml.latest_order_status
+                END AS order_status
+           FROM logistics.master_log ml
+          WHERE ml.drop_row = 0 AND NOT (ml.date >= '2024-05-01'::date AND ml.f_agent_assigned_at_date IS NULL AND (ml.cancelled_date IS NOT NULL AND ml.delivered_date IS NULL OR ml.cancelled_date IS NULL AND ml.delivered_date IS NULL AND ml.latest_order_status::text = 'Cancelled'::text) AND
+                CASE
+                    WHEN ml.bpp_id::text = 'ondc-lsp.olacabs.com'::text THEN 'P2P'::character varying
+                    ELSE ml.shipment_type
+                END::text = 'P2P'::text)
+        ), enriched AS (
+         SELECT base_master.bap_id,
+            base_master.bpp_id,
+            base_master.order_id,
+            base_master.transaction_id,
+            base_master.fulfillment_status,
+            base_master.cod_order,
+            base_master.date,
+            base_master.order_created_at,
+            base_master.cancellation_code,
+            base_master.latest_order_status,
+            base_master.retail_order_id,
+            base_master.pick_up_pincode,
+            base_master.delivery_pincode,
+            base_master.retail_category,
+            base_master.shipment_type,
+            base_master.motorable_distance,
+            base_master.provider_name,
+            base_master.pickup_tat,
+            base_master.rts_tat,
+            base_master.f_ready_to_ship_at_date,
+            base_master.f_at_pickup_from_date,
+            base_master.f_agent_assigned_at_date,
+            base_master.delivered_date,
+            base_master.cancelled_date,
+            base_master.picked_date,
+            base_master.promised_time_to_deliver,
+            base_master.fulfillment_type,
+            base_master.awb_number,
+            base_master.pick_up_lat,
+            base_master.pick_up_long,
+            base_master.order_status,
+            COALESCE(base_master.retail_order_id, base_master.order_id) AS network_retail_order_id,
+            COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) AS effective_pickup_date,
+                CASE
+                    WHEN base_master.order_status::text = 'Completed'::text AND base_master.f_agent_assigned_at_date IS NOT NULL AND COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) IS NOT NULL THEN 1
+                    WHEN base_master.order_status::text = 'Completed'::text AND base_master.f_agent_assigned_at_date IS NOT NULL AND COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) IS NULL THEN 2
+                    WHEN base_master.order_status::text = 'Completed'::text AND base_master.f_agent_assigned_at_date IS NULL AND COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) IS NOT NULL THEN 3
+                    WHEN base_master.order_status::text = 'Completed'::text AND base_master.f_agent_assigned_at_date IS NULL AND COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) IS NULL THEN 4
+                    WHEN (base_master.order_status::text <> ALL (ARRAY['Completed'::character varying, 'Cancelled'::character varying]::text[])) AND base_master.f_agent_assigned_at_date IS NOT NULL AND COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) IS NOT NULL THEN 5
+                    WHEN (base_master.order_status::text <> ALL (ARRAY['Completed'::character varying, 'Cancelled'::character varying]::text[])) AND base_master.f_agent_assigned_at_date IS NOT NULL AND COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) IS NULL THEN 6
+                    WHEN (base_master.order_status::text <> ALL (ARRAY['Completed'::character varying, 'Cancelled'::character varying]::text[])) AND base_master.f_agent_assigned_at_date IS NULL AND COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) IS NOT NULL THEN 7
+                    WHEN (base_master.order_status::text <> ALL (ARRAY['Completed'::character varying, 'Cancelled'::character varying]::text[])) AND base_master.f_agent_assigned_at_date IS NULL AND COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) IS NULL THEN 8
+                    WHEN base_master.order_status::text = 'Cancelled'::text AND base_master.f_agent_assigned_at_date IS NOT NULL AND COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) IS NOT NULL THEN 9
+                    WHEN base_master.order_status::text = 'Cancelled'::text AND base_master.f_agent_assigned_at_date IS NOT NULL AND COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) IS NULL THEN 10
+                    WHEN base_master.order_status::text = 'Cancelled'::text AND base_master.f_agent_assigned_at_date IS NULL AND COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) IS NOT NULL THEN 11
+                    WHEN base_master.order_status::text = 'Cancelled'::text AND base_master.f_agent_assigned_at_date IS NULL AND COALESCE(base_master.f_at_pickup_from_date, base_master.picked_date) IS NULL THEN 12
+                    ELSE 999
+                END AS rank
+           FROM base_master
+        ), ranked AS (
+         SELECT enriched.bap_id,
+            enriched.bpp_id,
+            enriched.order_id,
+            enriched.transaction_id,
+            enriched.fulfillment_status,
+            enriched.cod_order,
+            enriched.date,
+            enriched.order_created_at,
+            enriched.cancellation_code,
+            enriched.latest_order_status,
+            enriched.retail_order_id,
+            enriched.pick_up_pincode,
+            enriched.delivery_pincode,
+            enriched.retail_category,
+            enriched.shipment_type,
+            enriched.motorable_distance,
+            enriched.provider_name,
+            enriched.pickup_tat,
+            enriched.rts_tat,
+            enriched.f_ready_to_ship_at_date,
+            enriched.f_at_pickup_from_date,
+            enriched.f_agent_assigned_at_date,
+            enriched.delivered_date,
+            enriched.cancelled_date,
+            enriched.picked_date,
+            enriched.promised_time_to_deliver,
+            enriched.fulfillment_type,
+            enriched.awb_number,
+            enriched.pick_up_lat,
+            enriched.pick_up_long,
+            enriched.order_status,
+            enriched.network_retail_order_id,
+            enriched.effective_pickup_date,
+            enriched.rank,
+                CASE enriched.rank
+                    WHEN 1 THEN 'DAP'::text
+                    WHEN 2 THEN 'DANP'::text
+                    WHEN 3 THEN 'DNAP'::text
+                    WHEN 4 THEN 'DNANP'::text
+                    WHEN 5 THEN 'IPAP'::text
+                    WHEN 6 THEN 'IPANP'::text
+                    WHEN 7 THEN 'IPNAP'::text
+                    WHEN 8 THEN 'IPNANP'::text
+                    WHEN 9 THEN 'CAP'::text
+                    WHEN 10 THEN 'CANP'::text
+                    WHEN 11 THEN 'CNAP'::text
+                    WHEN 12 THEN 'CNANP'::text
+                    ELSE NULL::text
+                END AS mark
+           FROM enriched
+        ), min_dedup AS (
+         SELECT sub.bpp_id,
+            sub.network_retail_order_id,
+            sub.transaction_id,
+            sub.order_id
+           FROM ( SELECT ranked.bpp_id,
+                    ranked.network_retail_order_id,
+                    ranked.transaction_id,
+                    ranked.order_id,
+                    ranked.order_created_at,
+                    ranked.rank,
+                    min(ranked.rank) OVER (PARTITION BY ranked.network_retail_order_id) AS min_rank_global,
+                    row_number() OVER (PARTITION BY ranked.network_retail_order_id ORDER BY ranked.rank, ranked.order_created_at DESC) AS rn
+                   FROM ranked) sub
+          WHERE sub.rn = 1
+        ), master_with_rownum AS (
+         SELECT mt.bap_id,
+            mt.bpp_id,
+            mt.order_id,
+            mt.transaction_id,
+            mt.fulfillment_status,
+            mt.cod_order,
+            mt.date,
+            mt.order_created_at,
+            mt.cancellation_code,
+            mt.latest_order_status,
+            mt.retail_order_id,
+            mt.pick_up_pincode,
+            mt.delivery_pincode,
+            mt.retail_category,
+            mt.shipment_type,
+            mt.motorable_distance,
+            mt.provider_name,
+            mt.pickup_tat,
+            mt.rts_tat,
+            mt.f_ready_to_ship_at_date,
+            mt.f_at_pickup_from_date,
+            mt.f_agent_assigned_at_date,
+            mt.delivered_date,
+            mt.cancelled_date,
+            mt.picked_date,
+            mt.promised_time_to_deliver,
+            mt.fulfillment_type,
+            mt.awb_number,
+            mt.pick_up_lat,
+            mt.pick_up_long,
+            mt.order_status,
+            mt.network_retail_order_id,
+            mt.effective_pickup_date,
+            mt.rank,
+            mt.mark,
+                CASE
+                    WHEN md.transaction_id::text = mt.transaction_id::text AND COALESCE(mt.retail_order_id, mt.order_id)::text = md.network_retail_order_id::text AND md.order_id::text = mt.order_id::text THEN 1
+                    ELSE 0
+                END AS rn_retail,
+            row_number() OVER (PARTITION BY mt.order_id, mt.transaction_id, mt.bap_id, mt.bpp_id, mt.order_created_at ORDER BY mt.order_created_at DESC) AS rn_order
+           FROM ranked mt
+             LEFT JOIN min_dedup md ON md.bpp_id::text = mt.bpp_id::text AND md.transaction_id::text = mt.transaction_id::text AND md.network_retail_order_id::text = mt.network_retail_order_id::text AND md.order_id::text = mt.order_id::text
+        ), masked AS (
+         SELECT master_with_rownum.bap_id,
+            master_with_rownum.bpp_id,
+            master_with_rownum.order_id,
+            master_with_rownum.transaction_id,
+            master_with_rownum.fulfillment_status,
+            master_with_rownum.cod_order,
+            master_with_rownum.date,
+            master_with_rownum.order_created_at,
+            master_with_rownum.cancellation_code,
+            master_with_rownum.latest_order_status,
+            master_with_rownum.retail_order_id,
+            master_with_rownum.pick_up_pincode,
+            master_with_rownum.delivery_pincode,
+            master_with_rownum.retail_category,
+            master_with_rownum.shipment_type,
+            master_with_rownum.motorable_distance,
+            master_with_rownum.provider_name,
+            master_with_rownum.pickup_tat,
+            master_with_rownum.rts_tat,
+            master_with_rownum.f_ready_to_ship_at_date,
+            master_with_rownum.f_at_pickup_from_date,
+            master_with_rownum.f_agent_assigned_at_date,
+            master_with_rownum.delivered_date,
+            master_with_rownum.cancelled_date,
+            master_with_rownum.picked_date,
+            master_with_rownum.promised_time_to_deliver,
+            master_with_rownum.fulfillment_type,
+            master_with_rownum.awb_number,
+            master_with_rownum.pick_up_lat,
+            master_with_rownum.pick_up_long,
+            master_with_rownum.order_status,
+            master_with_rownum.network_retail_order_id,
+            master_with_rownum.effective_pickup_date,
+            master_with_rownum.rank,
+            master_with_rownum.mark,
+            master_with_rownum.rn_retail,
+            master_with_rownum.rn_order,
+            master_with_rownum.date >= (CURRENT_DATE - '6 mons'::interval) AS is_recent
+           FROM master_with_rownum
+        )
+ SELECT mw.bap_id,
+    mw.bpp_id,
+        CASE
+            WHEN mw.is_recent THEN mw.order_id
+            ELSE NULL::character varying
+        END AS order_id,
+        CASE
+            WHEN mw.is_recent THEN mw.transaction_id
+            ELSE NULL::character varying
+        END AS transaction_id,
+        CASE
+            WHEN mw.is_recent THEN mw.retail_order_id
+            ELSE NULL::character varying
+        END AS retail_order_id,
+        CASE
+            WHEN mw.is_recent THEN date_trunc('minute'::text, mw.f_ready_to_ship_at_date)
+            ELSE NULL::timestamp without time zone
+        END AS f_ready_to_ship_at_date,
+    mw.fulfillment_status,
+    mw.fulfillment_type,
+    mw.cod_order,
+    mw.date,
+    mw.order_created_at,
+    mw.cancellation_code,
+    mw.order_status AS latest_order_status,
+    mw.pick_up_pincode,
+    mw.delivery_pincode,
+    mw.retail_category,
+    mw.shipment_type,
+    mw.motorable_distance,
+    mw.provider_name,
+    date_trunc('minute'::text, mw.pickup_tat) AS pickup_tat,
+    date_trunc('minute'::text, mw.rts_tat) AS rts_tat,
+    date_trunc('minute'::text, mw.f_at_pickup_from_date) AS f_at_pickup_from_date,
+    date_trunc('minute'::text, mw.f_agent_assigned_at_date) AS f_agent_assigned_at_date,
+    date_trunc('minute'::text, mw.delivered_date) AS delivered_date,
+    date_trunc('minute'::text, mw.cancelled_date) AS cancelled_date,
+    date_trunc('minute'::text, mw.picked_date) AS picked_date,
+    date_trunc('minute'::text, mw.promised_time_to_deliver) AS promised_time_to_deliver,
+    mw.awb_number AS awbnumber,
+    o.""Buyer NP"" AS buyer_np,
+    o.""Seller NP"" AS retail_snp,
+        CASE
+            WHEN o.""Network order id"" IS NULL THEN 0
+            ELSE 1
+        END AS ""Linked Orders"",
+    mw.rn_retail AS dedup,
+        CASE
+            WHEN mw.rn_order = 1 THEN 1
+            ELSE 0
+        END AS order_count,
+        CASE
+            WHEN mw.order_status::text = 'Completed'::text AND mw.delivered_date IS NOT NULL AND mw.f_ready_to_ship_at_date IS NOT NULL THEN round(EXTRACT(epoch FROM mw.delivered_date - mw.f_ready_to_ship_at_date) / 60::numeric, 0)
+            ELSE NULL::numeric
+        END AS avg_del,
+    round(EXTRACT(epoch FROM mw.promised_time_to_deliver - mw.order_created_at) / 60::numeric, 0) AS del_tat_duration,
+        CASE
+            WHEN mw.order_status::text = 'Completed'::text AND mw.delivered_date IS NOT NULL AND mw.f_ready_to_ship_at_date IS NOT NULL THEN
+            CASE
+                WHEN mw.delivered_date <= mw.promised_time_to_deliver THEN 1
+                ELSE 0
+            END
+            ELSE NULL::integer
+        END AS del_adherence,
+        CASE
+            WHEN mw.order_status::text = 'Completed'::text AND mw.delivered_date IS NOT NULL AND mw.f_ready_to_ship_at_date IS NOT NULL AND mw.promised_time_to_deliver IS NOT NULL AND mw.delivered_date > mw.promised_time_to_deliver THEN EXTRACT(epoch FROM mw.delivered_date - mw.promised_time_to_deliver)
+            ELSE NULL::numeric
+        END AS del_breach_diff,
+        CASE
+            WHEN mw.f_ready_to_ship_at_date IS NOT NULL THEN EXTRACT(epoch FROM mw.f_ready_to_ship_at_date - mw.order_created_at)
+            ELSE NULL::numeric
+        END AS rtsvscrt,
+        CASE
+            WHEN mw.picked_date IS NOT NULL THEN EXTRACT(epoch FROM mw.effective_pickup_date - mw.f_ready_to_ship_at_date)
+            ELSE NULL::numeric
+        END AS rtsvspck,
+        CASE
+            WHEN mw.order_status::text = 'Completed'::text AND mw.delivered_date IS NOT NULL AND mw.f_ready_to_ship_at_date IS NOT NULL THEN round(EXTRACT(epoch FROM mw.delivered_date - mw.f_ready_to_ship_at_date) / 60::numeric, 0)
+            ELSE NULL::numeric
+        END AS delage,
+        CASE
+            WHEN mw.order_status::text = 'Cancelled'::text THEN EXTRACT(epoch FROM mw.cancelled_date - mw.order_created_at)
+            ELSE NULL::numeric
+        END AS cancel_secs,
+        CASE
+            WHEN mw.order_status::text <> ALL (ARRAY['Completed'::character varying, 'Cancelled'::character varying]::text[]) THEN round(EXTRACT(epoch FROM now() - mw.order_created_at::timestamp with time zone) / 60::numeric, 0)
+            ELSE NULL::numeric
+        END AS in_process_ageing,
+        CASE
+            WHEN mw.f_at_pickup_from_date IS NOT NULL AND mw.picked_date IS NOT NULL THEN round(EXTRACT(epoch FROM mw.picked_date - mw.f_at_pickup_from_date) / 60::numeric, 0)
+            ELSE NULL::numeric
+        END AS rider_waiting,
+        CASE
+            WHEN mw.f_agent_assigned_at_date IS NOT NULL AND mw.f_ready_to_ship_at_date IS NOT NULL THEN round(EXTRACT(epoch FROM mw.f_agent_assigned_at_date - mw.f_ready_to_ship_at_date) / 60::numeric, 0)
+            ELSE NULL::numeric
+        END AS rider_assigning,
+        CASE
+            WHEN mw.pickup_tat IS NOT NULL AND mw.effective_pickup_date IS NOT NULL THEN
+            CASE
+                WHEN mw.effective_pickup_date <= mw.pickup_tat THEN 0
+                ELSE 1
+            END
+            ELSE NULL::integer
+        END AS pick_up_breached,
+        CASE
+            WHEN mw.pickup_tat IS NOT NULL AND mw.effective_pickup_date IS NOT NULL THEN EXTRACT(epoch FROM mw.effective_pickup_date - mw.pickup_tat)
+            ELSE NULL::numeric
+        END AS pick_up_tat_diff,
+        CASE
+            WHEN mw.rts_tat IS NOT NULL AND mw.f_ready_to_ship_at_date IS NOT NULL THEN
+            CASE
+                WHEN mw.f_ready_to_ship_at_date <= mw.rts_tat THEN 0
+                ELSE 1
+            END
+            ELSE NULL::integer
+        END AS rts_breached,
+        CASE
+            WHEN mw.rts_tat IS NOT NULL AND mw.f_ready_to_ship_at_date IS NOT NULL THEN EXTRACT(epoch FROM mw.f_ready_to_ship_at_date - mw.rts_tat)
+            ELSE NULL::numeric
+        END AS rts_tat_diff
+   FROM masked mw
+     LEFT JOIN analytics_insight.order_level o ON o.""Network order id""::text = mw.retail_order_id::text;"
+bap_id,Unique identifier for the Buyer App (BAP).,"no_recommendation.logistics_gold_test.""bap_id""",no_recommendation.logistics_gold_test,
+bpp_id,Unique identifier for the Seller App (BPP).,"no_recommendation.logistics_gold_test.""bpp_id""",no_recommendation.logistics_gold_test,
+order_id,Unique identifier for order.,"no_recommendation.logistics_gold_test.""order_id""",no_recommendation.logistics_gold_test,
+transaction_id,Unique ONDC transaction identifier.,"no_recommendation.logistics_gold_test.""transaction_id""",no_recommendation.logistics_gold_test,
+retail_order_id,Unique identifier for retail order.,"no_recommendation.logistics_gold_test.""retail_order_id""",no_recommendation.logistics_gold_test,
+f_ready_to_ship_at_date,Timestamp or date indicating when f ready to ship at date occurred.,"no_recommendation.logistics_gold_test.""f_ready_to_ship_at_date""",no_recommendation.logistics_gold_test,
+fulfillment_status,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_gold_test.""fulfillment_status""",no_recommendation.logistics_gold_test,
+fulfillment_type,Data representing the fulfillment type.,"no_recommendation.logistics_gold_test.""fulfillment_type""",no_recommendation.logistics_gold_test,
+cod_order,Data representing the cod order.,"no_recommendation.logistics_gold_test.""cod_order""",no_recommendation.logistics_gold_test,
+date,Timestamp or date indicating when date occurred.,"no_recommendation.logistics_gold_test.""date""",no_recommendation.logistics_gold_test,
+order_created_at,Timestamp when the record was created.,"no_recommendation.logistics_gold_test.""order_created_at""",no_recommendation.logistics_gold_test,
+cancellation_code,Timestamp or date indicating when cancellation code occurred.,"no_recommendation.logistics_gold_test.""cancellation_code""",no_recommendation.logistics_gold_test,
+latest_order_status,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_gold_test.""latest_order_status""",no_recommendation.logistics_gold_test,
+pick_up_pincode,Indian postal code (pincode).,"no_recommendation.logistics_gold_test.""pick_up_pincode""",no_recommendation.logistics_gold_test,
+delivery_pincode,Indian postal code (pincode).,"no_recommendation.logistics_gold_test.""delivery_pincode""",no_recommendation.logistics_gold_test,
+retail_category,Timestamp or date indicating when retail category occurred.,"no_recommendation.logistics_gold_test.""retail_category""",no_recommendation.logistics_gold_test,
+shipment_type,Data representing the shipment type.,"no_recommendation.logistics_gold_test.""shipment_type""",no_recommendation.logistics_gold_test,
+motorable_distance,Data representing the motorable distance.,"no_recommendation.logistics_gold_test.""motorable_distance""",no_recommendation.logistics_gold_test,
+provider_name,Unique identifier for provider name.,"no_recommendation.logistics_gold_test.""provider_name""",no_recommendation.logistics_gold_test,
+pickup_tat,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_gold_test.""pickup_tat""",no_recommendation.logistics_gold_test,
+rts_tat,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_gold_test.""rts_tat""",no_recommendation.logistics_gold_test,
+f_at_pickup_from_date,Timestamp or date indicating when f at pickup from date occurred.,"no_recommendation.logistics_gold_test.""f_at_pickup_from_date""",no_recommendation.logistics_gold_test,
+f_agent_assigned_at_date,Timestamp or date indicating when f agent assigned at date occurred.,"no_recommendation.logistics_gold_test.""f_agent_assigned_at_date""",no_recommendation.logistics_gold_test,
+delivered_date,Timestamp or date indicating when delivered date occurred.,"no_recommendation.logistics_gold_test.""delivered_date""",no_recommendation.logistics_gold_test,
+cancelled_date,Timestamp or date indicating when cancelled date occurred.,"no_recommendation.logistics_gold_test.""cancelled_date""",no_recommendation.logistics_gold_test,
+picked_date,Timestamp or date indicating when picked date occurred.,"no_recommendation.logistics_gold_test.""picked_date""",no_recommendation.logistics_gold_test,
+promised_time_to_deliver,Timestamp or date indicating when promised time to deliver occurred.,"no_recommendation.logistics_gold_test.""promised_time_to_deliver""",no_recommendation.logistics_gold_test,
+awbnumber,Data representing the awbnumber.,"no_recommendation.logistics_gold_test.""awbnumber""",no_recommendation.logistics_gold_test,
+buyer_np,Data representing the buyer np.,"no_recommendation.logistics_gold_test.""buyer_np""",no_recommendation.logistics_gold_test,
+retail_snp,Data representing the retail snp.,"no_recommendation.logistics_gold_test.""retail_snp""",no_recommendation.logistics_gold_test,
+Linked Orders,Data representing the linked orders.,"no_recommendation.logistics_gold_test.""Linked Orders""",no_recommendation.logistics_gold_test,
+dedup,Data representing the dedup.,"no_recommendation.logistics_gold_test.""dedup""",no_recommendation.logistics_gold_test,
+order_count,Data representing the order count.,"no_recommendation.logistics_gold_test.""order_count""",no_recommendation.logistics_gold_test,
+avg_del,Data representing the avg del.,"no_recommendation.logistics_gold_test.""avg_del""",no_recommendation.logistics_gold_test,
+del_tat_duration,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_gold_test.""del_tat_duration""",no_recommendation.logistics_gold_test,
+del_adherence,Data representing the del adherence.,"no_recommendation.logistics_gold_test.""del_adherence""",no_recommendation.logistics_gold_test,
+del_breach_diff,Data representing the del breach diff.,"no_recommendation.logistics_gold_test.""del_breach_diff""",no_recommendation.logistics_gold_test,
+rtsvscrt,Data representing the rtsvscrt.,"no_recommendation.logistics_gold_test.""rtsvscrt""",no_recommendation.logistics_gold_test,
+rtsvspck,Data representing the rtsvspck.,"no_recommendation.logistics_gold_test.""rtsvspck""",no_recommendation.logistics_gold_test,
+delage,Data representing the delage.,"no_recommendation.logistics_gold_test.""delage""",no_recommendation.logistics_gold_test,
+cancel_secs,Data representing the cancel secs.,"no_recommendation.logistics_gold_test.""cancel_secs""",no_recommendation.logistics_gold_test,
+in_process_ageing,Data representing the in process ageing.,"no_recommendation.logistics_gold_test.""in_process_ageing""",no_recommendation.logistics_gold_test,
+rider_waiting,Unique identifier for rider waiting.,"no_recommendation.logistics_gold_test.""rider_waiting""",no_recommendation.logistics_gold_test,
+rider_assigning,Unique identifier for rider assigning.,"no_recommendation.logistics_gold_test.""rider_assigning""",no_recommendation.logistics_gold_test,
+pick_up_breached,Data representing the pick up breached.,"no_recommendation.logistics_gold_test.""pick_up_breached""",no_recommendation.logistics_gold_test,
+pick_up_tat_diff,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_gold_test.""pick_up_tat_diff""",no_recommendation.logistics_gold_test,
+rts_breached,Data representing the rts breached.,"no_recommendation.logistics_gold_test.""rts_breached""",no_recommendation.logistics_gold_test,
+rts_tat_diff,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_gold_test.""rts_tat_diff""",no_recommendation.logistics_gold_test,
+"▼ logistics_order_bv   (base table, 206 cols)",,,no_recommendation.logistics_order_bv,
+bap_id,Unique identifier for the Buyer App (BAP).,"no_recommendation.logistics_order_bv.""bap_id""",no_recommendation.logistics_order_bv,
+bpp_id,Unique identifier for the Seller App (BPP).,"no_recommendation.logistics_order_bv.""bpp_id""",no_recommendation.logistics_order_bv,
+order_id,Unique identifier for order.,"no_recommendation.logistics_order_bv.""order_id""",no_recommendation.logistics_order_bv,
+transaction_id,Unique ONDC transaction identifier.,"no_recommendation.logistics_order_bv.""transaction_id""",no_recommendation.logistics_order_bv,
+fulfillment_status,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""fulfillment_status""",no_recommendation.logistics_order_bv,
+fulfillment_type,Data representing the fulfillment type.,"no_recommendation.logistics_order_bv.""fulfillment_type""",no_recommendation.logistics_order_bv,
+cod_order,Data representing the cod order.,"no_recommendation.logistics_order_bv.""cod_order""",no_recommendation.logistics_order_bv,
+date,Timestamp or date indicating when date occurred.,"no_recommendation.logistics_order_bv.""date""",no_recommendation.logistics_order_bv,
+order_created_at,Timestamp when the record was created.,"no_recommendation.logistics_order_bv.""order_created_at""",no_recommendation.logistics_order_bv,
+cancellation_code,Timestamp or date indicating when cancellation code occurred.,"no_recommendation.logistics_order_bv.""cancellation_code""",no_recommendation.logistics_order_bv,
+latest_order_status,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""latest_order_status""",no_recommendation.logistics_order_bv,
+retail_order_id,Unique identifier for retail order.,"no_recommendation.logistics_order_bv.""retail_order_id""",no_recommendation.logistics_order_bv,
+pick_up_pincode,Indian postal code (pincode).,"no_recommendation.logistics_order_bv.""pick_up_pincode""",no_recommendation.logistics_order_bv,
+delivery_pincode,Indian postal code (pincode).,"no_recommendation.logistics_order_bv.""delivery_pincode""",no_recommendation.logistics_order_bv,
+retail_category,Timestamp or date indicating when retail category occurred.,"no_recommendation.logistics_order_bv.""retail_category""",no_recommendation.logistics_order_bv,
+shipment_type,Data representing the shipment type.,"no_recommendation.logistics_order_bv.""shipment_type""",no_recommendation.logistics_order_bv,
+motorable_distance,Data representing the motorable distance.,"no_recommendation.logistics_order_bv.""motorable_distance""",no_recommendation.logistics_order_bv,
+provider_name,Unique identifier for provider name.,"no_recommendation.logistics_order_bv.""provider_name""",no_recommendation.logistics_order_bv,
+pickup_tat,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""pickup_tat""",no_recommendation.logistics_order_bv,
+rts_tat,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""rts_tat""",no_recommendation.logistics_order_bv,
+f_ready_to_ship_at_date,Timestamp or date indicating when f ready to ship at date occurred.,"no_recommendation.logistics_order_bv.""f_ready_to_ship_at_date""",no_recommendation.logistics_order_bv,
+f_at_pickup_from_date,Timestamp or date indicating when f at pickup from date occurred.,"no_recommendation.logistics_order_bv.""f_at_pickup_from_date""",no_recommendation.logistics_order_bv,
+f_agent_assigned_at_date,Timestamp or date indicating when f agent assigned at date occurred.,"no_recommendation.logistics_order_bv.""f_agent_assigned_at_date""",no_recommendation.logistics_order_bv,
+delivered_date,Timestamp or date indicating when delivered date occurred.,"no_recommendation.logistics_order_bv.""delivered_date""",no_recommendation.logistics_order_bv,
+cancelled_date,Timestamp or date indicating when cancelled date occurred.,"no_recommendation.logistics_order_bv.""cancelled_date""",no_recommendation.logistics_order_bv,
+picked_date,Timestamp or date indicating when picked date occurred.,"no_recommendation.logistics_order_bv.""picked_date""",no_recommendation.logistics_order_bv,
+promised_time_to_deliver,Timestamp or date indicating when promised time to deliver occurred.,"no_recommendation.logistics_order_bv.""promised_time_to_deliver""",no_recommendation.logistics_order_bv,
+buyer_np,Data representing the buyer np.,"no_recommendation.logistics_order_bv.""buyer_np""",no_recommendation.logistics_order_bv,
+retail_snp,Data representing the retail snp.,"no_recommendation.logistics_order_bv.""retail_snp""",no_recommendation.logistics_order_bv,
+Linked Orders,Data representing the linked orders.,"no_recommendation.logistics_order_bv.""Linked Orders""",no_recommendation.logistics_order_bv,
+dedup,Data representing the dedup.,"no_recommendation.logistics_order_bv.""dedup""",no_recommendation.logistics_order_bv,
+order_count,Data representing the order count.,"no_recommendation.logistics_order_bv.""order_count""",no_recommendation.logistics_order_bv,
+avg_del,Data representing the avg del.,"no_recommendation.logistics_order_bv.""avg_del""",no_recommendation.logistics_order_bv,
+del_tat_duration,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""del_tat_duration""",no_recommendation.logistics_order_bv,
+del_adherence,Data representing the del adherence.,"no_recommendation.logistics_order_bv.""del_adherence""",no_recommendation.logistics_order_bv,
+del_breach_diff,Data representing the del breach diff.,"no_recommendation.logistics_order_bv.""del_breach_diff""",no_recommendation.logistics_order_bv,
+rtsvscrt,Data representing the rtsvscrt.,"no_recommendation.logistics_order_bv.""rtsvscrt""",no_recommendation.logistics_order_bv,
+rtsvspck,Data representing the rtsvspck.,"no_recommendation.logistics_order_bv.""rtsvspck""",no_recommendation.logistics_order_bv,
+delage,Data representing the delage.,"no_recommendation.logistics_order_bv.""delage""",no_recommendation.logistics_order_bv,
+cancel_secs,Data representing the cancel secs.,"no_recommendation.logistics_order_bv.""cancel_secs""",no_recommendation.logistics_order_bv,
+in_process_ageing,Data representing the in process ageing.,"no_recommendation.logistics_order_bv.""in_process_ageing""",no_recommendation.logistics_order_bv,
+rider_waiting,Unique identifier for rider waiting.,"no_recommendation.logistics_order_bv.""rider_waiting""",no_recommendation.logistics_order_bv,
+rider_assigning,Unique identifier for rider assigning.,"no_recommendation.logistics_order_bv.""rider_assigning""",no_recommendation.logistics_order_bv,
+Pickup TAT Breached,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""Pickup TAT Breached""",no_recommendation.logistics_order_bv,
+pick_up_tat_diff,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""pick_up_tat_diff""",no_recommendation.logistics_order_bv,
+RTS Breached,Data representing the rts breached.,"no_recommendation.logistics_order_bv.""RTS Breached""",no_recommendation.logistics_order_bv,
+rts_tat_diff,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""rts_tat_diff""",no_recommendation.logistics_order_bv,
+order_status,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""order_status""",no_recommendation.logistics_order_bv,
+Order Category,Timestamp or date indicating when order category occurred.,"no_recommendation.logistics_order_bv.""Order Category""",no_recommendation.logistics_order_bv,
+Order Picked,Data representing the order picked.,"no_recommendation.logistics_order_bv.""Order Picked""",no_recommendation.logistics_order_bv,
+Rider Assignment Type,Data representing the rider assignment type.,"no_recommendation.logistics_order_bv.""Rider Assignment Type""",no_recommendation.logistics_order_bv,
+confirmed,Data representing the confirmed.,"no_recommendation.logistics_order_bv.""confirmed""",no_recommendation.logistics_order_bv,
+delivered,Data representing the delivered.,"no_recommendation.logistics_order_bv.""delivered""",no_recommendation.logistics_order_bv,
+cancelled,Data representing the cancelled.,"no_recommendation.logistics_order_bv.""cancelled""",no_recommendation.logistics_order_bv,
+inprocess,Data representing the inprocess.,"no_recommendation.logistics_order_bv.""inprocess""",no_recommendation.logistics_order_bv,
+logistics_cancelled,Data representing the logistics cancelled.,"no_recommendation.logistics_order_bv.""logistics_cancelled""",no_recommendation.logistics_order_bv,
+buyer_cancelled,Data representing the buyer cancelled.,"no_recommendation.logistics_order_bv.""buyer_cancelled""",no_recommendation.logistics_order_bv,
+seller_cancelled,Data representing the seller cancelled.,"no_recommendation.logistics_order_bv.""seller_cancelled""",no_recommendation.logistics_order_bv,
+Confirmed with RTS,Data representing the confirmed with rts.,"no_recommendation.logistics_order_bv.""Confirmed with RTS""",no_recommendation.logistics_order_bv,
+confirmed with No RTS,Data representing the confirmed with no rts.,"no_recommendation.logistics_order_bv.""confirmed with No RTS""",no_recommendation.logistics_order_bv,
+COD Orders,Data representing the cod orders.,"no_recommendation.logistics_order_bv.""COD Orders""",no_recommendation.logistics_order_bv,
+Unique retail orders by snp,Data representing the unique retail orders by snp.,"no_recommendation.logistics_order_bv.""Unique retail orders by snp""",no_recommendation.logistics_order_bv,
+Promised TAT (in days),Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""Promised TAT (in days)""",no_recommendation.logistics_order_bv,
+Avg Motorable Distance,Data representing the avg motorable distance.,"no_recommendation.logistics_order_bv.""Avg Motorable Distance""",no_recommendation.logistics_order_bv,
+No Motorable Distance,Data representing the no motorable distance.,"no_recommendation.logistics_order_bv.""No Motorable Distance""",no_recommendation.logistics_order_bv,
+Within 0-3 kms,Data representing the within 0-3 kms.,"no_recommendation.logistics_order_bv.""Within 0-3 kms""",no_recommendation.logistics_order_bv,
+Within 3-4 kms,Data representing the within 3-4 kms.,"no_recommendation.logistics_order_bv.""Within 3-4 kms""",no_recommendation.logistics_order_bv,
+Within 4-5 kms,Data representing the within 4-5 kms.,"no_recommendation.logistics_order_bv.""Within 4-5 kms""",no_recommendation.logistics_order_bv,
+Within 5-7 kms,Data representing the within 5-7 kms.,"no_recommendation.logistics_order_bv.""Within 5-7 kms""",no_recommendation.logistics_order_bv,
+Within 7-10 kms,Data representing the within 7-10 kms.,"no_recommendation.logistics_order_bv.""Within 7-10 kms""",no_recommendation.logistics_order_bv,
+Beyond 10 kms,Data representing the beyond 10 kms.,"no_recommendation.logistics_order_bv.""Beyond 10 kms""",no_recommendation.logistics_order_bv,
+Adherence %,Data representing the adherence %.,"no_recommendation.logistics_order_bv.""Adherence %""",no_recommendation.logistics_order_bv,
+Breached,Data representing the breached.,"no_recommendation.logistics_order_bv.""Breached""",no_recommendation.logistics_order_bv,
+Breached 0-5 mins,Data representing the breached 0-5 mins.,"no_recommendation.logistics_order_bv.""Breached 0-5 mins""",no_recommendation.logistics_order_bv,
+Breached 5-10 mins,Data representing the breached 5-10 mins.,"no_recommendation.logistics_order_bv.""Breached 5-10 mins""",no_recommendation.logistics_order_bv,
+Breached 10-20 mins,Data representing the breached 10-20 mins.,"no_recommendation.logistics_order_bv.""Breached 10-20 mins""",no_recommendation.logistics_order_bv,
+Breached 20-30 mins,Data representing the breached 20-30 mins.,"no_recommendation.logistics_order_bv.""Breached 20-30 mins""",no_recommendation.logistics_order_bv,
+Breached > 30 mins,Data representing the breached > 30 mins.,"no_recommendation.logistics_order_bv.""Breached > 30 mins""",no_recommendation.logistics_order_bv,
+Breached 0-15 mins,Data representing the breached 0-15 mins.,"no_recommendation.logistics_order_bv.""Breached 0-15 mins""",no_recommendation.logistics_order_bv,
+Breached 15-30 mins,Data representing the breached 15-30 mins.,"no_recommendation.logistics_order_bv.""Breached 15-30 mins""",no_recommendation.logistics_order_bv,
+Breached 30-60 mins,Data representing the breached 30-60 mins.,"no_recommendation.logistics_order_bv.""Breached 30-60 mins""",no_recommendation.logistics_order_bv,
+Breached 1-2 hrs,Data representing the breached 1-2 hrs.,"no_recommendation.logistics_order_bv.""Breached 1-2 hrs""",no_recommendation.logistics_order_bv,
+Breached 2-6 hrs,Data representing the breached 2-6 hrs.,"no_recommendation.logistics_order_bv.""Breached 2-6 hrs""",no_recommendation.logistics_order_bv,
+Breached >6 hrs,Data representing the breached >6 hrs.,"no_recommendation.logistics_order_bv.""Breached >6 hrs""",no_recommendation.logistics_order_bv,
+Breached 0-1 day,Data representing the breached 0-1 day.,"no_recommendation.logistics_order_bv.""Breached 0-1 day""",no_recommendation.logistics_order_bv,
+Breached 1-2 day,Data representing the breached 1-2 day.,"no_recommendation.logistics_order_bv.""Breached 1-2 day""",no_recommendation.logistics_order_bv,
+Breached 2-3 day,Data representing the breached 2-3 day.,"no_recommendation.logistics_order_bv.""Breached 2-3 day""",no_recommendation.logistics_order_bv,
+Breached 3-4 day,Data representing the breached 3-4 day.,"no_recommendation.logistics_order_bv.""Breached 3-4 day""",no_recommendation.logistics_order_bv,
+Breached > 4 day,Data representing the breached > 4 day.,"no_recommendation.logistics_order_bv.""Breached > 4 day""",no_recommendation.logistics_order_bv,
+D TAT Breached,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""D TAT Breached""",no_recommendation.logistics_order_bv,
+Average Delivery Time for Intercity,City name for the given context.,"no_recommendation.logistics_order_bv.""Average Delivery Time for Intercity""",no_recommendation.logistics_order_bv,
+Average Delivery Time for Hyperlocal,Timestamp or date indicating when average delivery time for hyperlocal occurred.,"no_recommendation.logistics_order_bv.""Average Delivery Time for Hyperlocal""",no_recommendation.logistics_order_bv,
+Average Delivery Time for F&B,Timestamp or date indicating when average delivery time for f&b occurred.,"no_recommendation.logistics_order_bv.""Average Delivery Time for F&B""",no_recommendation.logistics_order_bv,
+Picked Within 0-10 mins,Data representing the picked within 0-10 mins.,"no_recommendation.logistics_order_bv.""Picked Within 0-10 mins""",no_recommendation.logistics_order_bv,
+Picked Within 10-20 mins,Data representing the picked within 10-20 mins.,"no_recommendation.logistics_order_bv.""Picked Within 10-20 mins""",no_recommendation.logistics_order_bv,
+Picked Within 20-30 mins,Data representing the picked within 20-30 mins.,"no_recommendation.logistics_order_bv.""Picked Within 20-30 mins""",no_recommendation.logistics_order_bv,
+Picked Within 30-60 mins,Data representing the picked within 30-60 mins.,"no_recommendation.logistics_order_bv.""Picked Within 30-60 mins""",no_recommendation.logistics_order_bv,
+Picked Within 60-120 mins,Data representing the picked within 60-120 mins.,"no_recommendation.logistics_order_bv.""Picked Within 60-120 mins""",no_recommendation.logistics_order_bv,
+Picked Beyond 120 mins,Data representing the picked beyond 120 mins.,"no_recommendation.logistics_order_bv.""Picked Beyond 120 mins""",no_recommendation.logistics_order_bv,
+Picked Within 0-1 hrs,Data representing the picked within 0-1 hrs.,"no_recommendation.logistics_order_bv.""Picked Within 0-1 hrs""",no_recommendation.logistics_order_bv,
+Picked Within 1-3 hrs,Data representing the picked within 1-3 hrs.,"no_recommendation.logistics_order_bv.""Picked Within 1-3 hrs""",no_recommendation.logistics_order_bv,
+Picked Within 3-5 hrs,Data representing the picked within 3-5 hrs.,"no_recommendation.logistics_order_bv.""Picked Within 3-5 hrs""",no_recommendation.logistics_order_bv,
+Picked Within 5-10 hrs,Data representing the picked within 5-10 hrs.,"no_recommendation.logistics_order_bv.""Picked Within 5-10 hrs""",no_recommendation.logistics_order_bv,
+Picked Above 10 hrs,Data representing the picked above 10 hrs.,"no_recommendation.logistics_order_bv.""Picked Above 10 hrs""",no_recommendation.logistics_order_bv,
+Average Pickup Time,Timestamp or date indicating when average pickup time occurred.,"no_recommendation.logistics_order_bv.""Average Pickup Time""",no_recommendation.logistics_order_bv,
+F&B Average Pickup Time (in mins),Timestamp or date indicating when f&b average pickup time (in mins) occurred.,"no_recommendation.logistics_order_bv.""F&B Average Pickup Time (in mins)""",no_recommendation.logistics_order_bv,
+Hyperlocal Non F&B Average Pickup Time (in mins),Timestamp or date indicating when hyperlocal non f&b average pickup time (in mins) occurred.,"no_recommendation.logistics_order_bv.""Hyperlocal Non F&B Average Pickup Time (in mins)""",no_recommendation.logistics_order_bv,
+Intercity Average Pickup Time (in days),City name for the given context.,"no_recommendation.logistics_order_bv.""Intercity Average Pickup Time (in days)""",no_recommendation.logistics_order_bv,
+Intercity Average Pickup Time,City name for the given context.,"no_recommendation.logistics_order_bv.""Intercity Average Pickup Time""",no_recommendation.logistics_order_bv,
+Del 0-30 mins,Data representing the del 0-30 mins.,"no_recommendation.logistics_order_bv.""Del 0-30 mins""",no_recommendation.logistics_order_bv,
+Del 30-35 mins,Data representing the del 30-35 mins.,"no_recommendation.logistics_order_bv.""Del 30-35 mins""",no_recommendation.logistics_order_bv,
+Del 35-40 mins,Data representing the del 35-40 mins.,"no_recommendation.logistics_order_bv.""Del 35-40 mins""",no_recommendation.logistics_order_bv,
+Del 40-45 mins,Data representing the del 40-45 mins.,"no_recommendation.logistics_order_bv.""Del 40-45 mins""",no_recommendation.logistics_order_bv,
+Del 45-60 mins,Data representing the del 45-60 mins.,"no_recommendation.logistics_order_bv.""Del 45-60 mins""",no_recommendation.logistics_order_bv,
+Del Above 60 mins,Data representing the del above 60 mins.,"no_recommendation.logistics_order_bv.""Del Above 60 mins""",no_recommendation.logistics_order_bv,
+Del > 10 days,Data representing the del > 10 days.,"no_recommendation.logistics_order_bv.""Del > 10 days""",no_recommendation.logistics_order_bv,
+Del 0-3 days,Data representing the del 0-3 days.,"no_recommendation.logistics_order_bv.""Del 0-3 days""",no_recommendation.logistics_order_bv,
+Del 3-5 days,Data representing the del 3-5 days.,"no_recommendation.logistics_order_bv.""Del 3-5 days""",no_recommendation.logistics_order_bv,
+Del 5-7 days,Data representing the del 5-7 days.,"no_recommendation.logistics_order_bv.""Del 5-7 days""",no_recommendation.logistics_order_bv,
+Del 7-10 days,Data representing the del 7-10 days.,"no_recommendation.logistics_order_bv.""Del 7-10 days""",no_recommendation.logistics_order_bv,
+F&B Orders Average Delivery (in mins),Data representing the f&b orders average delivery (in mins).,"no_recommendation.logistics_order_bv.""F&B Orders Average Delivery (in mins)""",no_recommendation.logistics_order_bv,
+Intercity Orders Average Delivery (in days),City name for the given context.,"no_recommendation.logistics_order_bv.""Intercity Orders Average Delivery (in days)""",no_recommendation.logistics_order_bv,
+Hyperlocal Non F&B Orders Average Delivery (in mins),Data representing the hyperlocal non f&b orders average delivery (in mins).,"no_recommendation.logistics_order_bv.""Hyperlocal Non F&B Orders Average Delivery (in mins)""",no_recommendation.logistics_order_bv,
+Average Delivery (in mins),Data representing the average delivery (in mins).,"no_recommendation.logistics_order_bv.""Average Delivery (in mins)""",no_recommendation.logistics_order_bv,
+Pending Within 0-1 days,Data representing the pending within 0-1 days.,"no_recommendation.logistics_order_bv.""Pending Within 0-1 days""",no_recommendation.logistics_order_bv,
+Pending Within 1-2 days,Data representing the pending within 1-2 days.,"no_recommendation.logistics_order_bv.""Pending Within 1-2 days""",no_recommendation.logistics_order_bv,
+Pending Within 2-3 days,Data representing the pending within 2-3 days.,"no_recommendation.logistics_order_bv.""Pending Within 2-3 days""",no_recommendation.logistics_order_bv,
+Pending Within 3-4 days,Data representing the pending within 3-4 days.,"no_recommendation.logistics_order_bv.""Pending Within 3-4 days""",no_recommendation.logistics_order_bv,
+Pending Within 4-5 days,Data representing the pending within 4-5 days.,"no_recommendation.logistics_order_bv.""Pending Within 4-5 days""",no_recommendation.logistics_order_bv,
+Pending Beyond 5 days,Data representing the pending beyond 5 days.,"no_recommendation.logistics_order_bv.""Pending Beyond 5 days""",no_recommendation.logistics_order_bv,
+Pending Within 0-2 days,Data representing the pending within 0-2 days.,"no_recommendation.logistics_order_bv.""Pending Within 0-2 days""",no_recommendation.logistics_order_bv,
+Pending Within 2-5 days,Data representing the pending within 2-5 days.,"no_recommendation.logistics_order_bv.""Pending Within 2-5 days""",no_recommendation.logistics_order_bv,
+Pending Within 5-10 days,Data representing the pending within 5-10 days.,"no_recommendation.logistics_order_bv.""Pending Within 5-10 days""",no_recommendation.logistics_order_bv,
+Pending Beyond 10 days,Data representing the pending beyond 10 days.,"no_recommendation.logistics_order_bv.""Pending Beyond 10 days""",no_recommendation.logistics_order_bv,
+Waiting within 5 mins,Data representing the waiting within 5 mins.,"no_recommendation.logistics_order_bv.""Waiting within 5 mins""",no_recommendation.logistics_order_bv,
+Waiting 5-10 mins,Data representing the waiting 5-10 mins.,"no_recommendation.logistics_order_bv.""Waiting 5-10 mins""",no_recommendation.logistics_order_bv,
+Waiting 10-20 mins,Data representing the waiting 10-20 mins.,"no_recommendation.logistics_order_bv.""Waiting 10-20 mins""",no_recommendation.logistics_order_bv,
+Waiting 20-30 mins,Data representing the waiting 20-30 mins.,"no_recommendation.logistics_order_bv.""Waiting 20-30 mins""",no_recommendation.logistics_order_bv,
+Above 30 mins,Data representing the above 30 mins.,"no_recommendation.logistics_order_bv.""Above 30 mins""",no_recommendation.logistics_order_bv,
+Non F&B Orders Average Rider Waiting Time (in mins),Timestamp or date indicating when non f&b orders average rider waiting time (in mins) occurred.,"no_recommendation.logistics_order_bv.""Non F&B Orders Average Rider Waiting Time (in mins)""",no_recommendation.logistics_order_bv,
+F&B Orders Average Rider Waiting Time (in mins),Timestamp or date indicating when f&b orders average rider waiting time (in mins) occurred.,"no_recommendation.logistics_order_bv.""F&B Orders Average Rider Waiting Time (in mins)""",no_recommendation.logistics_order_bv,
+Average Rider Waiting Time (in mins),Timestamp or date indicating when average rider waiting time (in mins) occurred.,"no_recommendation.logistics_order_bv.""Average Rider Waiting Time (in mins)""",no_recommendation.logistics_order_bv,
+RTS Breached 0-5 mins,Data representing the rts breached 0-5 mins.,"no_recommendation.logistics_order_bv.""RTS Breached 0-5 mins""",no_recommendation.logistics_order_bv,
+RTS Breached 5-10 mins,Data representing the rts breached 5-10 mins.,"no_recommendation.logistics_order_bv.""RTS Breached 5-10 mins""",no_recommendation.logistics_order_bv,
+RTS Breached 10-20 mins,Data representing the rts breached 10-20 mins.,"no_recommendation.logistics_order_bv.""RTS Breached 10-20 mins""",no_recommendation.logistics_order_bv,
+RTS Breached 20-30 mins,Data representing the rts breached 20-30 mins.,"no_recommendation.logistics_order_bv.""RTS Breached 20-30 mins""",no_recommendation.logistics_order_bv,
+RTS Breached Above 30 mins,Data representing the rts breached above 30 mins.,"no_recommendation.logistics_order_bv.""RTS Breached Above 30 mins""",no_recommendation.logistics_order_bv,
+RTS Breached 0-1 days,Data representing the rts breached 0-1 days.,"no_recommendation.logistics_order_bv.""RTS Breached 0-1 days""",no_recommendation.logistics_order_bv,
+RTS Breached 1-2 days,Data representing the rts breached 1-2 days.,"no_recommendation.logistics_order_bv.""RTS Breached 1-2 days""",no_recommendation.logistics_order_bv,
+RTS Breached 2-3 days,Data representing the rts breached 2-3 days.,"no_recommendation.logistics_order_bv.""RTS Breached 2-3 days""",no_recommendation.logistics_order_bv,
+RTS Breached 3-4 days,Data representing the rts breached 3-4 days.,"no_recommendation.logistics_order_bv.""RTS Breached 3-4 days""",no_recommendation.logistics_order_bv,
+RTS Breached Above 4 days,Data representing the rts breached above 4 days.,"no_recommendation.logistics_order_bv.""RTS Breached Above 4 days""",no_recommendation.logistics_order_bv,
+F&B Order Average RTS (in mins),Data representing the f&b order average rts (in mins).,"no_recommendation.logistics_order_bv.""F&B Order Average RTS (in mins)""",no_recommendation.logistics_order_bv,
+Non F&B Hyperlocal Average RTS (in mins),Data representing the non f&b hyperlocal average rts (in mins).,"no_recommendation.logistics_order_bv.""Non F&B Hyperlocal Average RTS (in mins)""",no_recommendation.logistics_order_bv,
+Intercity Average Promised RTS (in mins),City name for the given context.,"no_recommendation.logistics_order_bv.""Intercity Average Promised RTS (in mins)""",no_recommendation.logistics_order_bv,
+Pickup Breached 0-5 mins,Data representing the pickup breached 0-5 mins.,"no_recommendation.logistics_order_bv.""Pickup Breached 0-5 mins""",no_recommendation.logistics_order_bv,
+Pickup Breached 5-10 mins,Data representing the pickup breached 5-10 mins.,"no_recommendation.logistics_order_bv.""Pickup Breached 5-10 mins""",no_recommendation.logistics_order_bv,
+Pickup Breached 10-20 mins,Data representing the pickup breached 10-20 mins.,"no_recommendation.logistics_order_bv.""Pickup Breached 10-20 mins""",no_recommendation.logistics_order_bv,
+Pickup Breached 20-30 mins,Data representing the pickup breached 20-30 mins.,"no_recommendation.logistics_order_bv.""Pickup Breached 20-30 mins""",no_recommendation.logistics_order_bv,
+Pickup Breached Above 30 mins,Data representing the pickup breached above 30 mins.,"no_recommendation.logistics_order_bv.""Pickup Breached Above 30 mins""",no_recommendation.logistics_order_bv,
+Pickup Breached 0-1 days,Data representing the pickup breached 0-1 days.,"no_recommendation.logistics_order_bv.""Pickup Breached 0-1 days""",no_recommendation.logistics_order_bv,
+Pickup Breached 1-2 days,Data representing the pickup breached 1-2 days.,"no_recommendation.logistics_order_bv.""Pickup Breached 1-2 days""",no_recommendation.logistics_order_bv,
+Pickup Breached 2-3 days,Data representing the pickup breached 2-3 days.,"no_recommendation.logistics_order_bv.""Pickup Breached 2-3 days""",no_recommendation.logistics_order_bv,
+Pickup Breached 3-4 days,Data representing the pickup breached 3-4 days.,"no_recommendation.logistics_order_bv.""Pickup Breached 3-4 days""",no_recommendation.logistics_order_bv,
+Pickup Breached 4-5 days,Data representing the pickup breached 4-5 days.,"no_recommendation.logistics_order_bv.""Pickup Breached 4-5 days""",no_recommendation.logistics_order_bv,
+Pickup Breached Above 5 days,Data representing the pickup breached above 5 days.,"no_recommendation.logistics_order_bv.""Pickup Breached Above 5 days""",no_recommendation.logistics_order_bv,
+Intercity Order Average Pickup TAT (in days),Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""Intercity Order Average Pickup TAT (in days)""",no_recommendation.logistics_order_bv,
+Hyperlocal Non F&B Order Average Pickup TAT (in mins),Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""Hyperlocal Non F&B Order Average Pickup TAT (in mins)""",no_recommendation.logistics_order_bv,
+F&B Order Average Pickup TAT (in mins),Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""F&B Order Average Pickup TAT (in mins)""",no_recommendation.logistics_order_bv,
+Assigned Within 0-1 mins,Data representing the assigned within 0-1 mins.,"no_recommendation.logistics_order_bv.""Assigned Within 0-1 mins""",no_recommendation.logistics_order_bv,
+Assigned Within 1-3 mins,Data representing the assigned within 1-3 mins.,"no_recommendation.logistics_order_bv.""Assigned Within 1-3 mins""",no_recommendation.logistics_order_bv,
+Assigned Within 3-5 mins,Data representing the assigned within 3-5 mins.,"no_recommendation.logistics_order_bv.""Assigned Within 3-5 mins""",no_recommendation.logistics_order_bv,
+Assigned Within 5-10 mins,Data representing the assigned within 5-10 mins.,"no_recommendation.logistics_order_bv.""Assigned Within 5-10 mins""",no_recommendation.logistics_order_bv,
+Assigned Beyond 10 mins,Data representing the assigned beyond 10 mins.,"no_recommendation.logistics_order_bv.""Assigned Beyond 10 mins""",no_recommendation.logistics_order_bv,
+Assigned Within 1 mins,Data representing the assigned within 1 mins.,"no_recommendation.logistics_order_bv.""Assigned Within 1 mins""",no_recommendation.logistics_order_bv,
+Assigned Within 1-3 hr,Data representing the assigned within 1-3 hr.,"no_recommendation.logistics_order_bv.""Assigned Within 1-3 hr""",no_recommendation.logistics_order_bv,
+Assign After RTS,Data representing the assign after rts.,"no_recommendation.logistics_order_bv.""Assign After RTS""",no_recommendation.logistics_order_bv,
+Assign Before RTS,Data representing the assign before rts.,"no_recommendation.logistics_order_bv.""Assign Before RTS""",no_recommendation.logistics_order_bv,
+Average time to Rider Assignment,Timestamp or date indicating when average time to rider assignment occurred.,"no_recommendation.logistics_order_bv.""Average time to Rider Assignment""",no_recommendation.logistics_order_bv,
+Rider Assignment (F&B),Data representing the rider assignment (f&b).,"no_recommendation.logistics_order_bv.""Rider Assignment (F&B)""",no_recommendation.logistics_order_bv,
+Hyperlocal Non F&B Average Rider Assignment (in mins),Data representing the hyperlocal non f&b average rider assignment (in mins).,"no_recommendation.logistics_order_bv.""Hyperlocal Non F&B Average Rider Assignment (in mins)""",no_recommendation.logistics_order_bv,
+Intercity Rider Assignment (in mins),City name for the given context.,"no_recommendation.logistics_order_bv.""Intercity Rider Assignment (in mins)""",no_recommendation.logistics_order_bv,
+RTS Within 0-10 mins,Data representing the rts within 0-10 mins.,"no_recommendation.logistics_order_bv.""RTS Within 0-10 mins""",no_recommendation.logistics_order_bv,
+RTS Within 10-20 mins,Data representing the rts within 10-20 mins.,"no_recommendation.logistics_order_bv.""RTS Within 10-20 mins""",no_recommendation.logistics_order_bv,
+RTS Within 20-30 mins,Data representing the rts within 20-30 mins.,"no_recommendation.logistics_order_bv.""RTS Within 20-30 mins""",no_recommendation.logistics_order_bv,
+RTS Within 30-60 mins,Data representing the rts within 30-60 mins.,"no_recommendation.logistics_order_bv.""RTS Within 30-60 mins""",no_recommendation.logistics_order_bv,
+RTS Within 60-120 mins,Data representing the rts within 60-120 mins.,"no_recommendation.logistics_order_bv.""RTS Within 60-120 mins""",no_recommendation.logistics_order_bv,
+RTS Above 120 mins,Data representing the rts above 120 mins.,"no_recommendation.logistics_order_bv.""RTS Above 120 mins""",no_recommendation.logistics_order_bv,
+RTS Within 0-10 hrs,Data representing the rts within 0-10 hrs.,"no_recommendation.logistics_order_bv.""RTS Within 0-10 hrs""",no_recommendation.logistics_order_bv,
+RTS Within 10-24 hrs,Data representing the rts within 10-24 hrs.,"no_recommendation.logistics_order_bv.""RTS Within 10-24 hrs""",no_recommendation.logistics_order_bv,
+RTS Within 1 - 3 Days,Data representing the rts within 1 - 3 days.,"no_recommendation.logistics_order_bv.""RTS Within 1 - 3 Days""",no_recommendation.logistics_order_bv,
+RTS Within >3 Days,Data representing the rts within >3 days.,"no_recommendation.logistics_order_bv.""RTS Within >3 Days""",no_recommendation.logistics_order_bv,
+Average Ready To Ship,Data representing the average ready to ship.,"no_recommendation.logistics_order_bv.""Average Ready To Ship""",no_recommendation.logistics_order_bv,
+F&B Average RTS (in mins),Data representing the f&b average rts (in mins).,"no_recommendation.logistics_order_bv.""F&B Average RTS (in mins)""",no_recommendation.logistics_order_bv,
+Hyperlocal Average RTS (in mins),Data representing the hyperlocal average rts (in mins).,"no_recommendation.logistics_order_bv.""Hyperlocal Average RTS (in mins)""",no_recommendation.logistics_order_bv,
+Intercity Average RTS (in days),City name for the given context.,"no_recommendation.logistics_order_bv.""Intercity Average RTS (in days)""",no_recommendation.logistics_order_bv,
+Logistics Network Partner,Data representing the logistics network partner.,"no_recommendation.logistics_order_bv.""Logistics Network Partner""",no_recommendation.logistics_order_bv,
+Seller NP,Data representing the seller np.,"no_recommendation.logistics_order_bv.""Seller NP""",no_recommendation.logistics_order_bv,
+Pick Up State,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""Pick Up State""",no_recommendation.logistics_order_bv,
+Delivery State,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_bv.""Delivery State""",no_recommendation.logistics_order_bv,
+Pick Up City,City name for the given context.,"no_recommendation.logistics_order_bv.""Pick Up City""",no_recommendation.logistics_order_bv,
+Delivery City,City name for the given context.,"no_recommendation.logistics_order_bv.""Delivery City""",no_recommendation.logistics_order_bv,
+Pick Up Tier,Data representing the pick up tier.,"no_recommendation.logistics_order_bv.""Pick Up Tier""",no_recommendation.logistics_order_bv,
+Delivery Tier,Data representing the delivery tier.,"no_recommendation.logistics_order_bv.""Delivery Tier""",no_recommendation.logistics_order_bv,
+Pick Up Zone,Data representing the pick up zone.,"no_recommendation.logistics_order_bv.""Pick Up Zone""",no_recommendation.logistics_order_bv,
+Delivery Zone,Data representing the delivery zone.,"no_recommendation.logistics_order_bv.""Delivery Zone""",no_recommendation.logistics_order_bv,
+"▼ logistics_order_test   (base table, 48 cols)",,,no_recommendation.logistics_order_test,
+bap_id,Unique identifier for the Buyer App (BAP).,"no_recommendation.logistics_order_test.""bap_id""",no_recommendation.logistics_order_test,
+bpp_id,Unique identifier for the Seller App (BPP).,"no_recommendation.logistics_order_test.""bpp_id""",no_recommendation.logistics_order_test,
+order_id,Unique identifier for order.,"no_recommendation.logistics_order_test.""order_id""",no_recommendation.logistics_order_test,
+transaction_id,Unique ONDC transaction identifier.,"no_recommendation.logistics_order_test.""transaction_id""",no_recommendation.logistics_order_test,
+fulfillment_status,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_test.""fulfillment_status""",no_recommendation.logistics_order_test,
+fulfillment_type,Data representing the fulfillment type.,"no_recommendation.logistics_order_test.""fulfillment_type""",no_recommendation.logistics_order_test,
+cod_order,Data representing the cod order.,"no_recommendation.logistics_order_test.""cod_order""",no_recommendation.logistics_order_test,
+date,Timestamp or date indicating when date occurred.,"no_recommendation.logistics_order_test.""date""",no_recommendation.logistics_order_test,
+order_created_at,Timestamp when the record was created.,"no_recommendation.logistics_order_test.""order_created_at""",no_recommendation.logistics_order_test,
+cancellation_code,Timestamp or date indicating when cancellation code occurred.,"no_recommendation.logistics_order_test.""cancellation_code""",no_recommendation.logistics_order_test,
+latest_order_status,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_test.""latest_order_status""",no_recommendation.logistics_order_test,
+retail_order_id,Unique identifier for retail order.,"no_recommendation.logistics_order_test.""retail_order_id""",no_recommendation.logistics_order_test,
+pick_up_pincode,Indian postal code (pincode).,"no_recommendation.logistics_order_test.""pick_up_pincode""",no_recommendation.logistics_order_test,
+delivery_pincode,Indian postal code (pincode).,"no_recommendation.logistics_order_test.""delivery_pincode""",no_recommendation.logistics_order_test,
+retail_category,Timestamp or date indicating when retail category occurred.,"no_recommendation.logistics_order_test.""retail_category""",no_recommendation.logistics_order_test,
+shipment_type,Data representing the shipment type.,"no_recommendation.logistics_order_test.""shipment_type""",no_recommendation.logistics_order_test,
+motorable_distance,Data representing the motorable distance.,"no_recommendation.logistics_order_test.""motorable_distance""",no_recommendation.logistics_order_test,
+provider_name,Unique identifier for provider name.,"no_recommendation.logistics_order_test.""provider_name""",no_recommendation.logistics_order_test,
+pickup_tat,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_test.""pickup_tat""",no_recommendation.logistics_order_test,
+rts_tat,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_test.""rts_tat""",no_recommendation.logistics_order_test,
+f_ready_to_ship_at_date,Timestamp or date indicating when f ready to ship at date occurred.,"no_recommendation.logistics_order_test.""f_ready_to_ship_at_date""",no_recommendation.logistics_order_test,
+f_at_pickup_from_date,Timestamp or date indicating when f at pickup from date occurred.,"no_recommendation.logistics_order_test.""f_at_pickup_from_date""",no_recommendation.logistics_order_test,
+f_agent_assigned_at_date,Timestamp or date indicating when f agent assigned at date occurred.,"no_recommendation.logistics_order_test.""f_agent_assigned_at_date""",no_recommendation.logistics_order_test,
+delivered_date,Timestamp or date indicating when delivered date occurred.,"no_recommendation.logistics_order_test.""delivered_date""",no_recommendation.logistics_order_test,
+cancelled_date,Timestamp or date indicating when cancelled date occurred.,"no_recommendation.logistics_order_test.""cancelled_date""",no_recommendation.logistics_order_test,
+picked_date,Timestamp or date indicating when picked date occurred.,"no_recommendation.logistics_order_test.""picked_date""",no_recommendation.logistics_order_test,
+promised_time_to_deliver,Timestamp or date indicating when promised time to deliver occurred.,"no_recommendation.logistics_order_test.""promised_time_to_deliver""",no_recommendation.logistics_order_test,
+awbnumber,Data representing the awbnumber.,"no_recommendation.logistics_order_test.""awbnumber""",no_recommendation.logistics_order_test,
+buyer_np,Data representing the buyer np.,"no_recommendation.logistics_order_test.""buyer_np""",no_recommendation.logistics_order_test,
+retail_snp,Data representing the retail snp.,"no_recommendation.logistics_order_test.""retail_snp""",no_recommendation.logistics_order_test,
+Linked Orders,Data representing the linked orders.,"no_recommendation.logistics_order_test.""Linked Orders""",no_recommendation.logistics_order_test,
+dedup,Data representing the dedup.,"no_recommendation.logistics_order_test.""dedup""",no_recommendation.logistics_order_test,
+order_count,Data representing the order count.,"no_recommendation.logistics_order_test.""order_count""",no_recommendation.logistics_order_test,
+avg_del,Data representing the avg del.,"no_recommendation.logistics_order_test.""avg_del""",no_recommendation.logistics_order_test,
+del_tat_duration,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_test.""del_tat_duration""",no_recommendation.logistics_order_test,
+del_adherence,Data representing the del adherence.,"no_recommendation.logistics_order_test.""del_adherence""",no_recommendation.logistics_order_test,
+del_breach_diff,Data representing the del breach diff.,"no_recommendation.logistics_order_test.""del_breach_diff""",no_recommendation.logistics_order_test,
+rtsvscrt,Data representing the rtsvscrt.,"no_recommendation.logistics_order_test.""rtsvscrt""",no_recommendation.logistics_order_test,
+rtsvspck,Data representing the rtsvspck.,"no_recommendation.logistics_order_test.""rtsvspck""",no_recommendation.logistics_order_test,
+delage,Data representing the delage.,"no_recommendation.logistics_order_test.""delage""",no_recommendation.logistics_order_test,
+cancel_secs,Data representing the cancel secs.,"no_recommendation.logistics_order_test.""cancel_secs""",no_recommendation.logistics_order_test,
+in_process_ageing,Data representing the in process ageing.,"no_recommendation.logistics_order_test.""in_process_ageing""",no_recommendation.logistics_order_test,
+rider_waiting,Unique identifier for rider waiting.,"no_recommendation.logistics_order_test.""rider_waiting""",no_recommendation.logistics_order_test,
+rider_assigning,Unique identifier for rider assigning.,"no_recommendation.logistics_order_test.""rider_assigning""",no_recommendation.logistics_order_test,
+pick_up_breached,Data representing the pick up breached.,"no_recommendation.logistics_order_test.""pick_up_breached""",no_recommendation.logistics_order_test,
+pick_up_tat_diff,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_test.""pick_up_tat_diff""",no_recommendation.logistics_order_test,
+rts_breached,Data representing the rts breached.,"no_recommendation.logistics_order_test.""rts_breached""",no_recommendation.logistics_order_test,
+rts_tat_diff,Turn-Around-Time (TAT) measurement.,"no_recommendation.logistics_order_test.""rts_tat_diff""",no_recommendation.logistics_order_test,
+"▼ lsp_view_h3_indexed   (base table, 17 cols)",,,no_recommendation.lsp_view_h3_indexed,CREATE INDEX idx_lsp_h3_date ON no_recommendation.lsp_view_h3_indexed USING btree (date)
+date,Timestamp or date indicating when date occurred.,"no_recommendation.lsp_view_h3_indexed.""date""",no_recommendation.lsp_view_h3_indexed,
+time_frame,Timestamp or date indicating when time frame occurred.,"no_recommendation.lsp_view_h3_indexed.""time_frame""",no_recommendation.lsp_view_h3_indexed,
+pincode,Indian postal code (pincode).,"no_recommendation.lsp_view_h3_indexed.""pincode""",no_recommendation.lsp_view_h3_indexed,
+latitude,Timestamp or date indicating when latitude occurred.,"no_recommendation.lsp_view_h3_indexed.""latitude""",no_recommendation.lsp_view_h3_indexed,
+longitude,Data representing the longitude.,"no_recommendation.lsp_view_h3_indexed.""longitude""",no_recommendation.lsp_view_h3_indexed,
+potential_orders,Data representing the potential orders.,"no_recommendation.lsp_view_h3_indexed.""potential_orders""",no_recommendation.lsp_view_h3_indexed,
+assigned,Data representing the assigned.,"no_recommendation.lsp_view_h3_indexed.""assigned""",no_recommendation.lsp_view_h3_indexed,
+delivered,Data representing the delivered.,"no_recommendation.lsp_view_h3_indexed.""delivered""",no_recommendation.lsp_view_h3_indexed,
+linked_potential_orders,Data representing the linked potential orders.,"no_recommendation.lsp_view_h3_indexed.""linked_potential_orders""",no_recommendation.lsp_view_h3_indexed,
+linked_assigned,Data representing the linked assigned.,"no_recommendation.lsp_view_h3_indexed.""linked_assigned""",no_recommendation.lsp_view_h3_indexed,
+linked_delivered,Data representing the linked delivered.,"no_recommendation.lsp_view_h3_indexed.""linked_delivered""",no_recommendation.lsp_view_h3_indexed,
+independent_potential_orders,Data representing the independent potential orders.,"no_recommendation.lsp_view_h3_indexed.""independent_potential_orders""",no_recommendation.lsp_view_h3_indexed,
+independent_assigned,Data representing the independent assigned.,"no_recommendation.lsp_view_h3_indexed.""independent_assigned""",no_recommendation.lsp_view_h3_indexed,
+independent_delivered,Data representing the independent delivered.,"no_recommendation.lsp_view_h3_indexed.""independent_delivered""",no_recommendation.lsp_view_h3_indexed,
+unique_logistics_latlong,Timestamp or date indicating when unique logistics latlong occurred.,"no_recommendation.lsp_view_h3_indexed.""unique_logistics_latlong""",no_recommendation.lsp_view_h3_indexed,
+unique_logistics_city,City name for the given context.,"no_recommendation.lsp_view_h3_indexed.""unique_logistics_city""",no_recommendation.lsp_view_h3_indexed,
+h3_res_8,Data representing the h3 res 8.,"no_recommendation.lsp_view_h3_indexed.""h3_res_8""",no_recommendation.lsp_view_h3_indexed,
+"▼ lsp_view_potential_latlong   (base table, 16 cols)",,,no_recommendation.lsp_view_potential_latlong,"CREATE INDEX index_lsp_latlong_date ON no_recommendation.lsp_view_potential_latlong USING btree (date)
+
+CREATE INDEX index_lsp_latlong_timeframe ON no_recommendation.lsp_view_potential_latlong USING btree (time_frame)
+
+CREATE INDEX index_lsp_latlong_pincode ON no_recommendation.lsp_view_potential_latlong USING btree (pincode)
+
+CREATE INDEX index_lsp_latlong_lat ON no_recommendation.lsp_view_potential_latlong USING btree (latitude)
+
+CREATE INDEX index_lsp_latlong_long ON no_recommendation.lsp_view_potential_latlong USING btree (longitude)"
+date,Timestamp or date indicating when date occurred.,"no_recommendation.lsp_view_potential_latlong.""date""",no_recommendation.lsp_view_potential_latlong,
+time_frame,Timestamp or date indicating when time frame occurred.,"no_recommendation.lsp_view_potential_latlong.""time_frame""",no_recommendation.lsp_view_potential_latlong,
+pincode,Indian postal code (pincode).,"no_recommendation.lsp_view_potential_latlong.""pincode""",no_recommendation.lsp_view_potential_latlong,
+latitude,Timestamp or date indicating when latitude occurred.,"no_recommendation.lsp_view_potential_latlong.""latitude""",no_recommendation.lsp_view_potential_latlong,
+longitude,Data representing the longitude.,"no_recommendation.lsp_view_potential_latlong.""longitude""",no_recommendation.lsp_view_potential_latlong,
+potential_orders,Data representing the potential orders.,"no_recommendation.lsp_view_potential_latlong.""potential_orders""",no_recommendation.lsp_view_potential_latlong,
+assigned,Data representing the assigned.,"no_recommendation.lsp_view_potential_latlong.""assigned""",no_recommendation.lsp_view_potential_latlong,
+delivered,Data representing the delivered.,"no_recommendation.lsp_view_potential_latlong.""delivered""",no_recommendation.lsp_view_potential_latlong,
+linked_potential_orders,Data representing the linked potential orders.,"no_recommendation.lsp_view_potential_latlong.""linked_potential_orders""",no_recommendation.lsp_view_potential_latlong,
+linked_assigned,Data representing the linked assigned.,"no_recommendation.lsp_view_potential_latlong.""linked_assigned""",no_recommendation.lsp_view_potential_latlong,
+linked_delivered,Data representing the linked delivered.,"no_recommendation.lsp_view_potential_latlong.""linked_delivered""",no_recommendation.lsp_view_potential_latlong,
+independent_potential_orders,Data representing the independent potential orders.,"no_recommendation.lsp_view_potential_latlong.""independent_potential_orders""",no_recommendation.lsp_view_potential_latlong,
+independent_assigned,Data representing the independent assigned.,"no_recommendation.lsp_view_potential_latlong.""independent_assigned""",no_recommendation.lsp_view_potential_latlong,
+independent_delivered,Data representing the independent delivered.,"no_recommendation.lsp_view_potential_latlong.""independent_delivered""",no_recommendation.lsp_view_potential_latlong,
+unique_logistics_latlong,Timestamp or date indicating when unique logistics latlong occurred.,"no_recommendation.lsp_view_potential_latlong.""unique_logistics_latlong""",no_recommendation.lsp_view_potential_latlong,
+unique_logistics_city,City name for the given context.,"no_recommendation.lsp_view_potential_latlong.""unique_logistics_city""",no_recommendation.lsp_view_potential_latlong,
+"▼ lsp_view_potential_latlong_new   (base table, 19 cols)",,,no_recommendation.lsp_view_potential_latlong_new,"CREATE INDEX index_lsp_latlong_new_date ON no_recommendation.lsp_view_potential_latlong_new USING btree (date)
+
+CREATE INDEX index_lsp_latlong_new_timeframe ON no_recommendation.lsp_view_potential_latlong_new USING btree (time_frame)
+
+CREATE INDEX index_lsp_latlong_new_pincode ON no_recommendation.lsp_view_potential_latlong_new USING btree (pincode)
+
+CREATE INDEX index_lsp_latlong_new_lat ON no_recommendation.lsp_view_potential_latlong_new USING btree (latitude)
+
+CREATE INDEX index_lsp_latlong_new_long ON no_recommendation.lsp_view_potential_latlong_new USING btree (longitude)
+
+CREATE INDEX index_lsp_latlong_new_h3_res_7 ON no_recommendation.lsp_view_potential_latlong_new USING btree (h3_res_7)
+
+CREATE INDEX index_lsp_latlong_new_h3_res_8 ON no_recommendation.lsp_view_potential_latlong_new USING btree (h3_res_8)
+
+CREATE INDEX index_lsp_latlong_new_h3_res_9 ON no_recommendation.lsp_view_potential_latlong_new USING btree (h3_res_9)"
+date,Timestamp or date indicating when date occurred.,"no_recommendation.lsp_view_potential_latlong_new.""date""",no_recommendation.lsp_view_potential_latlong_new,
+time_frame,Timestamp or date indicating when time frame occurred.,"no_recommendation.lsp_view_potential_latlong_new.""time_frame""",no_recommendation.lsp_view_potential_latlong_new,
+pincode,Indian postal code (pincode).,"no_recommendation.lsp_view_potential_latlong_new.""pincode""",no_recommendation.lsp_view_potential_latlong_new,
+latitude,Timestamp or date indicating when latitude occurred.,"no_recommendation.lsp_view_potential_latlong_new.""latitude""",no_recommendation.lsp_view_potential_latlong_new,
+longitude,Data representing the longitude.,"no_recommendation.lsp_view_potential_latlong_new.""longitude""",no_recommendation.lsp_view_potential_latlong_new,
+potential_orders,Data representing the potential orders.,"no_recommendation.lsp_view_potential_latlong_new.""potential_orders""",no_recommendation.lsp_view_potential_latlong_new,
+assigned,Data representing the assigned.,"no_recommendation.lsp_view_potential_latlong_new.""assigned""",no_recommendation.lsp_view_potential_latlong_new,
+delivered,Data representing the delivered.,"no_recommendation.lsp_view_potential_latlong_new.""delivered""",no_recommendation.lsp_view_potential_latlong_new,
+linked_potential_orders,Data representing the linked potential orders.,"no_recommendation.lsp_view_potential_latlong_new.""linked_potential_orders""",no_recommendation.lsp_view_potential_latlong_new,
+linked_assigned,Data representing the linked assigned.,"no_recommendation.lsp_view_potential_latlong_new.""linked_assigned""",no_recommendation.lsp_view_potential_latlong_new,
+linked_delivered,Data representing the linked delivered.,"no_recommendation.lsp_view_potential_latlong_new.""linked_delivered""",no_recommendation.lsp_view_potential_latlong_new,
+independent_potential_orders,Data representing the independent potential orders.,"no_recommendation.lsp_view_potential_latlong_new.""independent_potential_orders""",no_recommendation.lsp_view_potential_latlong_new,
+independent_assigned,Data representing the independent assigned.,"no_recommendation.lsp_view_potential_latlong_new.""independent_assigned""",no_recommendation.lsp_view_potential_latlong_new,
+independent_delivered,Data representing the independent delivered.,"no_recommendation.lsp_view_potential_latlong_new.""independent_delivered""",no_recommendation.lsp_view_potential_latlong_new,
+unique_logistics_latlong,Timestamp or date indicating when unique logistics latlong occurred.,"no_recommendation.lsp_view_potential_latlong_new.""unique_logistics_latlong""",no_recommendation.lsp_view_potential_latlong_new,
+unique_logistics_city,City name for the given context.,"no_recommendation.lsp_view_potential_latlong_new.""unique_logistics_city""",no_recommendation.lsp_view_potential_latlong_new,
+h3_res_7,Data representing the h3 res 7.,"no_recommendation.lsp_view_potential_latlong_new.""h3_res_7""",no_recommendation.lsp_view_potential_latlong_new,
+h3_res_8,Data representing the h3 res 8.,"no_recommendation.lsp_view_potential_latlong_new.""h3_res_8""",no_recommendation.lsp_view_potential_latlong_new,
+h3_res_9,Data representing the h3 res 9.,"no_recommendation.lsp_view_potential_latlong_new.""h3_res_9""",no_recommendation.lsp_view_potential_latlong_new,
+"▼ lsp_view_potential_order   (base table, 14 cols)",,,no_recommendation.lsp_view_potential_order,
+date,Timestamp or date indicating when date occurred.,"no_recommendation.lsp_view_potential_order.""date""",no_recommendation.lsp_view_potential_order,
+time_frame,Timestamp or date indicating when time frame occurred.,"no_recommendation.lsp_view_potential_order.""time_frame""",no_recommendation.lsp_view_potential_order,
+pincode,Indian postal code (pincode).,"no_recommendation.lsp_view_potential_order.""pincode""",no_recommendation.lsp_view_potential_order,
+potential_orders,Data representing the potential orders.,"no_recommendation.lsp_view_potential_order.""potential_orders""",no_recommendation.lsp_view_potential_order,
+assigned,Data representing the assigned.,"no_recommendation.lsp_view_potential_order.""assigned""",no_recommendation.lsp_view_potential_order,
+delivered,Data representing the delivered.,"no_recommendation.lsp_view_potential_order.""delivered""",no_recommendation.lsp_view_potential_order,
+linked_potential_orders,Data representing the linked potential orders.,"no_recommendation.lsp_view_potential_order.""linked_potential_orders""",no_recommendation.lsp_view_potential_order,
+linked_assigned,Data representing the linked assigned.,"no_recommendation.lsp_view_potential_order.""linked_assigned""",no_recommendation.lsp_view_potential_order,
+linked_delivered,Data representing the linked delivered.,"no_recommendation.lsp_view_potential_order.""linked_delivered""",no_recommendation.lsp_view_potential_order,
+independent_potential_orders,Data representing the independent potential orders.,"no_recommendation.lsp_view_potential_order.""independent_potential_orders""",no_recommendation.lsp_view_potential_order,
+independent_assigned,Data representing the independent assigned.,"no_recommendation.lsp_view_potential_order.""independent_assigned""",no_recommendation.lsp_view_potential_order,
+independent_delivered,Data representing the independent delivered.,"no_recommendation.lsp_view_potential_order.""independent_delivered""",no_recommendation.lsp_view_potential_order,
+unique_logistics_pincode,Indian postal code (pincode).,"no_recommendation.lsp_view_potential_order.""unique_logistics_pincode""",no_recommendation.lsp_view_potential_order,
+unique_logistics,Data representing the unique logistics.,"no_recommendation.lsp_view_potential_order.""unique_logistics""",no_recommendation.lsp_view_potential_order,
+"▼ lsp_view_testing_tbl   (base table, 4 cols)",,,no_recommendation.lsp_view_testing_tbl,
+date,Timestamp or date indicating when date occurred.,"no_recommendation.lsp_view_testing_tbl.""date""",no_recommendation.lsp_view_testing_tbl,
+h3_res8,Data representing the h3 res8.,"no_recommendation.lsp_view_testing_tbl.""h3_res8""",no_recommendation.lsp_view_testing_tbl,
+h3_res10,Data representing the h3 res10.,"no_recommendation.lsp_view_testing_tbl.""h3_res10""",no_recommendation.lsp_view_testing_tbl,
+h3_res12,Data representing the h3 res12.,"no_recommendation.lsp_view_testing_tbl.""h3_res12""",no_recommendation.lsp_view_testing_tbl,
+"▼ open_data_pincode   (base table, 3 cols)",,,no_recommendation.open_data_pincode,
+pincode,Indian postal code (pincode).,"no_recommendation.open_data_pincode.""pincode""",no_recommendation.open_data_pincode,
+districtname,Name of the districtname.,"no_recommendation.open_data_pincode.""districtname""",no_recommendation.open_data_pincode,
+state,Turn-Around-Time (TAT) measurement.,"no_recommendation.open_data_pincode.""state""",no_recommendation.open_data_pincode,
+"▼ plan_your_supply_2   (base table, 16 cols)",,,no_recommendation.plan_your_supply_2,"CREATE INDEX pys_provider_name ON no_recommendation.plan_your_supply_2 USING btree (provider_name)
+
+CREATE INDEX pys_pincode ON no_recommendation.plan_your_supply_2 USING btree (pick_up_pincode)
+
+CREATE INDEX pys_district_name ON no_recommendation.plan_your_supply_2 USING btree (district_name)
+
+CREATE INDEX pys_date ON no_recommendation.plan_your_supply_2 USING btree (date)
+
+CREATE INDEX pys_lbnp ON no_recommendation.plan_your_supply_2 USING btree (lbnp)"
+date,Timestamp or date indicating when date occurred.,"no_recommendation.plan_your_supply_2.""date""",no_recommendation.plan_your_supply_2,
+hour,Data representing the hour.,"no_recommendation.plan_your_supply_2.""hour""",no_recommendation.plan_your_supply_2,
+lbnp,Data representing the lbnp.,"no_recommendation.plan_your_supply_2.""lbnp""",no_recommendation.plan_your_supply_2,
+provider_name,Unique identifier for provider name.,"no_recommendation.plan_your_supply_2.""provider_name""",no_recommendation.plan_your_supply_2,
+linked,Data representing the linked.,"no_recommendation.plan_your_supply_2.""linked""",no_recommendation.plan_your_supply_2,
+pick_up_lat,Timestamp or date indicating when pick up lat occurred.,"no_recommendation.plan_your_supply_2.""pick_up_lat""",no_recommendation.plan_your_supply_2,
+pick_up_long,Data representing the pick up long.,"no_recommendation.plan_your_supply_2.""pick_up_long""",no_recommendation.plan_your_supply_2,
+pick_up_pincode,Indian postal code (pincode).,"no_recommendation.plan_your_supply_2.""pick_up_pincode""",no_recommendation.plan_your_supply_2,
+district_name,Name of the district.,"no_recommendation.plan_your_supply_2.""district_name""",no_recommendation.plan_your_supply_2,
+fulfillment_type,Data representing the fulfillment type.,"no_recommendation.plan_your_supply_2.""fulfillment_type""",no_recommendation.plan_your_supply_2,
+h3_index,Data representing the h3 index.,"no_recommendation.plan_your_supply_2.""h3_index""",no_recommendation.plan_your_supply_2,
+total_demand,Data representing the total demand.,"no_recommendation.plan_your_supply_2.""total_demand""",no_recommendation.plan_your_supply_2,
+delivered_orders,Data representing the delivered orders.,"no_recommendation.plan_your_supply_2.""delivered_orders""",no_recommendation.plan_your_supply_2,
+cancelled_orders,Data representing the cancelled orders.,"no_recommendation.plan_your_supply_2.""cancelled_orders""",no_recommendation.plan_your_supply_2,
+assigned_orders,Data representing the assigned orders.,"no_recommendation.plan_your_supply_2.""assigned_orders""",no_recommendation.plan_your_supply_2,
+preassign_cancel,Data representing the preassign cancel.,"no_recommendation.plan_your_supply_2.""preassign_cancel""",no_recommendation.plan_your_supply_2,
+"▼ refresh_tokens   (base table, 8 cols)",,,no_recommendation.refresh_tokens,"CREATE UNIQUE INDEX refresh_tokens_pkey ON no_recommendation.refresh_tokens USING btree (id)
+
+CREATE UNIQUE INDEX refresh_tokens_token_hash_key ON no_recommendation.refresh_tokens USING btree (token_hash)
+
+CREATE INDEX idx_refresh_tokens_user_id ON no_recommendation.refresh_tokens USING btree (user_id)
+
+CREATE INDEX idx_refresh_tokens_token_hash ON no_recommendation.refresh_tokens USING btree (token_hash)
+
+CREATE INDEX idx_refresh_tokens_expires_at ON no_recommendation.refresh_tokens USING btree (expires_at)"
+id,Unique identifier for id.,"no_recommendation.refresh_tokens.""id""",no_recommendation.refresh_tokens,
+user_id,Unique identifier for user.,"no_recommendation.refresh_tokens.""user_id""",no_recommendation.refresh_tokens,
+token_hash,Data representing the token hash.,"no_recommendation.refresh_tokens.""token_hash""",no_recommendation.refresh_tokens,
+expires_at,Timestamp or date indicating when expires at occurred.,"no_recommendation.refresh_tokens.""expires_at""",no_recommendation.refresh_tokens,
+revoked_at,Timestamp or date indicating when revoked at occurred.,"no_recommendation.refresh_tokens.""revoked_at""",no_recommendation.refresh_tokens,
+ip_address,Data representing the ip address.,"no_recommendation.refresh_tokens.""ip_address""",no_recommendation.refresh_tokens,
+user_agent,Data representing the user agent.,"no_recommendation.refresh_tokens.""user_agent""",no_recommendation.refresh_tokens,
+created_at,Timestamp when the record was created.,"no_recommendation.refresh_tokens.""created_at""",no_recommendation.refresh_tokens,
+"▼ seller_h3   (base table, 7 cols)",,,no_recommendation.seller_h3,
+date,Timestamp or date indicating when date occurred.,"no_recommendation.seller_h3.""date""",no_recommendation.seller_h3,
+pincode,Indian postal code (pincode).,"no_recommendation.seller_h3.""pincode""",no_recommendation.seller_h3,
+provider_long,Unique identifier for provider long.,"no_recommendation.seller_h3.""provider_long""",no_recommendation.seller_h3,
+provider_lat,Unique identifier for provider lat.,"no_recommendation.seller_h3.""provider_lat""",no_recommendation.seller_h3,
+seller_count,Data representing the seller count.,"no_recommendation.seller_h3.""seller_count""",no_recommendation.seller_h3,
+qsr_seller,Data representing the qsr seller.,"no_recommendation.seller_h3.""qsr_seller""",no_recommendation.seller_h3,
+h3_res_8,Data representing the h3 res 8.,"no_recommendation.seller_h3.""h3_res_8""",no_recommendation.seller_h3,
+"▼ sessions   (base table, 9 cols)",,,no_recommendation.sessions,"CREATE UNIQUE INDEX sessions_pkey ON no_recommendation.sessions USING btree (id)
+
+CREATE UNIQUE INDEX sessions_session_token_key ON no_recommendation.sessions USING btree (session_token)
+
+CREATE INDEX idx_sessions_user_id ON no_recommendation.sessions USING btree (user_id)
+
+CREATE INDEX idx_sessions_session_token ON no_recommendation.sessions USING btree (session_token)
+
+CREATE INDEX idx_sessions_expires_at ON no_recommendation.sessions USING btree (expires_at)"
+id,Unique identifier for id.,"no_recommendation.sessions.""id""",no_recommendation.sessions,
+user_id,Unique identifier for user.,"no_recommendation.sessions.""user_id""",no_recommendation.sessions,
+refresh_token_id,Data representing the refresh token id.,"no_recommendation.sessions.""refresh_token_id""",no_recommendation.sessions,
+session_token,Data representing the session token.,"no_recommendation.sessions.""session_token""",no_recommendation.sessions,
+ip_address,Data representing the ip address.,"no_recommendation.sessions.""ip_address""",no_recommendation.sessions,
+user_agent,Data representing the user agent.,"no_recommendation.sessions.""user_agent""",no_recommendation.sessions,
+last_activity_at,Timestamp or date indicating when last activity at occurred.,"no_recommendation.sessions.""last_activity_at""",no_recommendation.sessions,
+created_at,Timestamp when the record was created.,"no_recommendation.sessions.""created_at""",no_recommendation.sessions,
+expires_at,Timestamp or date indicating when expires at occurred.,"no_recommendation.sessions.""expires_at""",no_recommendation.sessions,
+"▼ sku_seller_trim   (base table, 4 cols)",,,no_recommendation.sku_seller_trim,
+Date,Timestamp or date indicating when date occurred.,"no_recommendation.sku_seller_trim.""Date""",no_recommendation.sku_seller_trim,
+pin_code,Data representing the pin code.,"no_recommendation.sku_seller_trim.""pin_code""",no_recommendation.sku_seller_trim,
+seller_count,Data representing the seller count.,"no_recommendation.sku_seller_trim.""seller_count""",no_recommendation.sku_seller_trim,
+Qsr Seller,Data representing the qsr seller.,"no_recommendation.sku_seller_trim.""Qsr Seller""",no_recommendation.sku_seller_trim,
+"▼ user_devices   (base table, 8 cols)",,,no_recommendation.user_devices,"CREATE UNIQUE INDEX user_devices_pkey ON no_recommendation.user_devices USING btree (id)
+
+CREATE UNIQUE INDEX user_devices_unique ON no_recommendation.user_devices USING btree (user_id, device_fingerprint)
+
+CREATE INDEX idx_user_devices_user_id ON no_recommendation.user_devices USING btree (user_id)
+
+CREATE INDEX idx_user_devices_fingerprint ON no_recommendation.user_devices USING btree (device_fingerprint)"
+id,Unique identifier for id.,"no_recommendation.user_devices.""id""",no_recommendation.user_devices,
+user_id,Unique identifier for user.,"no_recommendation.user_devices.""user_id""",no_recommendation.user_devices,
+device_fingerprint,Data representing the device fingerprint.,"no_recommendation.user_devices.""device_fingerprint""",no_recommendation.user_devices,
+device_name,Name of the device.,"no_recommendation.user_devices.""device_name""",no_recommendation.user_devices,
+user_agent,Data representing the user agent.,"no_recommendation.user_devices.""user_agent""",no_recommendation.user_devices,
+first_seen_at,Timestamp or date indicating when first seen at occurred.,"no_recommendation.user_devices.""first_seen_at""",no_recommendation.user_devices,
+last_seen_at,Timestamp or date indicating when last seen at occurred.,"no_recommendation.user_devices.""last_seen_at""",no_recommendation.user_devices,
+last_ip_address,Data representing the last ip address.,"no_recommendation.user_devices.""last_ip_address""",no_recommendation.user_devices,
+"▼ users   (base table, 7 cols)",,,no_recommendation.users,"CREATE UNIQUE INDEX users_pkey ON no_recommendation.users USING btree (id)
+
+CREATE UNIQUE INDEX users_email_key ON no_recommendation.users USING btree (email)
+
+CREATE INDEX idx_users_email ON no_recommendation.users USING btree (email)"
+id,Unique identifier for id.,"no_recommendation.users.""id""",no_recommendation.users,
+email,Data representing the email.,"no_recommendation.users.""email""",no_recommendation.users,
+name,Name of the name.,"no_recommendation.users.""name""",no_recommendation.users,
+profile_picture,Data representing the profile picture.,"no_recommendation.users.""profile_picture""",no_recommendation.users,
+created_at,Timestamp when the record was created.,"no_recommendation.users.""created_at""",no_recommendation.users,
+updated_at,Timestamp when the record was last updated.,"no_recommendation.users.""updated_at""",no_recommendation.users,
+last_login,Data representing the last login.,"no_recommendation.users.""last_login""",no_recommendation.users,

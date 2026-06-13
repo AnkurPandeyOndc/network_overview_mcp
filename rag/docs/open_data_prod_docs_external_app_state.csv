@@ -1,0 +1,14 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s)
+"▼ feedback_form_feedbackanswer   (base table, 4 cols)",,,external_app_state.feedback_form_feedbackanswer
+id,,"external_app_state.feedback_form_feedbackanswer.""id""",external_app_state.feedback_form_feedbackanswer
+answer_text,,"external_app_state.feedback_form_feedbackanswer.""answer_text""",external_app_state.feedback_form_feedbackanswer
+question_id,,"external_app_state.feedback_form_feedbackanswer.""question_id""",external_app_state.feedback_form_feedbackanswer
+response_id,,"external_app_state.feedback_form_feedbackanswer.""response_id""",external_app_state.feedback_form_feedbackanswer
+"▼ feedback_form_feedbackquestions   (base table, 4 cols)",,,external_app_state.feedback_form_feedbackquestions
+id,,"external_app_state.feedback_form_feedbackquestions.""id""",external_app_state.feedback_form_feedbackquestions
+order,,"external_app_state.feedback_form_feedbackquestions.""order""",external_app_state.feedback_form_feedbackquestions
+question_text,,"external_app_state.feedback_form_feedbackquestions.""question_text""",external_app_state.feedback_form_feedbackquestions
+questions_type,,"external_app_state.feedback_form_feedbackquestions.""questions_type""",external_app_state.feedback_form_feedbackquestions
+"▼ feedback_form_feedbackresponse   (base table, 2 cols)",,,external_app_state.feedback_form_feedbackresponse
+id,,"external_app_state.feedback_form_feedbackresponse.""id""",external_app_state.feedback_form_feedbackresponse
+submitted_at,,"external_app_state.feedback_form_feedbackresponse.""submitted_at""",external_app_state.feedback_form_feedbackresponse

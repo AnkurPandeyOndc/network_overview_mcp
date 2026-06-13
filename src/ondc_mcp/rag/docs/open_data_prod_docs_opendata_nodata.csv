@@ -1,0 +1,1301 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s),DDL & Indexes
+"▼ dim_pincode   (base table, 4 cols)",,,opendata_nodata.dim_pincode,
+pincode,Indian postal code (pincode).,"opendata_nodata.dim_pincode.""pincode""",opendata_nodata.dim_pincode,
+district_name,Name of the district.,"opendata_nodata.dim_pincode.""district_name""",opendata_nodata.dim_pincode,
+state_name,Turn-Around-Time (TAT) measurement.,"opendata_nodata.dim_pincode.""state_name""",opendata_nodata.dim_pincode,
+state_code,Turn-Around-Time (TAT) measurement.,"opendata_nodata.dim_pincode.""state_code""",opendata_nodata.dim_pincode,
+"▼ insurance   (base table, 7 cols)",,,opendata_nodata.insurance,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.insurance.""date""",opendata_nodata.insurance,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.insurance.""bap_id""",opendata_nodata.insurance,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.insurance.""bpp_id""",opendata_nodata.insurance,
+category_code,Timestamp or date indicating when category code occurred.,"opendata_nodata.insurance.""category_code""",opendata_nodata.insurance,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.insurance.""domain""",opendata_nodata.insurance,
+order_count,Data representing the order count.,"opendata_nodata.insurance.""order_count""",opendata_nodata.insurance,
+modified_date,Timestamp or date indicating when modified date occurred.,"opendata_nodata.insurance.""modified_date""",opendata_nodata.insurance,
+"▼ insurance_stage   (base table, 6 cols)",,,opendata_nodata.insurance_stage,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.insurance_stage.""date""",opendata_nodata.insurance_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.insurance_stage.""bap_id""",opendata_nodata.insurance_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.insurance_stage.""bpp_id""",opendata_nodata.insurance_stage,
+category_code,Timestamp or date indicating when category code occurred.,"opendata_nodata.insurance_stage.""category_code""",opendata_nodata.insurance_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.insurance_stage.""domain""",opendata_nodata.insurance_stage,
+order_count,Data representing the order count.,"opendata_nodata.insurance_stage.""order_count""",opendata_nodata.insurance_stage,
+"▼ md_b2b_data   (base table, 7 cols)",,,opendata_nodata.md_b2b_data,
+Date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_b2b_data.""Date""",opendata_nodata.md_b2b_data,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_b2b_data.""domain""",opendata_nodata.md_b2b_data,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_b2b_data.""category""",opendata_nodata.md_b2b_data,
+bnp,Data representing the bnp.,"opendata_nodata.md_b2b_data.""bnp""",opendata_nodata.md_b2b_data,
+snp,Data representing the snp.,"opendata_nodata.md_b2b_data.""snp""",opendata_nodata.md_b2b_data,
+order_count,Data representing the order count.,"opendata_nodata.md_b2b_data.""order_count""",opendata_nodata.md_b2b_data,
+modified_date,Timestamp or date indicating when modified date occurred.,"opendata_nodata.md_b2b_data.""modified_date""",opendata_nodata.md_b2b_data,
+"▼ md_b2b_data_stage   (base table, 6 cols)",,,opendata_nodata.md_b2b_data_stage,
+Date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_b2b_data_stage.""Date""",opendata_nodata.md_b2b_data_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_b2b_data_stage.""domain""",opendata_nodata.md_b2b_data_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_b2b_data_stage.""category""",opendata_nodata.md_b2b_data_stage,
+bnp,Data representing the bnp.,"opendata_nodata.md_b2b_data_stage.""bnp""",opendata_nodata.md_b2b_data_stage,
+snp,Data representing the snp.,"opendata_nodata.md_b2b_data_stage.""snp""",opendata_nodata.md_b2b_data_stage,
+order_count,Data representing the order count.,"opendata_nodata.md_b2b_data_stage.""order_count""",opendata_nodata.md_b2b_data_stage,
+"▼ md_b2c_data   (base table, 10 cols)",,,opendata_nodata.md_b2c_data,"CREATE INDEX idx_retail_b2c_agg ON opendata_nodata.md_b2c_data USING btree (""Date"", domain, delivery_pincode, seller_pincode)
+
+CREATE INDEX idx_buyer_np ON opendata_nodata.md_b2c_data USING btree (buyer_np)
+
+CREATE INDEX idx_date ON opendata_nodata.md_b2c_data USING btree (""Date"")
+
+CREATE INDEX idx_dpincode ON opendata_nodata.md_b2c_data USING btree (delivery_pincode)
+
+CREATE INDEX idx_seller_np ON opendata_nodata.md_b2c_data USING btree (seller_np)
+
+CREATE INDEX idx_spincode ON opendata_nodata.md_b2c_data USING btree (seller_pincode)"
+Date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_b2c_data.""Date""",opendata_nodata.md_b2c_data,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_b2c_data.""domain""",opendata_nodata.md_b2c_data,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_b2c_data.""category""",opendata_nodata.md_b2c_data,
+buyer_np,Data representing the buyer np.,"opendata_nodata.md_b2c_data.""buyer_np""",opendata_nodata.md_b2c_data,
+seller_np,Data representing the seller np.,"opendata_nodata.md_b2c_data.""seller_np""",opendata_nodata.md_b2c_data,
+provider_key,Unique identifier for provider key.,"opendata_nodata.md_b2c_data.""provider_key""",opendata_nodata.md_b2c_data,
+seller_pincode,Indian postal code (pincode).,"opendata_nodata.md_b2c_data.""seller_pincode""",opendata_nodata.md_b2c_data,
+delivery_pincode,Indian postal code (pincode).,"opendata_nodata.md_b2c_data.""delivery_pincode""",opendata_nodata.md_b2c_data,
+order_count,Data representing the order count.,"opendata_nodata.md_b2c_data.""order_count""",opendata_nodata.md_b2c_data,
+modified_date,Timestamp or date indicating when modified date occurred.,"opendata_nodata.md_b2c_data.""modified_date""",opendata_nodata.md_b2c_data,
+"▼ md_b2c_data_stage   (base table, 9 cols)",,,opendata_nodata.md_b2c_data_stage,
+Date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_b2c_data_stage.""Date""",opendata_nodata.md_b2c_data_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_b2c_data_stage.""domain""",opendata_nodata.md_b2c_data_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_b2c_data_stage.""category""",opendata_nodata.md_b2c_data_stage,
+buyer_np,Data representing the buyer np.,"opendata_nodata.md_b2c_data_stage.""buyer_np""",opendata_nodata.md_b2c_data_stage,
+seller_np,Data representing the seller np.,"opendata_nodata.md_b2c_data_stage.""seller_np""",opendata_nodata.md_b2c_data_stage,
+provider_key,Unique identifier for provider key.,"opendata_nodata.md_b2c_data_stage.""provider_key""",opendata_nodata.md_b2c_data_stage,
+seller_pincode,Indian postal code (pincode).,"opendata_nodata.md_b2c_data_stage.""seller_pincode""",opendata_nodata.md_b2c_data_stage,
+delivery_pincode,Indian postal code (pincode).,"opendata_nodata.md_b2c_data_stage.""delivery_pincode""",opendata_nodata.md_b2c_data_stage,
+order_count,Data representing the order count.,"opendata_nodata.md_b2c_data_stage.""order_count""",opendata_nodata.md_b2c_data_stage,
+"▼ md_data_sheets   (base table, 7 cols)",,,opendata_nodata.md_data_sheets,"CREATE UNIQUE INDEX md_data_sheets_pkey ON opendata_nodata.md_data_sheets USING btree (id)
+
+CREATE INDEX ix_ondc_prod_mdsheet_md_data_sheets_id ON opendata_nodata.md_data_sheets USING btree (id)"
+id,Unique identifier for id.,"opendata_nodata.md_data_sheets.""id""",opendata_nodata.md_data_sheets,
+title,Data representing the title.,"opendata_nodata.md_data_sheets.""title""",opendata_nodata.md_data_sheets,
+content,Data representing the content.,"opendata_nodata.md_data_sheets.""content""",opendata_nodata.md_data_sheets,
+owner_id,Unique identifier for owner.,"opendata_nodata.md_data_sheets.""owner_id""",opendata_nodata.md_data_sheets,
+is_public,Boolean flag indicating is public.,"opendata_nodata.md_data_sheets.""is_public""",opendata_nodata.md_data_sheets,
+created_at,Timestamp when the record was created.,"opendata_nodata.md_data_sheets.""created_at""",opendata_nodata.md_data_sheets,
+updated_at,Timestamp when the record was last updated.,"opendata_nodata.md_data_sheets.""updated_at""",opendata_nodata.md_data_sheets,
+"▼ md_finance_cl   (base table, 6 cols)",,,opendata_nodata.md_finance_cl,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_finance_cl.""date""",opendata_nodata.md_finance_cl,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_finance_cl.""domain""",opendata_nodata.md_finance_cl,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_finance_cl.""category""",opendata_nodata.md_finance_cl,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_finance_cl.""bap_id""",opendata_nodata.md_finance_cl,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_finance_cl.""bpp_id""",opendata_nodata.md_finance_cl,
+orders_count,Data representing the orders count.,"opendata_nodata.md_finance_cl.""orders_count""",opendata_nodata.md_finance_cl,
+"▼ md_finance_cl_stage   (base table, 6 cols)",,,opendata_nodata.md_finance_cl_stage,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_finance_cl_stage.""date""",opendata_nodata.md_finance_cl_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_finance_cl_stage.""domain""",opendata_nodata.md_finance_cl_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_finance_cl_stage.""category""",opendata_nodata.md_finance_cl_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_finance_cl_stage.""bap_id""",opendata_nodata.md_finance_cl_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_finance_cl_stage.""bpp_id""",opendata_nodata.md_finance_cl_stage,
+orders_count,Data representing the orders count.,"opendata_nodata.md_finance_cl_stage.""orders_count""",opendata_nodata.md_finance_cl_stage,
+"▼ md_finance_gl   (base table, 6 cols)",,,opendata_nodata.md_finance_gl,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_finance_gl.""date""",opendata_nodata.md_finance_gl,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_finance_gl.""domain""",opendata_nodata.md_finance_gl,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_finance_gl.""category""",opendata_nodata.md_finance_gl,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_finance_gl.""bap_id""",opendata_nodata.md_finance_gl,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_finance_gl.""bpp_id""",opendata_nodata.md_finance_gl,
+order_count,Data representing the order count.,"opendata_nodata.md_finance_gl.""order_count""",opendata_nodata.md_finance_gl,
+"▼ md_finance_gl_stage   (base table, 6 cols)",,,opendata_nodata.md_finance_gl_stage,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_finance_gl_stage.""date""",opendata_nodata.md_finance_gl_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_finance_gl_stage.""domain""",opendata_nodata.md_finance_gl_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_finance_gl_stage.""category""",opendata_nodata.md_finance_gl_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_finance_gl_stage.""bap_id""",opendata_nodata.md_finance_gl_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_finance_gl_stage.""bpp_id""",opendata_nodata.md_finance_gl_stage,
+order_count,Data representing the order count.,"opendata_nodata.md_finance_gl_stage.""order_count""",opendata_nodata.md_finance_gl_stage,
+"▼ md_finance_mf   (base table, 8 cols)",,,opendata_nodata.md_finance_mf,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_finance_mf.""date""",opendata_nodata.md_finance_mf,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_finance_mf.""domain""",opendata_nodata.md_finance_mf,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_finance_mf.""category""",opendata_nodata.md_finance_mf,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_finance_mf.""bap_id""",opendata_nodata.md_finance_mf,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_finance_mf.""bpp_id""",opendata_nodata.md_finance_mf,
+fulfillment_type,Data representing the fulfillment type.,"opendata_nodata.md_finance_mf.""fulfillment_type""",opendata_nodata.md_finance_mf,
+Units Allocated,Timestamp or date indicating when units allocated occurred.,"opendata_nodata.md_finance_mf.""Units Allocated""",opendata_nodata.md_finance_mf,
+modified_date,Timestamp or date indicating when modified date occurred.,"opendata_nodata.md_finance_mf.""modified_date""",opendata_nodata.md_finance_mf,
+"▼ md_finance_mf_stage   (base table, 7 cols)",,,opendata_nodata.md_finance_mf_stage,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_finance_mf_stage.""date""",opendata_nodata.md_finance_mf_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_finance_mf_stage.""domain""",opendata_nodata.md_finance_mf_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_finance_mf_stage.""category""",opendata_nodata.md_finance_mf_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_finance_mf_stage.""bap_id""",opendata_nodata.md_finance_mf_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_finance_mf_stage.""bpp_id""",opendata_nodata.md_finance_mf_stage,
+fulfillment_type,Data representing the fulfillment type.,"opendata_nodata.md_finance_mf_stage.""fulfillment_type""",opendata_nodata.md_finance_mf_stage,
+Units Allocated,Timestamp or date indicating when units allocated occurred.,"opendata_nodata.md_finance_mf_stage.""Units Allocated""",opendata_nodata.md_finance_mf_stage,
+"▼ md_finance_pl   (base table, 8 cols)",,,opendata_nodata.md_finance_pl,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_finance_pl.""date""",opendata_nodata.md_finance_pl,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_finance_pl.""domain""",opendata_nodata.md_finance_pl,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_finance_pl.""category""",opendata_nodata.md_finance_pl,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_finance_pl.""bap_id""",opendata_nodata.md_finance_pl,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_finance_pl.""bpp_id""",opendata_nodata.md_finance_pl,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_finance_pl.""sub_domain""",opendata_nodata.md_finance_pl,
+orders_count,Data representing the orders count.,"opendata_nodata.md_finance_pl.""orders_count""",opendata_nodata.md_finance_pl,
+modified_date,Timestamp or date indicating when modified date occurred.,"opendata_nodata.md_finance_pl.""modified_date""",opendata_nodata.md_finance_pl,
+"▼ md_finance_pl_stage   (base table, 7 cols)",,,opendata_nodata.md_finance_pl_stage,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_finance_pl_stage.""date""",opendata_nodata.md_finance_pl_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_finance_pl_stage.""domain""",opendata_nodata.md_finance_pl_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_finance_pl_stage.""category""",opendata_nodata.md_finance_pl_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_finance_pl_stage.""bap_id""",opendata_nodata.md_finance_pl_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_finance_pl_stage.""bpp_id""",opendata_nodata.md_finance_pl_stage,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_finance_pl_stage.""sub_domain""",opendata_nodata.md_finance_pl_stage,
+orders_count,Data representing the orders count.,"opendata_nodata.md_finance_pl_stage.""orders_count""",opendata_nodata.md_finance_pl_stage,
+"▼ md_gift_voucher   (base table, 7 cols)",,,opendata_nodata.md_gift_voucher,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_gift_voucher.""date""",opendata_nodata.md_gift_voucher,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_gift_voucher.""domain""",opendata_nodata.md_gift_voucher,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_gift_voucher.""category""",opendata_nodata.md_gift_voucher,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_gift_voucher.""bap_id""",opendata_nodata.md_gift_voucher,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_gift_voucher.""bpp_id""",opendata_nodata.md_gift_voucher,
+order_count,Data representing the order count.,"opendata_nodata.md_gift_voucher.""order_count""",opendata_nodata.md_gift_voucher,
+modified_date,Timestamp or date indicating when modified date occurred.,"opendata_nodata.md_gift_voucher.""modified_date""",opendata_nodata.md_gift_voucher,
+"▼ md_gift_voucher_stage   (base table, 6 cols)",,,opendata_nodata.md_gift_voucher_stage,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_gift_voucher_stage.""date""",opendata_nodata.md_gift_voucher_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_gift_voucher_stage.""domain""",opendata_nodata.md_gift_voucher_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_gift_voucher_stage.""category""",opendata_nodata.md_gift_voucher_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_gift_voucher_stage.""bap_id""",opendata_nodata.md_gift_voucher_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_gift_voucher_stage.""bpp_id""",opendata_nodata.md_gift_voucher_stage,
+order_count,Data representing the order count.,"opendata_nodata.md_gift_voucher_stage.""order_count""",opendata_nodata.md_gift_voucher_stage,
+"▼ md_gift_vouchers_gsheet_stage   (base table, 9 cols)",,,opendata_nodata.md_gift_vouchers_gsheet_stage,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_gift_vouchers_gsheet_stage.""date""",opendata_nodata.md_gift_vouchers_gsheet_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_gift_vouchers_gsheet_stage.""domain""",opendata_nodata.md_gift_vouchers_gsheet_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_gift_vouchers_gsheet_stage.""category""",opendata_nodata.md_gift_vouchers_gsheet_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_gift_vouchers_gsheet_stage.""bap_id""",opendata_nodata.md_gift_vouchers_gsheet_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_gift_vouchers_gsheet_stage.""bpp_id""",opendata_nodata.md_gift_vouchers_gsheet_stage,
+buyer_np,Data representing the buyer np.,"opendata_nodata.md_gift_vouchers_gsheet_stage.""buyer_np""",opendata_nodata.md_gift_vouchers_gsheet_stage,
+seller_np,Data representing the seller np.,"opendata_nodata.md_gift_vouchers_gsheet_stage.""seller_np""",opendata_nodata.md_gift_vouchers_gsheet_stage,
+order_count,Data representing the order count.,"opendata_nodata.md_gift_vouchers_gsheet_stage.""order_count""",opendata_nodata.md_gift_vouchers_gsheet_stage,
+type_new,Data representing the type new.,"opendata_nodata.md_gift_vouchers_gsheet_stage.""type_new""",opendata_nodata.md_gift_vouchers_gsheet_stage,
+"▼ md_home_service   (base table, 7 cols)",,,opendata_nodata.md_home_service,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_home_service.""date""",opendata_nodata.md_home_service,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_home_service.""domain""",opendata_nodata.md_home_service,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_home_service.""category""",opendata_nodata.md_home_service,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_home_service.""bap_id""",opendata_nodata.md_home_service,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_home_service.""bpp_id""",opendata_nodata.md_home_service,
+order_count,Data representing the order count.,"opendata_nodata.md_home_service.""order_count""",opendata_nodata.md_home_service,
+modified_date,Timestamp or date indicating when modified date occurred.,"opendata_nodata.md_home_service.""modified_date""",opendata_nodata.md_home_service,
+"▼ md_home_service_stage   (base table, 6 cols)",,,opendata_nodata.md_home_service_stage,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_home_service_stage.""date""",opendata_nodata.md_home_service_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_home_service_stage.""domain""",opendata_nodata.md_home_service_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_home_service_stage.""category""",opendata_nodata.md_home_service_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_home_service_stage.""bap_id""",opendata_nodata.md_home_service_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_home_service_stage.""bpp_id""",opendata_nodata.md_home_service_stage,
+order_count,Data representing the order count.,"opendata_nodata.md_home_service_stage.""order_count""",opendata_nodata.md_home_service_stage,
+"▼ md_logistics   (base table, 10 cols)",,,opendata_nodata.md_logistics,"CREATE INDEX idx_logistics_agg ON opendata_nodata.md_logistics USING btree (date, domain, delivery_pincode, pick_up_pincode)
+
+CREATE INDEX idx_bap_id ON opendata_nodata.md_logistics USING btree (bap_id)
+
+CREATE INDEX idx_bpp_id ON opendata_nodata.md_logistics USING btree (bpp_id)
+
+CREATE INDEX idx_delivery_pincode ON opendata_nodata.md_logistics USING btree (delivery_pincode)
+
+CREATE INDEX idx_log_date ON opendata_nodata.md_logistics USING btree (date)
+
+CREATE INDEX idx_pick_up_pincode ON opendata_nodata.md_logistics USING btree (pick_up_pincode)"
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_logistics.""date""",opendata_nodata.md_logistics,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_logistics.""domain""",opendata_nodata.md_logistics,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_logistics.""category""",opendata_nodata.md_logistics,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_logistics.""bap_id""",opendata_nodata.md_logistics,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_logistics.""bpp_id""",opendata_nodata.md_logistics,
+sub_cat,Timestamp or date indicating when sub cat occurred.,"opendata_nodata.md_logistics.""sub_cat""",opendata_nodata.md_logistics,
+order_count,Data representing the order count.,"opendata_nodata.md_logistics.""order_count""",opendata_nodata.md_logistics,
+modified_date,Timestamp or date indicating when modified date occurred.,"opendata_nodata.md_logistics.""modified_date""",opendata_nodata.md_logistics,
+pick_up_pincode,Indian postal code (pincode).,"opendata_nodata.md_logistics.""pick_up_pincode""",opendata_nodata.md_logistics,
+delivery_pincode,Indian postal code (pincode).,"opendata_nodata.md_logistics.""delivery_pincode""",opendata_nodata.md_logistics,
+"▼ md_logistics_stage   (base table, 9 cols)",,,opendata_nodata.md_logistics_stage,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_logistics_stage.""date""",opendata_nodata.md_logistics_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_logistics_stage.""domain""",opendata_nodata.md_logistics_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_logistics_stage.""category""",opendata_nodata.md_logistics_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_logistics_stage.""bap_id""",opendata_nodata.md_logistics_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_logistics_stage.""bpp_id""",opendata_nodata.md_logistics_stage,
+sub_cat,Timestamp or date indicating when sub cat occurred.,"opendata_nodata.md_logistics_stage.""sub_cat""",opendata_nodata.md_logistics_stage,
+order_count,Data representing the order count.,"opendata_nodata.md_logistics_stage.""order_count""",opendata_nodata.md_logistics_stage,
+pick_up_pincode,Indian postal code (pincode).,"opendata_nodata.md_logistics_stage.""pick_up_pincode""",opendata_nodata.md_logistics_stage,
+delivery_pincode,Indian postal code (pincode).,"opendata_nodata.md_logistics_stage.""delivery_pincode""",opendata_nodata.md_logistics_stage,
+"▼ md_mobility_bus   (base table, 8 cols)",,,opendata_nodata.md_mobility_bus,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_mobility_bus.""date""",opendata_nodata.md_mobility_bus,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_mobility_bus.""domain""",opendata_nodata.md_mobility_bus,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_mobility_bus.""category""",opendata_nodata.md_mobility_bus,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_mobility_bus.""bap_id""",opendata_nodata.md_mobility_bus,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_mobility_bus.""bpp_id""",opendata_nodata.md_mobility_bus,
+tickets,Data representing the tickets.,"opendata_nodata.md_mobility_bus.""tickets""",opendata_nodata.md_mobility_bus,
+rides_qty,Unique identifier for rides qty.,"opendata_nodata.md_mobility_bus.""rides_qty""",opendata_nodata.md_mobility_bus,
+modified_date,Timestamp or date indicating when modified date occurred.,"opendata_nodata.md_mobility_bus.""modified_date""",opendata_nodata.md_mobility_bus,
+"▼ md_mobility_bus_stage   (base table, 7 cols)",,,opendata_nodata.md_mobility_bus_stage,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_mobility_bus_stage.""date""",opendata_nodata.md_mobility_bus_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_mobility_bus_stage.""domain""",opendata_nodata.md_mobility_bus_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_mobility_bus_stage.""category""",opendata_nodata.md_mobility_bus_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_mobility_bus_stage.""bap_id""",opendata_nodata.md_mobility_bus_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_mobility_bus_stage.""bpp_id""",opendata_nodata.md_mobility_bus_stage,
+tickets,Data representing the tickets.,"opendata_nodata.md_mobility_bus_stage.""tickets""",opendata_nodata.md_mobility_bus_stage,
+rides_qty,Unique identifier for rides qty.,"opendata_nodata.md_mobility_bus_stage.""rides_qty""",opendata_nodata.md_mobility_bus_stage,
+"▼ md_mobility_metro   (base table, 9 cols)",,,opendata_nodata.md_mobility_metro,
+Date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_mobility_metro.""Date""",opendata_nodata.md_mobility_metro,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_mobility_metro.""domain""",opendata_nodata.md_mobility_metro,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_mobility_metro.""category""",opendata_nodata.md_mobility_metro,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_mobility_metro.""bpp_id""",opendata_nodata.md_mobility_metro,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_mobility_metro.""bap_id""",opendata_nodata.md_mobility_metro,
+buyer_np,Data representing the buyer np.,"opendata_nodata.md_mobility_metro.""buyer_np""",opendata_nodata.md_mobility_metro,
+seller_np,Data representing the seller np.,"opendata_nodata.md_mobility_metro.""seller_np""",opendata_nodata.md_mobility_metro,
+type,Data representing the type.,"opendata_nodata.md_mobility_metro.""type""",opendata_nodata.md_mobility_metro,
+order_count,Data representing the order count.,"opendata_nodata.md_mobility_metro.""order_count""",opendata_nodata.md_mobility_metro,
+"▼ md_mobility_metro_stage   (base table, 9 cols)",,,opendata_nodata.md_mobility_metro_stage,
+Date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_mobility_metro_stage.""Date""",opendata_nodata.md_mobility_metro_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_mobility_metro_stage.""domain""",opendata_nodata.md_mobility_metro_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_mobility_metro_stage.""category""",opendata_nodata.md_mobility_metro_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_mobility_metro_stage.""bpp_id""",opendata_nodata.md_mobility_metro_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_mobility_metro_stage.""bap_id""",opendata_nodata.md_mobility_metro_stage,
+buyer_np,Data representing the buyer np.,"opendata_nodata.md_mobility_metro_stage.""buyer_np""",opendata_nodata.md_mobility_metro_stage,
+seller_np,Data representing the seller np.,"opendata_nodata.md_mobility_metro_stage.""seller_np""",opendata_nodata.md_mobility_metro_stage,
+type,Data representing the type.,"opendata_nodata.md_mobility_metro_stage.""type""",opendata_nodata.md_mobility_metro_stage,
+order_count,Data representing the order count.,"opendata_nodata.md_mobility_metro_stage.""order_count""",opendata_nodata.md_mobility_metro_stage,
+"▼ md_mobility_metro_trv11   (base table, 8 cols)",,,opendata_nodata.md_mobility_metro_trv11,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_mobility_metro_trv11.""bap_id""",opendata_nodata.md_mobility_metro_trv11,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_mobility_metro_trv11.""bpp_id""",opendata_nodata.md_mobility_metro_trv11,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_mobility_metro_trv11.""date""",opendata_nodata.md_mobility_metro_trv11,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_mobility_metro_trv11.""category""",opendata_nodata.md_mobility_metro_trv11,
+igm_key,Data representing the igm key.,"opendata_nodata.md_mobility_metro_trv11.""igm_key""",opendata_nodata.md_mobility_metro_trv11,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_mobility_metro_trv11.""domain""",opendata_nodata.md_mobility_metro_trv11,
+rides_qty,Unique identifier for rides qty.,"opendata_nodata.md_mobility_metro_trv11.""rides_qty""",opendata_nodata.md_mobility_metro_trv11,
+modified_date,Timestamp or date indicating when modified date occurred.,"opendata_nodata.md_mobility_metro_trv11.""modified_date""",opendata_nodata.md_mobility_metro_trv11,
+"▼ md_mobility_metro_trv11_stage   (base table, 7 cols)",,,opendata_nodata.md_mobility_metro_trv11_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_mobility_metro_trv11_stage.""bap_id""",opendata_nodata.md_mobility_metro_trv11_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_mobility_metro_trv11_stage.""bpp_id""",opendata_nodata.md_mobility_metro_trv11_stage,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.md_mobility_metro_trv11_stage.""date""",opendata_nodata.md_mobility_metro_trv11_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_mobility_metro_trv11_stage.""category""",opendata_nodata.md_mobility_metro_trv11_stage,
+igm_key,Data representing the igm key.,"opendata_nodata.md_mobility_metro_trv11_stage.""igm_key""",opendata_nodata.md_mobility_metro_trv11_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_mobility_metro_trv11_stage.""domain""",opendata_nodata.md_mobility_metro_trv11_stage,
+rides_qty,Unique identifier for rides qty.,"opendata_nodata.md_mobility_metro_trv11_stage.""rides_qty""",opendata_nodata.md_mobility_metro_trv11_stage,
+"▼ md_travel_experience   (base table, 7 cols)",,,opendata_nodata.md_travel_experience,
+order_date,Timestamp or date indicating when order date occurred.,"opendata_nodata.md_travel_experience.""order_date""",opendata_nodata.md_travel_experience,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_travel_experience.""bap_id""",opendata_nodata.md_travel_experience,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_travel_experience.""bpp_id""",opendata_nodata.md_travel_experience,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_travel_experience.""category""",opendata_nodata.md_travel_experience,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_travel_experience.""domain""",opendata_nodata.md_travel_experience,
+orders,Data representing the orders.,"opendata_nodata.md_travel_experience.""orders""",opendata_nodata.md_travel_experience,
+modified_date,Timestamp or date indicating when modified date occurred.,"opendata_nodata.md_travel_experience.""modified_date""",opendata_nodata.md_travel_experience,
+"▼ md_travel_experience_stage   (base table, 6 cols)",,,opendata_nodata.md_travel_experience_stage,
+order_date,Timestamp or date indicating when order date occurred.,"opendata_nodata.md_travel_experience_stage.""order_date""",opendata_nodata.md_travel_experience_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.md_travel_experience_stage.""bap_id""",opendata_nodata.md_travel_experience_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.md_travel_experience_stage.""bpp_id""",opendata_nodata.md_travel_experience_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.md_travel_experience_stage.""category""",opendata_nodata.md_travel_experience_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.md_travel_experience_stage.""domain""",opendata_nodata.md_travel_experience_stage,
+orders,Data representing the orders.,"opendata_nodata.md_travel_experience_stage.""orders""",opendata_nodata.md_travel_experience_stage,
+"▼ md_users   (base table, 9 cols)",,,opendata_nodata.md_users,"CREATE UNIQUE INDEX md_users_email_key ON opendata_nodata.md_users USING btree (email)
+
+CREATE UNIQUE INDEX md_users_google_id_key ON opendata_nodata.md_users USING btree (google_id)
+
+CREATE UNIQUE INDEX md_users_pkey ON opendata_nodata.md_users USING btree (id)
+
+CREATE INDEX idx_md_users_email ON opendata_nodata.md_users USING btree (email)
+
+CREATE INDEX idx_md_users_google_id ON opendata_nodata.md_users USING btree (google_id)
+
+CREATE INDEX idx_md_users_is_active ON opendata_nodata.md_users USING btree (is_active)
+
+CREATE INDEX idx_md_users_role_id ON opendata_nodata.md_users USING btree (role_id)"
+id,Unique identifier for id.,"opendata_nodata.md_users.""id""",opendata_nodata.md_users,
+email,Data representing the email.,"opendata_nodata.md_users.""email""",opendata_nodata.md_users,
+name,Name of the name.,"opendata_nodata.md_users.""name""",opendata_nodata.md_users,
+picture,Data representing the picture.,"opendata_nodata.md_users.""picture""",opendata_nodata.md_users,
+google_id,Unique identifier for google.,"opendata_nodata.md_users.""google_id""",opendata_nodata.md_users,
+is_active,Boolean flag indicating is active.,"opendata_nodata.md_users.""is_active""",opendata_nodata.md_users,
+created_at,Timestamp when the record was created.,"opendata_nodata.md_users.""created_at""",opendata_nodata.md_users,
+updated_at,Timestamp when the record was last updated.,"opendata_nodata.md_users.""updated_at""",opendata_nodata.md_users,
+role_id,Unique identifier for role.,"opendata_nodata.md_users.""role_id""",opendata_nodata.md_users,
+"▼ mobility_snp_wise   (base table, 6 cols)",,,opendata_nodata.mobility_snp_wise,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.mobility_snp_wise.""date""",opendata_nodata.mobility_snp_wise,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.mobility_snp_wise.""bpp_id""",opendata_nodata.mobility_snp_wise,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.mobility_snp_wise.""bap_id""",opendata_nodata.mobility_snp_wise,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.mobility_snp_wise.""category""",opendata_nodata.mobility_snp_wise,
+order_count,Data representing the order count.,"opendata_nodata.mobility_snp_wise.""order_count""",opendata_nodata.mobility_snp_wise,
+modified_date,Timestamp or date indicating when modified date occurred.,"opendata_nodata.mobility_snp_wise.""modified_date""",opendata_nodata.mobility_snp_wise,
+"▼ mobility_snp_wise_stage   (base table, 5 cols)",,,opendata_nodata.mobility_snp_wise_stage,
+date,Timestamp or date indicating when date occurred.,"opendata_nodata.mobility_snp_wise_stage.""date""",opendata_nodata.mobility_snp_wise_stage,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.mobility_snp_wise_stage.""bpp_id""",opendata_nodata.mobility_snp_wise_stage,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.mobility_snp_wise_stage.""bap_id""",opendata_nodata.mobility_snp_wise_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.mobility_snp_wise_stage.""category""",opendata_nodata.mobility_snp_wise_stage,
+order_count,Data representing the order count.,"opendata_nodata.mobility_snp_wise_stage.""order_count""",opendata_nodata.mobility_snp_wise_stage,
+"▼ model_for_all_d_old_orders   (base table, 9 cols)",,,opendata_nodata.model_for_all_d_old_orders,
+Date,Timestamp or date indicating when date occurred.,"opendata_nodata.model_for_all_d_old_orders.""Date""",opendata_nodata.model_for_all_d_old_orders,
+bap_id,Unique identifier for the Buyer App (BAP).,"opendata_nodata.model_for_all_d_old_orders.""bap_id""",opendata_nodata.model_for_all_d_old_orders,
+bpp_id,Unique identifier for the Seller App (BPP).,"opendata_nodata.model_for_all_d_old_orders.""bpp_id""",opendata_nodata.model_for_all_d_old_orders,
+buyer_np,Data representing the buyer np.,"opendata_nodata.model_for_all_d_old_orders.""buyer_np""",opendata_nodata.model_for_all_d_old_orders,
+seller_np,Data representing the seller np.,"opendata_nodata.model_for_all_d_old_orders.""seller_np""",opendata_nodata.model_for_all_d_old_orders,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.model_for_all_d_old_orders.""category""",opendata_nodata.model_for_all_d_old_orders,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.model_for_all_d_old_orders.""domain""",opendata_nodata.model_for_all_d_old_orders,
+order_count,Data representing the order count.,"opendata_nodata.model_for_all_d_old_orders.""order_count""",opendata_nodata.model_for_all_d_old_orders,
+Type New,Data representing the type new.,"opendata_nodata.model_for_all_d_old_orders.""Type New""",opendata_nodata.model_for_all_d_old_orders,
+"▼ no_model_for_all_domain   (materialized view, 8 cols)",,,opendata_nodata.no_model_for_all_domain,"SELECT order_date,
+    buyer_np,
+    seller_np,
+    category,
+    domain,
+    sub_domain,
+    np_type,
+    orders
+   FROM ( SELECT cl.date AS order_date,
+            clbnp.np_name AS buyer_np,
+            dmsn.np_name AS seller_np,
+            cl.category,
+            cl.domain,
+            'Credit'::text AS sub_domain,
+                CASE
+                    WHEN clbnp.np_name::text = dmsn.np_name::text THEN 'Intra NP'::text
+                    ELSE 'Inter NP'::text
+                END AS np_type,
+            sum(cl.orders_count) AS orders
+           FROM opendata_nodata.md_finance_cl cl
+             LEFT JOIN dimension.dim_mf_buyer_np clbnp ON clbnp.subscriber_id::text = cl.bap_id::text
+             LEFT JOIN dimension.dim_mf_seller_np dmsn ON dmsn.subscriber_id::text = cl.bpp_id::text
+          WHERE cl.orders_count > 0
+          GROUP BY cl.date, clbnp.np_name, dmsn.np_name, cl.category, cl.domain, 'Credit'::text
+        UNION
+         SELECT gl.date AS order_date,
+            clbnp.np_name AS buyer_np,
+            dmsn.np_name AS seller_np,
+            gl.category,
+            gl.domain,
+            'Credit'::text AS sub_domain,
+                CASE
+                    WHEN clbnp.np_name::text = dmsn.np_name::text THEN 'Intra NP'::text
+                    ELSE 'Inter NP'::text
+                END AS np_type,
+            sum(gl.order_count) AS orders
+           FROM opendata_nodata.md_finance_gl gl
+             LEFT JOIN dimension.dim_mf_buyer_np clbnp ON clbnp.subscriber_id::text = gl.bap_id::text
+             LEFT JOIN dimension.dim_mf_seller_np dmsn ON dmsn.subscriber_id::text = gl.bpp_id::text
+          WHERE gl.order_count > 0
+          GROUP BY gl.date, clbnp.np_name, dmsn.np_name, gl.category, gl.domain, 'Credit'::text
+        UNION
+         SELECT pl.date AS order_date,
+            plbnp.np_name AS buyer_np,
+            COALESCE(dmsn.np_name, pl.bpp_id) AS seller_np,
+            pl.category,
+            pl.domain,
+            'Credit'::text AS sub_domain,
+            'Inter NP'::text AS np_type,
+            sum(pl.orders_count) AS orders
+           FROM opendata_nodata.md_finance_pl pl
+             LEFT JOIN dimension.dim_mf_buyer_np plbnp ON plbnp.subscriber_id::text = pl.bap_id::text
+             LEFT JOIN dimension.dim_mf_seller_np dmsn ON dmsn.subscriber_id::text = pl.bpp_id::text
+          WHERE pl.orders_count > 0
+          GROUP BY pl.date, plbnp.np_name, (COALESCE(dmsn.np_name, pl.bpp_id)), pl.category, pl.domain, 'Credit'::text, 'Inter NP'::text
+        UNION
+         SELECT ins.date AS order_date,
+            ibap.np_name AS buyer_np,
+            COALESCE(ibpp.np_name, ins.bpp_id) AS seller_np,
+            ins.category_code AS category,
+            'Finance'::text AS domain,
+            ins.domain AS sub_domain,
+            'Inter NP'::text AS np_type,
+            sum(ins.order_count) AS orders
+           FROM opendata_nodata.insurance ins
+             LEFT JOIN dimension.dim_insurance_bap ibap ON ibap.subscriber_id::text = ins.bap_id::text
+             LEFT JOIN dimension.dim_insurance_bpp ibpp ON ibpp.subscriber_id::text = ins.bpp_id::text
+          WHERE ins.order_count > 0
+          GROUP BY ins.date, ibap.np_name, (COALESCE(ibpp.np_name, ins.bpp_id)), ins.category_code, 'Finance'::text, ins.domain
+        UNION (
+                (
+                        (
+                                (
+ SELECT b2c.""Date"" AS order_date,
+    bnp.buyer_np_name AS buyer_np,
+    snp.seller_np_name AS seller_np,
+  CASE
+   WHEN b2c.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+   ELSE b2c.category
+  END AS category,
+    b2c.domain,
+    NULL::text AS sub_domain,
+  CASE
+   WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+   ELSE 'Inter NP'::text
+  END AS np_type,
+    sum(b2c.order_count) AS orders
+   FROM opendata_nodata.md_b2c_data b2c
+     LEFT JOIN dimension.dim_retail_buyer_np bnp ON b2c.buyer_np::text = bnp.buyer_np::text
+     LEFT JOIN dimension.dim_retail_seller_np snp ON b2c.seller_np::text = snp.seller_np::text
+  GROUP BY b2c.""Date"", b2c.buyer_np, b2c.seller_np, bnp.buyer_np_name, snp.seller_np_name, (
+  CASE
+   WHEN b2c.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+   ELSE b2c.category
+  END), b2c.domain, (
+  CASE
+   WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+   ELSE 'Inter NP'::text
+  END)
+UNION
+ SELECT b2b.""Date"" AS order_date,
+    bnp.buyer_np_name AS buyer_np,
+    snp.seller_np_name AS seller_np,
+  CASE
+   WHEN b2b.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+   ELSE b2b.category
+  END AS category,
+    b2b.domain,
+    NULL::text AS sub_domain,
+  CASE
+   WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+   ELSE 'Inter NP'::text
+  END AS np_type,
+    sum(b2b.order_count) AS orders
+   FROM opendata_nodata.md_b2b_data b2b
+     LEFT JOIN dimension.dim_retail_buyer_np bnp ON b2b.bnp::text = bnp.buyer_np::text
+     LEFT JOIN dimension.dim_retail_seller_np snp ON b2b.snp::text = snp.seller_np::text
+  GROUP BY b2b.""Date"", b2b.bnp, b2b.snp, bnp.buyer_np_name, snp.seller_np_name, (
+  CASE
+   WHEN b2b.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+   ELSE b2b.category
+  END), b2b.domain, (
+  CASE
+   WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+   ELSE 'Inter NP'::text
+  END)
+UNION
+ SELECT gv.date AS order_date,
+    bnp.buyer_np_name AS buyer_np,
+    snp.seller_np_name AS seller_np,
+  CASE
+   WHEN gv.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+   ELSE gv.category
+  END AS category,
+    gv.domain,
+    NULL::text AS sub_domain,
+  CASE
+   WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+   ELSE 'Inter NP'::text
+  END AS np_type,
+    sum(gv.order_count) AS orders
+   FROM opendata_nodata.md_gift_voucher gv
+     LEFT JOIN dimension.dim_retail_buyer_np bnp ON gv.bap_id::text = bnp.buyer_np::text
+     LEFT JOIN dimension.dim_retail_seller_np snp ON gv.bpp_id::text = snp.seller_np::text
+  GROUP BY gv.date, gv.bap_id, gv.bpp_id, bnp.buyer_np_name, snp.seller_np_name, (
+  CASE
+   WHEN gv.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+   ELSE gv.category
+  END), gv.domain, (
+  CASE
+   WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+   ELSE 'Inter NP'::text
+  END)
+                                ) EXCEPT
+                                 SELECT gv.date AS order_date,
+                                    bnp.buyer_np_name AS buyer_np,
+                                    snp.seller_np_name AS seller_np,
+CASE
+ WHEN gv.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+ ELSE gv.category
+END AS category,
+                                    gv.domain,
+                                    NULL::text AS sub_domain,
+CASE
+ WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+ ELSE 'Inter NP'::text
+END AS np_type,
+                                    sum(gv.order_count) AS orders
+                                   FROM opendata_nodata.md_gift_voucher gv
+                                     LEFT JOIN dimension.dim_retail_buyer_np bnp ON gv.bap_id::text = bnp.buyer_np::text
+                                     LEFT JOIN dimension.dim_retail_seller_np snp ON gv.bpp_id::text = snp.seller_np::text
+                                  WHERE gv.date >= '2025-01-09'::date AND gv.date <= '2025-01-16'::date OR gv.date = '2024-12-26'::date
+                                  GROUP BY gv.date, gv.bap_id, gv.bpp_id, bnp.buyer_np_name, snp.seller_np_name, (
+CASE
+ WHEN gv.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+ ELSE gv.category
+END), gv.domain, (
+CASE
+ WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+ ELSE 'Inter NP'::text
+END)
+                        ) UNION
+                         SELECT log.date AS order_date,
+                                CASE
+                                    WHEN log.bap_id::text = 'webapi.magicpin.in/oms_partner/ondc/logistics/buyer'::text THEN 'Magicpin (LBNP)'::text
+                                    ELSE COALESCE(snp.seller_np_name, 'Unknown'::character varying)::text || ' (LBNP)'::text
+                                END AS buyer_np,
+                            lnp.logistics_np_name AS seller_np,
+                            log.sub_cat AS category,
+                            log.domain,
+                            NULL::text AS sub_domain,
+                                CASE
+                                    WHEN snp.seller_np_name::text = lnp.logistics_np_name::text THEN 'Intra NP'::text
+                                    ELSE 'Inter NP'::text
+                                END AS np_type,
+                            sum(log.order_count) AS orders
+                           FROM opendata_nodata.md_logistics log
+                             LEFT JOIN dimension.dim_retail_seller_np snp ON log.bap_id::text = snp.seller_np::text
+                             LEFT JOIN dimension.dim_logistics_np lnp ON log.bpp_id::text = lnp.logistics_np::text
+                             LEFT JOIN dimension.dim_logistics_category cat ON log.sub_cat::text = cat.network_retail_order_category::text
+                          GROUP BY log.date, log.bap_id, log.bpp_id, log.sub_cat, (
+                                CASE
+                                    WHEN log.bap_id::text = 'webapi.magicpin.in/oms_partner/ondc/logistics/buyer'::text THEN 'Magicpin (LBNP)'::text
+                                    ELSE COALESCE(snp.seller_np_name, 'Unknown'::character varying)::text || ' (LBNP)'::text
+                                END), lnp.logistics_np_name, log.domain, (
+                                CASE
+                                    WHEN snp.seller_np_name::text = lnp.logistics_np_name::text THEN 'Intra NP'::text
+                                    ELSE 'Inter NP'::text
+                                END)
+                        UNION
+                         SELECT hs.date AS order_date,
+                            bnp.""Buyer NP"" AS buyer_np,
+                            snp.""Seller NP"" AS seller_np,
+                            hs.category,
+                            hs.domain,
+                            NULL::text AS sub_domain,
+                                CASE
+                                    WHEN bnp.""Buyer NP""::text = snp.""Seller NP""::text THEN 'Intra NP'::text
+                                    ELSE 'Inter NP'::text
+                                END AS np_type,
+                            sum(hs.order_count) AS orders
+                           FROM opendata_nodata.md_home_service hs
+                             LEFT JOIN dimension.dim_home_service_buyer_np bnp ON hs.bap_id::text = bnp.""Bap Id""::text
+                             LEFT JOIN dimension.dim_home_service_seller_np snp ON hs.bpp_id::text = snp.""Bpp Id""::text
+                          GROUP BY hs.date, hs.bap_id, hs.bpp_id, bnp.""Buyer NP"", snp.""Seller NP"", hs.category, hs.domain, (
+                                CASE
+                                    WHEN bnp.""Buyer NP""::text = snp.""Seller NP""::text THEN 'Intra NP'::text
+                                    ELSE 'Inter NP'::text
+                                END)
+                        UNION
+                         SELECT bus.date AS order_date,
+                            ibnp.bap_name AS buyer_np,
+                            ibpp.bpp_name AS seller_np,
+                            bus.category,
+                            'Public Transport'::character varying AS domain,
+                            NULL::text AS sub_domain,
+                                CASE
+                                    WHEN ibnp.bap_name::text = ibpp.bpp_name::text THEN 'Intra NP'::text
+                                    ELSE 'Inter NP'::text
+                                END AS np_type,
+                            sum(bus.tickets) AS orders
+                           FROM opendata_nodata.md_mobility_bus bus
+                             LEFT JOIN dimension.dim_igm_bap ibnp ON ibnp.bap_id::text = bus.bap_id::text
+                             LEFT JOIN dimension.dim_igm_bpp ibpp ON ibpp.bpp_id::text = bus.bpp_id::text
+                          GROUP BY bus.date, bus.bap_id, bus.bpp_id, ibnp.bap_name, ibpp.bpp_name, bus.category, bus.domain, (
+                                CASE
+                                    WHEN ibnp.bap_name::text = ibpp.bpp_name::text THEN 'Intra NP'::text
+                                    ELSE 'Inter NP'::text
+                                END)
+                        UNION
+                         SELECT mf.date AS order_date,
+                            mfbnp.np_name AS buyer_np,
+                            mfsnp.np_name AS seller_np,
+                            mf.category,
+                            mf.domain,
+                            NULL::text AS sub_domain,
+                                CASE
+                                    WHEN mfbnp.np_name::text = mfsnp.np_name::text THEN 'Intra NP'::text
+                                    ELSE 'Inter NP'::text
+                                END AS np_type,
+                            sum(mf.""Units Allocated"") AS orders
+                           FROM opendata_nodata.md_finance_mf mf
+                             LEFT JOIN dimension.dim_mf_buyer_np mfbnp ON mfbnp.subscriber_id::text = mf.bap_id::text
+                             LEFT JOIN dimension.dim_mf_seller_np mfsnp ON mfsnp.subscriber_id::text = mf.bpp_id::text
+                          GROUP BY mf.date, mf.bap_id, mf.bpp_id, mfbnp.np_name, mfsnp.np_name, mf.category, mf.domain, (
+                                CASE
+                                    WHEN mfbnp.np_name::text = mfsnp.np_name::text THEN 'Intra NP'::text
+                                    ELSE 'Inter NP'::text
+                                END)
+                        UNION
+                         SELECT msw.date AS order_date,
+                            mbap.bap_name AS buyer_np,
+                            mbpp.bpp_name AS seller_np,
+                            msw.category,
+                            'Ride Hailing'::text AS domain,
+                            NULL::text AS sub_domain,
+                                CASE
+                                    WHEN mbap.bap_name::text = 'One Delhi'::text AND mbpp.bpp_name::text = 'DTC'::text AND msw.category::text = 'Bus'::text THEN 'Intra NP'::text
+                                    WHEN mbap.bap_name::text = mbpp.bpp_name::text THEN 'Intra NP'::text
+                                    ELSE 'Inter NP'::text
+                                END AS np_type,
+                            sum(msw.order_count) AS orders
+                           FROM opendata_nodata.mobility_snp_wise msw
+                             LEFT JOIN dimension.dim_bpp_mobility mbpp ON mbpp.bpp_id::text = msw.bpp_id::text
+                             LEFT JOIN dimension.dim_bap_mobility mbap ON mbap.bap_id::text = msw.bap_id::text
+                          GROUP BY msw.date, mbap.bap_name, mbpp.bpp_name, msw.category, 'Mobility'::text, (
+                                CASE
+                                    WHEN mbap.bap_name::text = 'One Delhi'::text AND mbpp.bpp_name::text = 'DTC'::text AND msw.category::text = 'Bus'::text THEN 'Intra NP'::text
+                                    WHEN mbap.bap_name::text = mbpp.bpp_name::text THEN 'Intra NP'::text
+                                    ELSE 'Inter NP'::text
+                                END)
+                ) EXCEPT
+                 SELECT msw.date AS order_date,
+                    mbap.bap_name AS buyer_np,
+                    mbpp.bpp_name AS seller_np,
+                    msw.category,
+                    'Ride Hailing'::text AS domain,
+                    NULL::text AS sub_domain,
+                        CASE
+                            WHEN mbap.bap_name::text = 'One Delhi'::text AND mbpp.bpp_name::text = 'DTC'::text AND msw.category::text = 'Bus'::text THEN 'Intra NP'::text
+                            WHEN mbap.bap_name::text = mbpp.bpp_name::text THEN 'Intra NP'::text
+                            ELSE 'Inter NP'::text
+                        END AS np_type,
+                    sum(msw.order_count) AS orders
+                   FROM opendata_nodata.mobility_snp_wise msw
+                     LEFT JOIN dimension.dim_bpp_mobility mbpp ON mbpp.bpp_id::text = msw.bpp_id::text
+                     LEFT JOIN dimension.dim_bap_mobility mbap ON mbap.bap_id::text = msw.bap_id::text
+                  WHERE NOT (msw.bap_id::text = ANY (ARRAY['api.beckn.juspay.in/bap/beckn/v1/4b17bd06-ae7e-48e9-85bf-282fb310209c'::character varying::text, 'api.beckn.juspay.in/bap/beckn/v1/bd064716-ae7e-48e9-85bf-282fb310209c'::character varying::text])) AND NOT (msw.bpp_id::text = ANY (ARRAY['api.beckn.juspay.in/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f'::character varying::text, 'api.beckn.juspay.in/dobpp/beckn/d2929b92-8b12-4e21-9efd-d6203940c4c5'::character varying::text])) AND msw.date >= '2024-12-30'::date AND msw.date <= '2025-01-10'::date
+                  GROUP BY msw.date, mbap.bap_name, mbpp.bpp_name, msw.category, 'Mobility'::text, (
+                        CASE
+                            WHEN mbap.bap_name::text = 'One Delhi'::text AND mbpp.bpp_name::text = 'DTC'::text AND msw.category::text = 'Bus'::text THEN 'Intra NP'::text
+                            WHEN mbap.bap_name::text = mbpp.bpp_name::text THEN 'Intra NP'::text
+                            ELSE 'Inter NP'::text
+                        END)
+        )
+        UNION
+         SELECT model_for_all_d_old_orders.""Date"" AS order_date,
+            model_for_all_d_old_orders.buyer_np,
+            model_for_all_d_old_orders.seller_np,
+            model_for_all_d_old_orders.category,
+                CASE
+                    WHEN model_for_all_d_old_orders.domain::text = 'Mobility'::text AND model_for_all_d_old_orders.category::text = 'Metro'::text THEN 'Public Transport'::character varying
+                    WHEN model_for_all_d_old_orders.domain::text = 'Mobility'::text AND model_for_all_d_old_orders.category::text = 'Bus'::text THEN 'Public Transport'::character varying
+                    WHEN model_for_all_d_old_orders.domain::text = 'Mobility'::text AND model_for_all_d_old_orders.category::text = 'Cabs/Auto'::text THEN 'Ride Hailing'::character varying
+                    ELSE model_for_all_d_old_orders.domain
+                END AS domain,
+            NULL::text AS sub_domain,
+            model_for_all_d_old_orders.""Type New"" AS np_type,
+            model_for_all_d_old_orders.order_count AS orders
+           FROM opendata_nodata.model_for_all_d_old_orders
+          WHERE NOT (model_for_all_d_old_orders.domain::text = 'Retail B2C'::text AND model_for_all_d_old_orders.""Date"" >= '2025-08-22'::date AND model_for_all_d_old_orders.""Date"" <= '2025-09-30'::date)
+        UNION
+         SELECT md_mobility_metro.""Date"" AS order_date,
+            md_mobility_metro.buyer_np,
+            md_mobility_metro.seller_np,
+            md_mobility_metro.category,
+                CASE
+                    WHEN md_mobility_metro.domain::text = 'Mobility'::text AND md_mobility_metro.category::text = 'Metro'::text THEN 'Public Transport'::character varying
+                    WHEN md_mobility_metro.domain::text = 'Mobility'::text AND md_mobility_metro.category::text = 'Bus'::text THEN 'Public Transport'::character varying
+                    WHEN md_mobility_metro.domain::text = 'Mobility'::text AND md_mobility_metro.category::text = 'Cabs/Auto'::text THEN 'Ride Hailing'::character varying
+                    ELSE md_mobility_metro.domain
+                END AS domain,
+            NULL::text AS sub_domain,
+            md_mobility_metro.type AS np_type,
+            md_mobility_metro.order_count AS orders
+           FROM opendata_nodata.md_mobility_metro
+          WHERE md_mobility_metro.seller_np::text = 'DTC'::text OR md_mobility_metro.""Date"" <= '2026-05-06'::date
+        UNION
+         SELECT md_mobility_metro_trv11.date AS order_date,
+            ibnp.bap_name AS buyer_np,
+                CASE
+                    WHEN ibpp.bpp_name IS NOT NULL THEN ibpp.bpp_name
+                    ELSE md_mobility_metro_trv11.bpp_id
+                END AS seller_np,
+            md_mobility_metro_trv11.category,
+                CASE
+                    WHEN md_mobility_metro_trv11.domain::text = 'Mobility'::text AND md_mobility_metro_trv11.category::text = 'Metro'::text THEN 'Public Transport'::character varying
+                    WHEN md_mobility_metro_trv11.domain::text = 'Mobility'::text AND md_mobility_metro_trv11.category::text = 'Bus'::text THEN 'Public Transport'::character varying
+                    WHEN md_mobility_metro_trv11.domain::text = 'Mobility'::text AND md_mobility_metro_trv11.category::text = 'Cabs/Auto'::text THEN 'Ride Hailing'::character varying
+                    ELSE md_mobility_metro_trv11.domain
+                END AS domain,
+            NULL::text AS sub_domain,
+                CASE
+                    WHEN ibnp.bap_name::text = ibpp.bpp_name::text THEN 'Intra NP'::text
+                    ELSE 'Inter NP'::text
+                END AS np_type,
+            md_mobility_metro_trv11.rides_qty AS orders
+           FROM opendata_nodata.md_mobility_metro_trv11 md_mobility_metro_trv11
+             LEFT JOIN dimension.dim_igm_bap ibnp ON ibnp.bap_id::text = md_mobility_metro_trv11.bap_id::text
+             LEFT JOIN dimension.dim_igm_bpp ibpp ON ibpp.bpp_id::text = md_mobility_metro_trv11.bpp_id::text
+        UNION
+         SELECT md_travel_experience.order_date,
+            ibnp.bap_name AS buyer_np,
+                CASE
+                    WHEN ibpp.bpp_name IS NOT NULL THEN ibpp.bpp_name
+                    ELSE md_travel_experience.bpp_id
+                END AS seller_np,
+            md_travel_experience.category,
+            md_travel_experience.domain,
+            NULL::text AS sub_domain,
+                CASE
+                    WHEN ibnp.bap_name::text = ibpp.bpp_name::text THEN 'Intra NP'::text
+                    ELSE 'Inter NP'::text
+                END AS np_type,
+            md_travel_experience.orders
+           FROM opendata_nodata.md_travel_experience md_travel_experience
+             LEFT JOIN dimension.dim_igm_bap ibnp ON ibnp.bap_id::text = md_travel_experience.bap_id::text
+             LEFT JOIN dimension.dim_igm_bpp ibpp ON ibpp.bpp_id::text = md_travel_experience.bpp_id::text) no_model_for_all_domain_src
+  WHERE order_date < CURRENT_DATE AND orders > 0 AND orders IS NOT NULL;"
+order_date,Timestamp or date indicating when order date occurred.,"opendata_nodata.no_model_for_all_domain.""order_date""",opendata_nodata.no_model_for_all_domain,
+buyer_np,Data representing the buyer np.,"opendata_nodata.no_model_for_all_domain.""buyer_np""",opendata_nodata.no_model_for_all_domain,
+seller_np,Data representing the seller np.,"opendata_nodata.no_model_for_all_domain.""seller_np""",opendata_nodata.no_model_for_all_domain,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.no_model_for_all_domain.""category""",opendata_nodata.no_model_for_all_domain,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.no_model_for_all_domain.""domain""",opendata_nodata.no_model_for_all_domain,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.no_model_for_all_domain.""sub_domain""",opendata_nodata.no_model_for_all_domain,
+np_type,Data representing the np type.,"opendata_nodata.no_model_for_all_domain.""np_type""",opendata_nodata.no_model_for_all_domain,
+orders,Data representing the orders.,"opendata_nodata.no_model_for_all_domain.""orders""",opendata_nodata.no_model_for_all_domain,
+"▼ no_model_for_all_domain_backup   (materialized view, 8 cols)",,,opendata_nodata.no_model_for_all_domain_backup,"SELECT cl.date AS order_date,
+    clbnp.np_name AS buyer_np,
+    dmsn.np_name AS seller_np,
+    cl.category,
+    cl.domain,
+    'Credit'::text AS sub_domain,
+        CASE
+            WHEN clbnp.np_name::text = dmsn.np_name::text THEN 'Intra NP'::text
+            ELSE 'Inter NP'::text
+        END AS np_type,
+    sum(cl.orders_count) AS orders
+   FROM opendata_nodata.md_finance_cl cl
+     LEFT JOIN dimension.dim_mf_buyer_np clbnp ON clbnp.subscriber_id::text = cl.bap_id::text
+     LEFT JOIN dimension.dim_mf_seller_np dmsn ON dmsn.subscriber_id::text = cl.bpp_id::text
+  WHERE cl.orders_count > 0
+  GROUP BY cl.date, clbnp.np_name, dmsn.np_name, cl.category, cl.domain, 'Credit'::text
+UNION
+ SELECT gl.date AS order_date,
+    clbnp.np_name AS buyer_np,
+    dmsn.np_name AS seller_np,
+    gl.category,
+    gl.domain,
+    'Credit'::text AS sub_domain,
+        CASE
+            WHEN clbnp.np_name::text = dmsn.np_name::text THEN 'Intra NP'::text
+            ELSE 'Inter NP'::text
+        END AS np_type,
+    sum(gl.order_count) AS orders
+   FROM opendata_nodata.md_finance_gl gl
+     LEFT JOIN dimension.dim_mf_buyer_np clbnp ON clbnp.subscriber_id::text = gl.bap_id::text
+     LEFT JOIN dimension.dim_mf_seller_np dmsn ON dmsn.subscriber_id::text = gl.bpp_id::text
+  WHERE gl.order_count > 0
+  GROUP BY gl.date, clbnp.np_name, dmsn.np_name, gl.category, gl.domain, 'Credit'::text
+UNION
+ SELECT pl.date AS order_date,
+    plbnp.np_name AS buyer_np,
+    COALESCE(dmsn.np_name, pl.bpp_id) AS seller_np,
+    pl.category,
+    pl.domain,
+    'Credit'::text AS sub_domain,
+    'Inter NP'::text AS np_type,
+    sum(pl.orders_count) AS orders
+   FROM opendata_nodata.md_finance_pl pl
+     LEFT JOIN dimension.dim_mf_buyer_np plbnp ON plbnp.subscriber_id::text = pl.bap_id::text
+     LEFT JOIN dimension.dim_mf_seller_np dmsn ON dmsn.subscriber_id::text = pl.bpp_id::text
+  WHERE pl.orders_count > 0
+  GROUP BY pl.date, plbnp.np_name, (COALESCE(dmsn.np_name, pl.bpp_id)), pl.category, pl.domain, 'Credit'::text, 'Inter NP'::text
+UNION
+ SELECT ins.date AS order_date,
+    ibap.np_name AS buyer_np,
+    COALESCE(ibpp.np_name, ins.bpp_id) AS seller_np,
+    ins.category_code AS category,
+    'Finance'::text AS domain,
+    ins.domain AS sub_domain,
+    'Inter NP'::text AS np_type,
+    sum(ins.order_count) AS orders
+   FROM opendata_nodata.insurance ins
+     LEFT JOIN dimension.dim_insurance_bap ibap ON ibap.subscriber_id::text = ins.bap_id::text
+     LEFT JOIN dimension.dim_insurance_bpp ibpp ON ibpp.subscriber_id::text = ins.bpp_id::text
+  WHERE ins.order_count > 0
+  GROUP BY ins.date, ibap.np_name, (COALESCE(ibpp.np_name, ins.bpp_id)), ins.category_code, 'Finance'::text, ins.domain
+UNION (
+        (
+                (
+                        (
+                                 SELECT b2c.""Date"" AS order_date,
+                                    bnp.buyer_np_name AS buyer_np,
+                                    snp.seller_np_name AS seller_np,
+CASE
+ WHEN b2c.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+ ELSE b2c.category
+END AS category,
+                                    b2c.domain,
+                                    NULL::text AS sub_domain,
+CASE
+ WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+ ELSE 'Inter NP'::text
+END AS np_type,
+                                    sum(b2c.order_count) AS orders
+                                   FROM opendata_nodata.md_b2c_data b2c
+                                     LEFT JOIN dimension.dim_retail_buyer_np bnp ON b2c.buyer_np::text = bnp.buyer_np::text
+                                     LEFT JOIN dimension.dim_retail_seller_np snp ON b2c.seller_np::text = snp.seller_np::text
+                                  GROUP BY b2c.""Date"", b2c.buyer_np, b2c.seller_np, bnp.buyer_np_name, snp.seller_np_name, (
+CASE
+ WHEN b2c.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+ ELSE b2c.category
+END), b2c.domain, (
+CASE
+ WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+ ELSE 'Inter NP'::text
+END)
+                                UNION
+                                 SELECT b2b.""Date"" AS order_date,
+                                    bnp.buyer_np_name AS buyer_np,
+                                    snp.seller_np_name AS seller_np,
+CASE
+ WHEN b2b.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+ ELSE b2b.category
+END AS category,
+                                    b2b.domain,
+                                    NULL::text AS sub_domain,
+CASE
+ WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+ ELSE 'Inter NP'::text
+END AS np_type,
+                                    sum(b2b.order_count) AS orders
+                                   FROM opendata_nodata.md_b2b_data b2b
+                                     LEFT JOIN dimension.dim_retail_buyer_np bnp ON b2b.bnp::text = bnp.buyer_np::text
+                                     LEFT JOIN dimension.dim_retail_seller_np snp ON b2b.snp::text = snp.seller_np::text
+                                  GROUP BY b2b.""Date"", b2b.bnp, b2b.snp, bnp.buyer_np_name, snp.seller_np_name, (
+CASE
+ WHEN b2b.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+ ELSE b2b.category
+END), b2b.domain, (
+CASE
+ WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+ ELSE 'Inter NP'::text
+END)
+                                UNION
+                                 SELECT gv.date AS order_date,
+                                    bnp.buyer_np_name AS buyer_np,
+                                    snp.seller_np_name AS seller_np,
+CASE
+ WHEN gv.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+ ELSE gv.category
+END AS category,
+                                    gv.domain,
+                                    NULL::text AS sub_domain,
+CASE
+ WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+ ELSE 'Inter NP'::text
+END AS np_type,
+                                    sum(gv.order_count) AS orders
+                                   FROM opendata_nodata.md_gift_voucher gv
+                                     LEFT JOIN dimension.dim_retail_buyer_np bnp ON gv.bap_id::text = bnp.buyer_np::text
+                                     LEFT JOIN dimension.dim_retail_seller_np snp ON gv.bpp_id::text = snp.seller_np::text
+                                  GROUP BY gv.date, gv.bap_id, gv.bpp_id, bnp.buyer_np_name, snp.seller_np_name, (
+CASE
+ WHEN gv.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+ ELSE gv.category
+END), gv.domain, (
+CASE
+ WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+ ELSE 'Inter NP'::text
+END)
+                        ) EXCEPT
+                         SELECT gv.date AS order_date,
+                            bnp.buyer_np_name AS buyer_np,
+                            snp.seller_np_name AS seller_np,
+                                CASE
+                                    WHEN gv.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+                                    ELSE gv.category
+                                END AS category,
+                            gv.domain,
+                            NULL::text AS sub_domain,
+                                CASE
+                                    WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+                                    ELSE 'Inter NP'::text
+                                END AS np_type,
+                            sum(gv.order_count) AS orders
+                           FROM opendata_nodata.md_gift_voucher gv
+                             LEFT JOIN dimension.dim_retail_buyer_np bnp ON gv.bap_id::text = bnp.buyer_np::text
+                             LEFT JOIN dimension.dim_retail_seller_np snp ON gv.bpp_id::text = snp.seller_np::text
+                          WHERE gv.date >= '2025-01-09'::date AND gv.date <= '2025-01-16'::date OR gv.date = '2024-12-26'::date
+                          GROUP BY gv.date, gv.bap_id, gv.bpp_id, bnp.buyer_np_name, snp.seller_np_name, (
+                                CASE
+                                    WHEN gv.category::text = ANY (ARRAY['Others'::character varying::text, 'Multi Category'::character varying::text, 'Undefined'::character varying::text]) THEN 'Others'::character varying
+                                    ELSE gv.category
+                                END), gv.domain, (
+                                CASE
+                                    WHEN bnp.buyer_np_name::text = snp.seller_np_name::text THEN 'Intra NP'::text
+                                    ELSE 'Inter NP'::text
+                                END)
+                ) UNION
+                 SELECT log.date AS order_date,
+                        CASE
+                            WHEN log.bap_id::text = 'webapi.magicpin.in/oms_partner/ondc/logistics/buyer'::text THEN 'Magicpin (LBNP)'::text
+                            ELSE COALESCE(snp.seller_np_name, 'Unknown'::character varying)::text || ' (LBNP)'::text
+                        END AS buyer_np,
+                    lnp.logistics_np_name AS seller_np,
+                    log.sub_cat AS category,
+                    log.domain,
+                    NULL::text AS sub_domain,
+                        CASE
+                            WHEN snp.seller_np_name::text = lnp.logistics_np_name::text THEN 'Intra NP'::text
+                            ELSE 'Inter NP'::text
+                        END AS np_type,
+                    sum(log.order_count) AS orders
+                   FROM opendata_nodata.md_logistics log
+                     LEFT JOIN dimension.dim_retail_seller_np snp ON log.bap_id::text = snp.seller_np::text
+                     LEFT JOIN dimension.dim_logistics_np lnp ON log.bpp_id::text = lnp.logistics_np::text
+                     LEFT JOIN dimension.dim_logistics_category cat ON log.sub_cat::text = cat.network_retail_order_category::text
+                  GROUP BY log.date, log.bap_id, log.bpp_id, log.sub_cat, (
+                        CASE
+                            WHEN log.bap_id::text = 'webapi.magicpin.in/oms_partner/ondc/logistics/buyer'::text THEN 'Magicpin (LBNP)'::text
+                            ELSE COALESCE(snp.seller_np_name, 'Unknown'::character varying)::text || ' (LBNP)'::text
+                        END), lnp.logistics_np_name, log.domain, (
+                        CASE
+                            WHEN snp.seller_np_name::text = lnp.logistics_np_name::text THEN 'Intra NP'::text
+                            ELSE 'Inter NP'::text
+                        END)
+                UNION
+                 SELECT hs.date AS order_date,
+                    bnp.""Buyer NP"" AS buyer_np,
+                    snp.""Seller NP"" AS seller_np,
+                    hs.category,
+                    hs.domain,
+                    NULL::text AS sub_domain,
+                        CASE
+                            WHEN bnp.""Buyer NP""::text = snp.""Seller NP""::text THEN 'Intra NP'::text
+                            ELSE 'Inter NP'::text
+                        END AS np_type,
+                    sum(hs.order_count) AS orders
+                   FROM opendata_nodata.md_home_service hs
+                     LEFT JOIN dimension.dim_home_service_buyer_np bnp ON hs.bap_id::text = bnp.""Bap Id""::text
+                     LEFT JOIN dimension.dim_home_service_seller_np snp ON hs.bpp_id::text = snp.""Bpp Id""::text
+                  GROUP BY hs.date, hs.bap_id, hs.bpp_id, bnp.""Buyer NP"", snp.""Seller NP"", hs.category, hs.domain, (
+                        CASE
+                            WHEN bnp.""Buyer NP""::text = snp.""Seller NP""::text THEN 'Intra NP'::text
+                            ELSE 'Inter NP'::text
+                        END)
+                UNION
+                 SELECT bus.date AS order_date,
+                    ibnp.bap_name AS buyer_np,
+                    ibpp.bpp_name AS seller_np,
+                    bus.category,
+                    'Public Transport'::character varying AS domain,
+                    NULL::text AS sub_domain,
+                        CASE
+                            WHEN ibnp.bap_name::text = ibpp.bpp_name::text THEN 'Intra NP'::text
+                            ELSE 'Inter NP'::text
+                        END AS np_type,
+                    sum(bus.tickets) AS orders
+                   FROM opendata_nodata.md_mobility_bus bus
+                     LEFT JOIN dimension.dim_igm_bap ibnp ON ibnp.bap_id::text = bus.bap_id::text
+                     LEFT JOIN dimension.dim_igm_bpp ibpp ON ibpp.bpp_id::text = bus.bpp_id::text
+                  GROUP BY bus.date, bus.bap_id, bus.bpp_id, ibnp.bap_name, ibpp.bpp_name, bus.category, bus.domain, (
+                        CASE
+                            WHEN ibnp.bap_name::text = ibpp.bpp_name::text THEN 'Intra NP'::text
+                            ELSE 'Inter NP'::text
+                        END)
+                UNION
+                 SELECT mf.date AS order_date,
+                    mfbnp.np_name AS buyer_np,
+                    mfsnp.np_name AS seller_np,
+                    mf.category,
+                    mf.domain,
+                    NULL::text AS sub_domain,
+                        CASE
+                            WHEN mfbnp.np_name::text = mfsnp.np_name::text THEN 'Intra NP'::text
+                            ELSE 'Inter NP'::text
+                        END AS np_type,
+                    sum(mf.""Units Allocated"") AS orders
+                   FROM opendata_nodata.md_finance_mf mf
+                     LEFT JOIN dimension.dim_mf_buyer_np mfbnp ON mfbnp.subscriber_id::text = mf.bap_id::text
+                     LEFT JOIN dimension.dim_mf_seller_np mfsnp ON mfsnp.subscriber_id::text = mf.bpp_id::text
+                  GROUP BY mf.date, mf.bap_id, mf.bpp_id, mfbnp.np_name, mfsnp.np_name, mf.category, mf.domain, (
+                        CASE
+                            WHEN mfbnp.np_name::text = mfsnp.np_name::text THEN 'Intra NP'::text
+                            ELSE 'Inter NP'::text
+                        END)
+                UNION
+                 SELECT msw.date AS order_date,
+                    mbap.bap_name AS buyer_np,
+                    mbpp.bpp_name AS seller_np,
+                    msw.category,
+                    'Ride Hailing'::text AS domain,
+                    NULL::text AS sub_domain,
+                        CASE
+                            WHEN mbap.bap_name::text = 'One Delhi'::text AND mbpp.bpp_name::text = 'DTC'::text AND msw.category::text = 'Bus'::text THEN 'Intra NP'::text
+                            WHEN mbap.bap_name::text = mbpp.bpp_name::text THEN 'Intra NP'::text
+                            ELSE 'Inter NP'::text
+                        END AS np_type,
+                    sum(msw.order_count) AS orders
+                   FROM opendata_nodata.mobility_snp_wise msw
+                     LEFT JOIN dimension.dim_bpp_mobility mbpp ON mbpp.bpp_id::text = msw.bpp_id::text
+                     LEFT JOIN dimension.dim_bap_mobility mbap ON mbap.bap_id::text = msw.bap_id::text
+                  GROUP BY msw.date, mbap.bap_name, mbpp.bpp_name, msw.category, 'Mobility'::text, (
+                        CASE
+                            WHEN mbap.bap_name::text = 'One Delhi'::text AND mbpp.bpp_name::text = 'DTC'::text AND msw.category::text = 'Bus'::text THEN 'Intra NP'::text
+                            WHEN mbap.bap_name::text = mbpp.bpp_name::text THEN 'Intra NP'::text
+                            ELSE 'Inter NP'::text
+                        END)
+        ) EXCEPT
+         SELECT msw.date AS order_date,
+            mbap.bap_name AS buyer_np,
+            mbpp.bpp_name AS seller_np,
+            msw.category,
+            'Ride Hailing'::text AS domain,
+            NULL::text AS sub_domain,
+                CASE
+                    WHEN mbap.bap_name::text = 'One Delhi'::text AND mbpp.bpp_name::text = 'DTC'::text AND msw.category::text = 'Bus'::text THEN 'Intra NP'::text
+                    WHEN mbap.bap_name::text = mbpp.bpp_name::text THEN 'Intra NP'::text
+                    ELSE 'Inter NP'::text
+                END AS np_type,
+            sum(msw.order_count) AS orders
+           FROM opendata_nodata.mobility_snp_wise msw
+             LEFT JOIN dimension.dim_bpp_mobility mbpp ON mbpp.bpp_id::text = msw.bpp_id::text
+             LEFT JOIN dimension.dim_bap_mobility mbap ON mbap.bap_id::text = msw.bap_id::text
+          WHERE NOT (msw.bap_id::text = ANY (ARRAY['api.beckn.juspay.in/bap/beckn/v1/4b17bd06-ae7e-48e9-85bf-282fb310209c'::character varying::text, 'api.beckn.juspay.in/bap/beckn/v1/bd064716-ae7e-48e9-85bf-282fb310209c'::character varying::text])) AND NOT (msw.bpp_id::text = ANY (ARRAY['api.beckn.juspay.in/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f'::character varying::text, 'api.beckn.juspay.in/dobpp/beckn/d2929b92-8b12-4e21-9efd-d6203940c4c5'::character varying::text])) AND msw.date >= '2024-12-30'::date AND msw.date <= '2025-01-10'::date
+          GROUP BY msw.date, mbap.bap_name, mbpp.bpp_name, msw.category, 'Mobility'::text, (
+                CASE
+                    WHEN mbap.bap_name::text = 'One Delhi'::text AND mbpp.bpp_name::text = 'DTC'::text AND msw.category::text = 'Bus'::text THEN 'Intra NP'::text
+                    WHEN mbap.bap_name::text = mbpp.bpp_name::text THEN 'Intra NP'::text
+                    ELSE 'Inter NP'::text
+                END)
+)
+UNION
+ SELECT model_for_all_d_old_orders.""Date"" AS order_date,
+    model_for_all_d_old_orders.buyer_np,
+    model_for_all_d_old_orders.seller_np,
+    model_for_all_d_old_orders.category,
+        CASE
+            WHEN model_for_all_d_old_orders.domain::text = 'Mobility'::text AND model_for_all_d_old_orders.category::text = 'Metro'::text THEN 'Public Transport'::character varying
+            WHEN model_for_all_d_old_orders.domain::text = 'Mobility'::text AND model_for_all_d_old_orders.category::text = 'Bus'::text THEN 'Public Transport'::character varying
+            WHEN model_for_all_d_old_orders.domain::text = 'Mobility'::text AND model_for_all_d_old_orders.category::text = 'Cabs/Auto'::text THEN 'Ride Hailing'::character varying
+            ELSE model_for_all_d_old_orders.domain
+        END AS domain,
+    NULL::text AS sub_domain,
+    model_for_all_d_old_orders.""Type New"" AS np_type,
+    model_for_all_d_old_orders.order_count AS orders
+   FROM opendata_nodata.model_for_all_d_old_orders
+  WHERE NOT (model_for_all_d_old_orders.domain::text = 'Retail B2C'::text AND model_for_all_d_old_orders.""Date"" >= '2025-08-22'::date AND model_for_all_d_old_orders.""Date"" <= '2025-09-30'::date)
+UNION
+ SELECT md_mobility_metro.""Date"" AS order_date,
+    md_mobility_metro.buyer_np,
+    md_mobility_metro.seller_np,
+    md_mobility_metro.category,
+        CASE
+            WHEN md_mobility_metro.domain::text = 'Mobility'::text AND md_mobility_metro.category::text = 'Metro'::text THEN 'Public Transport'::character varying
+            WHEN md_mobility_metro.domain::text = 'Mobility'::text AND md_mobility_metro.category::text = 'Bus'::text THEN 'Public Transport'::character varying
+            WHEN md_mobility_metro.domain::text = 'Mobility'::text AND md_mobility_metro.category::text = 'Cabs/Auto'::text THEN 'Ride Hailing'::character varying
+            ELSE md_mobility_metro.domain
+        END AS domain,
+    NULL::text AS sub_domain,
+    md_mobility_metro.type AS np_type,
+    md_mobility_metro.order_count AS orders
+   FROM opendata_nodata.md_mobility_metro
+  WHERE md_mobility_metro.seller_np::text = 'DTC'::text OR md_mobility_metro.""Date"" <= '2026-05-06'::date
+UNION
+ SELECT md_mobility_metro_trv11.date AS order_date,
+    ibnp.bap_name AS buyer_np,
+        CASE
+            WHEN ibpp.bpp_name IS NOT NULL THEN ibpp.bpp_name
+            ELSE md_mobility_metro_trv11.bpp_id
+        END AS seller_np,
+    md_mobility_metro_trv11.category,
+        CASE
+            WHEN md_mobility_metro_trv11.domain::text = 'Mobility'::text AND md_mobility_metro_trv11.category::text = 'Metro'::text THEN 'Public Transport'::character varying
+            WHEN md_mobility_metro_trv11.domain::text = 'Mobility'::text AND md_mobility_metro_trv11.category::text = 'Bus'::text THEN 'Public Transport'::character varying
+            WHEN md_mobility_metro_trv11.domain::text = 'Mobility'::text AND md_mobility_metro_trv11.category::text = 'Cabs/Auto'::text THEN 'Ride Hailing'::character varying
+            ELSE md_mobility_metro_trv11.domain
+        END AS domain,
+    NULL::text AS sub_domain,
+        CASE
+            WHEN ibnp.bap_name::text = ibpp.bpp_name::text THEN 'Intra NP'::text
+            ELSE 'Inter NP'::text
+        END AS np_type,
+    md_mobility_metro_trv11.rides_qty AS orders
+   FROM opendata_nodata.md_mobility_metro_trv11 md_mobility_metro_trv11
+     LEFT JOIN dimension.dim_igm_bap ibnp ON ibnp.bap_id::text = md_mobility_metro_trv11.bap_id::text
+     LEFT JOIN dimension.dim_igm_bpp ibpp ON ibpp.bpp_id::text = md_mobility_metro_trv11.bpp_id::text
+UNION
+ SELECT md_travel_experience.order_date,
+    ibnp.bap_name AS buyer_np,
+        CASE
+            WHEN ibpp.bpp_name IS NOT NULL THEN ibpp.bpp_name
+            ELSE md_travel_experience.bpp_id
+        END AS seller_np,
+    md_travel_experience.category,
+    md_travel_experience.domain,
+    NULL::text AS sub_domain,
+        CASE
+            WHEN ibnp.bap_name::text = ibpp.bpp_name::text THEN 'Intra NP'::text
+            ELSE 'Inter NP'::text
+        END AS np_type,
+    md_travel_experience.orders
+   FROM opendata_nodata.md_travel_experience md_travel_experience
+     LEFT JOIN dimension.dim_igm_bap ibnp ON ibnp.bap_id::text = md_travel_experience.bap_id::text
+     LEFT JOIN dimension.dim_igm_bpp ibpp ON ibpp.bpp_id::text = md_travel_experience.bpp_id::text;"
+order_date,Timestamp or date indicating when order date occurred.,"opendata_nodata.no_model_for_all_domain_backup.""order_date""",opendata_nodata.no_model_for_all_domain_backup,
+buyer_np,Data representing the buyer np.,"opendata_nodata.no_model_for_all_domain_backup.""buyer_np""",opendata_nodata.no_model_for_all_domain_backup,
+seller_np,Data representing the seller np.,"opendata_nodata.no_model_for_all_domain_backup.""seller_np""",opendata_nodata.no_model_for_all_domain_backup,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.no_model_for_all_domain_backup.""category""",opendata_nodata.no_model_for_all_domain_backup,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.no_model_for_all_domain_backup.""domain""",opendata_nodata.no_model_for_all_domain_backup,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.no_model_for_all_domain_backup.""sub_domain""",opendata_nodata.no_model_for_all_domain_backup,
+np_type,Data representing the np type.,"opendata_nodata.no_model_for_all_domain_backup.""np_type""",opendata_nodata.no_model_for_all_domain_backup,
+orders,Data representing the orders.,"opendata_nodata.no_model_for_all_domain_backup.""orders""",opendata_nodata.no_model_for_all_domain_backup,
+"▼ no_model_for_all_domain_pincode   (base table, 8 cols)",,,opendata_nodata.no_model_for_all_domain_pincode,
+order_date,Timestamp or date indicating when order date occurred.,"opendata_nodata.no_model_for_all_domain_pincode.""order_date""",opendata_nodata.no_model_for_all_domain_pincode,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.no_model_for_all_domain_pincode.""domain""",opendata_nodata.no_model_for_all_domain_pincode,
+delivery_city,City name for the given context.,"opendata_nodata.no_model_for_all_domain_pincode.""delivery_city""",opendata_nodata.no_model_for_all_domain_pincode,
+seller_city,City name for the given context.,"opendata_nodata.no_model_for_all_domain_pincode.""seller_city""",opendata_nodata.no_model_for_all_domain_pincode,
+orders,Data representing the orders.,"opendata_nodata.no_model_for_all_domain_pincode.""orders""",opendata_nodata.no_model_for_all_domain_pincode,
+delivery_pincode,Indian postal code (pincode).,"opendata_nodata.no_model_for_all_domain_pincode.""delivery_pincode""",opendata_nodata.no_model_for_all_domain_pincode,
+seller_pincode,Indian postal code (pincode).,"opendata_nodata.no_model_for_all_domain_pincode.""seller_pincode""",opendata_nodata.no_model_for_all_domain_pincode,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.no_model_for_all_domain_pincode.""category""",opendata_nodata.no_model_for_all_domain_pincode,
+"▼ no_model_for_all_domain_pincode_agg   (materialized view, 11 cols)",,,opendata_nodata.no_model_for_all_domain_pincode_agg,"WITH monthlyaggregations AS (
+         SELECT no_model_for_all_domain_pincode.domain,
+            no_model_for_all_domain_pincode.category,
+            no_model_for_all_domain_pincode.delivery_pincode,
+            no_model_for_all_domain_pincode.seller_pincode,
+            sum(
+                CASE
+                    WHEN date_trunc('month'::text, no_model_for_all_domain_pincode.order_date::timestamp with time zone) = (date_trunc('month'::text, CURRENT_DATE::timestamp with time zone) - '5 mons'::interval) THEN no_model_for_all_domain_pincode.orders
+                    ELSE 0::bigint
+                END) AS ""M-5"",
+            sum(
+                CASE
+                    WHEN date_trunc('month'::text, no_model_for_all_domain_pincode.order_date::timestamp with time zone) = (date_trunc('month'::text, CURRENT_DATE::timestamp with time zone) - '4 mons'::interval) THEN no_model_for_all_domain_pincode.orders
+                    ELSE 0::bigint
+                END) AS ""M-4"",
+            sum(
+                CASE
+                    WHEN date_trunc('month'::text, no_model_for_all_domain_pincode.order_date::timestamp with time zone) = (date_trunc('month'::text, CURRENT_DATE::timestamp with time zone) - '3 mons'::interval) THEN no_model_for_all_domain_pincode.orders
+                    ELSE 0::bigint
+                END) AS ""M-3"",
+            sum(
+                CASE
+                    WHEN date_trunc('month'::text, no_model_for_all_domain_pincode.order_date::timestamp with time zone) = (date_trunc('month'::text, CURRENT_DATE::timestamp with time zone) - '2 mons'::interval) THEN no_model_for_all_domain_pincode.orders
+                    ELSE 0::bigint
+                END) AS ""M-2"",
+            sum(
+                CASE
+                    WHEN date_trunc('month'::text, no_model_for_all_domain_pincode.order_date::timestamp with time zone) = (date_trunc('month'::text, CURRENT_DATE::timestamp with time zone) - '1 mon'::interval) THEN no_model_for_all_domain_pincode.orders
+                    ELSE 0::bigint
+                END) AS ""M-1"",
+            sum(
+                CASE
+                    WHEN date_trunc('month'::text, no_model_for_all_domain_pincode.order_date::timestamp with time zone) = date_trunc('month'::text, CURRENT_DATE::timestamp with time zone) THEN no_model_for_all_domain_pincode.orders
+                    ELSE 0::bigint
+                END) AS current_m_actual
+           FROM opendata_nodata.no_model_for_all_domain_pincode
+          WHERE no_model_for_all_domain_pincode.order_date >= (date_trunc('month'::text, CURRENT_DATE::timestamp with time zone) - '5 mons'::interval) AND no_model_for_all_domain_pincode.order_date < CURRENT_DATE AND no_model_for_all_domain_pincode.orders > 0 AND no_model_for_all_domain_pincode.orders IS NOT NULL
+          GROUP BY no_model_for_all_domain_pincode.domain, no_model_for_all_domain_pincode.category, no_model_for_all_domain_pincode.delivery_pincode, no_model_for_all_domain_pincode.seller_pincode
+        )
+ SELECT domain,
+    category,
+    delivery_pincode,
+    seller_pincode,
+    ""M-5"",
+    ""M-4"",
+    ""M-3"",
+    ""M-2"",
+    ""M-1"",
+    current_m_actual AS ""M"",
+    round(current_m_actual::double precision / date_part('day'::text, CURRENT_DATE) * date_part('day'::text, date_trunc('month'::text, CURRENT_DATE::timestamp with time zone) + '1 mon -1 days'::interval)) AS ""Forecast""
+   FROM monthlyaggregations;
+
+CREATE UNIQUE INDEX no_model_for_all_domain_pincode_agg_uidx ON opendata_nodata.no_model_for_all_domain_pincode_agg USING btree (domain, category, delivery_pincode, seller_pincode)"
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.no_model_for_all_domain_pincode_agg.""domain""",opendata_nodata.no_model_for_all_domain_pincode_agg,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.no_model_for_all_domain_pincode_agg.""category""",opendata_nodata.no_model_for_all_domain_pincode_agg,
+delivery_pincode,Indian postal code (pincode).,"opendata_nodata.no_model_for_all_domain_pincode_agg.""delivery_pincode""",opendata_nodata.no_model_for_all_domain_pincode_agg,
+seller_pincode,Indian postal code (pincode).,"opendata_nodata.no_model_for_all_domain_pincode_agg.""seller_pincode""",opendata_nodata.no_model_for_all_domain_pincode_agg,
+M-5,Data representing the m-5.,"opendata_nodata.no_model_for_all_domain_pincode_agg.""M-5""",opendata_nodata.no_model_for_all_domain_pincode_agg,
+M-4,Data representing the m-4.,"opendata_nodata.no_model_for_all_domain_pincode_agg.""M-4""",opendata_nodata.no_model_for_all_domain_pincode_agg,
+M-3,Data representing the m-3.,"opendata_nodata.no_model_for_all_domain_pincode_agg.""M-3""",opendata_nodata.no_model_for_all_domain_pincode_agg,
+M-2,Data representing the m-2.,"opendata_nodata.no_model_for_all_domain_pincode_agg.""M-2""",opendata_nodata.no_model_for_all_domain_pincode_agg,
+M-1,Data representing the m-1.,"opendata_nodata.no_model_for_all_domain_pincode_agg.""M-1""",opendata_nodata.no_model_for_all_domain_pincode_agg,
+M,Data representing the m.,"opendata_nodata.no_model_for_all_domain_pincode_agg.""M""",opendata_nodata.no_model_for_all_domain_pincode_agg,
+Forecast,Data representing the forecast.,"opendata_nodata.no_model_for_all_domain_pincode_agg.""Forecast""",opendata_nodata.no_model_for_all_domain_pincode_agg,
+"▼ no_model_for_all_domain_pincode_monthly   (materialized view, 7 cols)",,,opendata_nodata.no_model_for_all_domain_pincode_monthly,"SELECT date_part('year'::text, order_date)::integer AS year_value,
+    date_part('month'::text, order_date)::integer AS month_value,
+        CASE
+            WHEN date_part('isodow'::text, order_date) = ANY (ARRAY[6::double precision, 7::double precision]) THEN 'weekend'::text
+            ELSE 'weekday'::text
+        END AS day_type,
+    domain,
+    delivery_city,
+    seller_city,
+    sum(orders) AS total_orders
+   FROM opendata_nodata.no_model_for_all_domain_pincode model_for_all_domain_pincode
+  WHERE order_date < CURRENT_DATE AND orders > 0 AND orders IS NOT NULL
+  GROUP BY (date_part('year'::text, order_date)), (date_part('month'::text, order_date)), (
+        CASE
+            WHEN date_part('isodow'::text, order_date) = ANY (ARRAY[6::double precision, 7::double precision]) THEN 'weekend'::text
+            ELSE 'weekday'::text
+        END), domain, delivery_city, seller_city;
+
+CREATE INDEX idx_no_mv_pincode_daytype ON opendata_nodata.no_model_for_all_domain_pincode_monthly USING btree (day_type)
+
+CREATE INDEX idx_no_mv_pincode_delivery ON opendata_nodata.no_model_for_all_domain_pincode_monthly USING btree (delivery_city)
+
+CREATE UNIQUE INDEX idx_no_mv_pincode_monthly_unique ON opendata_nodata.no_model_for_all_domain_pincode_monthly USING btree (year_value, month_value, domain, delivery_city, seller_city, day_type)
+
+CREATE INDEX idx_no_mv_pincode_seller ON opendata_nodata.no_model_for_all_domain_pincode_monthly USING btree (seller_city)
+
+CREATE INDEX idx_no_mv_pincode_year_month ON opendata_nodata.no_model_for_all_domain_pincode_monthly USING btree (year_value, month_value)"
+year_value,Data representing the year value.,"opendata_nodata.no_model_for_all_domain_pincode_monthly.""year_value""",opendata_nodata.no_model_for_all_domain_pincode_monthly,
+month_value,Data representing the month value.,"opendata_nodata.no_model_for_all_domain_pincode_monthly.""month_value""",opendata_nodata.no_model_for_all_domain_pincode_monthly,
+day_type,Data representing the day type.,"opendata_nodata.no_model_for_all_domain_pincode_monthly.""day_type""",opendata_nodata.no_model_for_all_domain_pincode_monthly,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.no_model_for_all_domain_pincode_monthly.""domain""",opendata_nodata.no_model_for_all_domain_pincode_monthly,
+delivery_city,City name for the given context.,"opendata_nodata.no_model_for_all_domain_pincode_monthly.""delivery_city""",opendata_nodata.no_model_for_all_domain_pincode_monthly,
+seller_city,City name for the given context.,"opendata_nodata.no_model_for_all_domain_pincode_monthly.""seller_city""",opendata_nodata.no_model_for_all_domain_pincode_monthly,
+total_orders,Data representing the total orders.,"opendata_nodata.no_model_for_all_domain_pincode_monthly.""total_orders""",opendata_nodata.no_model_for_all_domain_pincode_monthly,
+"▼ no_model_for_all_domain_pincode_stage   (base table, 8 cols)",,,opendata_nodata.no_model_for_all_domain_pincode_stage,
+order_date,Timestamp or date indicating when order date occurred.,"opendata_nodata.no_model_for_all_domain_pincode_stage.""order_date""",opendata_nodata.no_model_for_all_domain_pincode_stage,
+domain,"The ONDC network domain (e.g., retail, logistics).","opendata_nodata.no_model_for_all_domain_pincode_stage.""domain""",opendata_nodata.no_model_for_all_domain_pincode_stage,
+delivery_city,City name for the given context.,"opendata_nodata.no_model_for_all_domain_pincode_stage.""delivery_city""",opendata_nodata.no_model_for_all_domain_pincode_stage,
+seller_city,City name for the given context.,"opendata_nodata.no_model_for_all_domain_pincode_stage.""seller_city""",opendata_nodata.no_model_for_all_domain_pincode_stage,
+orders,Data representing the orders.,"opendata_nodata.no_model_for_all_domain_pincode_stage.""orders""",opendata_nodata.no_model_for_all_domain_pincode_stage,
+delivery_pincode,Indian postal code (pincode).,"opendata_nodata.no_model_for_all_domain_pincode_stage.""delivery_pincode""",opendata_nodata.no_model_for_all_domain_pincode_stage,
+seller_pincode,Indian postal code (pincode).,"opendata_nodata.no_model_for_all_domain_pincode_stage.""seller_pincode""",opendata_nodata.no_model_for_all_domain_pincode_stage,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.no_model_for_all_domain_pincode_stage.""category""",opendata_nodata.no_model_for_all_domain_pincode_stage,
+"▼ processed_reports   (base table, 4 cols)",,,opendata_nodata.processed_reports,"CREATE UNIQUE INDEX processed_reports_pkey ON opendata_nodata.processed_reports USING btree (id)
+
+CREATE INDEX ix_ondc_prod_mdsheet_processed_reports_id ON opendata_nodata.processed_reports USING btree (id)"
+id,Unique identifier for id.,"opendata_nodata.processed_reports.""id""",opendata_nodata.processed_reports,
+report_data,Timestamp or date indicating when report data occurred.,"opendata_nodata.processed_reports.""report_data""",opendata_nodata.processed_reports,
+pdf_filename,Name of the pdf filename.,"opendata_nodata.processed_reports.""pdf_filename""",opendata_nodata.processed_reports,
+processed_at,Timestamp or date indicating when processed at occurred.,"opendata_nodata.processed_reports.""processed_at""",opendata_nodata.processed_reports,
+"▼ processing_status   (base table, 4 cols)",,,opendata_nodata.processing_status,"CREATE UNIQUE INDEX processing_status_pkey ON opendata_nodata.processing_status USING btree (id)
+
+CREATE INDEX ix_ondc_prod_mdsheet_processing_status_id ON opendata_nodata.processing_status USING btree (id)"
+id,Unique identifier for id.,"opendata_nodata.processing_status.""id""",opendata_nodata.processing_status,
+status,Turn-Around-Time (TAT) measurement.,"opendata_nodata.processing_status.""status""",opendata_nodata.processing_status,
+error_message,Data representing the error message.,"opendata_nodata.processing_status.""error_message""",opendata_nodata.processing_status,
+updated_at,Timestamp when the record was last updated.,"opendata_nodata.processing_status.""updated_at""",opendata_nodata.processing_status,
+"▼ refresh_tokens   (base table, 6 cols)",,,opendata_nodata.refresh_tokens,"CREATE UNIQUE INDEX refresh_tokens_pkey ON opendata_nodata.refresh_tokens USING btree (id)
+
+CREATE UNIQUE INDEX refresh_tokens_token_key ON opendata_nodata.refresh_tokens USING btree (token)
+
+CREATE INDEX idx_refresh_tokens_active ON opendata_nodata.refresh_tokens USING btree (is_active, expires_at)
+
+CREATE INDEX idx_refresh_tokens_expires_at ON opendata_nodata.refresh_tokens USING btree (expires_at)
+
+CREATE INDEX idx_refresh_tokens_token ON opendata_nodata.refresh_tokens USING btree (token)
+
+CREATE INDEX idx_refresh_tokens_user_id ON opendata_nodata.refresh_tokens USING btree (user_id)"
+id,Unique identifier for id.,"opendata_nodata.refresh_tokens.""id""",opendata_nodata.refresh_tokens,
+token,Data representing the token.,"opendata_nodata.refresh_tokens.""token""",opendata_nodata.refresh_tokens,
+user_id,Unique identifier for user.,"opendata_nodata.refresh_tokens.""user_id""",opendata_nodata.refresh_tokens,
+expires_at,Timestamp or date indicating when expires at occurred.,"opendata_nodata.refresh_tokens.""expires_at""",opendata_nodata.refresh_tokens,
+is_active,Boolean flag indicating is active.,"opendata_nodata.refresh_tokens.""is_active""",opendata_nodata.refresh_tokens,
+created_at,Timestamp when the record was created.,"opendata_nodata.refresh_tokens.""created_at""",opendata_nodata.refresh_tokens,
+"▼ roles   (base table, 5 cols)",,,opendata_nodata.roles,"CREATE UNIQUE INDEX roles_name_key ON opendata_nodata.roles USING btree (name)
+
+CREATE UNIQUE INDEX roles_pkey ON opendata_nodata.roles USING btree (id)
+
+CREATE INDEX idx_roles_name ON opendata_nodata.roles USING btree (name)"
+id,Unique identifier for id.,"opendata_nodata.roles.""id""",opendata_nodata.roles,
+name,Name of the name.,"opendata_nodata.roles.""name""",opendata_nodata.roles,
+description,Data representing the description.,"opendata_nodata.roles.""description""",opendata_nodata.roles,
+created_at,Timestamp when the record was created.,"opendata_nodata.roles.""created_at""",opendata_nodata.roles,
+updated_at,Timestamp when the record was last updated.,"opendata_nodata.roles.""updated_at""",opendata_nodata.roles,
+"▼ token_blacklist   (base table, 6 cols)",,,opendata_nodata.token_blacklist,"CREATE UNIQUE INDEX token_blacklist_pkey ON opendata_nodata.token_blacklist USING btree (id)
+
+CREATE UNIQUE INDEX token_blacklist_token_key ON opendata_nodata.token_blacklist USING btree (token)
+
+CREATE INDEX idx_token_blacklist_expires_at ON opendata_nodata.token_blacklist USING btree (expires_at)
+
+CREATE INDEX idx_token_blacklist_token ON opendata_nodata.token_blacklist USING btree (token)
+
+CREATE INDEX idx_token_blacklist_user_id ON opendata_nodata.token_blacklist USING btree (user_id)"
+id,Unique identifier for id.,"opendata_nodata.token_blacklist.""id""",opendata_nodata.token_blacklist,
+token,Data representing the token.,"opendata_nodata.token_blacklist.""token""",opendata_nodata.token_blacklist,
+user_id,Unique identifier for user.,"opendata_nodata.token_blacklist.""user_id""",opendata_nodata.token_blacklist,
+blacklisted_at,Timestamp or date indicating when blacklisted at occurred.,"opendata_nodata.token_blacklist.""blacklisted_at""",opendata_nodata.token_blacklist,
+expires_at,Timestamp or date indicating when expires at occurred.,"opendata_nodata.token_blacklist.""expires_at""",opendata_nodata.token_blacklist,
+reason,Data representing the reason.,"opendata_nodata.token_blacklist.""reason""",opendata_nodata.token_blacklist,
+"▼ user_queries   (base table, 11 cols)",,,opendata_nodata.user_queries,"CREATE UNIQUE INDEX user_queries_pkey ON opendata_nodata.user_queries USING btree (id)
+
+CREATE INDEX idx_user_queries_created_at ON opendata_nodata.user_queries USING btree (created_at)
+
+CREATE INDEX idx_user_queries_resolved_by ON opendata_nodata.user_queries USING btree (resolved_by)
+
+CREATE INDEX idx_user_queries_status ON opendata_nodata.user_queries USING btree (status)
+
+CREATE INDEX idx_user_queries_user_id ON opendata_nodata.user_queries USING btree (user_id)"
+id,Unique identifier for id.,"opendata_nodata.user_queries.""id""",opendata_nodata.user_queries,
+user_id,Unique identifier for user.,"opendata_nodata.user_queries.""user_id""",opendata_nodata.user_queries,
+subject,Data representing the subject.,"opendata_nodata.user_queries.""subject""",opendata_nodata.user_queries,
+category,Timestamp or date indicating when category occurred.,"opendata_nodata.user_queries.""category""",opendata_nodata.user_queries,
+query_text,Data representing the query text.,"opendata_nodata.user_queries.""query_text""",opendata_nodata.user_queries,
+status,Turn-Around-Time (TAT) measurement.,"opendata_nodata.user_queries.""status""",opendata_nodata.user_queries,
+admin_response,Data representing the admin response.,"opendata_nodata.user_queries.""admin_response""",opendata_nodata.user_queries,
+created_at,Timestamp when the record was created.,"opendata_nodata.user_queries.""created_at""",opendata_nodata.user_queries,
+updated_at,Timestamp when the record was last updated.,"opendata_nodata.user_queries.""updated_at""",opendata_nodata.user_queries,
+resolved_at,Timestamp or date indicating when resolved at occurred.,"opendata_nodata.user_queries.""resolved_at""",opendata_nodata.user_queries,
+resolved_by,Data representing the resolved by.,"opendata_nodata.user_queries.""resolved_by""",opendata_nodata.user_queries,

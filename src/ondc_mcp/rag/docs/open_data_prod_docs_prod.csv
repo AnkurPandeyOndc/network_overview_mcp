@@ -1,0 +1,240 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s),DDL & Indexes
+"▼ dim_dates   (base table, 1 cols)",,,prod.dim_dates,CREATE INDEX dim_dates_order_date_idx ON prod.dim_dates USING btree (order_date)
+order_date,Timestamp or date indicating when order date occurred.,"prod.dim_dates.""order_date""",prod.dim_dates,
+"▼ dim_districts   (base table, 2 cols)",,,prod.dim_districts,"CREATE INDEX dim_districts_delivery_state_idx ON prod.dim_districts USING btree (delivery_state)
+
+CREATE INDEX dim_districts_delivery_district_idx ON prod.dim_districts USING btree (delivery_district)"
+delivery_state,Turn-Around-Time (TAT) measurement.,"prod.dim_districts.""delivery_state""",prod.dim_districts,
+delivery_district,Data representing the delivery district.,"prod.dim_districts.""delivery_district""",prod.dim_districts,
+"▼ dim_pincode   (base table, 4 cols)",,,prod.dim_pincode,
+Pincode,Indian postal code (pincode).,"prod.dim_pincode.""Pincode""",prod.dim_pincode,
+Districtname,Name of the districtname.,"prod.dim_pincode.""Districtname""",prod.dim_pincode,
+Statename,Turn-Around-Time (TAT) measurement.,"prod.dim_pincode.""Statename""",prod.dim_pincode,
+Statecode,Turn-Around-Time (TAT) measurement.,"prod.dim_pincode.""Statecode""",prod.dim_pincode,
+"▼ dim_providers   (base table, 7 cols)",,,prod.dim_providers,
+provider_key,Unique identifier for provider key.,"prod.dim_providers.""provider_key""",prod.dim_providers,
+order_date,Timestamp or date indicating when order date occurred.,"prod.dim_providers.""order_date""",prod.dim_providers,
+category,Timestamp or date indicating when category occurred.,"prod.dim_providers.""category""",prod.dim_providers,
+sub_category,Timestamp or date indicating when sub category occurred.,"prod.dim_providers.""sub_category""",prod.dim_providers,
+seller_district,Data representing the seller district.,"prod.dim_providers.""seller_district""",prod.dim_providers,
+seller_state,Turn-Around-Time (TAT) measurement.,"prod.dim_providers.""seller_state""",prod.dim_providers,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"prod.dim_providers.""seller_state_code""",prod.dim_providers,
+"▼ district_wise_agg   (base table, 18 cols)",,,prod.district_wise_agg,"CREATE INDEX district_wise_agg_domain_idx ON prod.district_wise_agg USING btree (domain)
+
+CREATE INDEX district_wise_agg_delivery_state_idx ON prod.district_wise_agg USING btree (delivery_state)
+
+CREATE INDEX district_wise_agg_sub_domain_idx ON prod.district_wise_agg USING btree (sub_domain)
+
+CREATE INDEX district_wise_agg_seller_state_idx ON prod.district_wise_agg USING btree (seller_state)
+
+CREATE INDEX district_wise_agg_delivery_district_idx ON prod.district_wise_agg USING btree (delivery_district)
+
+CREATE INDEX district_wise_agg_seller_district_idx ON prod.district_wise_agg USING btree (seller_district)"
+domain,"The ONDC network domain (e.g., retail, logistics).","prod.district_wise_agg.""domain""",prod.district_wise_agg,
+sub_domain,"The ONDC network domain (e.g., retail, logistics).","prod.district_wise_agg.""sub_domain""",prod.district_wise_agg,
+order_month,Data representing the order month.,"prod.district_wise_agg.""order_month""",prod.district_wise_agg,
+order_year,Data representing the order year.,"prod.district_wise_agg.""order_year""",prod.district_wise_agg,
+order_week,Data representing the order week.,"prod.district_wise_agg.""order_week""",prod.district_wise_agg,
+delivery_district,Data representing the delivery district.,"prod.district_wise_agg.""delivery_district""",prod.district_wise_agg,
+delivery_state,Turn-Around-Time (TAT) measurement.,"prod.district_wise_agg.""delivery_state""",prod.district_wise_agg,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"prod.district_wise_agg.""delivery_state_code""",prod.district_wise_agg,
+seller_district,Data representing the seller district.,"prod.district_wise_agg.""seller_district""",prod.district_wise_agg,
+seller_state,Turn-Around-Time (TAT) measurement.,"prod.district_wise_agg.""seller_state""",prod.district_wise_agg,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"prod.district_wise_agg.""seller_state_code""",prod.district_wise_agg,
+total_orders_delivered,Data representing the total orders delivered.,"prod.district_wise_agg.""total_orders_delivered""",prod.district_wise_agg,
+pincode_count,Indian postal code (pincode).,"prod.district_wise_agg.""pincode_count""",prod.district_wise_agg,
+total_items,Data representing the total items.,"prod.district_wise_agg.""total_items""",prod.district_wise_agg,
+intrastate_orders,Turn-Around-Time (TAT) measurement.,"prod.district_wise_agg.""intrastate_orders""",prod.district_wise_agg,
+intradistrict_orders,Data representing the intradistrict orders.,"prod.district_wise_agg.""intradistrict_orders""",prod.district_wise_agg,
+interstate_orders,Turn-Around-Time (TAT) measurement.,"prod.district_wise_agg.""interstate_orders""",prod.district_wise_agg,
+interdistrict_orders,Data representing the interdistrict orders.,"prod.district_wise_agg.""interdistrict_orders""",prod.district_wise_agg,
+"▼ fact_order_detail   (base table, 18 cols)",,,prod.fact_order_detail,"CREATE INDEX fact_order_detail_sub_category_idx ON prod.fact_order_detail USING btree (sub_category)
+
+CREATE INDEX fact_order_detail_seller_np_idx ON prod.fact_order_detail USING btree (seller_np)
+
+CREATE INDEX fact_order_detail_domain_idx ON prod.fact_order_detail USING btree (domain)
+
+CREATE INDEX fact_order_detail_network_order_id_idx ON prod.fact_order_detail USING btree (network_order_id)
+
+CREATE INDEX fact_order_detail_provider_key_idx ON prod.fact_order_detail USING btree (provider_key)"
+network_order_id,Data representing the network order id.,"prod.fact_order_detail.""network_order_id""",prod.fact_order_detail,
+sub_category,Timestamp or date indicating when sub category occurred.,"prod.fact_order_detail.""sub_category""",prod.fact_order_detail,
+seller_np,Data representing the seller np.,"prod.fact_order_detail.""seller_np""",prod.fact_order_detail,
+total_items,Data representing the total items.,"prod.fact_order_detail.""total_items""",prod.fact_order_detail,
+domain,"The ONDC network domain (e.g., retail, logistics).","prod.fact_order_detail.""domain""",prod.fact_order_detail,
+provider_key,Unique identifier for provider key.,"prod.fact_order_detail.""provider_key""",prod.fact_order_detail,
+order_status,Turn-Around-Time (TAT) measurement.,"prod.fact_order_detail.""order_status""",prod.fact_order_detail,
+seller_pincode,Indian postal code (pincode).,"prod.fact_order_detail.""seller_pincode""",prod.fact_order_detail,
+delivery_pincode,Indian postal code (pincode).,"prod.fact_order_detail.""delivery_pincode""",prod.fact_order_detail,
+order_date,Timestamp or date indicating when order date occurred.,"prod.fact_order_detail.""order_date""",prod.fact_order_detail,
+consolidated_categories,Timestamp or date indicating when consolidated categories occurred.,"prod.fact_order_detail.""consolidated_categories""",prod.fact_order_detail,
+multi_category_flag,Timestamp or date indicating when multi category flag occurred.,"prod.fact_order_detail.""multi_category_flag""",prod.fact_order_detail,
+delivery_district,Data representing the delivery district.,"prod.fact_order_detail.""delivery_district""",prod.fact_order_detail,
+delivery_state,Turn-Around-Time (TAT) measurement.,"prod.fact_order_detail.""delivery_state""",prod.fact_order_detail,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"prod.fact_order_detail.""delivery_state_code""",prod.fact_order_detail,
+seller_district,Data representing the seller district.,"prod.fact_order_detail.""seller_district""",prod.fact_order_detail,
+seller_state,Turn-Around-Time (TAT) measurement.,"prod.fact_order_detail.""seller_state""",prod.fact_order_detail,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"prod.fact_order_detail.""seller_state_code""",prod.fact_order_detail,
+"▼ fact_order_detail_b2b   (base table, 11 cols)",,,prod.fact_order_detail_b2b,"CREATE INDEX fact_order_detail_b2b_provider_key_idx ON prod.fact_order_detail_b2b USING btree (provider_key)
+
+CREATE INDEX fact_order_detail_b2b_network_order_id_idx ON prod.fact_order_detail_b2b USING btree (network_order_id)
+
+CREATE INDEX fact_order_detail_b2b_domain_idx ON prod.fact_order_detail_b2b USING btree (domain)
+
+CREATE INDEX fact_order_detail_b2b_seller_np_idx ON prod.fact_order_detail_b2b USING btree (seller_np)"
+network_order_id,Data representing the network order id.,"prod.fact_order_detail_b2b.""network_order_id""",prod.fact_order_detail_b2b,
+seller_np,Data representing the seller np.,"prod.fact_order_detail_b2b.""seller_np""",prod.fact_order_detail_b2b,
+total_items,Data representing the total items.,"prod.fact_order_detail_b2b.""total_items""",prod.fact_order_detail_b2b,
+domain,"The ONDC network domain (e.g., retail, logistics).","prod.fact_order_detail_b2b.""domain""",prod.fact_order_detail_b2b,
+provider_key,Unique identifier for provider key.,"prod.fact_order_detail_b2b.""provider_key""",prod.fact_order_detail_b2b,
+order_status,Turn-Around-Time (TAT) measurement.,"prod.fact_order_detail_b2b.""order_status""",prod.fact_order_detail_b2b,
+delivery_pincode,Indian postal code (pincode).,"prod.fact_order_detail_b2b.""delivery_pincode""",prod.fact_order_detail_b2b,
+order_date,Timestamp or date indicating when order date occurred.,"prod.fact_order_detail_b2b.""order_date""",prod.fact_order_detail_b2b,
+delivery_district,Data representing the delivery district.,"prod.fact_order_detail_b2b.""delivery_district""",prod.fact_order_detail_b2b,
+delivery_state,Turn-Around-Time (TAT) measurement.,"prod.fact_order_detail_b2b.""delivery_state""",prod.fact_order_detail_b2b,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"prod.fact_order_detail_b2b.""delivery_state_code""",prod.fact_order_detail_b2b,
+"▼ landing_page_echart   (base table, 3 cols)",,,prod.landing_page_echart,
+month,Data representing the month.,"prod.landing_page_echart.""month""",prod.landing_page_echart,
+domain,"The ONDC network domain (e.g., retail, logistics).","prod.landing_page_echart.""domain""",prod.landing_page_echart,
+order_count,Data representing the order count.,"prod.landing_page_echart.""order_count""",prod.landing_page_echart,
+"▼ logistics_active_sellers   (base table, 6 cols)",,,prod.logistics_active_sellers,"CREATE INDEX logistics_active_sellers_provider_key_idx ON prod.logistics_active_sellers USING btree (provider_key)
+
+CREATE INDEX logistics_active_sellers_seller_state_idx ON prod.logistics_active_sellers USING btree (seller_state)
+
+CREATE INDEX logistics_active_sellers_seller_district_idx ON prod.logistics_active_sellers USING btree (seller_district)"
+provider_key,Unique identifier for provider key.,"prod.logistics_active_sellers.""provider_key""",prod.logistics_active_sellers,
+seller_district,Data representing the seller district.,"prod.logistics_active_sellers.""seller_district""",prod.logistics_active_sellers,
+seller_state,Turn-Around-Time (TAT) measurement.,"prod.logistics_active_sellers.""seller_state""",prod.logistics_active_sellers,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"prod.logistics_active_sellers.""seller_state_code""",prod.logistics_active_sellers,
+order_month,Data representing the order month.,"prod.logistics_active_sellers.""order_month""",prod.logistics_active_sellers,
+order_year,Data representing the order year.,"prod.logistics_active_sellers.""order_year""",prod.logistics_active_sellers,
+"▼ logistics_district_level_orders   (base table, 14 cols)",,,prod.logistics_district_level_orders,"CREATE INDEX logistics_district_level_orders_delivery_district_idx ON prod.logistics_district_level_orders USING btree (delivery_district)
+
+CREATE INDEX logistics_district_level_orders_order_date_idx ON prod.logistics_district_level_orders USING btree (order_date)
+
+CREATE INDEX logistics_district_level_orders_delivery_state_idx ON prod.logistics_district_level_orders USING btree (delivery_state)
+
+CREATE INDEX logistics_district_level_orders_seller_district_idx ON prod.logistics_district_level_orders USING btree (seller_district)
+
+CREATE INDEX logistics_district_level_orders_seller_state_idx ON prod.logistics_district_level_orders USING btree (seller_state)"
+order_date,Timestamp or date indicating when order date occurred.,"prod.logistics_district_level_orders.""order_date""",prod.logistics_district_level_orders,
+delivery_district,Data representing the delivery district.,"prod.logistics_district_level_orders.""delivery_district""",prod.logistics_district_level_orders,
+delivery_state,Turn-Around-Time (TAT) measurement.,"prod.logistics_district_level_orders.""delivery_state""",prod.logistics_district_level_orders,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"prod.logistics_district_level_orders.""delivery_state_code""",prod.logistics_district_level_orders,
+seller_state,Turn-Around-Time (TAT) measurement.,"prod.logistics_district_level_orders.""seller_state""",prod.logistics_district_level_orders,
+seller_district,Data representing the seller district.,"prod.logistics_district_level_orders.""seller_district""",prod.logistics_district_level_orders,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"prod.logistics_district_level_orders.""seller_state_code""",prod.logistics_district_level_orders,
+total_orders_delivered,Data representing the total orders delivered.,"prod.logistics_district_level_orders.""total_orders_delivered""",prod.logistics_district_level_orders,
+pincode_count,Indian postal code (pincode).,"prod.logistics_district_level_orders.""pincode_count""",prod.logistics_district_level_orders,
+intrastate_orders,Turn-Around-Time (TAT) measurement.,"prod.logistics_district_level_orders.""intrastate_orders""",prod.logistics_district_level_orders,
+intradistrict_orders,Data representing the intradistrict orders.,"prod.logistics_district_level_orders.""intradistrict_orders""",prod.logistics_district_level_orders,
+interstate_orders,Turn-Around-Time (TAT) measurement.,"prod.logistics_district_level_orders.""interstate_orders""",prod.logistics_district_level_orders,
+intrastate_orders_percentage,Turn-Around-Time (TAT) measurement.,"prod.logistics_district_level_orders.""intrastate_orders_percentage""",prod.logistics_district_level_orders,
+intradistrict_orders_percentage,Data representing the intradistrict orders percentage.,"prod.logistics_district_level_orders.""intradistrict_orders_percentage""",prod.logistics_district_level_orders,
+"▼ logistics_fact_order_detail   (base table, 25 cols)",,,prod.logistics_fact_order_detail,"CREATE INDEX logistics_fact_order_detail_seller_district_idx ON prod.logistics_fact_order_detail USING btree (seller_district)
+
+CREATE INDEX logistics_fact_order_detail_bpp_id_idx ON prod.logistics_fact_order_detail USING btree (bpp_id)
+
+CREATE INDEX logistics_fact_order_detail_bap_id_idx ON prod.logistics_fact_order_detail USING btree (bap_id)
+
+CREATE INDEX logistics_fact_order_detail_delivery_state_idx ON prod.logistics_fact_order_detail USING btree (delivery_state)
+
+CREATE INDEX logistics_fact_order_detail_provider_id_idx ON prod.logistics_fact_order_detail USING btree (provider_id)
+
+CREATE INDEX logistics_fact_order_detail_item_id_idx ON prod.logistics_fact_order_detail USING btree (item_id)
+
+CREATE INDEX logistics_fact_order_detail_pick_up_pincode_idx ON prod.logistics_fact_order_detail USING btree (pick_up_pincode)
+
+CREATE INDEX logistics_fact_order_detail_seller_state_idx ON prod.logistics_fact_order_detail USING btree (seller_state)
+
+CREATE INDEX logistics_fact_order_detail_delivery_district_idx ON prod.logistics_fact_order_detail USING btree (delivery_district)
+
+CREATE INDEX logistics_fact_order_detail_delivery_pincode_idx ON prod.logistics_fact_order_detail USING btree (delivery_pincode)"
+bap_id,Unique identifier for the Buyer App (BAP).,"prod.logistics_fact_order_detail.""bap_id""",prod.logistics_fact_order_detail,
+bpp_id,Unique identifier for the Seller App (BPP).,"prod.logistics_fact_order_detail.""bpp_id""",prod.logistics_fact_order_detail,
+provider_id,Unique identifier for the provider.,"prod.logistics_fact_order_detail.""provider_id""",prod.logistics_fact_order_detail,
+order_id,Unique identifier for order.,"prod.logistics_fact_order_detail.""order_id""",prod.logistics_fact_order_detail,
+transaction_id,Unique ONDC transaction identifier.,"prod.logistics_fact_order_detail.""transaction_id""",prod.logistics_fact_order_detail,
+item_id,Unique identifier for item.,"prod.logistics_fact_order_detail.""item_id""",prod.logistics_fact_order_detail,
+fulfillment_status,Turn-Around-Time (TAT) measurement.,"prod.logistics_fact_order_detail.""fulfillment_status""",prod.logistics_fact_order_detail,
+order_date,Timestamp or date indicating when order date occurred.,"prod.logistics_fact_order_detail.""order_date""",prod.logistics_fact_order_detail,
+domain,"The ONDC network domain (e.g., retail, logistics).","prod.logistics_fact_order_detail.""domain""",prod.logistics_fact_order_detail,
+f_agent_assigned_at_date,Timestamp or date indicating when f agent assigned at date occurred.,"prod.logistics_fact_order_detail.""f_agent_assigned_at_date""",prod.logistics_fact_order_detail,
+Log_Ondc_Status,Turn-Around-Time (TAT) measurement.,"prod.logistics_fact_order_detail.""Log_Ondc_Status""",prod.logistics_fact_order_detail,
+network_retail_order_id,Data representing the network retail order id.,"prod.logistics_fact_order_detail.""network_retail_order_id""",prod.logistics_fact_order_detail,
+shipment_type,Data representing the shipment type.,"prod.logistics_fact_order_detail.""shipment_type""",prod.logistics_fact_order_detail,
+pick_up_pincode,Indian postal code (pincode).,"prod.logistics_fact_order_detail.""pick_up_pincode""",prod.logistics_fact_order_detail,
+delivery_pincode,Indian postal code (pincode).,"prod.logistics_fact_order_detail.""delivery_pincode""",prod.logistics_fact_order_detail,
+network_retail_order_category,Timestamp or date indicating when network retail order category occurred.,"prod.logistics_fact_order_detail.""network_retail_order_category""",prod.logistics_fact_order_detail,
+on_confirm_sync_response,Data representing the on confirm sync response.,"prod.logistics_fact_order_detail.""on_confirm_sync_response""",prod.logistics_fact_order_detail,
+on_confirm_error_code,Error code associated with a failure or issue.,"prod.logistics_fact_order_detail.""on_confirm_error_code""",prod.logistics_fact_order_detail,
+on_confirm_error_message,Data representing the on confirm error message.,"prod.logistics_fact_order_detail.""on_confirm_error_message""",prod.logistics_fact_order_detail,
+delivery_district,Data representing the delivery district.,"prod.logistics_fact_order_detail.""delivery_district""",prod.logistics_fact_order_detail,
+delivery_state,Turn-Around-Time (TAT) measurement.,"prod.logistics_fact_order_detail.""delivery_state""",prod.logistics_fact_order_detail,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"prod.logistics_fact_order_detail.""delivery_state_code""",prod.logistics_fact_order_detail,
+seller_district,Data representing the seller district.,"prod.logistics_fact_order_detail.""seller_district""",prod.logistics_fact_order_detail,
+seller_state,Turn-Around-Time (TAT) measurement.,"prod.logistics_fact_order_detail.""seller_state""",prod.logistics_fact_order_detail,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"prod.logistics_fact_order_detail.""seller_state_code""",prod.logistics_fact_order_detail,
+"▼ logistics_providers   (base table, 5 cols)",,,prod.logistics_providers,"CREATE INDEX logistics_providers_order_date_idx ON prod.logistics_providers USING btree (order_date)
+
+CREATE INDEX logistics_providers_seller_district_idx ON prod.logistics_providers USING btree (seller_district)
+
+CREATE INDEX logistics_providers_provider_key_idx ON prod.logistics_providers USING btree (provider_key)
+
+CREATE INDEX logistics_providers_seller_state_idx ON prod.logistics_providers USING btree (seller_state)"
+provider_key,Unique identifier for provider key.,"prod.logistics_providers.""provider_key""",prod.logistics_providers,
+order_date,Timestamp or date indicating when order date occurred.,"prod.logistics_providers.""order_date""",prod.logistics_providers,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"prod.logistics_providers.""seller_state_code""",prod.logistics_providers,
+seller_state,Turn-Around-Time (TAT) measurement.,"prod.logistics_providers.""seller_state""",prod.logistics_providers,
+seller_district,Data representing the seller district.,"prod.logistics_providers.""seller_district""",prod.logistics_providers,
+"▼ monthly_providers   (base table, 6 cols)",,,prod.monthly_providers,
+provider_key,Unique identifier for provider key.,"prod.monthly_providers.""provider_key""",prod.monthly_providers,
+seller_district,Data representing the seller district.,"prod.monthly_providers.""seller_district""",prod.monthly_providers,
+seller_state,Turn-Around-Time (TAT) measurement.,"prod.monthly_providers.""seller_state""",prod.monthly_providers,
+seller_state_code,Turn-Around-Time (TAT) measurement.,"prod.monthly_providers.""seller_state_code""",prod.monthly_providers,
+order_month,Data representing the order month.,"prod.monthly_providers.""order_month""",prod.monthly_providers,
+order_year,Data representing the order year.,"prod.monthly_providers.""order_year""",prod.monthly_providers,
+"▼ ondc_dashboard_version   (base table, 6 cols)",,,prod.ondc_dashboard_version,CREATE UNIQUE INDEX ondc_dashboard_version_pkey ON prod.ondc_dashboard_version USING btree (id)
+id,Unique identifier for id.,"prod.ondc_dashboard_version.""id""",prod.ondc_dashboard_version,
+major,Data representing the major.,"prod.ondc_dashboard_version.""major""",prod.ondc_dashboard_version,
+minor,Data representing the minor.,"prod.ondc_dashboard_version.""minor""",prod.ondc_dashboard_version,
+minor_minor,Data representing the minor minor.,"prod.ondc_dashboard_version.""minor_minor""",prod.ondc_dashboard_version,
+run_date,Timestamp or date indicating when run date occurred.,"prod.ondc_dashboard_version.""run_date""",prod.ondc_dashboard_version,
+hot_fix_file_name,Name of the hot fix file.,"prod.ondc_dashboard_version.""hot_fix_file_name""",prod.ondc_dashboard_version,
+"▼ retail_b2b_district_level_orders   (base table, 6 cols)",,,prod.retail_b2b_district_level_orders,"CREATE INDEX retail_b2b_district_level_orders_delivery_state_idx ON prod.retail_b2b_district_level_orders USING btree (delivery_state)
+
+CREATE INDEX retail_b2b_district_level_orders_order_date_idx ON prod.retail_b2b_district_level_orders USING btree (order_date)
+
+CREATE INDEX retail_b2b_district_level_orders_delivery_district_idx ON prod.retail_b2b_district_level_orders USING btree (delivery_district)"
+order_date,Timestamp or date indicating when order date occurred.,"prod.retail_b2b_district_level_orders.""order_date""",prod.retail_b2b_district_level_orders,
+delivery_district,Data representing the delivery district.,"prod.retail_b2b_district_level_orders.""delivery_district""",prod.retail_b2b_district_level_orders,
+delivery_state,Turn-Around-Time (TAT) measurement.,"prod.retail_b2b_district_level_orders.""delivery_state""",prod.retail_b2b_district_level_orders,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"prod.retail_b2b_district_level_orders.""delivery_state_code""",prod.retail_b2b_district_level_orders,
+total_orders_delivered,Data representing the total orders delivered.,"prod.retail_b2b_district_level_orders.""total_orders_delivered""",prod.retail_b2b_district_level_orders,
+total_items,Data representing the total items.,"prod.retail_b2b_district_level_orders.""total_items""",prod.retail_b2b_district_level_orders,
+"▼ retail_voucher_fact_order_detail   (base table, 10 cols)",,,prod.retail_voucher_fact_order_detail,"CREATE INDEX retail_voucher_fact_order_detail_delivery_state_code_idx ON prod.retail_voucher_fact_order_detail USING btree (delivery_state_code)
+
+CREATE INDEX retail_voucher_fact_order_detail_provider_key_idx ON prod.retail_voucher_fact_order_detail USING btree (provider_key)
+
+CREATE INDEX retail_voucher_fact_order_detail_network_order_id_idx ON prod.retail_voucher_fact_order_detail USING btree (network_order_id)
+
+CREATE INDEX retail_voucher_fact_order_detail_delivery_district_idx ON prod.retail_voucher_fact_order_detail USING btree (delivery_district)
+
+CREATE INDEX retail_voucher_fact_order_detail_domain_idx ON prod.retail_voucher_fact_order_detail USING btree (domain)
+
+CREATE INDEX retail_voucher_fact_order_detail_delivery_state_idx ON prod.retail_voucher_fact_order_detail USING btree (delivery_state)"
+network_order_id,Data representing the network order id.,"prod.retail_voucher_fact_order_detail.""network_order_id""",prod.retail_voucher_fact_order_detail,
+provider_key,Unique identifier for provider key.,"prod.retail_voucher_fact_order_detail.""provider_key""",prod.retail_voucher_fact_order_detail,
+total_items,Data representing the total items.,"prod.retail_voucher_fact_order_detail.""total_items""",prod.retail_voucher_fact_order_detail,
+domain,"The ONDC network domain (e.g., retail, logistics).","prod.retail_voucher_fact_order_detail.""domain""",prod.retail_voucher_fact_order_detail,
+order_status,Turn-Around-Time (TAT) measurement.,"prod.retail_voucher_fact_order_detail.""order_status""",prod.retail_voucher_fact_order_detail,
+delivery_pincode,Indian postal code (pincode).,"prod.retail_voucher_fact_order_detail.""delivery_pincode""",prod.retail_voucher_fact_order_detail,
+order_date,Timestamp or date indicating when order date occurred.,"prod.retail_voucher_fact_order_detail.""order_date""",prod.retail_voucher_fact_order_detail,
+delivery_district,Data representing the delivery district.,"prod.retail_voucher_fact_order_detail.""delivery_district""",prod.retail_voucher_fact_order_detail,
+delivery_state,Turn-Around-Time (TAT) measurement.,"prod.retail_voucher_fact_order_detail.""delivery_state""",prod.retail_voucher_fact_order_detail,
+delivery_state_code,Turn-Around-Time (TAT) measurement.,"prod.retail_voucher_fact_order_detail.""delivery_state_code""",prod.retail_voucher_fact_order_detail,
+"▼ static_summary   (base table, 4 cols)",,,prod.static_summary,
+month,Data representing the month.,"prod.static_summary.""month""",prod.static_summary,
+domain,"The ONDC network domain (e.g., retail, logistics).","prod.static_summary.""domain""",prod.static_summary,
+order_count,Data representing the order count.,"prod.static_summary.""order_count""",prod.static_summary,
+updated_at,Timestamp when the record was last updated.,"prod.static_summary.""updated_at""",prod.static_summary,

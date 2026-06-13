@@ -1,0 +1,132 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s)
+"▼ dim_dates   (base table, 1 cols)",,,prod_bkp.dim_dates
+order_date,,"prod_bkp.dim_dates.""order_date""",prod_bkp.dim_dates
+"▼ dim_districts   (base table, 2 cols)",,,prod_bkp.dim_districts
+delivery_state,,"prod_bkp.dim_districts.""delivery_state""",prod_bkp.dim_districts
+delivery_district,,"prod_bkp.dim_districts.""delivery_district""",prod_bkp.dim_districts
+"▼ district_level_orders   (base table, 16 cols)",,,prod_bkp.district_level_orders
+order_date,,"prod_bkp.district_level_orders.""order_date""",prod_bkp.district_level_orders
+delivery_district,,"prod_bkp.district_level_orders.""delivery_district""",prod_bkp.district_level_orders
+delivery_state,,"prod_bkp.district_level_orders.""delivery_state""",prod_bkp.district_level_orders
+delivery_state_code,,"prod_bkp.district_level_orders.""delivery_state_code""",prod_bkp.district_level_orders
+seller_district,,"prod_bkp.district_level_orders.""seller_district""",prod_bkp.district_level_orders
+seller_state,,"prod_bkp.district_level_orders.""seller_state""",prod_bkp.district_level_orders
+seller_state_code,,"prod_bkp.district_level_orders.""seller_state_code""",prod_bkp.district_level_orders
+total_orders_delivered,,"prod_bkp.district_level_orders.""total_orders_delivered""",prod_bkp.district_level_orders
+pincode_count,,"prod_bkp.district_level_orders.""pincode_count""",prod_bkp.district_level_orders
+total_items,,"prod_bkp.district_level_orders.""total_items""",prod_bkp.district_level_orders
+intrastate_orders,,"prod_bkp.district_level_orders.""intrastate_orders""",prod_bkp.district_level_orders
+interstate_orders,,"prod_bkp.district_level_orders.""interstate_orders""",prod_bkp.district_level_orders
+intradistrict_orders,,"prod_bkp.district_level_orders.""intradistrict_orders""",prod_bkp.district_level_orders
+interdistrict_orders,,"prod_bkp.district_level_orders.""interdistrict_orders""",prod_bkp.district_level_orders
+intrastate_orders_percentage,,"prod_bkp.district_level_orders.""intrastate_orders_percentage""",prod_bkp.district_level_orders
+intradistrict_orders_percentage,,"prod_bkp.district_level_orders.""intradistrict_orders_percentage""",prod_bkp.district_level_orders
+"▼ district_wise_monthly_aggregates   (base table, 13 cols)",,,prod_bkp.district_wise_monthly_aggregates
+domain_name,,"prod_bkp.district_wise_monthly_aggregates.""domain_name""",prod_bkp.district_wise_monthly_aggregates
+sub_domain,,"prod_bkp.district_wise_monthly_aggregates.""sub_domain""",prod_bkp.district_wise_monthly_aggregates
+order_month,,"prod_bkp.district_wise_monthly_aggregates.""order_month""",prod_bkp.district_wise_monthly_aggregates
+order_year,,"prod_bkp.district_wise_monthly_aggregates.""order_year""",prod_bkp.district_wise_monthly_aggregates
+delivery_district,,"prod_bkp.district_wise_monthly_aggregates.""delivery_district""",prod_bkp.district_wise_monthly_aggregates
+delivery_state,,"prod_bkp.district_wise_monthly_aggregates.""delivery_state""",prod_bkp.district_wise_monthly_aggregates
+delivery_state_code,,"prod_bkp.district_wise_monthly_aggregates.""delivery_state_code""",prod_bkp.district_wise_monthly_aggregates
+seller_district,,"prod_bkp.district_wise_monthly_aggregates.""seller_district""",prod_bkp.district_wise_monthly_aggregates
+seller_state,,"prod_bkp.district_wise_monthly_aggregates.""seller_state""",prod_bkp.district_wise_monthly_aggregates
+seller_state_code,,"prod_bkp.district_wise_monthly_aggregates.""seller_state_code""",prod_bkp.district_wise_monthly_aggregates
+total_orders_delivered,,"prod_bkp.district_wise_monthly_aggregates.""total_orders_delivered""",prod_bkp.district_wise_monthly_aggregates
+intrastate_orders,,"prod_bkp.district_wise_monthly_aggregates.""intrastate_orders""",prod_bkp.district_wise_monthly_aggregates
+intradistrict_orders,,"prod_bkp.district_wise_monthly_aggregates.""intradistrict_orders""",prod_bkp.district_wise_monthly_aggregates
+"▼ fact_order_detail_b2b   (base table, 11 cols)",,,prod_bkp.fact_order_detail_b2b
+network_order_id,,"prod_bkp.fact_order_detail_b2b.""network_order_id""",prod_bkp.fact_order_detail_b2b
+seller_np,,"prod_bkp.fact_order_detail_b2b.""seller_np""",prod_bkp.fact_order_detail_b2b
+total_items,,"prod_bkp.fact_order_detail_b2b.""total_items""",prod_bkp.fact_order_detail_b2b
+domain,,"prod_bkp.fact_order_detail_b2b.""domain""",prod_bkp.fact_order_detail_b2b
+provider_key,,"prod_bkp.fact_order_detail_b2b.""provider_key""",prod_bkp.fact_order_detail_b2b
+order_status,,"prod_bkp.fact_order_detail_b2b.""order_status""",prod_bkp.fact_order_detail_b2b
+delivery_pincode,,"prod_bkp.fact_order_detail_b2b.""delivery_pincode""",prod_bkp.fact_order_detail_b2b
+order_date,,"prod_bkp.fact_order_detail_b2b.""order_date""",prod_bkp.fact_order_detail_b2b
+delivery_district,,"prod_bkp.fact_order_detail_b2b.""delivery_district""",prod_bkp.fact_order_detail_b2b
+delivery_state,,"prod_bkp.fact_order_detail_b2b.""delivery_state""",prod_bkp.fact_order_detail_b2b
+delivery_state_code,,"prod_bkp.fact_order_detail_b2b.""delivery_state_code""",prod_bkp.fact_order_detail_b2b
+"▼ landing_page_echart   (base table, 3 cols)",,,prod_bkp.landing_page_echart
+month,,"prod_bkp.landing_page_echart.""month""",prod_bkp.landing_page_echart
+domain,,"prod_bkp.landing_page_echart.""domain""",prod_bkp.landing_page_echart
+order_count,,"prod_bkp.landing_page_echart.""order_count""",prod_bkp.landing_page_echart
+"▼ logistics_district_level_orders   (base table, 14 cols)",,,prod_bkp.logistics_district_level_orders
+order_date,,"prod_bkp.logistics_district_level_orders.""order_date""",prod_bkp.logistics_district_level_orders
+delivery_district,,"prod_bkp.logistics_district_level_orders.""delivery_district""",prod_bkp.logistics_district_level_orders
+delivery_state,,"prod_bkp.logistics_district_level_orders.""delivery_state""",prod_bkp.logistics_district_level_orders
+delivery_state_code,,"prod_bkp.logistics_district_level_orders.""delivery_state_code""",prod_bkp.logistics_district_level_orders
+seller_state,,"prod_bkp.logistics_district_level_orders.""seller_state""",prod_bkp.logistics_district_level_orders
+seller_district,,"prod_bkp.logistics_district_level_orders.""seller_district""",prod_bkp.logistics_district_level_orders
+seller_state_code,,"prod_bkp.logistics_district_level_orders.""seller_state_code""",prod_bkp.logistics_district_level_orders
+total_orders_delivered,,"prod_bkp.logistics_district_level_orders.""total_orders_delivered""",prod_bkp.logistics_district_level_orders
+pincode_count,,"prod_bkp.logistics_district_level_orders.""pincode_count""",prod_bkp.logistics_district_level_orders
+intrastate_orders,,"prod_bkp.logistics_district_level_orders.""intrastate_orders""",prod_bkp.logistics_district_level_orders
+intradistrict_orders,,"prod_bkp.logistics_district_level_orders.""intradistrict_orders""",prod_bkp.logistics_district_level_orders
+interstate_orders,,"prod_bkp.logistics_district_level_orders.""interstate_orders""",prod_bkp.logistics_district_level_orders
+intrastate_orders_percentage,,"prod_bkp.logistics_district_level_orders.""intrastate_orders_percentage""",prod_bkp.logistics_district_level_orders
+intradistrict_orders_percentage,,"prod_bkp.logistics_district_level_orders.""intradistrict_orders_percentage""",prod_bkp.logistics_district_level_orders
+"▼ logistics_monthly_providers   (base table, 6 cols)",,,prod_bkp.logistics_monthly_providers
+provider_key,,"prod_bkp.logistics_monthly_providers.""provider_key""",prod_bkp.logistics_monthly_providers
+seller_district,,"prod_bkp.logistics_monthly_providers.""seller_district""",prod_bkp.logistics_monthly_providers
+seller_state,,"prod_bkp.logistics_monthly_providers.""seller_state""",prod_bkp.logistics_monthly_providers
+seller_state_code,,"prod_bkp.logistics_monthly_providers.""seller_state_code""",prod_bkp.logistics_monthly_providers
+order_month,,"prod_bkp.logistics_monthly_providers.""order_month""",prod_bkp.logistics_monthly_providers
+order_year,,"prod_bkp.logistics_monthly_providers.""order_year""",prod_bkp.logistics_monthly_providers
+"▼ logistics_providers   (base table, 5 cols)",,,prod_bkp.logistics_providers
+provider_key,,"prod_bkp.logistics_providers.""provider_key""",prod_bkp.logistics_providers
+order_date,,"prod_bkp.logistics_providers.""order_date""",prod_bkp.logistics_providers
+seller_state_code,,"prod_bkp.logistics_providers.""seller_state_code""",prod_bkp.logistics_providers
+seller_state,,"prod_bkp.logistics_providers.""seller_state""",prod_bkp.logistics_providers
+seller_district,,"prod_bkp.logistics_providers.""seller_district""",prod_bkp.logistics_providers
+"▼ monthly_providers   (base table, 6 cols)",,,prod_bkp.monthly_providers
+provider_key,,"prod_bkp.monthly_providers.""provider_key""",prod_bkp.monthly_providers
+seller_district,,"prod_bkp.monthly_providers.""seller_district""",prod_bkp.monthly_providers
+seller_state,,"prod_bkp.monthly_providers.""seller_state""",prod_bkp.monthly_providers
+seller_state_code,,"prod_bkp.monthly_providers.""seller_state_code""",prod_bkp.monthly_providers
+order_month,,"prod_bkp.monthly_providers.""order_month""",prod_bkp.monthly_providers
+order_year,,"prod_bkp.monthly_providers.""order_year""",prod_bkp.monthly_providers
+"▼ ondc_dashboard_version   (base table, 6 cols)",,,prod_bkp.ondc_dashboard_version
+id,,"prod_bkp.ondc_dashboard_version.""id""",prod_bkp.ondc_dashboard_version
+major,,"prod_bkp.ondc_dashboard_version.""major""",prod_bkp.ondc_dashboard_version
+minor,,"prod_bkp.ondc_dashboard_version.""minor""",prod_bkp.ondc_dashboard_version
+minor_minor,,"prod_bkp.ondc_dashboard_version.""minor_minor""",prod_bkp.ondc_dashboard_version
+run_date,,"prod_bkp.ondc_dashboard_version.""run_date""",prod_bkp.ondc_dashboard_version
+hot_fix_file_name,,"prod_bkp.ondc_dashboard_version.""hot_fix_file_name""",prod_bkp.ondc_dashboard_version
+"▼ pincode   (base table, 4 cols)",,,prod_bkp.pincode
+Pincode,,"prod_bkp.pincode.""Pincode""",prod_bkp.pincode
+Districtname,,"prod_bkp.pincode.""Districtname""",prod_bkp.pincode
+Statename,,"prod_bkp.pincode.""Statename""",prod_bkp.pincode
+Statecode,,"prod_bkp.pincode.""Statecode""",prod_bkp.pincode
+"▼ retail_b2b_dim_dates   (base table, 1 cols)",,,prod_bkp.retail_b2b_dim_dates
+order_date,,"prod_bkp.retail_b2b_dim_dates.""order_date""",prod_bkp.retail_b2b_dim_dates
+"▼ retail_b2b_district_level_orders   (base table, 6 cols)",,,prod_bkp.retail_b2b_district_level_orders
+order_date,,"prod_bkp.retail_b2b_district_level_orders.""order_date""",prod_bkp.retail_b2b_district_level_orders
+delivery_district,,"prod_bkp.retail_b2b_district_level_orders.""delivery_district""",prod_bkp.retail_b2b_district_level_orders
+delivery_state,,"prod_bkp.retail_b2b_district_level_orders.""delivery_state""",prod_bkp.retail_b2b_district_level_orders
+delivery_state_code,,"prod_bkp.retail_b2b_district_level_orders.""delivery_state_code""",prod_bkp.retail_b2b_district_level_orders
+total_orders_delivered,,"prod_bkp.retail_b2b_district_level_orders.""total_orders_delivered""",prod_bkp.retail_b2b_district_level_orders
+total_items,,"prod_bkp.retail_b2b_district_level_orders.""total_items""",prod_bkp.retail_b2b_district_level_orders
+"▼ retail_voucher_district_level_orders   (base table, 6 cols)",,,prod_bkp.retail_voucher_district_level_orders
+order_date,,"prod_bkp.retail_voucher_district_level_orders.""order_date""",prod_bkp.retail_voucher_district_level_orders
+delivery_district,,"prod_bkp.retail_voucher_district_level_orders.""delivery_district""",prod_bkp.retail_voucher_district_level_orders
+delivery_state,,"prod_bkp.retail_voucher_district_level_orders.""delivery_state""",prod_bkp.retail_voucher_district_level_orders
+delivery_state_code,,"prod_bkp.retail_voucher_district_level_orders.""delivery_state_code""",prod_bkp.retail_voucher_district_level_orders
+total_orders_delivered,,"prod_bkp.retail_voucher_district_level_orders.""total_orders_delivered""",prod_bkp.retail_voucher_district_level_orders
+total_items,,"prod_bkp.retail_voucher_district_level_orders.""total_items""",prod_bkp.retail_voucher_district_level_orders
+"▼ retail_voucher_fact_order_detail   (base table, 10 cols)",,,prod_bkp.retail_voucher_fact_order_detail
+network_order_id,,"prod_bkp.retail_voucher_fact_order_detail.""network_order_id""",prod_bkp.retail_voucher_fact_order_detail
+provider_key,,"prod_bkp.retail_voucher_fact_order_detail.""provider_key""",prod_bkp.retail_voucher_fact_order_detail
+total_items,,"prod_bkp.retail_voucher_fact_order_detail.""total_items""",prod_bkp.retail_voucher_fact_order_detail
+domain,,"prod_bkp.retail_voucher_fact_order_detail.""domain""",prod_bkp.retail_voucher_fact_order_detail
+order_status,,"prod_bkp.retail_voucher_fact_order_detail.""order_status""",prod_bkp.retail_voucher_fact_order_detail
+delivery_pincode,,"prod_bkp.retail_voucher_fact_order_detail.""delivery_pincode""",prod_bkp.retail_voucher_fact_order_detail
+order_date,,"prod_bkp.retail_voucher_fact_order_detail.""order_date""",prod_bkp.retail_voucher_fact_order_detail
+delivery_district,,"prod_bkp.retail_voucher_fact_order_detail.""delivery_district""",prod_bkp.retail_voucher_fact_order_detail
+delivery_state,,"prod_bkp.retail_voucher_fact_order_detail.""delivery_state""",prod_bkp.retail_voucher_fact_order_detail
+delivery_state_code,,"prod_bkp.retail_voucher_fact_order_detail.""delivery_state_code""",prod_bkp.retail_voucher_fact_order_detail
+"▼ static_summary   (base table, 4 cols)",,,prod_bkp.static_summary
+month,,"prod_bkp.static_summary.""month""",prod_bkp.static_summary
+domain,,"prod_bkp.static_summary.""domain""",prod_bkp.static_summary
+order_count,,"prod_bkp.static_summary.""order_count""",prod_bkp.static_summary
+updated_at,,"prod_bkp.static_summary.""updated_at""",prod_bkp.static_summary

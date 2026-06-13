@@ -6,7 +6,7 @@ authors = ["ONDC Analytics Team"]
 packages = [{include = "ondc_mcp", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.15"
 mcp = {extras = ["cli"], version = "^1.0"}
 fastapi = "^0.115"
 uvicorn = "^0.34"
@@ -26,6 +26,7 @@ optional = true
 [tool.poetry.group.rag.dependencies]
 faiss-cpu = "^1.9"
 sentence-transformers = "^3.4"
+pandas = "^2.2"
 
 [tool.poetry.scripts]
 ondc-mcp = "ondc_mcp.server:main"

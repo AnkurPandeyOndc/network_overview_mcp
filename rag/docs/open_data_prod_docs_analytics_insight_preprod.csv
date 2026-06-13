@@ -1,0 +1,400 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s)
+"▼ logistics_stock_bv   (view, 87 cols)",,,analytics_insight_preprod.logistics_stock_bv
+bap_id,,"analytics_insight_preprod.logistics_stock_bv.""bap_id""",analytics_insight_preprod.logistics_stock_bv
+bpp_id,,"analytics_insight_preprod.logistics_stock_bv.""bpp_id""",analytics_insight_preprod.logistics_stock_bv
+order_id,,"analytics_insight_preprod.logistics_stock_bv.""order_id""",analytics_insight_preprod.logistics_stock_bv
+retail_order_id,,"analytics_insight_preprod.logistics_stock_bv.""retail_order_id""",analytics_insight_preprod.logistics_stock_bv
+transaction_id,,"analytics_insight_preprod.logistics_stock_bv.""transaction_id""",analytics_insight_preprod.logistics_stock_bv
+date,,"analytics_insight_preprod.logistics_stock_bv.""date""",analytics_insight_preprod.logistics_stock_bv
+order_created_at,,"analytics_insight_preprod.logistics_stock_bv.""order_created_at""",analytics_insight_preprod.logistics_stock_bv
+cancellation_code,,"analytics_insight_preprod.logistics_stock_bv.""cancellation_code""",analytics_insight_preprod.logistics_stock_bv
+latest_order_status,,"analytics_insight_preprod.logistics_stock_bv.""latest_order_status""",analytics_insight_preprod.logistics_stock_bv
+Linked,,"analytics_insight_preprod.logistics_stock_bv.""Linked""",analytics_insight_preprod.logistics_stock_bv
+shipment_type,,"analytics_insight_preprod.logistics_stock_bv.""shipment_type""",analytics_insight_preprod.logistics_stock_bv
+provider_name,,"analytics_insight_preprod.logistics_stock_bv.""provider_name""",analytics_insight_preprod.logistics_stock_bv
+pick_up_pincode,,"analytics_insight_preprod.logistics_stock_bv.""pick_up_pincode""",analytics_insight_preprod.logistics_stock_bv
+delivery_pincode,,"analytics_insight_preprod.logistics_stock_bv.""delivery_pincode""",analytics_insight_preprod.logistics_stock_bv
+retail_category,,"analytics_insight_preprod.logistics_stock_bv.""retail_category""",analytics_insight_preprod.logistics_stock_bv
+assigned,,"analytics_insight_preprod.logistics_stock_bv.""assigned""",analytics_insight_preprod.logistics_stock_bv
+cancelled_date,,"analytics_insight_preprod.logistics_stock_bv.""cancelled_date""",analytics_insight_preprod.logistics_stock_bv
+picked_date,,"analytics_insight_preprod.logistics_stock_bv.""picked_date""",analytics_insight_preprod.logistics_stock_bv
+dedup,,"analytics_insight_preprod.logistics_stock_bv.""dedup""",analytics_insight_preprod.logistics_stock_bv
+rn_order,,"analytics_insight_preprod.logistics_stock_bv.""rn_order""",analytics_insight_preprod.logistics_stock_bv
+Cancellation Attributed to,,"analytics_insight_preprod.logistics_stock_bv.""Cancellation Attributed to""",analytics_insight_preprod.logistics_stock_bv
+Cancellation By,,"analytics_insight_preprod.logistics_stock_bv.""Cancellation By""",analytics_insight_preprod.logistics_stock_bv
+Cancel sec,,"analytics_insight_preprod.logistics_stock_bv.""Cancel sec""",analytics_insight_preprod.logistics_stock_bv
+Logistics NP Name,,"analytics_insight_preprod.logistics_stock_bv.""Logistics NP Name""",analytics_insight_preprod.logistics_stock_bv
+LNP Mask,,"analytics_insight_preprod.logistics_stock_bv.""LNP Mask""",analytics_insight_preprod.logistics_stock_bv
+TSP Powered,,"analytics_insight_preprod.logistics_stock_bv.""TSP Powered""",analytics_insight_preprod.logistics_stock_bv
+Overall,,"analytics_insight_preprod.logistics_stock_bv.""Overall""",analytics_insight_preprod.logistics_stock_bv
+Overall Orders,,"analytics_insight_preprod.logistics_stock_bv.""Overall Orders""",analytics_insight_preprod.logistics_stock_bv
+Overall Orders Dedup,,"analytics_insight_preprod.logistics_stock_bv.""Overall Orders Dedup""",analytics_insight_preprod.logistics_stock_bv
+Overall Deduped,,"analytics_insight_preprod.logistics_stock_bv.""Overall Deduped""",analytics_insight_preprod.logistics_stock_bv
+Cancelled Overall,,"analytics_insight_preprod.logistics_stock_bv.""Cancelled Overall""",analytics_insight_preprod.logistics_stock_bv
+Driver Assigned,,"analytics_insight_preprod.logistics_stock_bv.""Driver Assigned""",analytics_insight_preprod.logistics_stock_bv
+Delivered Ded,,"analytics_insight_preprod.logistics_stock_bv.""Delivered Ded""",analytics_insight_preprod.logistics_stock_bv
+Post assgn Post Pickup SO Dedup Cancelled,,"analytics_insight_preprod.logistics_stock_bv.""Post assgn Post Pickup SO Dedup Cancelled""",analytics_insight_preprod.logistics_stock_bv
+Preassigned SO Dedup,,"analytics_insight_preprod.logistics_stock_bv.""Preassigned SO Dedup""",analytics_insight_preprod.logistics_stock_bv
+Pre Assigned SO,,"analytics_insight_preprod.logistics_stock_bv.""Pre Assigned SO""",analytics_insight_preprod.logistics_stock_bv
+Post Assigned SO Dedup,,"analytics_insight_preprod.logistics_stock_bv.""Post Assigned SO Dedup""",analytics_insight_preprod.logistics_stock_bv
+Confirmed,,"analytics_insight_preprod.logistics_stock_bv.""Confirmed""",analytics_insight_preprod.logistics_stock_bv
+Buyer Led SO Dedup PA,,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led SO Dedup PA""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led SO Dedup,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO Dedup""",analytics_insight_preprod.logistics_stock_bv
+Buyer Led SO Preassgn,,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led SO Preassgn""",analytics_insight_preprod.logistics_stock_bv
+Buyer Led - Seller by,,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led - Seller by""",analytics_insight_preprod.logistics_stock_bv
+Log By Pre Assigned SO,,"analytics_insight_preprod.logistics_stock_bv.""Log By Pre Assigned SO""",analytics_insight_preprod.logistics_stock_bv
+Logistics Led - Buyer by(PA),,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led - Buyer by(PA)""",analytics_insight_preprod.logistics_stock_bv
+LSP Led SO (Postassgn) < 20 mins (Not Picked),,"analytics_insight_preprod.logistics_stock_bv.""LSP Led SO (Postassgn) < 20 mins (Not Picked)""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led SO (Preassgn) 15-20 mins,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) 15-20 mins""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led SO (Preassgn) 10-15 mins,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) 10-15 mins""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led SO (Postassgn) > 2 mins (Not Picked),,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Postassgn) > 2 mins (Not Picked)""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led SO (Postassgn) > 2 mins (Picked),,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Postassgn) > 2 mins (Picked)""",analytics_insight_preprod.logistics_stock_bv
+Log Led SO Postassgn,,"analytics_insight_preprod.logistics_stock_bv.""Log Led SO Postassgn""",analytics_insight_preprod.logistics_stock_bv
+Log By SO Postassgn,,"analytics_insight_preprod.logistics_stock_bv.""Log By SO Postassgn""",analytics_insight_preprod.logistics_stock_bv
+LSP Led SO (Postassgn) > 20 mins (Not Picked),,"analytics_insight_preprod.logistics_stock_bv.""LSP Led SO (Postassgn) > 20 mins (Not Picked)""",analytics_insight_preprod.logistics_stock_bv
+LSP Led SO (Preassgn) 0-2 mins,,"analytics_insight_preprod.logistics_stock_bv.""LSP Led SO (Preassgn) 0-2 mins""",analytics_insight_preprod.logistics_stock_bv
+LSP Led SO (Preassgn) 2-5 mins,,"analytics_insight_preprod.logistics_stock_bv.""LSP Led SO (Preassgn) 2-5 mins""",analytics_insight_preprod.logistics_stock_bv
+LSP Led SO (Preassgn) >5 mins,,"analytics_insight_preprod.logistics_stock_bv.""LSP Led SO (Preassgn) >5 mins""",analytics_insight_preprod.logistics_stock_bv
+LSP Led SO (Postassgn) 0-2 mins,,"analytics_insight_preprod.logistics_stock_bv.""LSP Led SO (Postassgn) 0-2 mins""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led SO (Postassgn) 0-2 mins,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Postassgn) 0-2 mins""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led SO (Preassgn) 20-30 mins,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) 20-30 mins""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led SO (Preassgn) >30 mins,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) >30 mins""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led SO (Preassgn) 6-10 mins,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) 6-10 mins""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led SO (Preassgn) 2-6 mins,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) 2-6 mins""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led SO (Preassgn) 0-2 mins,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO (Preassgn) 0-2 mins""",analytics_insight_preprod.logistics_stock_bv
+Logistics Led Post Assigned Cancel,,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led Post Assigned Cancel""",analytics_insight_preprod.logistics_stock_bv
+Buyer Led - Seller by(PA),,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led - Seller by(PA)""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led - Seller by,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led - Seller by""",analytics_insight_preprod.logistics_stock_bv
+Merchant By Pre Assigned SO,,"analytics_insight_preprod.logistics_stock_bv.""Merchant By Pre Assigned SO""",analytics_insight_preprod.logistics_stock_bv
+Logistics Led - Seller by,,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led - Seller by""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led - Buyer by,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led - Buyer by""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led - Logistics by (Post Assigned),,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led - Logistics by (Post Assigned)""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led - Buyer by (PA),,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led - Buyer by (PA)""",analytics_insight_preprod.logistics_stock_bv
+Logistics Led - Logistics by,,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led - Logistics by""",analytics_insight_preprod.logistics_stock_bv
+Logistics Led - Buyer by,,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led - Buyer by""",analytics_insight_preprod.logistics_stock_bv
+Logistics Led - Seller by(PA),,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led - Seller by(PA)""",analytics_insight_preprod.logistics_stock_bv
+Buyer Led - Logistics by(PA),,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led - Logistics by(PA)""",analytics_insight_preprod.logistics_stock_bv
+Logistics By SO Dedup Preassigned,,"analytics_insight_preprod.logistics_stock_bv.""Logistics By SO Dedup Preassigned""",analytics_insight_preprod.logistics_stock_bv
+Buyer Led Post Assigned Cancel,,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led Post Assigned Cancel""",analytics_insight_preprod.logistics_stock_bv
+Logistics Led - Logistics by(PA),,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led - Logistics by(PA)""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led Pre Assigned SO,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led Pre Assigned SO""",analytics_insight_preprod.logistics_stock_bv
+Buyer Led - Buyer by(PA),,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led - Buyer by(PA)""",analytics_insight_preprod.logistics_stock_bv
+Buyer Led - Logistics by,,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led - Logistics by""",analytics_insight_preprod.logistics_stock_bv
+Logistics Led SO Dedup,,"analytics_insight_preprod.logistics_stock_bv.""Logistics Led SO Dedup""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led Post Assigned Cancel,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led Post Assigned Cancel""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led SO Postassgn,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led SO Postassgn""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led Preassigned SO,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led Preassigned SO""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led - Logistics by,,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led - Logistics by""",analytics_insight_preprod.logistics_stock_bv
+Buyer Led - Buyer by,,"analytics_insight_preprod.logistics_stock_bv.""Buyer Led - Buyer by""",analytics_insight_preprod.logistics_stock_bv
+Merchant Led - Seller by (Post),,"analytics_insight_preprod.logistics_stock_bv.""Merchant Led - Seller by (Post)""",analytics_insight_preprod.logistics_stock_bv
+"▼ order_retail_b2b_category_subcategory_preagg   (base table, 21 cols)",,,analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+agg_level,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""agg_level""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+domain,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""domain""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+sub_domain,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""sub_domain""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+order_year,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""order_year""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+order_month,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""order_month""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+order_week,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""order_week""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+category,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""category""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+sub_category,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""sub_category""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+delivery_district,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""delivery_district""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+delivery_state,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""delivery_state""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+delivery_state_code,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""delivery_state_code""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+seller_district,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""seller_district""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+seller_state,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""seller_state""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+seller_state_code,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""seller_state_code""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+total_orders_delivered,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""total_orders_delivered""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+pincode_count,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""pincode_count""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+total_items,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""total_items""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+intrastate_orders,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""intrastate_orders""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+interstate_orders,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""interstate_orders""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+intradistrict_orders,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""intradistrict_orders""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+interdistrict_orders,,"analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg.""interdistrict_orders""",analytics_insight_preprod.order_retail_b2b_category_subcategory_preagg
+"▼ order_retail_b2b_district_preagg   (base table, 18 cols)",,,analytics_insight_preprod.order_retail_b2b_district_preagg
+domain,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""domain""",analytics_insight_preprod.order_retail_b2b_district_preagg
+sub_domain,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""sub_domain""",analytics_insight_preprod.order_retail_b2b_district_preagg
+order_year,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""order_year""",analytics_insight_preprod.order_retail_b2b_district_preagg
+order_month,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""order_month""",analytics_insight_preprod.order_retail_b2b_district_preagg
+order_week,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""order_week""",analytics_insight_preprod.order_retail_b2b_district_preagg
+delivery_district,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""delivery_district""",analytics_insight_preprod.order_retail_b2b_district_preagg
+delivery_state,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""delivery_state""",analytics_insight_preprod.order_retail_b2b_district_preagg
+delivery_state_code,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""delivery_state_code""",analytics_insight_preprod.order_retail_b2b_district_preagg
+seller_district,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""seller_district""",analytics_insight_preprod.order_retail_b2b_district_preagg
+seller_state,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""seller_state""",analytics_insight_preprod.order_retail_b2b_district_preagg
+seller_state_code,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""seller_state_code""",analytics_insight_preprod.order_retail_b2b_district_preagg
+total_orders_delivered,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""total_orders_delivered""",analytics_insight_preprod.order_retail_b2b_district_preagg
+pincode_count,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""pincode_count""",analytics_insight_preprod.order_retail_b2b_district_preagg
+total_items,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""total_items""",analytics_insight_preprod.order_retail_b2b_district_preagg
+intrastate_orders,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""intrastate_orders""",analytics_insight_preprod.order_retail_b2b_district_preagg
+interstate_orders,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""interstate_orders""",analytics_insight_preprod.order_retail_b2b_district_preagg
+intradistrict_orders,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""intradistrict_orders""",analytics_insight_preprod.order_retail_b2b_district_preagg
+interdistrict_orders,,"analytics_insight_preprod.order_retail_b2b_district_preagg.""interdistrict_orders""",analytics_insight_preprod.order_retail_b2b_district_preagg
+"▼ order_retail_b2b_pc_level_preagg   (base table, 8 cols)",,,analytics_insight_preprod.order_retail_b2b_pc_level_preagg
+order_year,,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""order_year""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg
+order_month,,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""order_month""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg
+domain,,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""domain""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg
+sub_domain,,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""sub_domain""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg
+seller_pincode,,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""seller_pincode""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg
+delivery_pincode,,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""delivery_pincode""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg
+total_orders,,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""total_orders""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg
+total_items,,"analytics_insight_preprod.order_retail_b2b_pc_level_preagg.""total_items""",analytics_insight_preprod.order_retail_b2b_pc_level_preagg
+"▼ order_retail_b2b_scat_pc_preagg   (base table, 10 cols)",,,analytics_insight_preprod.order_retail_b2b_scat_pc_preagg
+order_year,,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""order_year""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg
+order_month,,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""order_month""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg
+domain,,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""domain""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg
+sub_domain,,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""sub_domain""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg
+seller_pincode,,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""seller_pincode""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg
+delivery_pincode,,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""delivery_pincode""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg
+category,,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""category""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg
+sub_category,,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""sub_category""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg
+total_orders,,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""total_orders""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg
+total_items,,"analytics_insight_preprod.order_retail_b2b_scat_pc_preagg.""total_items""",analytics_insight_preprod.order_retail_b2b_scat_pc_preagg
+"▼ retail_b2c_ordernhm_bv   (view, 101 cols)",,,analytics_insight_preprod.retail_b2c_ordernhm_bv
+Date,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Date""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Seller NP,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller NP""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Buyer NP,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Buyer NP""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Network order id,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Network order id""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+provider key,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""provider key""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Provider Id,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Provider Id""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Seller Name,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller Name""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Seller Pincode,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller Pincode""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Delivery Pincode,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivery Pincode""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+cancellation_code,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""cancellation_code""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Created at,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Created at""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Updated at,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Updated at""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Updated,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Updated""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Shipped at,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Shipped at""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Ready to Ship,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Ready to Ship""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Promised time,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Promised time""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+domain,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""domain""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+on-time-del,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""on-time-del""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+tat_dif,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""tat_dif""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+tat_diff_days,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""tat_diff_days""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+day_diff,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""day_diff""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+min_diff,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""min_diff""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+tat_time,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""tat_time""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Category,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Category""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Consolidated_category,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Consolidated_category""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+ONDC order_status,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""ONDC order_status""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+no_key,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""no_key""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Confirmed,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Confirmed""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Delivered,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivered""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Cancelled,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Cancelled""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+In Process,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""In Process""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Part Delivered,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Part Delivered""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+SNP,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""SNP""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+BNP,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""BNP""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Cancellation code cal,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Cancellation code cal""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Delivered with TAT,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivered with TAT""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Delivered beyond TAT,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivered beyond TAT""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+DBO,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""DBO""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Delivered beyond P.TAT,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivered beyond P.TAT""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Delivered within P.TAT,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivered within P.TAT""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Breach (mins),,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Breach (mins)""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Breach (hrs),,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Breach (hrs)""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Breach (days),,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Breach (days)""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Same Day,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Same Day""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Next Day,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Next Day""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Day + 2,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Day + 2""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+More than 2 Days,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""More than 2 Days""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+On time deliveries,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""On time deliveries""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+F&B mins diff,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""F&B mins diff""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Within 15 mins,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Within 15 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+15 - 30 mins,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""15 - 30 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+30 - 45 mins,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""30 - 45 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+45 - 60 mins,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""45 - 60 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+60 - 120 mins,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""60 - 120 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Above 120 mins,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Above 120 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT < 5 mins,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT < 5 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT 5-15 mins,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 5-15 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT 15-30 mins,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 15-30 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT 30-60 mins,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 30-60 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT > 60 mins,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT > 60 mins""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT 0-6 hrs,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 0-6 hrs""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT 6-12 hrs,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 6-12 hrs""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT 12-24 hrs,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 12-24 hrs""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT 24-48 hrs,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT 24-48 hrs""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT >48 hrs,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT >48 hrs""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT+1,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT+1""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT + 2,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT + 2""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT + 3,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT + 3""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT + 4,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT + 4""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT > 4,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT > 4""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+TAT (Same day),,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""TAT (Same day)""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Non F&B days diff,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Non F&B days diff""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Shipped mark,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Shipped mark""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Seller State,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller State""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Delivery State,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivery State""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Seller City,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller City""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Delivery City,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivery City""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Seller Tier,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller Tier""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Delivery Tier,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivery Tier""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Seller Zone,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller Zone""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Delivery Zone,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivery Zone""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Delivery Type,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Delivery Type""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Order type,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Order type""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Breach,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Breach""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Inprocessnew(tat),,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Inprocessnew(tat)""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+inprocess(tat),,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""inprocess(tat)""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Buyer cancelled(tat),,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Buyer cancelled(tat)""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Logistics cancelled(tat),,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Logistics cancelled(tat)""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+attributed_to,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""attributed_to""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+reason_for_cancellation,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""reason_for_cancellation""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+is_triggers_rto,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""is_triggers_rto""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+cancelled_by,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""cancelled_by""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+whether_applicable_for_part_cancel,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""whether_applicable_for_part_cancel""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+sorting,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""sorting""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Buyer Cancel,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Buyer Cancel""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Seller Cancel,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Seller Cancel""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Logistics Cancel,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Logistics Cancel""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Cancelled att,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Cancelled att""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+In Process (Dt),,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""In Process (Dt)""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+delivered(tat),,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""delivered(tat)""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+Social Cred Orders,,"analytics_insight_preprod.retail_b2c_ordernhm_bv.""Social Cred Orders""",analytics_insight_preprod.retail_b2c_ordernhm_bv
+"▼ retail_funnel_bv   (view, 64 cols)",,,analytics_insight_preprod.retail_funnel_bv
+bpp_id,,"analytics_insight_preprod.retail_funnel_bv.""bpp_id""",analytics_insight_preprod.retail_funnel_bv
+bap_id,,"analytics_insight_preprod.retail_funnel_bv.""bap_id""",analytics_insight_preprod.retail_funnel_bv
+domain,,"analytics_insight_preprod.retail_funnel_bv.""domain""",analytics_insight_preprod.retail_funnel_bv
+transaction_id,,"analytics_insight_preprod.retail_funnel_bv.""transaction_id""",analytics_insight_preprod.retail_funnel_bv
+provider_id,,"analytics_insight_preprod.retail_funnel_bv.""provider_id""",analytics_insight_preprod.retail_funnel_bv
+order_status,,"analytics_insight_preprod.retail_funnel_bv.""order_status""",analytics_insight_preprod.retail_funnel_bv
+cancellation_type,,"analytics_insight_preprod.retail_funnel_bv.""cancellation_type""",analytics_insight_preprod.retail_funnel_bv
+seller_pincode,,"analytics_insight_preprod.retail_funnel_bv.""seller_pincode""",analytics_insight_preprod.retail_funnel_bv
+provider_name,,"analytics_insight_preprod.retail_funnel_bv.""provider_name""",analytics_insight_preprod.retail_funnel_bv
+delivery_pincode,,"analytics_insight_preprod.retail_funnel_bv.""delivery_pincode""",analytics_insight_preprod.retail_funnel_bv
+is_error,,"analytics_insight_preprod.retail_funnel_bv.""is_error""",analytics_insight_preprod.retail_funnel_bv
+error_code,,"analytics_insight_preprod.retail_funnel_bv.""error_code""",analytics_insight_preprod.retail_funnel_bv
+first_seen_date,,"analytics_insight_preprod.retail_funnel_bv.""first_seen_date""",analytics_insight_preprod.retail_funnel_bv
+hour_of_day,,"analytics_insight_preprod.retail_funnel_bv.""hour_of_day""",analytics_insight_preprod.retail_funnel_bv
+min_trans_type_sp,,"analytics_insight_preprod.retail_funnel_bv.""min_trans_type_sp""",analytics_insight_preprod.retail_funnel_bv
+max_trans_type_sp,,"analytics_insight_preprod.retail_funnel_bv.""max_trans_type_sp""",analytics_insight_preprod.retail_funnel_bv
+max_error_trans_type_sp,,"analytics_insight_preprod.retail_funnel_bv.""max_error_trans_type_sp""",analytics_insight_preprod.retail_funnel_bv
+end_trans_type,,"analytics_insight_preprod.retail_funnel_bv.""end_trans_type""",analytics_insight_preprod.retail_funnel_bv
+qsr,,"analytics_insight_preprod.retail_funnel_bv.""qsr""",analytics_insight_preprod.retail_funnel_bv
+Seller NP,,"analytics_insight_preprod.retail_funnel_bv.""Seller NP""",analytics_insight_preprod.retail_funnel_bv
+Buyer NP,,"analytics_insight_preprod.retail_funnel_bv.""Buyer NP""",analytics_insight_preprod.retail_funnel_bv
+Call Type,,"analytics_insight_preprod.retail_funnel_bv.""Call Type""",analytics_insight_preprod.retail_funnel_bv
+error_category,,"analytics_insight_preprod.retail_funnel_bv.""error_category""",analytics_insight_preprod.retail_funnel_bv
+provider_key,,"analytics_insight_preprod.retail_funnel_bv.""provider_key""",analytics_insight_preprod.retail_funnel_bv
+Select,,"analytics_insight_preprod.retail_funnel_bv.""Select""",analytics_insight_preprod.retail_funnel_bv
+on_select,,"analytics_insight_preprod.retail_funnel_bv.""on_select""",analytics_insight_preprod.retail_funnel_bv
+Init,,"analytics_insight_preprod.retail_funnel_bv.""Init""",analytics_insight_preprod.retail_funnel_bv
+on_init,,"analytics_insight_preprod.retail_funnel_bv.""on_init""",analytics_insight_preprod.retail_funnel_bv
+Confirm_,,"analytics_insight_preprod.retail_funnel_bv.""Confirm_""",analytics_insight_preprod.retail_funnel_bv
+on_confirm,,"analytics_insight_preprod.retail_funnel_bv.""on_confirm""",analytics_insight_preprod.retail_funnel_bv
+Confirm,,"analytics_insight_preprod.retail_funnel_bv.""Confirm""",analytics_insight_preprod.retail_funnel_bv
+Select to Delivered,,"analytics_insight_preprod.retail_funnel_bv.""Select to Delivered""",analytics_insight_preprod.retail_funnel_bv
+Select to Cancelled,,"analytics_insight_preprod.retail_funnel_bv.""Select to Cancelled""",analytics_insight_preprod.retail_funnel_bv
+Confirm to inprocess,,"analytics_insight_preprod.retail_funnel_bv.""Confirm to inprocess""",analytics_insight_preprod.retail_funnel_bv
+Confirm to Delivered,,"analytics_insight_preprod.retail_funnel_bv.""Confirm to Delivered""",analytics_insight_preprod.retail_funnel_bv
+In Process,,"analytics_insight_preprod.retail_funnel_bv.""In Process""",analytics_insight_preprod.retail_funnel_bv
+On_Select Error,,"analytics_insight_preprod.retail_funnel_bv.""On_Select Error""",analytics_insight_preprod.retail_funnel_bv
+On_Confirm Error,,"analytics_insight_preprod.retail_funnel_bv.""On_Confirm Error""",analytics_insight_preprod.retail_funnel_bv
+Drop not due to Error (Select-Init) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop not due to Error (Select-Init) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop due to Error (Select-Init) (logistics) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Select-Init) (logistics) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop due to Error (Select-Init) (merchant) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Select-Init) (merchant) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop due to Error (Select-Init) (inventory) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Select-Init) (inventory) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop due to Error (Select-Init) (others) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Select-Init) (others) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop not due to Error (Init-Confirm) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop not due to Error (Init-Confirm) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop due to Error (Init-Confirm) (logistics) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Init-Confirm) (logistics) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop due to Error (Init-Confirm) (merchant) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Init-Confirm) (merchant) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop due to Error (Confirm-on_confirm) (logistics) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Confirm-on_confirm) (logistics) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop due to Error (select-Confirm) (others) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (select-Confirm) (others) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop due to Error (select-Confirm) (logistics) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (select-Confirm) (logistics) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop due to Error (select-Confirm) (merchant) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (select-Confirm) (merchant) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop due to Error (Select-Confirm) (inventory) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Select-Confirm) (inventory) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop due to Error (Init-Confirm) (inventory) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop due to Error (Init-Confirm) (inventory) absolute""",analytics_insight_preprod.retail_funnel_bv
+Drop not due to Error (Select-Confirm) absolute,,"analytics_insight_preprod.retail_funnel_bv.""Drop not due to Error (Select-Confirm) absolute""",analytics_insight_preprod.retail_funnel_bv
+Cancelled (Select - Seller),,"analytics_insight_preprod.retail_funnel_bv.""Cancelled (Select - Seller)""",analytics_insight_preprod.retail_funnel_bv
+Cancelled (Select - Buyer),,"analytics_insight_preprod.retail_funnel_bv.""Cancelled (Select - Buyer)""",analytics_insight_preprod.retail_funnel_bv
+Cancelled (Select - Logistics),,"analytics_insight_preprod.retail_funnel_bv.""Cancelled (Select - Logistics)""",analytics_insight_preprod.retail_funnel_bv
+Seller State,,"analytics_insight_preprod.retail_funnel_bv.""Seller State""",analytics_insight_preprod.retail_funnel_bv
+Delivery State,,"analytics_insight_preprod.retail_funnel_bv.""Delivery State""",analytics_insight_preprod.retail_funnel_bv
+Seller City,,"analytics_insight_preprod.retail_funnel_bv.""Seller City""",analytics_insight_preprod.retail_funnel_bv
+Delivery City,,"analytics_insight_preprod.retail_funnel_bv.""Delivery City""",analytics_insight_preprod.retail_funnel_bv
+Seller Tier,,"analytics_insight_preprod.retail_funnel_bv.""Seller Tier""",analytics_insight_preprod.retail_funnel_bv
+Delivery Tier,,"analytics_insight_preprod.retail_funnel_bv.""Delivery Tier""",analytics_insight_preprod.retail_funnel_bv
+Seller Zone,,"analytics_insight_preprod.retail_funnel_bv.""Seller Zone""",analytics_insight_preprod.retail_funnel_bv
+Delivery Zone,,"analytics_insight_preprod.retail_funnel_bv.""Delivery Zone""",analytics_insight_preprod.retail_funnel_bv
+"▼ sub_cat_active_sellers_agg   (base table, 8 cols)",,,analytics_insight_preprod.sub_cat_active_sellers_agg
+year_value,,"analytics_insight_preprod.sub_cat_active_sellers_agg.""year_value""",analytics_insight_preprod.sub_cat_active_sellers_agg
+month_value,,"analytics_insight_preprod.sub_cat_active_sellers_agg.""month_value""",analytics_insight_preprod.sub_cat_active_sellers_agg
+seller_state,,"analytics_insight_preprod.sub_cat_active_sellers_agg.""seller_state""",analytics_insight_preprod.sub_cat_active_sellers_agg
+seller_district,,"analytics_insight_preprod.sub_cat_active_sellers_agg.""seller_district""",analytics_insight_preprod.sub_cat_active_sellers_agg
+category,,"analytics_insight_preprod.sub_cat_active_sellers_agg.""category""",analytics_insight_preprod.sub_cat_active_sellers_agg
+sub_category,,"analytics_insight_preprod.sub_cat_active_sellers_agg.""sub_category""",analytics_insight_preprod.sub_cat_active_sellers_agg
+seller_state_code,,"analytics_insight_preprod.sub_cat_active_sellers_agg.""seller_state_code""",analytics_insight_preprod.sub_cat_active_sellers_agg
+active_sellers,,"analytics_insight_preprod.sub_cat_active_sellers_agg.""active_sellers""",analytics_insight_preprod.sub_cat_active_sellers_agg
+"▼ sub_cat_district_wise_agg   (base table, 21 cols)",,,analytics_insight_preprod.sub_cat_district_wise_agg
+agg_level,,"analytics_insight_preprod.sub_cat_district_wise_agg.""agg_level""",analytics_insight_preprod.sub_cat_district_wise_agg
+domain,,"analytics_insight_preprod.sub_cat_district_wise_agg.""domain""",analytics_insight_preprod.sub_cat_district_wise_agg
+sub_domain,,"analytics_insight_preprod.sub_cat_district_wise_agg.""sub_domain""",analytics_insight_preprod.sub_cat_district_wise_agg
+order_year,,"analytics_insight_preprod.sub_cat_district_wise_agg.""order_year""",analytics_insight_preprod.sub_cat_district_wise_agg
+order_month,,"analytics_insight_preprod.sub_cat_district_wise_agg.""order_month""",analytics_insight_preprod.sub_cat_district_wise_agg
+order_week,,"analytics_insight_preprod.sub_cat_district_wise_agg.""order_week""",analytics_insight_preprod.sub_cat_district_wise_agg
+category,,"analytics_insight_preprod.sub_cat_district_wise_agg.""category""",analytics_insight_preprod.sub_cat_district_wise_agg
+sub_category,,"analytics_insight_preprod.sub_cat_district_wise_agg.""sub_category""",analytics_insight_preprod.sub_cat_district_wise_agg
+delivery_district,,"analytics_insight_preprod.sub_cat_district_wise_agg.""delivery_district""",analytics_insight_preprod.sub_cat_district_wise_agg
+delivery_state,,"analytics_insight_preprod.sub_cat_district_wise_agg.""delivery_state""",analytics_insight_preprod.sub_cat_district_wise_agg
+delivery_state_code,,"analytics_insight_preprod.sub_cat_district_wise_agg.""delivery_state_code""",analytics_insight_preprod.sub_cat_district_wise_agg
+seller_district,,"analytics_insight_preprod.sub_cat_district_wise_agg.""seller_district""",analytics_insight_preprod.sub_cat_district_wise_agg
+seller_state,,"analytics_insight_preprod.sub_cat_district_wise_agg.""seller_state""",analytics_insight_preprod.sub_cat_district_wise_agg
+seller_state_code,,"analytics_insight_preprod.sub_cat_district_wise_agg.""seller_state_code""",analytics_insight_preprod.sub_cat_district_wise_agg
+total_orders_delivered,,"analytics_insight_preprod.sub_cat_district_wise_agg.""total_orders_delivered""",analytics_insight_preprod.sub_cat_district_wise_agg
+pincode_count,,"analytics_insight_preprod.sub_cat_district_wise_agg.""pincode_count""",analytics_insight_preprod.sub_cat_district_wise_agg
+total_items,,"analytics_insight_preprod.sub_cat_district_wise_agg.""total_items""",analytics_insight_preprod.sub_cat_district_wise_agg
+intrastate_orders,,"analytics_insight_preprod.sub_cat_district_wise_agg.""intrastate_orders""",analytics_insight_preprod.sub_cat_district_wise_agg
+interstate_orders,,"analytics_insight_preprod.sub_cat_district_wise_agg.""interstate_orders""",analytics_insight_preprod.sub_cat_district_wise_agg
+intradistrict_orders,,"analytics_insight_preprod.sub_cat_district_wise_agg.""intradistrict_orders""",analytics_insight_preprod.sub_cat_district_wise_agg
+interdistrict_orders,,"analytics_insight_preprod.sub_cat_district_wise_agg.""interdistrict_orders""",analytics_insight_preprod.sub_cat_district_wise_agg
+"▼ sub_cat_pc_level_agg   (base table, 10 cols)",,,analytics_insight_preprod.sub_cat_pc_level_agg
+order_year,,"analytics_insight_preprod.sub_cat_pc_level_agg.""order_year""",analytics_insight_preprod.sub_cat_pc_level_agg
+order_month,,"analytics_insight_preprod.sub_cat_pc_level_agg.""order_month""",analytics_insight_preprod.sub_cat_pc_level_agg
+domain,,"analytics_insight_preprod.sub_cat_pc_level_agg.""domain""",analytics_insight_preprod.sub_cat_pc_level_agg
+sub_domain,,"analytics_insight_preprod.sub_cat_pc_level_agg.""sub_domain""",analytics_insight_preprod.sub_cat_pc_level_agg
+seller_pincode,,"analytics_insight_preprod.sub_cat_pc_level_agg.""seller_pincode""",analytics_insight_preprod.sub_cat_pc_level_agg
+delivery_pincode,,"analytics_insight_preprod.sub_cat_pc_level_agg.""delivery_pincode""",analytics_insight_preprod.sub_cat_pc_level_agg
+category,,"analytics_insight_preprod.sub_cat_pc_level_agg.""category""",analytics_insight_preprod.sub_cat_pc_level_agg
+sub_category,,"analytics_insight_preprod.sub_cat_pc_level_agg.""sub_category""",analytics_insight_preprod.sub_cat_pc_level_agg
+total_orders,,"analytics_insight_preprod.sub_cat_pc_level_agg.""total_orders""",analytics_insight_preprod.sub_cat_pc_level_agg
+total_items,,"analytics_insight_preprod.sub_cat_pc_level_agg.""total_items""",analytics_insight_preprod.sub_cat_pc_level_agg
+"▼ sub_cat_pc_sellers_agg   (view, 11 cols)",,,analytics_insight_preprod.sub_cat_pc_sellers_agg
+year_value,,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""year_value""",analytics_insight_preprod.sub_cat_pc_sellers_agg
+month_value,,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""month_value""",analytics_insight_preprod.sub_cat_pc_sellers_agg
+category,,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""category""",analytics_insight_preprod.sub_cat_pc_sellers_agg
+sub_category,,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""sub_category""",analytics_insight_preprod.sub_cat_pc_sellers_agg
+seller_state,,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""seller_state""",analytics_insight_preprod.sub_cat_pc_sellers_agg
+seller_district,,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""seller_district""",analytics_insight_preprod.sub_cat_pc_sellers_agg
+seller_state_code,,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""seller_state_code""",analytics_insight_preprod.sub_cat_pc_sellers_agg
+active_sellers,,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""active_sellers""",analytics_insight_preprod.sub_cat_pc_sellers_agg
+total_sellers,,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""total_sellers""",analytics_insight_preprod.sub_cat_pc_sellers_agg
+pincode,,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""pincode""",analytics_insight_preprod.sub_cat_pc_sellers_agg
+active_seller_pct,,"analytics_insight_preprod.sub_cat_pc_sellers_agg.""active_seller_pct""",analytics_insight_preprod.sub_cat_pc_sellers_agg
+"▼ sub_cat_pincode_active_sellers_wise_agg   (base table, 9 cols)",,,analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg
+year_value,,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""year_value""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg
+month_value,,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""month_value""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg
+seller_state,,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""seller_state""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg
+seller_district,,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""seller_district""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg
+pincode,,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""pincode""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg
+category,,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""category""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg
+sub_category,,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""sub_category""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg
+seller_state_code,,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""seller_state_code""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg
+active_sellers,,"analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg.""active_sellers""",analytics_insight_preprod.sub_cat_pincode_active_sellers_wise_agg
+"▼ total_sellers_agg   (base table, 8 cols)",,,analytics_insight_preprod.total_sellers_agg
+year_value,,"analytics_insight_preprod.total_sellers_agg.""year_value""",analytics_insight_preprod.total_sellers_agg
+month_value,,"analytics_insight_preprod.total_sellers_agg.""month_value""",analytics_insight_preprod.total_sellers_agg
+seller_state,,"analytics_insight_preprod.total_sellers_agg.""seller_state""",analytics_insight_preprod.total_sellers_agg
+seller_district,,"analytics_insight_preprod.total_sellers_agg.""seller_district""",analytics_insight_preprod.total_sellers_agg
+category,,"analytics_insight_preprod.total_sellers_agg.""category""",analytics_insight_preprod.total_sellers_agg
+sub_category,,"analytics_insight_preprod.total_sellers_agg.""sub_category""",analytics_insight_preprod.total_sellers_agg
+seller_state_code,,"analytics_insight_preprod.total_sellers_agg.""seller_state_code""",analytics_insight_preprod.total_sellers_agg
+total_sellers,,"analytics_insight_preprod.total_sellers_agg.""total_sellers""",analytics_insight_preprod.total_sellers_agg
+"▼ total_sellers_pc_agg   (base table, 9 cols)",,,analytics_insight_preprod.total_sellers_pc_agg
+year_value,,"analytics_insight_preprod.total_sellers_pc_agg.""year_value""",analytics_insight_preprod.total_sellers_pc_agg
+month_value,,"analytics_insight_preprod.total_sellers_pc_agg.""month_value""",analytics_insight_preprod.total_sellers_pc_agg
+seller_state,,"analytics_insight_preprod.total_sellers_pc_agg.""seller_state""",analytics_insight_preprod.total_sellers_pc_agg
+seller_district,,"analytics_insight_preprod.total_sellers_pc_agg.""seller_district""",analytics_insight_preprod.total_sellers_pc_agg
+pincode,,"analytics_insight_preprod.total_sellers_pc_agg.""pincode""",analytics_insight_preprod.total_sellers_pc_agg
+category,,"analytics_insight_preprod.total_sellers_pc_agg.""category""",analytics_insight_preprod.total_sellers_pc_agg
+sub_category,,"analytics_insight_preprod.total_sellers_pc_agg.""sub_category""",analytics_insight_preprod.total_sellers_pc_agg
+seller_state_code,,"analytics_insight_preprod.total_sellers_pc_agg.""seller_state_code""",analytics_insight_preprod.total_sellers_pc_agg
+total_sellers,,"analytics_insight_preprod.total_sellers_pc_agg.""total_sellers""",analytics_insight_preprod.total_sellers_pc_agg

@@ -9,10 +9,10 @@ from ondc_mcp.security.query_logger import query_logger
 
 
 async def get_schema() -> dict[str, Any]:
-    """Return full schema metadata including tables, columns, and domain/category values.
+    """Get high-level schema directory and instructions.
 
     Returns:
-        Dict with schema name, table definitions, domain categories, and np_types
+        Dict with instructions to use search_schema instead.
     """
     start = time.monotonic()
 
@@ -26,7 +26,11 @@ async def get_schema() -> dict[str, Any]:
         )
         return cached
 
-    schema_info = registry.get_schema_description()
+    schema_info = {
+        "status": "success",
+        "message": "The schema is too large to load entirely. Please use the 'search_schema' tool to find relevant tables by business context or keywords.",
+        "schemas_available": ["opendata_nodata", "analytics_insight", "dimension", "external", "logistics", "no_recommendation", "prod", "prod_bkp", "public"]
+    }
 
     # Cache the result
     await redis_cache.set_cached_schema(schema_info)

@@ -1,0 +1,18 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s),DDL & Indexes
+"▼ feedback_form_feedbackanswer   (base table, 4 cols)",,,external_app_state.feedback_form_feedbackanswer,"CREATE UNIQUE INDEX feedback_form_feedbackanswer_pkey ON external_app_state.feedback_form_feedbackanswer USING btree (id)
+
+CREATE INDEX feedback_form_feedbackanswer_question_id_67393dad ON external_app_state.feedback_form_feedbackanswer USING btree (question_id)
+
+CREATE INDEX feedback_form_feedbackanswer_response_id_c2c45bf6 ON external_app_state.feedback_form_feedbackanswer USING btree (response_id)"
+id,Unique identifier for id.,"external_app_state.feedback_form_feedbackanswer.""id""",external_app_state.feedback_form_feedbackanswer,
+answer_text,Data representing the answer text.,"external_app_state.feedback_form_feedbackanswer.""answer_text""",external_app_state.feedback_form_feedbackanswer,
+question_id,Unique identifier for question.,"external_app_state.feedback_form_feedbackanswer.""question_id""",external_app_state.feedback_form_feedbackanswer,
+response_id,Unique identifier for response.,"external_app_state.feedback_form_feedbackanswer.""response_id""",external_app_state.feedback_form_feedbackanswer,
+"▼ feedback_form_feedbackquestions   (base table, 4 cols)",,,external_app_state.feedback_form_feedbackquestions,CREATE UNIQUE INDEX feedback_form_feedbackquestions_pkey ON external_app_state.feedback_form_feedbackquestions USING btree (id)
+id,Unique identifier for id.,"external_app_state.feedback_form_feedbackquestions.""id""",external_app_state.feedback_form_feedbackquestions,
+order,Data representing the order.,"external_app_state.feedback_form_feedbackquestions.""order""",external_app_state.feedback_form_feedbackquestions,
+question_text,Data representing the question text.,"external_app_state.feedback_form_feedbackquestions.""question_text""",external_app_state.feedback_form_feedbackquestions,
+questions_type,Data representing the questions type.,"external_app_state.feedback_form_feedbackquestions.""questions_type""",external_app_state.feedback_form_feedbackquestions,
+"▼ feedback_form_feedbackresponse   (base table, 2 cols)",,,external_app_state.feedback_form_feedbackresponse,CREATE UNIQUE INDEX feedback_form_feedbackresponse_pkey ON external_app_state.feedback_form_feedbackresponse USING btree (id)
+id,Unique identifier for id.,"external_app_state.feedback_form_feedbackresponse.""id""",external_app_state.feedback_form_feedbackresponse,
+submitted_at,Timestamp or date indicating when submitted at occurred.,"external_app_state.feedback_form_feedbackresponse.""submitted_at""",external_app_state.feedback_form_feedbackresponse,

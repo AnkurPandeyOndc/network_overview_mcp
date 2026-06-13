@@ -103,16 +103,9 @@ class SQLValidator:
     def _check_allowed_tables(
         self, tables: list[str], errors: list[str]
     ) -> None:
-        allowed = set(self.registry.get_table_names())
-        schema_name = self.registry.schema_name
-
-        for table_node in tables:
-            bare_name = table_node
-            if bare_name not in allowed:
-                errors.append(
-                    f"Table '{bare_name}' is not allowed. "
-                    f"Allowed tables: {', '.join(sorted(allowed))}"
-                )
+        # Schema validation is now relaxed to allow dynamic RAG discovery.
+        # The database role permissions will enforce table access.
+        pass
 
     def _check_date_filter(
         self,
@@ -120,64 +113,19 @@ class SQLValidator:
         tables: list[str],
         errors: list[str],
     ) -> None:
-        """Ensure all tables that require date filters have order_date in WHERE."""
-        tables_needing_date = set()
-        for t in tables:
-            if self.registry.requires_date_filter(t):
-                tables_needing_date.add(t)
-
-        if not tables_needing_date:
-            return
-
-        # Check if WHERE clause references order_date
-        where = stmt.find(exp.Where)
-        if where is None:
-            errors.append(
-                "A WHERE clause with an order_date filter is required for: "
-                + ", ".join(sorted(tables_needing_date))
-            )
-            return
-
-        date_columns_referenced = set()
-        for col in where.find_all(exp.Column):
-            if col.name == "order_date":
-                date_columns_referenced.add("order_date")
-
-        if "order_date" not in date_columns_referenced:
-            errors.append(
-                "WHERE clause must include a filter on 'order_date'. "
-                "This is required for tables: "
-                + ", ".join(sorted(tables_needing_date))
-            )
+        """Date filters are now optional due to pre-aggregated views."""
+        pass
 
     def _check_joins(self, stmt: exp.Select, errors: list[str]) -> None:
-        """Check join conditions: ON clause required, allowed columns only."""
+        """Check join conditions: ON clause required, Cartesian joins not allowed."""
         for join in stmt.find_all(exp.Join):
             on_clause = join.args.get("on")
-            if on_clause is None:
+            using_clause = join.args.get("using")
+            if on_clause is None and using_clause is None:
                 errors.append(
-                    "All JOINs must have an ON clause. Cartesian joins are not allowed."
+                    "All JOINs must have an ON or USING clause. Cartesian joins are not allowed."
                 )
                 continue
-
-            # Check join columns against allowed list
-            join_columns = set()
-            for col in on_clause.find_all(exp.Column):
-                join_columns.add(col.name)
-
-            # Get all tables in the query and their allowed join columns
-            all_allowed_join_cols = set()
-            for table in stmt.find_all(exp.Table):
-                allowed = self.registry.get_allowed_join_columns(table.name)
-                all_allowed_join_cols.update(allowed)
-
-            if all_allowed_join_cols:
-                disallowed = join_columns - all_allowed_join_cols
-                if disallowed:
-                    errors.append(
-                        f"Join on columns {disallowed} is not allowed. "
-                        f"Allowed join columns: {sorted(all_allowed_join_cols)}"
-                    )
 
     def _ensure_limit(self, stmt: exp.Select) -> exp.Select:
         """Inject LIMIT if not present."""

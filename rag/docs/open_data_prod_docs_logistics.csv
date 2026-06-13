@@ -1,0 +1,1536 @@
+Column Name,Description in Plain English,Logic / Formula,Source Table(s)
+"▼ dummy_data   (base table, 19 cols)",,,logistics.dummy_data
+delivery_partner,,"logistics.dummy_data.""delivery_partner""",logistics.dummy_data
+delivery_id,,"logistics.dummy_data.""delivery_id""",logistics.dummy_data
+transaction_id,,"logistics.dummy_data.""transaction_id""",logistics.dummy_data
+date,,"logistics.dummy_data.""date""",logistics.dummy_data
+order_created_as_on,,"logistics.dummy_data.""order_created_as_on""",logistics.dummy_data
+cancel_reason,,"logistics.dummy_data.""cancel_reason""",logistics.dummy_data
+status,,"logistics.dummy_data.""status""",logistics.dummy_data
+starting_pincode,,"logistics.dummy_data.""starting_pincode""",logistics.dummy_data
+drop_pincode,,"logistics.dummy_data.""drop_pincode""",logistics.dummy_data
+package_type,,"logistics.dummy_data.""package_type""",logistics.dummy_data
+delivery_mode,,"logistics.dummy_data.""delivery_mode""",logistics.dummy_data
+distance_kms,,"logistics.dummy_data.""distance_kms""",logistics.dummy_data
+order_marked_ready,,"logistics.dummy_data.""order_marked_ready""",logistics.dummy_data
+rider_assigned,,"logistics.dummy_data.""rider_assigned""",logistics.dummy_data
+rider_at_location,,"logistics.dummy_data.""rider_at_location""",logistics.dummy_data
+order_picked,,"logistics.dummy_data.""order_picked""",logistics.dummy_data
+order_delivered_timestamp,,"logistics.dummy_data.""order_delivered_timestamp""",logistics.dummy_data
+order_cancelled_timestamp,,"logistics.dummy_data.""order_cancelled_timestamp""",logistics.dummy_data
+tat_order,,"logistics.dummy_data.""tat_order""",logistics.dummy_data
+"▼ funnel_rca_data   (view, 25 cols)",,,logistics.funnel_rca_data
+bap_id,,"logistics.funnel_rca_data.""bap_id""",logistics.funnel_rca_data
+bpp_id,,"logistics.funnel_rca_data.""bpp_id""",logistics.funnel_rca_data
+date,,"logistics.funnel_rca_data.""date""",logistics.funnel_rca_data
+transaction_id,,"logistics.funnel_rca_data.""transaction_id""",logistics.funnel_rca_data
+order_id,,"logistics.funnel_rca_data.""order_id""",logistics.funnel_rca_data
+retail_order_id,,"logistics.funnel_rca_data.""retail_order_id""",logistics.funnel_rca_data
+linked,,"logistics.funnel_rca_data.""linked""",logistics.funnel_rca_data
+pick_up_pincode,,"logistics.funnel_rca_data.""pick_up_pincode""",logistics.funnel_rca_data
+delivery_pincode,,"logistics.funnel_rca_data.""delivery_pincode""",logistics.funnel_rca_data
+retail_category,,"logistics.funnel_rca_data.""retail_category""",logistics.funnel_rca_data
+shipment_type,,"logistics.funnel_rca_data.""shipment_type""",logistics.funnel_rca_data
+fulfillment_type,,"logistics.funnel_rca_data.""fulfillment_type""",logistics.funnel_rca_data
+cancellation_code,,"logistics.funnel_rca_data.""cancellation_code""",logistics.funnel_rca_data
+provider_name,,"logistics.funnel_rca_data.""provider_name""",logistics.funnel_rca_data
+order_created_at,,"logistics.funnel_rca_data.""order_created_at""",logistics.funnel_rca_data
+delivered_date,,"logistics.funnel_rca_data.""delivered_date""",logistics.funnel_rca_data
+cancelled_date,,"logistics.funnel_rca_data.""cancelled_date""",logistics.funnel_rca_data
+agent_assigned_at,,"logistics.funnel_rca_data.""agent_assigned_at""",logistics.funnel_rca_data
+transaction_status,,"logistics.funnel_rca_data.""transaction_status""",logistics.funnel_rca_data
+cancel_attribution,,"logistics.funnel_rca_data.""cancel_attribution""",logistics.funnel_rca_data
+is_assigned,,"logistics.funnel_rca_data.""is_assigned""",logistics.funnel_rca_data
+pickup_status,,"logistics.funnel_rca_data.""pickup_status""",logistics.funnel_rca_data
+deliver_time_mins,,"logistics.funnel_rca_data.""deliver_time_mins""",logistics.funnel_rca_data
+cancel_time_mins,,"logistics.funnel_rca_data.""cancel_time_mins""",logistics.funnel_rca_data
+time_to_assign_mins,,"logistics.funnel_rca_data.""time_to_assign_mins""",logistics.funnel_rca_data
+"▼ inc_log   (base table, 32 cols)",,,logistics.inc_log
+bap_id,,"logistics.inc_log.""bap_id""",logistics.inc_log
+bpp_id,,"logistics.inc_log.""bpp_id""",logistics.inc_log
+order_id,,"logistics.inc_log.""order_id""",logistics.inc_log
+transaction_id,,"logistics.inc_log.""transaction_id""",logistics.inc_log
+fulfillment_status,,"logistics.inc_log.""fulfillment_status""",logistics.inc_log
+cod_order,,"logistics.inc_log.""cod_order""",logistics.inc_log
+date,,"logistics.inc_log.""date""",logistics.inc_log
+order_created_at,,"logistics.inc_log.""order_created_at""",logistics.inc_log
+cancellation_code,,"logistics.inc_log.""cancellation_code""",logistics.inc_log
+latest_order_status,,"logistics.inc_log.""latest_order_status""",logistics.inc_log
+retail_order_id,,"logistics.inc_log.""retail_order_id""",logistics.inc_log
+pick_up_pincode,,"logistics.inc_log.""pick_up_pincode""",logistics.inc_log
+delivery_pincode,,"logistics.inc_log.""delivery_pincode""",logistics.inc_log
+retail_category,,"logistics.inc_log.""retail_category""",logistics.inc_log
+shipment_type,,"logistics.inc_log.""shipment_type""",logistics.inc_log
+motorable_distance,,"logistics.inc_log.""motorable_distance""",logistics.inc_log
+provider_name,,"logistics.inc_log.""provider_name""",logistics.inc_log
+pickup_tat,,"logistics.inc_log.""pickup_tat""",logistics.inc_log
+rts_tat,,"logistics.inc_log.""rts_tat""",logistics.inc_log
+f_ready_to_ship_at_date,,"logistics.inc_log.""f_ready_to_ship_at_date""",logistics.inc_log
+f_at_pickup_from_date,,"logistics.inc_log.""f_at_pickup_from_date""",logistics.inc_log
+f_agent_assigned_at_date,,"logistics.inc_log.""f_agent_assigned_at_date""",logistics.inc_log
+delivered_date,,"logistics.inc_log.""delivered_date""",logistics.inc_log
+cancelled_date,,"logistics.inc_log.""cancelled_date""",logistics.inc_log
+picked_date,,"logistics.inc_log.""picked_date""",logistics.inc_log
+drop_row,,"logistics.inc_log.""drop_row""",logistics.inc_log
+row_updated,,"logistics.inc_log.""row_updated""",logistics.inc_log
+promised_time_to_deliver,,"logistics.inc_log.""promised_time_to_deliver""",logistics.inc_log
+fulfillment_type,,"logistics.inc_log.""fulfillment_type""",logistics.inc_log
+awb_number,,"logistics.inc_log.""awb_number""",logistics.inc_log
+pick_up_lat,,"logistics.inc_log.""pick_up_lat""",logistics.inc_log
+pick_up_long,,"logistics.inc_log.""pick_up_long""",logistics.inc_log
+"▼ lbnp_funnel_view   (view, 66 cols)",,,logistics.lbnp_funnel_view
+bap_id,,"logistics.lbnp_funnel_view.""bap_id""",logistics.lbnp_funnel_view
+date,,"logistics.lbnp_funnel_view.""date""",logistics.lbnp_funnel_view
+linked,,"logistics.lbnp_funnel_view.""linked""",logistics.lbnp_funnel_view
+pick_up_pincode,,"logistics.lbnp_funnel_view.""pick_up_pincode""",logistics.lbnp_funnel_view
+delivery_pincode,,"logistics.lbnp_funnel_view.""delivery_pincode""",logistics.lbnp_funnel_view
+retail_category,,"logistics.lbnp_funnel_view.""retail_category""",logistics.lbnp_funnel_view
+shipment_type,,"logistics.lbnp_funnel_view.""shipment_type""",logistics.lbnp_funnel_view
+fulfillment_type,,"logistics.lbnp_funnel_view.""fulfillment_type""",logistics.lbnp_funnel_view
+request,,"logistics.lbnp_funnel_view.""request""",logistics.lbnp_funnel_view
+unique_retail_order,,"logistics.lbnp_funnel_view.""unique_retail_order""",logistics.lbnp_funnel_view
+on_confirms,,"logistics.lbnp_funnel_view.""on_confirms""",logistics.lbnp_funnel_view
+confirmed_orders,,"logistics.lbnp_funnel_view.""confirmed_orders""",logistics.lbnp_funnel_view
+assigned,,"logistics.lbnp_funnel_view.""assigned""",logistics.lbnp_funnel_view
+delivered,,"logistics.lbnp_funnel_view.""delivered""",logistics.lbnp_funnel_view
+preassigned_cancel,,"logistics.lbnp_funnel_view.""preassigned_cancel""",logistics.lbnp_funnel_view
+precancel_buyer,,"logistics.lbnp_funnel_view.""precancel_buyer""",logistics.lbnp_funnel_view
+precancel_buyer_0_2,,"logistics.lbnp_funnel_view.""precancel_buyer_0_2""",logistics.lbnp_funnel_view
+precancel_buyer_3_5,,"logistics.lbnp_funnel_view.""precancel_buyer_3_5""",logistics.lbnp_funnel_view
+precancel_buyer_5_10,,"logistics.lbnp_funnel_view.""precancel_buyer_5_10""",logistics.lbnp_funnel_view
+precancel_buyer_10_15,,"logistics.lbnp_funnel_view.""precancel_buyer_10_15""",logistics.lbnp_funnel_view
+precancel_buyer_15_20,,"logistics.lbnp_funnel_view.""precancel_buyer_15_20""",logistics.lbnp_funnel_view
+precancel_buyer_gt_20,,"logistics.lbnp_funnel_view.""precancel_buyer_gt_20""",logistics.lbnp_funnel_view
+precancel_seller,,"logistics.lbnp_funnel_view.""precancel_seller""",logistics.lbnp_funnel_view
+precancel_seller_0_2,,"logistics.lbnp_funnel_view.""precancel_seller_0_2""",logistics.lbnp_funnel_view
+precancel_seller_3_5,,"logistics.lbnp_funnel_view.""precancel_seller_3_5""",logistics.lbnp_funnel_view
+precancel_seller_5_10,,"logistics.lbnp_funnel_view.""precancel_seller_5_10""",logistics.lbnp_funnel_view
+precancel_seller_10_15,,"logistics.lbnp_funnel_view.""precancel_seller_10_15""",logistics.lbnp_funnel_view
+precancel_seller_15_20,,"logistics.lbnp_funnel_view.""precancel_seller_15_20""",logistics.lbnp_funnel_view
+precancel_seller_gt_20,,"logistics.lbnp_funnel_view.""precancel_seller_gt_20""",logistics.lbnp_funnel_view
+precancel_logistics,,"logistics.lbnp_funnel_view.""precancel_logistics""",logistics.lbnp_funnel_view
+precancel_logistics_0_2,,"logistics.lbnp_funnel_view.""precancel_logistics_0_2""",logistics.lbnp_funnel_view
+precancel_logistics_3_5,,"logistics.lbnp_funnel_view.""precancel_logistics_3_5""",logistics.lbnp_funnel_view
+precancel_logistics_5_10,,"logistics.lbnp_funnel_view.""precancel_logistics_5_10""",logistics.lbnp_funnel_view
+precancel_logistics_10_15,,"logistics.lbnp_funnel_view.""precancel_logistics_10_15""",logistics.lbnp_funnel_view
+precancel_logistics_15_20,,"logistics.lbnp_funnel_view.""precancel_logistics_15_20""",logistics.lbnp_funnel_view
+precancel_logistics_gt_20,,"logistics.lbnp_funnel_view.""precancel_logistics_gt_20""",logistics.lbnp_funnel_view
+postassigned_cancel,,"logistics.lbnp_funnel_view.""postassigned_cancel""",logistics.lbnp_funnel_view
+postcancel_buyer,,"logistics.lbnp_funnel_view.""postcancel_buyer""",logistics.lbnp_funnel_view
+postcancel_buyer_prepickup,,"logistics.lbnp_funnel_view.""postcancel_buyer_prepickup""",logistics.lbnp_funnel_view
+postcancel_buyer_prepickup_0_2,,"logistics.lbnp_funnel_view.""postcancel_buyer_prepickup_0_2""",logistics.lbnp_funnel_view
+postcancel_buyer_prepickup_3_5,,"logistics.lbnp_funnel_view.""postcancel_buyer_prepickup_3_5""",logistics.lbnp_funnel_view
+postcancel_buyer_prepickup_5_10,,"logistics.lbnp_funnel_view.""postcancel_buyer_prepickup_5_10""",logistics.lbnp_funnel_view
+postcancel_buyer_prepickup_10_15,,"logistics.lbnp_funnel_view.""postcancel_buyer_prepickup_10_15""",logistics.lbnp_funnel_view
+postcancel_buyer_prepickup_15_20,,"logistics.lbnp_funnel_view.""postcancel_buyer_prepickup_15_20""",logistics.lbnp_funnel_view
+postcancel_buyer_prepickup_gt_20,,"logistics.lbnp_funnel_view.""postcancel_buyer_prepickup_gt_20""",logistics.lbnp_funnel_view
+postcancel_buyer_postpickup,,"logistics.lbnp_funnel_view.""postcancel_buyer_postpickup""",logistics.lbnp_funnel_view
+postcancel_seller,,"logistics.lbnp_funnel_view.""postcancel_seller""",logistics.lbnp_funnel_view
+postcancel_seller_prepickup,,"logistics.lbnp_funnel_view.""postcancel_seller_prepickup""",logistics.lbnp_funnel_view
+postcancel_seller_prepickup_0_2,,"logistics.lbnp_funnel_view.""postcancel_seller_prepickup_0_2""",logistics.lbnp_funnel_view
+postcancel_seller_prepickup_3_5,,"logistics.lbnp_funnel_view.""postcancel_seller_prepickup_3_5""",logistics.lbnp_funnel_view
+postcancel_seller_prepickup_5_10,,"logistics.lbnp_funnel_view.""postcancel_seller_prepickup_5_10""",logistics.lbnp_funnel_view
+postcancel_seller_prepickup_10_15,,"logistics.lbnp_funnel_view.""postcancel_seller_prepickup_10_15""",logistics.lbnp_funnel_view
+postcancel_seller_prepickup_15_20,,"logistics.lbnp_funnel_view.""postcancel_seller_prepickup_15_20""",logistics.lbnp_funnel_view
+postcancel_seller_prepickup_gt_20,,"logistics.lbnp_funnel_view.""postcancel_seller_prepickup_gt_20""",logistics.lbnp_funnel_view
+postcancel_seller_postpickup,,"logistics.lbnp_funnel_view.""postcancel_seller_postpickup""",logistics.lbnp_funnel_view
+postcancel_logistics,,"logistics.lbnp_funnel_view.""postcancel_logistics""",logistics.lbnp_funnel_view
+postcancel_logistics_prepickup,,"logistics.lbnp_funnel_view.""postcancel_logistics_prepickup""",logistics.lbnp_funnel_view
+postcancel_logistics_prepickup_0_2,,"logistics.lbnp_funnel_view.""postcancel_logistics_prepickup_0_2""",logistics.lbnp_funnel_view
+postcancel_logistics_prepickup_3_5,,"logistics.lbnp_funnel_view.""postcancel_logistics_prepickup_3_5""",logistics.lbnp_funnel_view
+postcancel_logistics_prepickup_5_10,,"logistics.lbnp_funnel_view.""postcancel_logistics_prepickup_5_10""",logistics.lbnp_funnel_view
+postcancel_logistics_prepickup_10_15,,"logistics.lbnp_funnel_view.""postcancel_logistics_prepickup_10_15""",logistics.lbnp_funnel_view
+postcancel_logistics_prepickup_15_20,,"logistics.lbnp_funnel_view.""postcancel_logistics_prepickup_15_20""",logistics.lbnp_funnel_view
+postcancel_logistics_prepickup_gt_20,,"logistics.lbnp_funnel_view.""postcancel_logistics_prepickup_gt_20""",logistics.lbnp_funnel_view
+postcancel_logistics_postpickup,,"logistics.lbnp_funnel_view.""postcancel_logistics_postpickup""",logistics.lbnp_funnel_view
+preassigned_open,,"logistics.lbnp_funnel_view.""preassigned_open""",logistics.lbnp_funnel_view
+postassigned_open,,"logistics.lbnp_funnel_view.""postassigned_open""",logistics.lbnp_funnel_view
+"▼ log_dummy_data   (view, 48 cols)",,,logistics.log_dummy_data
+bap_id,,"logistics.log_dummy_data.""bap_id""",logistics.log_dummy_data
+bpp_id,,"logistics.log_dummy_data.""bpp_id""",logistics.log_dummy_data
+order_id,,"logistics.log_dummy_data.""order_id""",logistics.log_dummy_data
+transaction_id,,"logistics.log_dummy_data.""transaction_id""",logistics.log_dummy_data
+fulfillment_status,,"logistics.log_dummy_data.""fulfillment_status""",logistics.log_dummy_data
+fulfillment_type,,"logistics.log_dummy_data.""fulfillment_type""",logistics.log_dummy_data
+cod_order,,"logistics.log_dummy_data.""cod_order""",logistics.log_dummy_data
+date,,"logistics.log_dummy_data.""date""",logistics.log_dummy_data
+order_created_at,,"logistics.log_dummy_data.""order_created_at""",logistics.log_dummy_data
+cancellation_code,,"logistics.log_dummy_data.""cancellation_code""",logistics.log_dummy_data
+latest_order_status,,"logistics.log_dummy_data.""latest_order_status""",logistics.log_dummy_data
+retail_order_id,,"logistics.log_dummy_data.""retail_order_id""",logistics.log_dummy_data
+pick_up_pincode,,"logistics.log_dummy_data.""pick_up_pincode""",logistics.log_dummy_data
+delivery_pincode,,"logistics.log_dummy_data.""delivery_pincode""",logistics.log_dummy_data
+retail_category,,"logistics.log_dummy_data.""retail_category""",logistics.log_dummy_data
+shipment_type,,"logistics.log_dummy_data.""shipment_type""",logistics.log_dummy_data
+motorable_distance,,"logistics.log_dummy_data.""motorable_distance""",logistics.log_dummy_data
+provider_name,,"logistics.log_dummy_data.""provider_name""",logistics.log_dummy_data
+pickup_tat,,"logistics.log_dummy_data.""pickup_tat""",logistics.log_dummy_data
+rts_tat,,"logistics.log_dummy_data.""rts_tat""",logistics.log_dummy_data
+f_ready_to_ship_at_date,,"logistics.log_dummy_data.""f_ready_to_ship_at_date""",logistics.log_dummy_data
+f_at_pickup_from_date,,"logistics.log_dummy_data.""f_at_pickup_from_date""",logistics.log_dummy_data
+f_agent_assigned_at_date,,"logistics.log_dummy_data.""f_agent_assigned_at_date""",logistics.log_dummy_data
+delivered_date,,"logistics.log_dummy_data.""delivered_date""",logistics.log_dummy_data
+cancelled_date,,"logistics.log_dummy_data.""cancelled_date""",logistics.log_dummy_data
+picked_date,,"logistics.log_dummy_data.""picked_date""",logistics.log_dummy_data
+promised_time_to_deliver,,"logistics.log_dummy_data.""promised_time_to_deliver""",logistics.log_dummy_data
+awbnumber,,"logistics.log_dummy_data.""awbnumber""",logistics.log_dummy_data
+buyer_np,,"logistics.log_dummy_data.""buyer_np""",logistics.log_dummy_data
+retail_snp,,"logistics.log_dummy_data.""retail_snp""",logistics.log_dummy_data
+Linked Orders,,"logistics.log_dummy_data.""Linked Orders""",logistics.log_dummy_data
+dedup,,"logistics.log_dummy_data.""dedup""",logistics.log_dummy_data
+order_count,,"logistics.log_dummy_data.""order_count""",logistics.log_dummy_data
+avg_del,,"logistics.log_dummy_data.""avg_del""",logistics.log_dummy_data
+del_tat_duration,,"logistics.log_dummy_data.""del_tat_duration""",logistics.log_dummy_data
+del_adherence,,"logistics.log_dummy_data.""del_adherence""",logistics.log_dummy_data
+del_breach_diff,,"logistics.log_dummy_data.""del_breach_diff""",logistics.log_dummy_data
+rtsvscrt,,"logistics.log_dummy_data.""rtsvscrt""",logistics.log_dummy_data
+rtsvspck,,"logistics.log_dummy_data.""rtsvspck""",logistics.log_dummy_data
+delage,,"logistics.log_dummy_data.""delage""",logistics.log_dummy_data
+cancel_secs,,"logistics.log_dummy_data.""cancel_secs""",logistics.log_dummy_data
+in_process_ageing,,"logistics.log_dummy_data.""in_process_ageing""",logistics.log_dummy_data
+rider_waiting,,"logistics.log_dummy_data.""rider_waiting""",logistics.log_dummy_data
+rider_assigning,,"logistics.log_dummy_data.""rider_assigning""",logistics.log_dummy_data
+pick_up_breached,,"logistics.log_dummy_data.""pick_up_breached""",logistics.log_dummy_data
+pick_up_tat_diff,,"logistics.log_dummy_data.""pick_up_tat_diff""",logistics.log_dummy_data
+rts_breached,,"logistics.log_dummy_data.""rts_breached""",logistics.log_dummy_data
+rts_tat_diff,,"logistics.log_dummy_data.""rts_tat_diff""",logistics.log_dummy_data
+"▼ logistics_category_mapping   (base table, 5 cols)",,,logistics.logistics_category_mapping
+category,,"logistics.logistics_category_mapping.""category""",logistics.logistics_category_mapping
+key,,"logistics.logistics_category_mapping.""key""",logistics.logistics_category_mapping
+Main Category,,"logistics.logistics_category_mapping.""Main Category""",logistics.logistics_category_mapping
+Sub Category,,"logistics.logistics_category_mapping.""Sub Category""",logistics.logistics_category_mapping
+ENUMs,,"logistics.logistics_category_mapping.""ENUMs""",logistics.logistics_category_mapping
+"▼ logistics_funnel_lbnp   (base table, 66 cols)",,,logistics.logistics_funnel_lbnp
+bap_id,,"logistics.logistics_funnel_lbnp.""bap_id""",logistics.logistics_funnel_lbnp
+date,,"logistics.logistics_funnel_lbnp.""date""",logistics.logistics_funnel_lbnp
+linked,,"logistics.logistics_funnel_lbnp.""linked""",logistics.logistics_funnel_lbnp
+pick_up_pincode,,"logistics.logistics_funnel_lbnp.""pick_up_pincode""",logistics.logistics_funnel_lbnp
+delivery_pincode,,"logistics.logistics_funnel_lbnp.""delivery_pincode""",logistics.logistics_funnel_lbnp
+retail_category,,"logistics.logistics_funnel_lbnp.""retail_category""",logistics.logistics_funnel_lbnp
+shipment_type,,"logistics.logistics_funnel_lbnp.""shipment_type""",logistics.logistics_funnel_lbnp
+fulfillment_type,,"logistics.logistics_funnel_lbnp.""fulfillment_type""",logistics.logistics_funnel_lbnp
+request,,"logistics.logistics_funnel_lbnp.""request""",logistics.logistics_funnel_lbnp
+unique_retail_order,,"logistics.logistics_funnel_lbnp.""unique_retail_order""",logistics.logistics_funnel_lbnp
+on_confirms,,"logistics.logistics_funnel_lbnp.""on_confirms""",logistics.logistics_funnel_lbnp
+confirmed_orders,,"logistics.logistics_funnel_lbnp.""confirmed_orders""",logistics.logistics_funnel_lbnp
+assigned,,"logistics.logistics_funnel_lbnp.""assigned""",logistics.logistics_funnel_lbnp
+delivered,,"logistics.logistics_funnel_lbnp.""delivered""",logistics.logistics_funnel_lbnp
+preassigned_cancel,,"logistics.logistics_funnel_lbnp.""preassigned_cancel""",logistics.logistics_funnel_lbnp
+precancel_buyer,,"logistics.logistics_funnel_lbnp.""precancel_buyer""",logistics.logistics_funnel_lbnp
+precancel_buyer_0_2,,"logistics.logistics_funnel_lbnp.""precancel_buyer_0_2""",logistics.logistics_funnel_lbnp
+precancel_buyer_3_5,,"logistics.logistics_funnel_lbnp.""precancel_buyer_3_5""",logistics.logistics_funnel_lbnp
+precancel_buyer_5_10,,"logistics.logistics_funnel_lbnp.""precancel_buyer_5_10""",logistics.logistics_funnel_lbnp
+precancel_buyer_10_15,,"logistics.logistics_funnel_lbnp.""precancel_buyer_10_15""",logistics.logistics_funnel_lbnp
+precancel_buyer_15_20,,"logistics.logistics_funnel_lbnp.""precancel_buyer_15_20""",logistics.logistics_funnel_lbnp
+precancel_buyer_gt_20,,"logistics.logistics_funnel_lbnp.""precancel_buyer_gt_20""",logistics.logistics_funnel_lbnp
+precancel_seller,,"logistics.logistics_funnel_lbnp.""precancel_seller""",logistics.logistics_funnel_lbnp
+precancel_seller_0_2,,"logistics.logistics_funnel_lbnp.""precancel_seller_0_2""",logistics.logistics_funnel_lbnp
+precancel_seller_3_5,,"logistics.logistics_funnel_lbnp.""precancel_seller_3_5""",logistics.logistics_funnel_lbnp
+precancel_seller_5_10,,"logistics.logistics_funnel_lbnp.""precancel_seller_5_10""",logistics.logistics_funnel_lbnp
+precancel_seller_10_15,,"logistics.logistics_funnel_lbnp.""precancel_seller_10_15""",logistics.logistics_funnel_lbnp
+precancel_seller_15_20,,"logistics.logistics_funnel_lbnp.""precancel_seller_15_20""",logistics.logistics_funnel_lbnp
+precancel_seller_gt_20,,"logistics.logistics_funnel_lbnp.""precancel_seller_gt_20""",logistics.logistics_funnel_lbnp
+precancel_logistics,,"logistics.logistics_funnel_lbnp.""precancel_logistics""",logistics.logistics_funnel_lbnp
+precancel_logistics_0_2,,"logistics.logistics_funnel_lbnp.""precancel_logistics_0_2""",logistics.logistics_funnel_lbnp
+precancel_logistics_3_5,,"logistics.logistics_funnel_lbnp.""precancel_logistics_3_5""",logistics.logistics_funnel_lbnp
+precancel_logistics_5_10,,"logistics.logistics_funnel_lbnp.""precancel_logistics_5_10""",logistics.logistics_funnel_lbnp
+precancel_logistics_10_15,,"logistics.logistics_funnel_lbnp.""precancel_logistics_10_15""",logistics.logistics_funnel_lbnp
+precancel_logistics_15_20,,"logistics.logistics_funnel_lbnp.""precancel_logistics_15_20""",logistics.logistics_funnel_lbnp
+precancel_logistics_gt_20,,"logistics.logistics_funnel_lbnp.""precancel_logistics_gt_20""",logistics.logistics_funnel_lbnp
+postassigned_cancel,,"logistics.logistics_funnel_lbnp.""postassigned_cancel""",logistics.logistics_funnel_lbnp
+postcancel_buyer,,"logistics.logistics_funnel_lbnp.""postcancel_buyer""",logistics.logistics_funnel_lbnp
+postcancel_buyer_prepickup,,"logistics.logistics_funnel_lbnp.""postcancel_buyer_prepickup""",logistics.logistics_funnel_lbnp
+postcancel_buyer_prepickup_0_2,,"logistics.logistics_funnel_lbnp.""postcancel_buyer_prepickup_0_2""",logistics.logistics_funnel_lbnp
+postcancel_buyer_prepickup_3_5,,"logistics.logistics_funnel_lbnp.""postcancel_buyer_prepickup_3_5""",logistics.logistics_funnel_lbnp
+postcancel_buyer_prepickup_5_10,,"logistics.logistics_funnel_lbnp.""postcancel_buyer_prepickup_5_10""",logistics.logistics_funnel_lbnp
+postcancel_buyer_prepickup_10_15,,"logistics.logistics_funnel_lbnp.""postcancel_buyer_prepickup_10_15""",logistics.logistics_funnel_lbnp
+postcancel_buyer_prepickup_15_20,,"logistics.logistics_funnel_lbnp.""postcancel_buyer_prepickup_15_20""",logistics.logistics_funnel_lbnp
+postcancel_buyer_prepickup_gt_20,,"logistics.logistics_funnel_lbnp.""postcancel_buyer_prepickup_gt_20""",logistics.logistics_funnel_lbnp
+postcancel_buyer_postpickup,,"logistics.logistics_funnel_lbnp.""postcancel_buyer_postpickup""",logistics.logistics_funnel_lbnp
+postcancel_seller,,"logistics.logistics_funnel_lbnp.""postcancel_seller""",logistics.logistics_funnel_lbnp
+postcancel_seller_prepickup,,"logistics.logistics_funnel_lbnp.""postcancel_seller_prepickup""",logistics.logistics_funnel_lbnp
+postcancel_seller_prepickup_0_2,,"logistics.logistics_funnel_lbnp.""postcancel_seller_prepickup_0_2""",logistics.logistics_funnel_lbnp
+postcancel_seller_prepickup_3_5,,"logistics.logistics_funnel_lbnp.""postcancel_seller_prepickup_3_5""",logistics.logistics_funnel_lbnp
+postcancel_seller_prepickup_5_10,,"logistics.logistics_funnel_lbnp.""postcancel_seller_prepickup_5_10""",logistics.logistics_funnel_lbnp
+postcancel_seller_prepickup_10_15,,"logistics.logistics_funnel_lbnp.""postcancel_seller_prepickup_10_15""",logistics.logistics_funnel_lbnp
+postcancel_seller_prepickup_15_20,,"logistics.logistics_funnel_lbnp.""postcancel_seller_prepickup_15_20""",logistics.logistics_funnel_lbnp
+postcancel_seller_prepickup_gt_20,,"logistics.logistics_funnel_lbnp.""postcancel_seller_prepickup_gt_20""",logistics.logistics_funnel_lbnp
+postcancel_seller_postpickup,,"logistics.logistics_funnel_lbnp.""postcancel_seller_postpickup""",logistics.logistics_funnel_lbnp
+postcancel_logistics,,"logistics.logistics_funnel_lbnp.""postcancel_logistics""",logistics.logistics_funnel_lbnp
+postcancel_logistics_prepickup,,"logistics.logistics_funnel_lbnp.""postcancel_logistics_prepickup""",logistics.logistics_funnel_lbnp
+postcancel_logistics_prepickup_0_2,,"logistics.logistics_funnel_lbnp.""postcancel_logistics_prepickup_0_2""",logistics.logistics_funnel_lbnp
+postcancel_logistics_prepickup_3_5,,"logistics.logistics_funnel_lbnp.""postcancel_logistics_prepickup_3_5""",logistics.logistics_funnel_lbnp
+postcancel_logistics_prepickup_5_10,,"logistics.logistics_funnel_lbnp.""postcancel_logistics_prepickup_5_10""",logistics.logistics_funnel_lbnp
+postcancel_logistics_prepickup_10_15,,"logistics.logistics_funnel_lbnp.""postcancel_logistics_prepickup_10_15""",logistics.logistics_funnel_lbnp
+postcancel_logistics_prepickup_15_20,,"logistics.logistics_funnel_lbnp.""postcancel_logistics_prepickup_15_20""",logistics.logistics_funnel_lbnp
+postcancel_logistics_prepickup_gt_20,,"logistics.logistics_funnel_lbnp.""postcancel_logistics_prepickup_gt_20""",logistics.logistics_funnel_lbnp
+postcancel_logistics_postpickup,,"logistics.logistics_funnel_lbnp.""postcancel_logistics_postpickup""",logistics.logistics_funnel_lbnp
+preassigned_open,,"logistics.logistics_funnel_lbnp.""preassigned_open""",logistics.logistics_funnel_lbnp
+postassigned_open,,"logistics.logistics_funnel_lbnp.""postassigned_open""",logistics.logistics_funnel_lbnp
+"▼ logistics_funnel_lbnp_bv   (view, 78 cols)",,,logistics.logistics_funnel_lbnp_bv
+bap_id,,"logistics.logistics_funnel_lbnp_bv.""bap_id""",logistics.logistics_funnel_lbnp_bv
+date,,"logistics.logistics_funnel_lbnp_bv.""date""",logistics.logistics_funnel_lbnp_bv
+linked,,"logistics.logistics_funnel_lbnp_bv.""linked""",logistics.logistics_funnel_lbnp_bv
+pick_up_pincode,,"logistics.logistics_funnel_lbnp_bv.""pick_up_pincode""",logistics.logistics_funnel_lbnp_bv
+delivery_pincode,,"logistics.logistics_funnel_lbnp_bv.""delivery_pincode""",logistics.logistics_funnel_lbnp_bv
+retail_category,,"logistics.logistics_funnel_lbnp_bv.""retail_category""",logistics.logistics_funnel_lbnp_bv
+shipment_type,,"logistics.logistics_funnel_lbnp_bv.""shipment_type""",logistics.logistics_funnel_lbnp_bv
+fulfillment_type,,"logistics.logistics_funnel_lbnp_bv.""fulfillment_type""",logistics.logistics_funnel_lbnp_bv
+request,,"logistics.logistics_funnel_lbnp_bv.""request""",logistics.logistics_funnel_lbnp_bv
+unique_retail_order,,"logistics.logistics_funnel_lbnp_bv.""unique_retail_order""",logistics.logistics_funnel_lbnp_bv
+on_confirms,,"logistics.logistics_funnel_lbnp_bv.""on_confirms""",logistics.logistics_funnel_lbnp_bv
+confirmed_orders,,"logistics.logistics_funnel_lbnp_bv.""confirmed_orders""",logistics.logistics_funnel_lbnp_bv
+assigned,,"logistics.logistics_funnel_lbnp_bv.""assigned""",logistics.logistics_funnel_lbnp_bv
+delivered,,"logistics.logistics_funnel_lbnp_bv.""delivered""",logistics.logistics_funnel_lbnp_bv
+preassigned_cancel,,"logistics.logistics_funnel_lbnp_bv.""preassigned_cancel""",logistics.logistics_funnel_lbnp_bv
+precancel_buyer,,"logistics.logistics_funnel_lbnp_bv.""precancel_buyer""",logistics.logistics_funnel_lbnp_bv
+precancel_buyer_0_2,,"logistics.logistics_funnel_lbnp_bv.""precancel_buyer_0_2""",logistics.logistics_funnel_lbnp_bv
+precancel_buyer_3_5,,"logistics.logistics_funnel_lbnp_bv.""precancel_buyer_3_5""",logistics.logistics_funnel_lbnp_bv
+precancel_buyer_5_10,,"logistics.logistics_funnel_lbnp_bv.""precancel_buyer_5_10""",logistics.logistics_funnel_lbnp_bv
+precancel_buyer_10_15,,"logistics.logistics_funnel_lbnp_bv.""precancel_buyer_10_15""",logistics.logistics_funnel_lbnp_bv
+precancel_buyer_15_20,,"logistics.logistics_funnel_lbnp_bv.""precancel_buyer_15_20""",logistics.logistics_funnel_lbnp_bv
+precancel_buyer_gt_20,,"logistics.logistics_funnel_lbnp_bv.""precancel_buyer_gt_20""",logistics.logistics_funnel_lbnp_bv
+precancel_seller,,"logistics.logistics_funnel_lbnp_bv.""precancel_seller""",logistics.logistics_funnel_lbnp_bv
+precancel_seller_0_2,,"logistics.logistics_funnel_lbnp_bv.""precancel_seller_0_2""",logistics.logistics_funnel_lbnp_bv
+precancel_seller_3_5,,"logistics.logistics_funnel_lbnp_bv.""precancel_seller_3_5""",logistics.logistics_funnel_lbnp_bv
+precancel_seller_5_10,,"logistics.logistics_funnel_lbnp_bv.""precancel_seller_5_10""",logistics.logistics_funnel_lbnp_bv
+precancel_seller_10_15,,"logistics.logistics_funnel_lbnp_bv.""precancel_seller_10_15""",logistics.logistics_funnel_lbnp_bv
+precancel_seller_15_20,,"logistics.logistics_funnel_lbnp_bv.""precancel_seller_15_20""",logistics.logistics_funnel_lbnp_bv
+precancel_seller_gt_20,,"logistics.logistics_funnel_lbnp_bv.""precancel_seller_gt_20""",logistics.logistics_funnel_lbnp_bv
+precancel_logistics,,"logistics.logistics_funnel_lbnp_bv.""precancel_logistics""",logistics.logistics_funnel_lbnp_bv
+precancel_logistics_0_2,,"logistics.logistics_funnel_lbnp_bv.""precancel_logistics_0_2""",logistics.logistics_funnel_lbnp_bv
+precancel_logistics_3_5,,"logistics.logistics_funnel_lbnp_bv.""precancel_logistics_3_5""",logistics.logistics_funnel_lbnp_bv
+precancel_logistics_5_10,,"logistics.logistics_funnel_lbnp_bv.""precancel_logistics_5_10""",logistics.logistics_funnel_lbnp_bv
+precancel_logistics_10_15,,"logistics.logistics_funnel_lbnp_bv.""precancel_logistics_10_15""",logistics.logistics_funnel_lbnp_bv
+precancel_logistics_15_20,,"logistics.logistics_funnel_lbnp_bv.""precancel_logistics_15_20""",logistics.logistics_funnel_lbnp_bv
+precancel_logistics_gt_20,,"logistics.logistics_funnel_lbnp_bv.""precancel_logistics_gt_20""",logistics.logistics_funnel_lbnp_bv
+postassigned_cancel,,"logistics.logistics_funnel_lbnp_bv.""postassigned_cancel""",logistics.logistics_funnel_lbnp_bv
+postcancel_buyer,,"logistics.logistics_funnel_lbnp_bv.""postcancel_buyer""",logistics.logistics_funnel_lbnp_bv
+postcancel_buyer_prepickup,,"logistics.logistics_funnel_lbnp_bv.""postcancel_buyer_prepickup""",logistics.logistics_funnel_lbnp_bv
+postcancel_buyer_prepickup_0_2,,"logistics.logistics_funnel_lbnp_bv.""postcancel_buyer_prepickup_0_2""",logistics.logistics_funnel_lbnp_bv
+postcancel_buyer_prepickup_3_5,,"logistics.logistics_funnel_lbnp_bv.""postcancel_buyer_prepickup_3_5""",logistics.logistics_funnel_lbnp_bv
+postcancel_buyer_prepickup_5_10,,"logistics.logistics_funnel_lbnp_bv.""postcancel_buyer_prepickup_5_10""",logistics.logistics_funnel_lbnp_bv
+postcancel_buyer_prepickup_10_15,,"logistics.logistics_funnel_lbnp_bv.""postcancel_buyer_prepickup_10_15""",logistics.logistics_funnel_lbnp_bv
+postcancel_buyer_prepickup_15_20,,"logistics.logistics_funnel_lbnp_bv.""postcancel_buyer_prepickup_15_20""",logistics.logistics_funnel_lbnp_bv
+postcancel_buyer_prepickup_gt_20,,"logistics.logistics_funnel_lbnp_bv.""postcancel_buyer_prepickup_gt_20""",logistics.logistics_funnel_lbnp_bv
+postcancel_buyer_postpickup,,"logistics.logistics_funnel_lbnp_bv.""postcancel_buyer_postpickup""",logistics.logistics_funnel_lbnp_bv
+postcancel_seller,,"logistics.logistics_funnel_lbnp_bv.""postcancel_seller""",logistics.logistics_funnel_lbnp_bv
+postcancel_seller_prepickup,,"logistics.logistics_funnel_lbnp_bv.""postcancel_seller_prepickup""",logistics.logistics_funnel_lbnp_bv
+postcancel_seller_prepickup_0_2,,"logistics.logistics_funnel_lbnp_bv.""postcancel_seller_prepickup_0_2""",logistics.logistics_funnel_lbnp_bv
+postcancel_seller_prepickup_3_5,,"logistics.logistics_funnel_lbnp_bv.""postcancel_seller_prepickup_3_5""",logistics.logistics_funnel_lbnp_bv
+postcancel_seller_prepickup_5_10,,"logistics.logistics_funnel_lbnp_bv.""postcancel_seller_prepickup_5_10""",logistics.logistics_funnel_lbnp_bv
+postcancel_seller_prepickup_10_15,,"logistics.logistics_funnel_lbnp_bv.""postcancel_seller_prepickup_10_15""",logistics.logistics_funnel_lbnp_bv
+postcancel_seller_prepickup_15_20,,"logistics.logistics_funnel_lbnp_bv.""postcancel_seller_prepickup_15_20""",logistics.logistics_funnel_lbnp_bv
+postcancel_seller_prepickup_gt_20,,"logistics.logistics_funnel_lbnp_bv.""postcancel_seller_prepickup_gt_20""",logistics.logistics_funnel_lbnp_bv
+postcancel_seller_postpickup,,"logistics.logistics_funnel_lbnp_bv.""postcancel_seller_postpickup""",logistics.logistics_funnel_lbnp_bv
+postcancel_logistics,,"logistics.logistics_funnel_lbnp_bv.""postcancel_logistics""",logistics.logistics_funnel_lbnp_bv
+postcancel_logistics_prepickup,,"logistics.logistics_funnel_lbnp_bv.""postcancel_logistics_prepickup""",logistics.logistics_funnel_lbnp_bv
+postcancel_logistics_prepickup_0_2,,"logistics.logistics_funnel_lbnp_bv.""postcancel_logistics_prepickup_0_2""",logistics.logistics_funnel_lbnp_bv
+postcancel_logistics_prepickup_3_5,,"logistics.logistics_funnel_lbnp_bv.""postcancel_logistics_prepickup_3_5""",logistics.logistics_funnel_lbnp_bv
+postcancel_logistics_prepickup_5_10,,"logistics.logistics_funnel_lbnp_bv.""postcancel_logistics_prepickup_5_10""",logistics.logistics_funnel_lbnp_bv
+postcancel_logistics_prepickup_10_15,,"logistics.logistics_funnel_lbnp_bv.""postcancel_logistics_prepickup_10_15""",logistics.logistics_funnel_lbnp_bv
+postcancel_logistics_prepickup_15_20,,"logistics.logistics_funnel_lbnp_bv.""postcancel_logistics_prepickup_15_20""",logistics.logistics_funnel_lbnp_bv
+postcancel_logistics_prepickup_gt_20,,"logistics.logistics_funnel_lbnp_bv.""postcancel_logistics_prepickup_gt_20""",logistics.logistics_funnel_lbnp_bv
+postcancel_logistics_postpickup,,"logistics.logistics_funnel_lbnp_bv.""postcancel_logistics_postpickup""",logistics.logistics_funnel_lbnp_bv
+preassigned_open,,"logistics.logistics_funnel_lbnp_bv.""preassigned_open""",logistics.logistics_funnel_lbnp_bv
+postassigned_open,,"logistics.logistics_funnel_lbnp_bv.""postassigned_open""",logistics.logistics_funnel_lbnp_bv
+total_rquest_lbnp_table,,"logistics.logistics_funnel_lbnp_bv.""total_rquest_lbnp_table""",logistics.logistics_funnel_lbnp_bv
+retail_order_lbnp_table,,"logistics.logistics_funnel_lbnp_bv.""retail_order_lbnp_table""",logistics.logistics_funnel_lbnp_bv
+total_confirm_lbnp_table,,"logistics.logistics_funnel_lbnp_bv.""total_confirm_lbnp_table""",logistics.logistics_funnel_lbnp_bv
+Seller NP,,"logistics.logistics_funnel_lbnp_bv.""Seller NP""",logistics.logistics_funnel_lbnp_bv
+Pick Up State,,"logistics.logistics_funnel_lbnp_bv.""Pick Up State""",logistics.logistics_funnel_lbnp_bv
+Delivery State,,"logistics.logistics_funnel_lbnp_bv.""Delivery State""",logistics.logistics_funnel_lbnp_bv
+Pick Up City,,"logistics.logistics_funnel_lbnp_bv.""Pick Up City""",logistics.logistics_funnel_lbnp_bv
+Delivery City,,"logistics.logistics_funnel_lbnp_bv.""Delivery City""",logistics.logistics_funnel_lbnp_bv
+Pick Up Tier,,"logistics.logistics_funnel_lbnp_bv.""Pick Up Tier""",logistics.logistics_funnel_lbnp_bv
+Delivery Tier,,"logistics.logistics_funnel_lbnp_bv.""Delivery Tier""",logistics.logistics_funnel_lbnp_bv
+Pick Up Zone,,"logistics.logistics_funnel_lbnp_bv.""Pick Up Zone""",logistics.logistics_funnel_lbnp_bv
+Delivery Zone,,"logistics.logistics_funnel_lbnp_bv.""Delivery Zone""",logistics.logistics_funnel_lbnp_bv
+"▼ logistics_funnel_lbnp_stage   (base table, 66 cols)",,,logistics.logistics_funnel_lbnp_stage
+bap_id,,"logistics.logistics_funnel_lbnp_stage.""bap_id""",logistics.logistics_funnel_lbnp_stage
+date,,"logistics.logistics_funnel_lbnp_stage.""date""",logistics.logistics_funnel_lbnp_stage
+linked,,"logistics.logistics_funnel_lbnp_stage.""linked""",logistics.logistics_funnel_lbnp_stage
+pick_up_pincode,,"logistics.logistics_funnel_lbnp_stage.""pick_up_pincode""",logistics.logistics_funnel_lbnp_stage
+delivery_pincode,,"logistics.logistics_funnel_lbnp_stage.""delivery_pincode""",logistics.logistics_funnel_lbnp_stage
+retail_category,,"logistics.logistics_funnel_lbnp_stage.""retail_category""",logistics.logistics_funnel_lbnp_stage
+shipment_type,,"logistics.logistics_funnel_lbnp_stage.""shipment_type""",logistics.logistics_funnel_lbnp_stage
+fulfillment_type,,"logistics.logistics_funnel_lbnp_stage.""fulfillment_type""",logistics.logistics_funnel_lbnp_stage
+request,,"logistics.logistics_funnel_lbnp_stage.""request""",logistics.logistics_funnel_lbnp_stage
+unique_retail_order,,"logistics.logistics_funnel_lbnp_stage.""unique_retail_order""",logistics.logistics_funnel_lbnp_stage
+on_confirms,,"logistics.logistics_funnel_lbnp_stage.""on_confirms""",logistics.logistics_funnel_lbnp_stage
+confirmed_orders,,"logistics.logistics_funnel_lbnp_stage.""confirmed_orders""",logistics.logistics_funnel_lbnp_stage
+assigned,,"logistics.logistics_funnel_lbnp_stage.""assigned""",logistics.logistics_funnel_lbnp_stage
+delivered,,"logistics.logistics_funnel_lbnp_stage.""delivered""",logistics.logistics_funnel_lbnp_stage
+preassigned_cancel,,"logistics.logistics_funnel_lbnp_stage.""preassigned_cancel""",logistics.logistics_funnel_lbnp_stage
+precancel_buyer,,"logistics.logistics_funnel_lbnp_stage.""precancel_buyer""",logistics.logistics_funnel_lbnp_stage
+precancel_buyer_0_2,,"logistics.logistics_funnel_lbnp_stage.""precancel_buyer_0_2""",logistics.logistics_funnel_lbnp_stage
+precancel_buyer_3_5,,"logistics.logistics_funnel_lbnp_stage.""precancel_buyer_3_5""",logistics.logistics_funnel_lbnp_stage
+precancel_buyer_5_10,,"logistics.logistics_funnel_lbnp_stage.""precancel_buyer_5_10""",logistics.logistics_funnel_lbnp_stage
+precancel_buyer_10_15,,"logistics.logistics_funnel_lbnp_stage.""precancel_buyer_10_15""",logistics.logistics_funnel_lbnp_stage
+precancel_buyer_15_20,,"logistics.logistics_funnel_lbnp_stage.""precancel_buyer_15_20""",logistics.logistics_funnel_lbnp_stage
+precancel_buyer_gt_20,,"logistics.logistics_funnel_lbnp_stage.""precancel_buyer_gt_20""",logistics.logistics_funnel_lbnp_stage
+precancel_seller,,"logistics.logistics_funnel_lbnp_stage.""precancel_seller""",logistics.logistics_funnel_lbnp_stage
+precancel_seller_0_2,,"logistics.logistics_funnel_lbnp_stage.""precancel_seller_0_2""",logistics.logistics_funnel_lbnp_stage
+precancel_seller_3_5,,"logistics.logistics_funnel_lbnp_stage.""precancel_seller_3_5""",logistics.logistics_funnel_lbnp_stage
+precancel_seller_5_10,,"logistics.logistics_funnel_lbnp_stage.""precancel_seller_5_10""",logistics.logistics_funnel_lbnp_stage
+precancel_seller_10_15,,"logistics.logistics_funnel_lbnp_stage.""precancel_seller_10_15""",logistics.logistics_funnel_lbnp_stage
+precancel_seller_15_20,,"logistics.logistics_funnel_lbnp_stage.""precancel_seller_15_20""",logistics.logistics_funnel_lbnp_stage
+precancel_seller_gt_20,,"logistics.logistics_funnel_lbnp_stage.""precancel_seller_gt_20""",logistics.logistics_funnel_lbnp_stage
+precancel_logistics,,"logistics.logistics_funnel_lbnp_stage.""precancel_logistics""",logistics.logistics_funnel_lbnp_stage
+precancel_logistics_0_2,,"logistics.logistics_funnel_lbnp_stage.""precancel_logistics_0_2""",logistics.logistics_funnel_lbnp_stage
+precancel_logistics_3_5,,"logistics.logistics_funnel_lbnp_stage.""precancel_logistics_3_5""",logistics.logistics_funnel_lbnp_stage
+precancel_logistics_5_10,,"logistics.logistics_funnel_lbnp_stage.""precancel_logistics_5_10""",logistics.logistics_funnel_lbnp_stage
+precancel_logistics_10_15,,"logistics.logistics_funnel_lbnp_stage.""precancel_logistics_10_15""",logistics.logistics_funnel_lbnp_stage
+precancel_logistics_15_20,,"logistics.logistics_funnel_lbnp_stage.""precancel_logistics_15_20""",logistics.logistics_funnel_lbnp_stage
+precancel_logistics_gt_20,,"logistics.logistics_funnel_lbnp_stage.""precancel_logistics_gt_20""",logistics.logistics_funnel_lbnp_stage
+postassigned_cancel,,"logistics.logistics_funnel_lbnp_stage.""postassigned_cancel""",logistics.logistics_funnel_lbnp_stage
+postcancel_buyer,,"logistics.logistics_funnel_lbnp_stage.""postcancel_buyer""",logistics.logistics_funnel_lbnp_stage
+postcancel_buyer_prepickup,,"logistics.logistics_funnel_lbnp_stage.""postcancel_buyer_prepickup""",logistics.logistics_funnel_lbnp_stage
+postcancel_buyer_prepickup_0_2,,"logistics.logistics_funnel_lbnp_stage.""postcancel_buyer_prepickup_0_2""",logistics.logistics_funnel_lbnp_stage
+postcancel_buyer_prepickup_3_5,,"logistics.logistics_funnel_lbnp_stage.""postcancel_buyer_prepickup_3_5""",logistics.logistics_funnel_lbnp_stage
+postcancel_buyer_prepickup_5_10,,"logistics.logistics_funnel_lbnp_stage.""postcancel_buyer_prepickup_5_10""",logistics.logistics_funnel_lbnp_stage
+postcancel_buyer_prepickup_10_15,,"logistics.logistics_funnel_lbnp_stage.""postcancel_buyer_prepickup_10_15""",logistics.logistics_funnel_lbnp_stage
+postcancel_buyer_prepickup_15_20,,"logistics.logistics_funnel_lbnp_stage.""postcancel_buyer_prepickup_15_20""",logistics.logistics_funnel_lbnp_stage
+postcancel_buyer_prepickup_gt_20,,"logistics.logistics_funnel_lbnp_stage.""postcancel_buyer_prepickup_gt_20""",logistics.logistics_funnel_lbnp_stage
+postcancel_buyer_postpickup,,"logistics.logistics_funnel_lbnp_stage.""postcancel_buyer_postpickup""",logistics.logistics_funnel_lbnp_stage
+postcancel_seller,,"logistics.logistics_funnel_lbnp_stage.""postcancel_seller""",logistics.logistics_funnel_lbnp_stage
+postcancel_seller_prepickup,,"logistics.logistics_funnel_lbnp_stage.""postcancel_seller_prepickup""",logistics.logistics_funnel_lbnp_stage
+postcancel_seller_prepickup_0_2,,"logistics.logistics_funnel_lbnp_stage.""postcancel_seller_prepickup_0_2""",logistics.logistics_funnel_lbnp_stage
+postcancel_seller_prepickup_3_5,,"logistics.logistics_funnel_lbnp_stage.""postcancel_seller_prepickup_3_5""",logistics.logistics_funnel_lbnp_stage
+postcancel_seller_prepickup_5_10,,"logistics.logistics_funnel_lbnp_stage.""postcancel_seller_prepickup_5_10""",logistics.logistics_funnel_lbnp_stage
+postcancel_seller_prepickup_10_15,,"logistics.logistics_funnel_lbnp_stage.""postcancel_seller_prepickup_10_15""",logistics.logistics_funnel_lbnp_stage
+postcancel_seller_prepickup_15_20,,"logistics.logistics_funnel_lbnp_stage.""postcancel_seller_prepickup_15_20""",logistics.logistics_funnel_lbnp_stage
+postcancel_seller_prepickup_gt_20,,"logistics.logistics_funnel_lbnp_stage.""postcancel_seller_prepickup_gt_20""",logistics.logistics_funnel_lbnp_stage
+postcancel_seller_postpickup,,"logistics.logistics_funnel_lbnp_stage.""postcancel_seller_postpickup""",logistics.logistics_funnel_lbnp_stage
+postcancel_logistics,,"logistics.logistics_funnel_lbnp_stage.""postcancel_logistics""",logistics.logistics_funnel_lbnp_stage
+postcancel_logistics_prepickup,,"logistics.logistics_funnel_lbnp_stage.""postcancel_logistics_prepickup""",logistics.logistics_funnel_lbnp_stage
+postcancel_logistics_prepickup_0_2,,"logistics.logistics_funnel_lbnp_stage.""postcancel_logistics_prepickup_0_2""",logistics.logistics_funnel_lbnp_stage
+postcancel_logistics_prepickup_3_5,,"logistics.logistics_funnel_lbnp_stage.""postcancel_logistics_prepickup_3_5""",logistics.logistics_funnel_lbnp_stage
+postcancel_logistics_prepickup_5_10,,"logistics.logistics_funnel_lbnp_stage.""postcancel_logistics_prepickup_5_10""",logistics.logistics_funnel_lbnp_stage
+postcancel_logistics_prepickup_10_15,,"logistics.logistics_funnel_lbnp_stage.""postcancel_logistics_prepickup_10_15""",logistics.logistics_funnel_lbnp_stage
+postcancel_logistics_prepickup_15_20,,"logistics.logistics_funnel_lbnp_stage.""postcancel_logistics_prepickup_15_20""",logistics.logistics_funnel_lbnp_stage
+postcancel_logistics_prepickup_gt_20,,"logistics.logistics_funnel_lbnp_stage.""postcancel_logistics_prepickup_gt_20""",logistics.logistics_funnel_lbnp_stage
+postcancel_logistics_postpickup,,"logistics.logistics_funnel_lbnp_stage.""postcancel_logistics_postpickup""",logistics.logistics_funnel_lbnp_stage
+preassigned_open,,"logistics.logistics_funnel_lbnp_stage.""preassigned_open""",logistics.logistics_funnel_lbnp_stage
+postassigned_open,,"logistics.logistics_funnel_lbnp_stage.""postassigned_open""",logistics.logistics_funnel_lbnp_stage
+"▼ logistics_funnel_lsp   (base table, 67 cols)",,,logistics.logistics_funnel_lsp
+bap_id,,"logistics.logistics_funnel_lsp.""bap_id""",logistics.logistics_funnel_lsp
+bpp_id,,"logistics.logistics_funnel_lsp.""bpp_id""",logistics.logistics_funnel_lsp
+date,,"logistics.logistics_funnel_lsp.""date""",logistics.logistics_funnel_lsp
+linked,,"logistics.logistics_funnel_lsp.""linked""",logistics.logistics_funnel_lsp
+pick_up_pincode,,"logistics.logistics_funnel_lsp.""pick_up_pincode""",logistics.logistics_funnel_lsp
+delivery_pincode,,"logistics.logistics_funnel_lsp.""delivery_pincode""",logistics.logistics_funnel_lsp
+retail_category,,"logistics.logistics_funnel_lsp.""retail_category""",logistics.logistics_funnel_lsp
+shipment_type,,"logistics.logistics_funnel_lsp.""shipment_type""",logistics.logistics_funnel_lsp
+fulfillment_type,,"logistics.logistics_funnel_lsp.""fulfillment_type""",logistics.logistics_funnel_lsp
+request,,"logistics.logistics_funnel_lsp.""request""",logistics.logistics_funnel_lsp
+unique_retail_order,,"logistics.logistics_funnel_lsp.""unique_retail_order""",logistics.logistics_funnel_lsp
+on_confirms,,"logistics.logistics_funnel_lsp.""on_confirms""",logistics.logistics_funnel_lsp
+confirmed_orders,,"logistics.logistics_funnel_lsp.""confirmed_orders""",logistics.logistics_funnel_lsp
+assigned,,"logistics.logistics_funnel_lsp.""assigned""",logistics.logistics_funnel_lsp
+delivered,,"logistics.logistics_funnel_lsp.""delivered""",logistics.logistics_funnel_lsp
+preassigned_cancel,,"logistics.logistics_funnel_lsp.""preassigned_cancel""",logistics.logistics_funnel_lsp
+precancel_buyer,,"logistics.logistics_funnel_lsp.""precancel_buyer""",logistics.logistics_funnel_lsp
+precancel_buyer_0_2,,"logistics.logistics_funnel_lsp.""precancel_buyer_0_2""",logistics.logistics_funnel_lsp
+precancel_buyer_3_5,,"logistics.logistics_funnel_lsp.""precancel_buyer_3_5""",logistics.logistics_funnel_lsp
+precancel_buyer_5_10,,"logistics.logistics_funnel_lsp.""precancel_buyer_5_10""",logistics.logistics_funnel_lsp
+precancel_buyer_10_15,,"logistics.logistics_funnel_lsp.""precancel_buyer_10_15""",logistics.logistics_funnel_lsp
+precancel_buyer_15_20,,"logistics.logistics_funnel_lsp.""precancel_buyer_15_20""",logistics.logistics_funnel_lsp
+precancel_buyer_gt_20,,"logistics.logistics_funnel_lsp.""precancel_buyer_gt_20""",logistics.logistics_funnel_lsp
+precancel_seller,,"logistics.logistics_funnel_lsp.""precancel_seller""",logistics.logistics_funnel_lsp
+precancel_seller_0_2,,"logistics.logistics_funnel_lsp.""precancel_seller_0_2""",logistics.logistics_funnel_lsp
+precancel_seller_3_5,,"logistics.logistics_funnel_lsp.""precancel_seller_3_5""",logistics.logistics_funnel_lsp
+precancel_seller_5_10,,"logistics.logistics_funnel_lsp.""precancel_seller_5_10""",logistics.logistics_funnel_lsp
+precancel_seller_10_15,,"logistics.logistics_funnel_lsp.""precancel_seller_10_15""",logistics.logistics_funnel_lsp
+precancel_seller_15_20,,"logistics.logistics_funnel_lsp.""precancel_seller_15_20""",logistics.logistics_funnel_lsp
+precancel_seller_gt_20,,"logistics.logistics_funnel_lsp.""precancel_seller_gt_20""",logistics.logistics_funnel_lsp
+precancel_logistics,,"logistics.logistics_funnel_lsp.""precancel_logistics""",logistics.logistics_funnel_lsp
+precancel_logistics_0_2,,"logistics.logistics_funnel_lsp.""precancel_logistics_0_2""",logistics.logistics_funnel_lsp
+precancel_logistics_3_5,,"logistics.logistics_funnel_lsp.""precancel_logistics_3_5""",logistics.logistics_funnel_lsp
+precancel_logistics_5_10,,"logistics.logistics_funnel_lsp.""precancel_logistics_5_10""",logistics.logistics_funnel_lsp
+precancel_logistics_10_15,,"logistics.logistics_funnel_lsp.""precancel_logistics_10_15""",logistics.logistics_funnel_lsp
+precancel_logistics_15_20,,"logistics.logistics_funnel_lsp.""precancel_logistics_15_20""",logistics.logistics_funnel_lsp
+precancel_logistics_gt_20,,"logistics.logistics_funnel_lsp.""precancel_logistics_gt_20""",logistics.logistics_funnel_lsp
+postassigned_cancel,,"logistics.logistics_funnel_lsp.""postassigned_cancel""",logistics.logistics_funnel_lsp
+postcancel_buyer,,"logistics.logistics_funnel_lsp.""postcancel_buyer""",logistics.logistics_funnel_lsp
+postcancel_buyer_prepickup,,"logistics.logistics_funnel_lsp.""postcancel_buyer_prepickup""",logistics.logistics_funnel_lsp
+postcancel_buyer_prepickup_0_2,,"logistics.logistics_funnel_lsp.""postcancel_buyer_prepickup_0_2""",logistics.logistics_funnel_lsp
+postcancel_buyer_prepickup_3_5,,"logistics.logistics_funnel_lsp.""postcancel_buyer_prepickup_3_5""",logistics.logistics_funnel_lsp
+postcancel_buyer_prepickup_5_10,,"logistics.logistics_funnel_lsp.""postcancel_buyer_prepickup_5_10""",logistics.logistics_funnel_lsp
+postcancel_buyer_prepickup_10_15,,"logistics.logistics_funnel_lsp.""postcancel_buyer_prepickup_10_15""",logistics.logistics_funnel_lsp
+postcancel_buyer_prepickup_15_20,,"logistics.logistics_funnel_lsp.""postcancel_buyer_prepickup_15_20""",logistics.logistics_funnel_lsp
+postcancel_buyer_prepickup_gt_20,,"logistics.logistics_funnel_lsp.""postcancel_buyer_prepickup_gt_20""",logistics.logistics_funnel_lsp
+postcancel_buyer_postpickup,,"logistics.logistics_funnel_lsp.""postcancel_buyer_postpickup""",logistics.logistics_funnel_lsp
+postcancel_seller,,"logistics.logistics_funnel_lsp.""postcancel_seller""",logistics.logistics_funnel_lsp
+postcancel_seller_prepickup,,"logistics.logistics_funnel_lsp.""postcancel_seller_prepickup""",logistics.logistics_funnel_lsp
+postcancel_seller_prepickup_0_2,,"logistics.logistics_funnel_lsp.""postcancel_seller_prepickup_0_2""",logistics.logistics_funnel_lsp
+postcancel_seller_prepickup_3_5,,"logistics.logistics_funnel_lsp.""postcancel_seller_prepickup_3_5""",logistics.logistics_funnel_lsp
+postcancel_seller_prepickup_5_10,,"logistics.logistics_funnel_lsp.""postcancel_seller_prepickup_5_10""",logistics.logistics_funnel_lsp
+postcancel_seller_prepickup_10_15,,"logistics.logistics_funnel_lsp.""postcancel_seller_prepickup_10_15""",logistics.logistics_funnel_lsp
+postcancel_seller_prepickup_15_20,,"logistics.logistics_funnel_lsp.""postcancel_seller_prepickup_15_20""",logistics.logistics_funnel_lsp
+postcancel_seller_prepickup_gt_20,,"logistics.logistics_funnel_lsp.""postcancel_seller_prepickup_gt_20""",logistics.logistics_funnel_lsp
+postcancel_seller_postpickup,,"logistics.logistics_funnel_lsp.""postcancel_seller_postpickup""",logistics.logistics_funnel_lsp
+postcancel_logistics,,"logistics.logistics_funnel_lsp.""postcancel_logistics""",logistics.logistics_funnel_lsp
+postcancel_logistics_prepickup,,"logistics.logistics_funnel_lsp.""postcancel_logistics_prepickup""",logistics.logistics_funnel_lsp
+postcancel_logistics_prepickup_0_2,,"logistics.logistics_funnel_lsp.""postcancel_logistics_prepickup_0_2""",logistics.logistics_funnel_lsp
+postcancel_logistics_prepickup_3_5,,"logistics.logistics_funnel_lsp.""postcancel_logistics_prepickup_3_5""",logistics.logistics_funnel_lsp
+postcancel_logistics_prepickup_5_10,,"logistics.logistics_funnel_lsp.""postcancel_logistics_prepickup_5_10""",logistics.logistics_funnel_lsp
+postcancel_logistics_prepickup_10_15,,"logistics.logistics_funnel_lsp.""postcancel_logistics_prepickup_10_15""",logistics.logistics_funnel_lsp
+postcancel_logistics_prepickup_15_20,,"logistics.logistics_funnel_lsp.""postcancel_logistics_prepickup_15_20""",logistics.logistics_funnel_lsp
+postcancel_logistics_prepickup_gt_20,,"logistics.logistics_funnel_lsp.""postcancel_logistics_prepickup_gt_20""",logistics.logistics_funnel_lsp
+postcancel_logistics_postpickup,,"logistics.logistics_funnel_lsp.""postcancel_logistics_postpickup""",logistics.logistics_funnel_lsp
+preassigned_open,,"logistics.logistics_funnel_lsp.""preassigned_open""",logistics.logistics_funnel_lsp
+postassigned_open,,"logistics.logistics_funnel_lsp.""postassigned_open""",logistics.logistics_funnel_lsp
+"▼ logistics_funnel_lsp_bv   (view, 80 cols)",,,logistics.logistics_funnel_lsp_bv
+bap_id,,"logistics.logistics_funnel_lsp_bv.""bap_id""",logistics.logistics_funnel_lsp_bv
+bpp_id,,"logistics.logistics_funnel_lsp_bv.""bpp_id""",logistics.logistics_funnel_lsp_bv
+date,,"logistics.logistics_funnel_lsp_bv.""date""",logistics.logistics_funnel_lsp_bv
+linked,,"logistics.logistics_funnel_lsp_bv.""linked""",logistics.logistics_funnel_lsp_bv
+pick_up_pincode,,"logistics.logistics_funnel_lsp_bv.""pick_up_pincode""",logistics.logistics_funnel_lsp_bv
+delivery_pincode,,"logistics.logistics_funnel_lsp_bv.""delivery_pincode""",logistics.logistics_funnel_lsp_bv
+retail_category,,"logistics.logistics_funnel_lsp_bv.""retail_category""",logistics.logistics_funnel_lsp_bv
+shipment_type,,"logistics.logistics_funnel_lsp_bv.""shipment_type""",logistics.logistics_funnel_lsp_bv
+fulfillment_type,,"logistics.logistics_funnel_lsp_bv.""fulfillment_type""",logistics.logistics_funnel_lsp_bv
+request,,"logistics.logistics_funnel_lsp_bv.""request""",logistics.logistics_funnel_lsp_bv
+unique_retail_order,,"logistics.logistics_funnel_lsp_bv.""unique_retail_order""",logistics.logistics_funnel_lsp_bv
+on_confirms,,"logistics.logistics_funnel_lsp_bv.""on_confirms""",logistics.logistics_funnel_lsp_bv
+confirmed_orders,,"logistics.logistics_funnel_lsp_bv.""confirmed_orders""",logistics.logistics_funnel_lsp_bv
+assigned,,"logistics.logistics_funnel_lsp_bv.""assigned""",logistics.logistics_funnel_lsp_bv
+delivered,,"logistics.logistics_funnel_lsp_bv.""delivered""",logistics.logistics_funnel_lsp_bv
+preassigned_cancel,,"logistics.logistics_funnel_lsp_bv.""preassigned_cancel""",logistics.logistics_funnel_lsp_bv
+precancel_buyer,,"logistics.logistics_funnel_lsp_bv.""precancel_buyer""",logistics.logistics_funnel_lsp_bv
+precancel_buyer_0_2,,"logistics.logistics_funnel_lsp_bv.""precancel_buyer_0_2""",logistics.logistics_funnel_lsp_bv
+precancel_buyer_3_5,,"logistics.logistics_funnel_lsp_bv.""precancel_buyer_3_5""",logistics.logistics_funnel_lsp_bv
+precancel_buyer_5_10,,"logistics.logistics_funnel_lsp_bv.""precancel_buyer_5_10""",logistics.logistics_funnel_lsp_bv
+precancel_buyer_10_15,,"logistics.logistics_funnel_lsp_bv.""precancel_buyer_10_15""",logistics.logistics_funnel_lsp_bv
+precancel_buyer_15_20,,"logistics.logistics_funnel_lsp_bv.""precancel_buyer_15_20""",logistics.logistics_funnel_lsp_bv
+precancel_buyer_gt_20,,"logistics.logistics_funnel_lsp_bv.""precancel_buyer_gt_20""",logistics.logistics_funnel_lsp_bv
+precancel_seller,,"logistics.logistics_funnel_lsp_bv.""precancel_seller""",logistics.logistics_funnel_lsp_bv
+precancel_seller_0_2,,"logistics.logistics_funnel_lsp_bv.""precancel_seller_0_2""",logistics.logistics_funnel_lsp_bv
+precancel_seller_3_5,,"logistics.logistics_funnel_lsp_bv.""precancel_seller_3_5""",logistics.logistics_funnel_lsp_bv
+precancel_seller_5_10,,"logistics.logistics_funnel_lsp_bv.""precancel_seller_5_10""",logistics.logistics_funnel_lsp_bv
+precancel_seller_10_15,,"logistics.logistics_funnel_lsp_bv.""precancel_seller_10_15""",logistics.logistics_funnel_lsp_bv
+precancel_seller_15_20,,"logistics.logistics_funnel_lsp_bv.""precancel_seller_15_20""",logistics.logistics_funnel_lsp_bv
+precancel_seller_gt_20,,"logistics.logistics_funnel_lsp_bv.""precancel_seller_gt_20""",logistics.logistics_funnel_lsp_bv
+precancel_logistics,,"logistics.logistics_funnel_lsp_bv.""precancel_logistics""",logistics.logistics_funnel_lsp_bv
+precancel_logistics_0_2,,"logistics.logistics_funnel_lsp_bv.""precancel_logistics_0_2""",logistics.logistics_funnel_lsp_bv
+precancel_logistics_3_5,,"logistics.logistics_funnel_lsp_bv.""precancel_logistics_3_5""",logistics.logistics_funnel_lsp_bv
+precancel_logistics_5_10,,"logistics.logistics_funnel_lsp_bv.""precancel_logistics_5_10""",logistics.logistics_funnel_lsp_bv
+precancel_logistics_10_15,,"logistics.logistics_funnel_lsp_bv.""precancel_logistics_10_15""",logistics.logistics_funnel_lsp_bv
+precancel_logistics_15_20,,"logistics.logistics_funnel_lsp_bv.""precancel_logistics_15_20""",logistics.logistics_funnel_lsp_bv
+precancel_logistics_gt_20,,"logistics.logistics_funnel_lsp_bv.""precancel_logistics_gt_20""",logistics.logistics_funnel_lsp_bv
+postassigned_cancel,,"logistics.logistics_funnel_lsp_bv.""postassigned_cancel""",logistics.logistics_funnel_lsp_bv
+postcancel_buyer,,"logistics.logistics_funnel_lsp_bv.""postcancel_buyer""",logistics.logistics_funnel_lsp_bv
+postcancel_buyer_prepickup,,"logistics.logistics_funnel_lsp_bv.""postcancel_buyer_prepickup""",logistics.logistics_funnel_lsp_bv
+postcancel_buyer_prepickup_0_2,,"logistics.logistics_funnel_lsp_bv.""postcancel_buyer_prepickup_0_2""",logistics.logistics_funnel_lsp_bv
+postcancel_buyer_prepickup_3_5,,"logistics.logistics_funnel_lsp_bv.""postcancel_buyer_prepickup_3_5""",logistics.logistics_funnel_lsp_bv
+postcancel_buyer_prepickup_5_10,,"logistics.logistics_funnel_lsp_bv.""postcancel_buyer_prepickup_5_10""",logistics.logistics_funnel_lsp_bv
+postcancel_buyer_prepickup_10_15,,"logistics.logistics_funnel_lsp_bv.""postcancel_buyer_prepickup_10_15""",logistics.logistics_funnel_lsp_bv
+postcancel_buyer_prepickup_15_20,,"logistics.logistics_funnel_lsp_bv.""postcancel_buyer_prepickup_15_20""",logistics.logistics_funnel_lsp_bv
+postcancel_buyer_prepickup_gt_20,,"logistics.logistics_funnel_lsp_bv.""postcancel_buyer_prepickup_gt_20""",logistics.logistics_funnel_lsp_bv
+postcancel_buyer_postpickup,,"logistics.logistics_funnel_lsp_bv.""postcancel_buyer_postpickup""",logistics.logistics_funnel_lsp_bv
+postcancel_seller,,"logistics.logistics_funnel_lsp_bv.""postcancel_seller""",logistics.logistics_funnel_lsp_bv
+postcancel_seller_prepickup,,"logistics.logistics_funnel_lsp_bv.""postcancel_seller_prepickup""",logistics.logistics_funnel_lsp_bv
+postcancel_seller_prepickup_0_2,,"logistics.logistics_funnel_lsp_bv.""postcancel_seller_prepickup_0_2""",logistics.logistics_funnel_lsp_bv
+postcancel_seller_prepickup_3_5,,"logistics.logistics_funnel_lsp_bv.""postcancel_seller_prepickup_3_5""",logistics.logistics_funnel_lsp_bv
+postcancel_seller_prepickup_5_10,,"logistics.logistics_funnel_lsp_bv.""postcancel_seller_prepickup_5_10""",logistics.logistics_funnel_lsp_bv
+postcancel_seller_prepickup_10_15,,"logistics.logistics_funnel_lsp_bv.""postcancel_seller_prepickup_10_15""",logistics.logistics_funnel_lsp_bv
+postcancel_seller_prepickup_15_20,,"logistics.logistics_funnel_lsp_bv.""postcancel_seller_prepickup_15_20""",logistics.logistics_funnel_lsp_bv
+postcancel_seller_prepickup_gt_20,,"logistics.logistics_funnel_lsp_bv.""postcancel_seller_prepickup_gt_20""",logistics.logistics_funnel_lsp_bv
+postcancel_seller_postpickup,,"logistics.logistics_funnel_lsp_bv.""postcancel_seller_postpickup""",logistics.logistics_funnel_lsp_bv
+postcancel_logistics,,"logistics.logistics_funnel_lsp_bv.""postcancel_logistics""",logistics.logistics_funnel_lsp_bv
+postcancel_logistics_prepickup,,"logistics.logistics_funnel_lsp_bv.""postcancel_logistics_prepickup""",logistics.logistics_funnel_lsp_bv
+postcancel_logistics_prepickup_0_2,,"logistics.logistics_funnel_lsp_bv.""postcancel_logistics_prepickup_0_2""",logistics.logistics_funnel_lsp_bv
+postcancel_logistics_prepickup_3_5,,"logistics.logistics_funnel_lsp_bv.""postcancel_logistics_prepickup_3_5""",logistics.logistics_funnel_lsp_bv
+postcancel_logistics_prepickup_5_10,,"logistics.logistics_funnel_lsp_bv.""postcancel_logistics_prepickup_5_10""",logistics.logistics_funnel_lsp_bv
+postcancel_logistics_prepickup_10_15,,"logistics.logistics_funnel_lsp_bv.""postcancel_logistics_prepickup_10_15""",logistics.logistics_funnel_lsp_bv
+postcancel_logistics_prepickup_15_20,,"logistics.logistics_funnel_lsp_bv.""postcancel_logistics_prepickup_15_20""",logistics.logistics_funnel_lsp_bv
+postcancel_logistics_prepickup_gt_20,,"logistics.logistics_funnel_lsp_bv.""postcancel_logistics_prepickup_gt_20""",logistics.logistics_funnel_lsp_bv
+postcancel_logistics_postpickup,,"logistics.logistics_funnel_lsp_bv.""postcancel_logistics_postpickup""",logistics.logistics_funnel_lsp_bv
+preassigned_open,,"logistics.logistics_funnel_lsp_bv.""preassigned_open""",logistics.logistics_funnel_lsp_bv
+postassigned_open,,"logistics.logistics_funnel_lsp_bv.""postassigned_open""",logistics.logistics_funnel_lsp_bv
+total_request_lsp,,"logistics.logistics_funnel_lsp_bv.""total_request_lsp""",logistics.logistics_funnel_lsp_bv
+total_confirm_lsp_table,,"logistics.logistics_funnel_lsp_bv.""total_confirm_lsp_table""",logistics.logistics_funnel_lsp_bv
+total_unique_retail_order_lsp,,"logistics.logistics_funnel_lsp_bv.""total_unique_retail_order_lsp""",logistics.logistics_funnel_lsp_bv
+Logistics Network Partner,,"logistics.logistics_funnel_lsp_bv.""Logistics Network Partner""",logistics.logistics_funnel_lsp_bv
+Seller NP,,"logistics.logistics_funnel_lsp_bv.""Seller NP""",logistics.logistics_funnel_lsp_bv
+Pick Up State,,"logistics.logistics_funnel_lsp_bv.""Pick Up State""",logistics.logistics_funnel_lsp_bv
+Delivery State,,"logistics.logistics_funnel_lsp_bv.""Delivery State""",logistics.logistics_funnel_lsp_bv
+Pick Up City,,"logistics.logistics_funnel_lsp_bv.""Pick Up City""",logistics.logistics_funnel_lsp_bv
+Delivery City,,"logistics.logistics_funnel_lsp_bv.""Delivery City""",logistics.logistics_funnel_lsp_bv
+Pick Up Tier,,"logistics.logistics_funnel_lsp_bv.""Pick Up Tier""",logistics.logistics_funnel_lsp_bv
+Delivery Tier,,"logistics.logistics_funnel_lsp_bv.""Delivery Tier""",logistics.logistics_funnel_lsp_bv
+Pick Up Zone,,"logistics.logistics_funnel_lsp_bv.""Pick Up Zone""",logistics.logistics_funnel_lsp_bv
+Delivery Zone,,"logistics.logistics_funnel_lsp_bv.""Delivery Zone""",logistics.logistics_funnel_lsp_bv
+"▼ logistics_funnel_lsp_stage   (base table, 67 cols)",,,logistics.logistics_funnel_lsp_stage
+bap_id,,"logistics.logistics_funnel_lsp_stage.""bap_id""",logistics.logistics_funnel_lsp_stage
+bpp_id,,"logistics.logistics_funnel_lsp_stage.""bpp_id""",logistics.logistics_funnel_lsp_stage
+date,,"logistics.logistics_funnel_lsp_stage.""date""",logistics.logistics_funnel_lsp_stage
+linked,,"logistics.logistics_funnel_lsp_stage.""linked""",logistics.logistics_funnel_lsp_stage
+pick_up_pincode,,"logistics.logistics_funnel_lsp_stage.""pick_up_pincode""",logistics.logistics_funnel_lsp_stage
+delivery_pincode,,"logistics.logistics_funnel_lsp_stage.""delivery_pincode""",logistics.logistics_funnel_lsp_stage
+retail_category,,"logistics.logistics_funnel_lsp_stage.""retail_category""",logistics.logistics_funnel_lsp_stage
+shipment_type,,"logistics.logistics_funnel_lsp_stage.""shipment_type""",logistics.logistics_funnel_lsp_stage
+fulfillment_type,,"logistics.logistics_funnel_lsp_stage.""fulfillment_type""",logistics.logistics_funnel_lsp_stage
+request,,"logistics.logistics_funnel_lsp_stage.""request""",logistics.logistics_funnel_lsp_stage
+unique_retail_order,,"logistics.logistics_funnel_lsp_stage.""unique_retail_order""",logistics.logistics_funnel_lsp_stage
+on_confirms,,"logistics.logistics_funnel_lsp_stage.""on_confirms""",logistics.logistics_funnel_lsp_stage
+confirmed_orders,,"logistics.logistics_funnel_lsp_stage.""confirmed_orders""",logistics.logistics_funnel_lsp_stage
+assigned,,"logistics.logistics_funnel_lsp_stage.""assigned""",logistics.logistics_funnel_lsp_stage
+delivered,,"logistics.logistics_funnel_lsp_stage.""delivered""",logistics.logistics_funnel_lsp_stage
+preassigned_cancel,,"logistics.logistics_funnel_lsp_stage.""preassigned_cancel""",logistics.logistics_funnel_lsp_stage
+precancel_buyer,,"logistics.logistics_funnel_lsp_stage.""precancel_buyer""",logistics.logistics_funnel_lsp_stage
+precancel_buyer_0_2,,"logistics.logistics_funnel_lsp_stage.""precancel_buyer_0_2""",logistics.logistics_funnel_lsp_stage
+precancel_buyer_3_5,,"logistics.logistics_funnel_lsp_stage.""precancel_buyer_3_5""",logistics.logistics_funnel_lsp_stage
+precancel_buyer_5_10,,"logistics.logistics_funnel_lsp_stage.""precancel_buyer_5_10""",logistics.logistics_funnel_lsp_stage
+precancel_buyer_10_15,,"logistics.logistics_funnel_lsp_stage.""precancel_buyer_10_15""",logistics.logistics_funnel_lsp_stage
+precancel_buyer_15_20,,"logistics.logistics_funnel_lsp_stage.""precancel_buyer_15_20""",logistics.logistics_funnel_lsp_stage
+precancel_buyer_gt_20,,"logistics.logistics_funnel_lsp_stage.""precancel_buyer_gt_20""",logistics.logistics_funnel_lsp_stage
+precancel_seller,,"logistics.logistics_funnel_lsp_stage.""precancel_seller""",logistics.logistics_funnel_lsp_stage
+precancel_seller_0_2,,"logistics.logistics_funnel_lsp_stage.""precancel_seller_0_2""",logistics.logistics_funnel_lsp_stage
+precancel_seller_3_5,,"logistics.logistics_funnel_lsp_stage.""precancel_seller_3_5""",logistics.logistics_funnel_lsp_stage
+precancel_seller_5_10,,"logistics.logistics_funnel_lsp_stage.""precancel_seller_5_10""",logistics.logistics_funnel_lsp_stage
+precancel_seller_10_15,,"logistics.logistics_funnel_lsp_stage.""precancel_seller_10_15""",logistics.logistics_funnel_lsp_stage
+precancel_seller_15_20,,"logistics.logistics_funnel_lsp_stage.""precancel_seller_15_20""",logistics.logistics_funnel_lsp_stage
+precancel_seller_gt_20,,"logistics.logistics_funnel_lsp_stage.""precancel_seller_gt_20""",logistics.logistics_funnel_lsp_stage
+precancel_logistics,,"logistics.logistics_funnel_lsp_stage.""precancel_logistics""",logistics.logistics_funnel_lsp_stage
+precancel_logistics_0_2,,"logistics.logistics_funnel_lsp_stage.""precancel_logistics_0_2""",logistics.logistics_funnel_lsp_stage
+precancel_logistics_3_5,,"logistics.logistics_funnel_lsp_stage.""precancel_logistics_3_5""",logistics.logistics_funnel_lsp_stage
+precancel_logistics_5_10,,"logistics.logistics_funnel_lsp_stage.""precancel_logistics_5_10""",logistics.logistics_funnel_lsp_stage
+precancel_logistics_10_15,,"logistics.logistics_funnel_lsp_stage.""precancel_logistics_10_15""",logistics.logistics_funnel_lsp_stage
+precancel_logistics_15_20,,"logistics.logistics_funnel_lsp_stage.""precancel_logistics_15_20""",logistics.logistics_funnel_lsp_stage
+precancel_logistics_gt_20,,"logistics.logistics_funnel_lsp_stage.""precancel_logistics_gt_20""",logistics.logistics_funnel_lsp_stage
+postassigned_cancel,,"logistics.logistics_funnel_lsp_stage.""postassigned_cancel""",logistics.logistics_funnel_lsp_stage
+postcancel_buyer,,"logistics.logistics_funnel_lsp_stage.""postcancel_buyer""",logistics.logistics_funnel_lsp_stage
+postcancel_buyer_prepickup,,"logistics.logistics_funnel_lsp_stage.""postcancel_buyer_prepickup""",logistics.logistics_funnel_lsp_stage
+postcancel_buyer_prepickup_0_2,,"logistics.logistics_funnel_lsp_stage.""postcancel_buyer_prepickup_0_2""",logistics.logistics_funnel_lsp_stage
+postcancel_buyer_prepickup_3_5,,"logistics.logistics_funnel_lsp_stage.""postcancel_buyer_prepickup_3_5""",logistics.logistics_funnel_lsp_stage
+postcancel_buyer_prepickup_5_10,,"logistics.logistics_funnel_lsp_stage.""postcancel_buyer_prepickup_5_10""",logistics.logistics_funnel_lsp_stage
+postcancel_buyer_prepickup_10_15,,"logistics.logistics_funnel_lsp_stage.""postcancel_buyer_prepickup_10_15""",logistics.logistics_funnel_lsp_stage
+postcancel_buyer_prepickup_15_20,,"logistics.logistics_funnel_lsp_stage.""postcancel_buyer_prepickup_15_20""",logistics.logistics_funnel_lsp_stage
+postcancel_buyer_prepickup_gt_20,,"logistics.logistics_funnel_lsp_stage.""postcancel_buyer_prepickup_gt_20""",logistics.logistics_funnel_lsp_stage
+postcancel_buyer_postpickup,,"logistics.logistics_funnel_lsp_stage.""postcancel_buyer_postpickup""",logistics.logistics_funnel_lsp_stage
+postcancel_seller,,"logistics.logistics_funnel_lsp_stage.""postcancel_seller""",logistics.logistics_funnel_lsp_stage
+postcancel_seller_prepickup,,"logistics.logistics_funnel_lsp_stage.""postcancel_seller_prepickup""",logistics.logistics_funnel_lsp_stage
+postcancel_seller_prepickup_0_2,,"logistics.logistics_funnel_lsp_stage.""postcancel_seller_prepickup_0_2""",logistics.logistics_funnel_lsp_stage
+postcancel_seller_prepickup_3_5,,"logistics.logistics_funnel_lsp_stage.""postcancel_seller_prepickup_3_5""",logistics.logistics_funnel_lsp_stage
+postcancel_seller_prepickup_5_10,,"logistics.logistics_funnel_lsp_stage.""postcancel_seller_prepickup_5_10""",logistics.logistics_funnel_lsp_stage
+postcancel_seller_prepickup_10_15,,"logistics.logistics_funnel_lsp_stage.""postcancel_seller_prepickup_10_15""",logistics.logistics_funnel_lsp_stage
+postcancel_seller_prepickup_15_20,,"logistics.logistics_funnel_lsp_stage.""postcancel_seller_prepickup_15_20""",logistics.logistics_funnel_lsp_stage
+postcancel_seller_prepickup_gt_20,,"logistics.logistics_funnel_lsp_stage.""postcancel_seller_prepickup_gt_20""",logistics.logistics_funnel_lsp_stage
+postcancel_seller_postpickup,,"logistics.logistics_funnel_lsp_stage.""postcancel_seller_postpickup""",logistics.logistics_funnel_lsp_stage
+postcancel_logistics,,"logistics.logistics_funnel_lsp_stage.""postcancel_logistics""",logistics.logistics_funnel_lsp_stage
+postcancel_logistics_prepickup,,"logistics.logistics_funnel_lsp_stage.""postcancel_logistics_prepickup""",logistics.logistics_funnel_lsp_stage
+postcancel_logistics_prepickup_0_2,,"logistics.logistics_funnel_lsp_stage.""postcancel_logistics_prepickup_0_2""",logistics.logistics_funnel_lsp_stage
+postcancel_logistics_prepickup_3_5,,"logistics.logistics_funnel_lsp_stage.""postcancel_logistics_prepickup_3_5""",logistics.logistics_funnel_lsp_stage
+postcancel_logistics_prepickup_5_10,,"logistics.logistics_funnel_lsp_stage.""postcancel_logistics_prepickup_5_10""",logistics.logistics_funnel_lsp_stage
+postcancel_logistics_prepickup_10_15,,"logistics.logistics_funnel_lsp_stage.""postcancel_logistics_prepickup_10_15""",logistics.logistics_funnel_lsp_stage
+postcancel_logistics_prepickup_15_20,,"logistics.logistics_funnel_lsp_stage.""postcancel_logistics_prepickup_15_20""",logistics.logistics_funnel_lsp_stage
+postcancel_logistics_prepickup_gt_20,,"logistics.logistics_funnel_lsp_stage.""postcancel_logistics_prepickup_gt_20""",logistics.logistics_funnel_lsp_stage
+postcancel_logistics_postpickup,,"logistics.logistics_funnel_lsp_stage.""postcancel_logistics_postpickup""",logistics.logistics_funnel_lsp_stage
+preassigned_open,,"logistics.logistics_funnel_lsp_stage.""preassigned_open""",logistics.logistics_funnel_lsp_stage
+postassigned_open,,"logistics.logistics_funnel_lsp_stage.""postassigned_open""",logistics.logistics_funnel_lsp_stage
+"▼ logistics_igm_bv   (view, 72 cols)",,,logistics.logistics_igm_bv
+bap_id,,"logistics.logistics_igm_bv.""bap_id""",logistics.logistics_igm_bv
+bpp_id,,"logistics.logistics_igm_bv.""bpp_id""",logistics.logistics_igm_bv
+igm_key,,"logistics.logistics_igm_bv.""igm_key""",logistics.logistics_igm_bv
+ticket_created_date,,"logistics.logistics_igm_bv.""ticket_created_date""",logistics.logistics_igm_bv
+Date,,"logistics.logistics_igm_bv.""Date""",logistics.logistics_igm_bv
+domain,,"logistics.logistics_igm_bv.""domain""",logistics.logistics_igm_bv
+network_issue_id,,"logistics.logistics_igm_bv.""network_issue_id""",logistics.logistics_igm_bv
+ticket_category,,"logistics.logistics_igm_bv.""ticket_category""",logistics.logistics_igm_bv
+ticket_sub_category,,"logistics.logistics_igm_bv.""ticket_sub_category""",logistics.logistics_igm_bv
+Resolved,,"logistics.logistics_igm_bv.""Resolved""",logistics.logistics_igm_bv
+network_order_id,,"logistics.logistics_igm_bv.""network_order_id""",logistics.logistics_igm_bv
+ticket_key,,"logistics.logistics_igm_bv.""ticket_key""",logistics.logistics_igm_bv
+ticket_source,,"logistics.logistics_igm_bv.""ticket_source""",logistics.logistics_igm_bv
+ticket count,,"logistics.logistics_igm_bv.""ticket count""",logistics.logistics_igm_bv
+ticket_raiser,,"logistics.logistics_igm_bv.""ticket_raiser""",logistics.logistics_igm_bv
+ticket_expected_resolution_time,,"logistics.logistics_igm_bv.""ticket_expected_resolution_time""",logistics.logistics_igm_bv
+ticket_status,,"logistics.logistics_igm_bv.""ticket_status""",logistics.logistics_igm_bv
+Closed date,,"logistics.logistics_igm_bv.""Closed date""",logistics.logistics_igm_bv
+r_action_ticket_resolved_date,,"logistics.logistics_igm_bv.""r_action_ticket_resolved_date""",logistics.logistics_igm_bv
+on_issue_error_code,,"logistics.logistics_igm_bv.""on_issue_error_code""",logistics.logistics_igm_bv
+issue_sync_response,,"logistics.logistics_igm_bv.""issue_sync_response""",logistics.logistics_igm_bv
+tat_diff(open),,"logistics.logistics_igm_bv.""tat_diff(open)""",logistics.logistics_igm_bv
+sec_diff(open),,"logistics.logistics_igm_bv.""sec_diff(open)""",logistics.logistics_igm_bv
+min_diff(resolved),,"logistics.logistics_igm_bv.""min_diff(resolved)""",logistics.logistics_igm_bv
+tat_diff(res),,"logistics.logistics_igm_bv.""tat_diff(res)""",logistics.logistics_igm_bv
+provider_name,,"logistics.logistics_igm_bv.""provider_name""",logistics.logistics_igm_bv
+Category,,"logistics.logistics_igm_bv.""Category""",logistics.logistics_igm_bv
+shipment_type,,"logistics.logistics_igm_bv.""shipment_type""",logistics.logistics_igm_bv
+rejected,,"logistics.logistics_igm_bv.""rejected""",logistics.logistics_igm_bv
+lnp name,,"logistics.logistics_igm_bv.""lnp name""",logistics.logistics_igm_bv
+lbnp,,"logistics.logistics_igm_bv.""lbnp""",logistics.logistics_igm_bv
+Np type Logistics,,"logistics.logistics_igm_bv.""Np type Logistics""",logistics.logistics_igm_bv
+Breached,,"logistics.logistics_igm_bv.""Breached""",logistics.logistics_igm_bv
+Status,,"logistics.logistics_igm_bv.""Status""",logistics.logistics_igm_bv
+Resolved hour,,"logistics.logistics_igm_bv.""Resolved hour""",logistics.logistics_igm_bv
+resolved_ticket,,"logistics.logistics_igm_bv.""resolved_ticket""",logistics.logistics_igm_bv
+unresolved_ticket,,"logistics.logistics_igm_bv.""unresolved_ticket""",logistics.logistics_igm_bv
+forced_resolved_ticket,,"logistics.logistics_igm_bv.""forced_resolved_ticket""",logistics.logistics_igm_bv
+ack_logistics,,"logistics.logistics_igm_bv.""ack_logistics""",logistics.logistics_igm_bv
+nack_logistics,,"logistics.logistics_igm_bv.""nack_logistics""",logistics.logistics_igm_bv
+on_issue_error_logistics,,"logistics.logistics_igm_bv.""on_issue_error_logistics""",logistics.logistics_igm_bv
+rejected_logistics,,"logistics.logistics_igm_bv.""rejected_logistics""",logistics.logistics_igm_bv
+net_tickets_logistics,,"logistics.logistics_igm_bv.""net_tickets_logistics""",logistics.logistics_igm_bv
+resolution_within_tat,,"logistics.logistics_igm_bv.""resolution_within_tat""",logistics.logistics_igm_bv
+unresolved_and_not_closed,,"logistics.logistics_igm_bv.""unresolved_and_not_closed""",logistics.logistics_igm_bv
+average_resolved_minutes,,"logistics.logistics_igm_bv.""average_resolved_minutes""",logistics.logistics_igm_bv
+average_resolved_hours,,"logistics.logistics_igm_bv.""average_resolved_hours""",logistics.logistics_igm_bv
+average_resolved_days,,"logistics.logistics_igm_bv.""average_resolved_days""",logistics.logistics_igm_bv
+average_resolved_time,,"logistics.logistics_igm_bv.""average_resolved_time""",logistics.logistics_igm_bv
+resolved_ticket_0_1_day,,"logistics.logistics_igm_bv.""resolved_ticket_0_1_day""",logistics.logistics_igm_bv
+resolved_ticket_1_3_day,,"logistics.logistics_igm_bv.""resolved_ticket_1_3_day""",logistics.logistics_igm_bv
+resolved_ticket_3_5_day,,"logistics.logistics_igm_bv.""resolved_ticket_3_5_day""",logistics.logistics_igm_bv
+resolved_ticket_5_10_day,,"logistics.logistics_igm_bv.""resolved_ticket_5_10_day""",logistics.logistics_igm_bv
+resolved_ticket_11_20_day,,"logistics.logistics_igm_bv.""resolved_ticket_11_20_day""",logistics.logistics_igm_bv
+resolved_ticket_21_30_day,,"logistics.logistics_igm_bv.""resolved_ticket_21_30_day""",logistics.logistics_igm_bv
+resolved_ticket_31_40_day,,"logistics.logistics_igm_bv.""resolved_ticket_31_40_day""",logistics.logistics_igm_bv
+resolved_ticket_41_50_day,,"logistics.logistics_igm_bv.""resolved_ticket_41_50_day""",logistics.logistics_igm_bv
+resolved_ticket_51_60_day,,"logistics.logistics_igm_bv.""resolved_ticket_51_60_day""",logistics.logistics_igm_bv
+resolved_ticket_above_60_day,,"logistics.logistics_igm_bv.""resolved_ticket_above_60_day""",logistics.logistics_igm_bv
+unresolved_ticket_0_1_day,,"logistics.logistics_igm_bv.""unresolved_ticket_0_1_day""",logistics.logistics_igm_bv
+unresolved_ticket_1_3_day,,"logistics.logistics_igm_bv.""unresolved_ticket_1_3_day""",logistics.logistics_igm_bv
+unresolved_ticket_3_5_day,,"logistics.logistics_igm_bv.""unresolved_ticket_3_5_day""",logistics.logistics_igm_bv
+unresolved_ticket_5_10_day,,"logistics.logistics_igm_bv.""unresolved_ticket_5_10_day""",logistics.logistics_igm_bv
+unresolved_ticket_11_20_day,,"logistics.logistics_igm_bv.""unresolved_ticket_11_20_day""",logistics.logistics_igm_bv
+unresolved_ticket_21_30_day,,"logistics.logistics_igm_bv.""unresolved_ticket_21_30_day""",logistics.logistics_igm_bv
+unresolved_ticket_31_40_day,,"logistics.logistics_igm_bv.""unresolved_ticket_31_40_day""",logistics.logistics_igm_bv
+unresolved_ticket_41_50_day,,"logistics.logistics_igm_bv.""unresolved_ticket_41_50_day""",logistics.logistics_igm_bv
+unresolved_ticket_51_60_day,,"logistics.logistics_igm_bv.""unresolved_ticket_51_60_day""",logistics.logistics_igm_bv
+unresolved_ticket_above_60_day,,"logistics.logistics_igm_bv.""unresolved_ticket_above_60_day""",logistics.logistics_igm_bv
+main_sub_category,,"logistics.logistics_igm_bv.""main_sub_category""",logistics.logistics_igm_bv
+order_category,,"logistics.logistics_igm_bv.""order_category""",logistics.logistics_igm_bv
+main_category,,"logistics.logistics_igm_bv.""main_category""",logistics.logistics_igm_bv
+"▼ logistics_igm_lsp   (base table, 5 cols)",,,logistics.logistics_igm_lsp
+bpp_id,,"logistics.logistics_igm_lsp.""bpp_id""",logistics.logistics_igm_lsp
+logistics NP name,,"logistics.logistics_igm_lsp.""logistics NP name""",logistics.logistics_igm_lsp
+Updated Date,,"logistics.logistics_igm_lsp.""Updated Date""",logistics.logistics_igm_lsp
+LNP Mask,,"logistics.logistics_igm_lsp.""LNP Mask""",logistics.logistics_igm_lsp
+TSP Powered,,"logistics.logistics_igm_lsp.""TSP Powered""",logistics.logistics_igm_lsp
+"▼ logistics_igm_snp   (base table, 5 cols)",,,logistics.logistics_igm_snp
+seller_np,,"logistics.logistics_igm_snp.""seller_np""",logistics.logistics_igm_snp
+Seller NP,,"logistics.logistics_igm_snp.""Seller NP""",logistics.logistics_igm_snp
+Updated Date,,"logistics.logistics_igm_snp.""Updated Date""",logistics.logistics_igm_snp
+SNP Mask,,"logistics.logistics_igm_snp.""SNP Mask""",logistics.logistics_igm_snp
+TSP Powered,,"logistics.logistics_igm_snp.""TSP Powered""",logistics.logistics_igm_snp
+"▼ logistics_on_search_metrics   (base table, 14 cols)",,,logistics.logistics_on_search_metrics
+bap_id,,"logistics.logistics_on_search_metrics.""bap_id""",logistics.logistics_on_search_metrics
+bpp_id,,"logistics.logistics_on_search_metrics.""bpp_id""",logistics.logistics_on_search_metrics
+date,,"logistics.logistics_on_search_metrics.""date""",logistics.logistics_on_search_metrics
+s_category_id,,"logistics.logistics_on_search_metrics.""s_category_id""",logistics.logistics_on_search_metrics
+pick_up_pincode,,"logistics.logistics_on_search_metrics.""pick_up_pincode""",logistics.logistics_on_search_metrics
+delivery_pincode,,"logistics.logistics_on_search_metrics.""delivery_pincode""",logistics.logistics_on_search_metrics
+s_sync_response,,"logistics.logistics_on_search_metrics.""s_sync_response""",logistics.logistics_on_search_metrics
+on_search_received,,"logistics.logistics_on_search_metrics.""on_search_received""",logistics.logistics_on_search_metrics
+on_search_error,,"logistics.logistics_on_search_metrics.""on_search_error""",logistics.logistics_on_search_metrics
+review,,"logistics.logistics_on_search_metrics.""review""",logistics.logistics_on_search_metrics
+success_review,,"logistics.logistics_on_search_metrics.""success_review""",logistics.logistics_on_search_metrics
+success_lsp,,"logistics.logistics_on_search_metrics.""success_lsp""",logistics.logistics_on_search_metrics
+snp_key,,"logistics.logistics_on_search_metrics.""snp_key""",logistics.logistics_on_search_metrics
+lnp_key,,"logistics.logistics_on_search_metrics.""lnp_key""",logistics.logistics_on_search_metrics
+"▼ logistics_on_search_metrics_bv   (view, 34 cols)",,,logistics.logistics_on_search_metrics_bv
+bap_id,,"logistics.logistics_on_search_metrics_bv.""bap_id""",logistics.logistics_on_search_metrics_bv
+bpp_id,,"logistics.logistics_on_search_metrics_bv.""bpp_id""",logistics.logistics_on_search_metrics_bv
+date,,"logistics.logistics_on_search_metrics_bv.""date""",logistics.logistics_on_search_metrics_bv
+s_category_id,,"logistics.logistics_on_search_metrics_bv.""s_category_id""",logistics.logistics_on_search_metrics_bv
+pick_up_pincode,,"logistics.logistics_on_search_metrics_bv.""pick_up_pincode""",logistics.logistics_on_search_metrics_bv
+delivery_pincode,,"logistics.logistics_on_search_metrics_bv.""delivery_pincode""",logistics.logistics_on_search_metrics_bv
+s_sync_response,,"logistics.logistics_on_search_metrics_bv.""s_sync_response""",logistics.logistics_on_search_metrics_bv
+on_search_received,,"logistics.logistics_on_search_metrics_bv.""on_search_received""",logistics.logistics_on_search_metrics_bv
+on_search_error,,"logistics.logistics_on_search_metrics_bv.""on_search_error""",logistics.logistics_on_search_metrics_bv
+review,,"logistics.logistics_on_search_metrics_bv.""review""",logistics.logistics_on_search_metrics_bv
+success_review,,"logistics.logistics_on_search_metrics_bv.""success_review""",logistics.logistics_on_search_metrics_bv
+success_lsp,,"logistics.logistics_on_search_metrics_bv.""success_lsp""",logistics.logistics_on_search_metrics_bv
+snp_key,,"logistics.logistics_on_search_metrics_bv.""snp_key""",logistics.logistics_on_search_metrics_bv
+lnp_key,,"logistics.logistics_on_search_metrics_bv.""lnp_key""",logistics.logistics_on_search_metrics_bv
+lnp,,"logistics.logistics_on_search_metrics_bv.""lnp""",logistics.logistics_on_search_metrics_bv
+snp,,"logistics.logistics_on_search_metrics_bv.""snp""",logistics.logistics_on_search_metrics_bv
+Unique Searches with 0 on_search,,"logistics.logistics_on_search_metrics_bv.""Unique Searches with 0 on_search""",logistics.logistics_on_search_metrics_bv
+On_search received with errors,,"logistics.logistics_on_search_metrics_bv.""On_search received with errors""",logistics.logistics_on_search_metrics_bv
+No On_search response,,"logistics.logistics_on_search_metrics_bv.""No On_search response""",logistics.logistics_on_search_metrics_bv
+Searches Dropped Due to LSP System Issue,,"logistics.logistics_on_search_metrics_bv.""Searches Dropped Due to LSP System Issue""",logistics.logistics_on_search_metrics_bv
+Searches with NACK response by LSP,,"logistics.logistics_on_search_metrics_bv.""Searches with NACK response by LSP""",logistics.logistics_on_search_metrics_bv
+On_search received with No errors,,"logistics.logistics_on_search_metrics_bv.""On_search received with No errors""",logistics.logistics_on_search_metrics_bv
+Atleast 1 on_search received,,"logistics.logistics_on_search_metrics_bv.""Atleast 1 on_search received""",logistics.logistics_on_search_metrics_bv
+LSPs with Successful Response,,"logistics.logistics_on_search_metrics_bv.""LSPs with Successful Response""",logistics.logistics_on_search_metrics_bv
+Error Message,,"logistics.logistics_on_search_metrics_bv.""Error Message""",logistics.logistics_on_search_metrics_bv
+Error Description,,"logistics.logistics_on_search_metrics_bv.""Error Description""",logistics.logistics_on_search_metrics_bv
+Pick Up State,,"logistics.logistics_on_search_metrics_bv.""Pick Up State""",logistics.logistics_on_search_metrics_bv
+Delivery State,,"logistics.logistics_on_search_metrics_bv.""Delivery State""",logistics.logistics_on_search_metrics_bv
+Pick Up City,,"logistics.logistics_on_search_metrics_bv.""Pick Up City""",logistics.logistics_on_search_metrics_bv
+Delivery City,,"logistics.logistics_on_search_metrics_bv.""Delivery City""",logistics.logistics_on_search_metrics_bv
+Pick Up Tier,,"logistics.logistics_on_search_metrics_bv.""Pick Up Tier""",logistics.logistics_on_search_metrics_bv
+Delivery Tier,,"logistics.logistics_on_search_metrics_bv.""Delivery Tier""",logistics.logistics_on_search_metrics_bv
+Pick Up Zone,,"logistics.logistics_on_search_metrics_bv.""Pick Up Zone""",logistics.logistics_on_search_metrics_bv
+Delivery Zone,,"logistics.logistics_on_search_metrics_bv.""Delivery Zone""",logistics.logistics_on_search_metrics_bv
+"▼ logistics_on_search_metrics_stage   (base table, 14 cols)",,,logistics.logistics_on_search_metrics_stage
+bap_id,,"logistics.logistics_on_search_metrics_stage.""bap_id""",logistics.logistics_on_search_metrics_stage
+bpp_id,,"logistics.logistics_on_search_metrics_stage.""bpp_id""",logistics.logistics_on_search_metrics_stage
+date,,"logistics.logistics_on_search_metrics_stage.""date""",logistics.logistics_on_search_metrics_stage
+s_category_id,,"logistics.logistics_on_search_metrics_stage.""s_category_id""",logistics.logistics_on_search_metrics_stage
+pick_up_pincode,,"logistics.logistics_on_search_metrics_stage.""pick_up_pincode""",logistics.logistics_on_search_metrics_stage
+delivery_pincode,,"logistics.logistics_on_search_metrics_stage.""delivery_pincode""",logistics.logistics_on_search_metrics_stage
+s_sync_response,,"logistics.logistics_on_search_metrics_stage.""s_sync_response""",logistics.logistics_on_search_metrics_stage
+on_search_received,,"logistics.logistics_on_search_metrics_stage.""on_search_received""",logistics.logistics_on_search_metrics_stage
+on_search_error,,"logistics.logistics_on_search_metrics_stage.""on_search_error""",logistics.logistics_on_search_metrics_stage
+review,,"logistics.logistics_on_search_metrics_stage.""review""",logistics.logistics_on_search_metrics_stage
+success_review,,"logistics.logistics_on_search_metrics_stage.""success_review""",logistics.logistics_on_search_metrics_stage
+success_lsp,,"logistics.logistics_on_search_metrics_stage.""success_lsp""",logistics.logistics_on_search_metrics_stage
+snp_key,,"logistics.logistics_on_search_metrics_stage.""snp_key""",logistics.logistics_on_search_metrics_stage
+lnp_key,,"logistics.logistics_on_search_metrics_stage.""lnp_key""",logistics.logistics_on_search_metrics_stage
+"▼ logistics_order   (view, 48 cols)",,,logistics.logistics_order
+bap_id,,"logistics.logistics_order.""bap_id""",logistics.logistics_order
+bpp_id,,"logistics.logistics_order.""bpp_id""",logistics.logistics_order
+order_id,,"logistics.logistics_order.""order_id""",logistics.logistics_order
+transaction_id,,"logistics.logistics_order.""transaction_id""",logistics.logistics_order
+fulfillment_status,,"logistics.logistics_order.""fulfillment_status""",logistics.logistics_order
+fulfillment_type,,"logistics.logistics_order.""fulfillment_type""",logistics.logistics_order
+cod_order,,"logistics.logistics_order.""cod_order""",logistics.logistics_order
+date,,"logistics.logistics_order.""date""",logistics.logistics_order
+order_created_at,,"logistics.logistics_order.""order_created_at""",logistics.logistics_order
+cancellation_code,,"logistics.logistics_order.""cancellation_code""",logistics.logistics_order
+latest_order_status,,"logistics.logistics_order.""latest_order_status""",logistics.logistics_order
+retail_order_id,,"logistics.logistics_order.""retail_order_id""",logistics.logistics_order
+pick_up_pincode,,"logistics.logistics_order.""pick_up_pincode""",logistics.logistics_order
+delivery_pincode,,"logistics.logistics_order.""delivery_pincode""",logistics.logistics_order
+retail_category,,"logistics.logistics_order.""retail_category""",logistics.logistics_order
+shipment_type,,"logistics.logistics_order.""shipment_type""",logistics.logistics_order
+motorable_distance,,"logistics.logistics_order.""motorable_distance""",logistics.logistics_order
+provider_name,,"logistics.logistics_order.""provider_name""",logistics.logistics_order
+pickup_tat,,"logistics.logistics_order.""pickup_tat""",logistics.logistics_order
+rts_tat,,"logistics.logistics_order.""rts_tat""",logistics.logistics_order
+f_ready_to_ship_at_date,,"logistics.logistics_order.""f_ready_to_ship_at_date""",logistics.logistics_order
+f_at_pickup_from_date,,"logistics.logistics_order.""f_at_pickup_from_date""",logistics.logistics_order
+f_agent_assigned_at_date,,"logistics.logistics_order.""f_agent_assigned_at_date""",logistics.logistics_order
+delivered_date,,"logistics.logistics_order.""delivered_date""",logistics.logistics_order
+cancelled_date,,"logistics.logistics_order.""cancelled_date""",logistics.logistics_order
+picked_date,,"logistics.logistics_order.""picked_date""",logistics.logistics_order
+promised_time_to_deliver,,"logistics.logistics_order.""promised_time_to_deliver""",logistics.logistics_order
+awbnumber,,"logistics.logistics_order.""awbnumber""",logistics.logistics_order
+buyer_np,,"logistics.logistics_order.""buyer_np""",logistics.logistics_order
+retail_snp,,"logistics.logistics_order.""retail_snp""",logistics.logistics_order
+Linked Orders,,"logistics.logistics_order.""Linked Orders""",logistics.logistics_order
+dedup,,"logistics.logistics_order.""dedup""",logistics.logistics_order
+order_count,,"logistics.logistics_order.""order_count""",logistics.logistics_order
+avg_del,,"logistics.logistics_order.""avg_del""",logistics.logistics_order
+del_tat_duration,,"logistics.logistics_order.""del_tat_duration""",logistics.logistics_order
+del_adherence,,"logistics.logistics_order.""del_adherence""",logistics.logistics_order
+del_breach_diff,,"logistics.logistics_order.""del_breach_diff""",logistics.logistics_order
+rtsvscrt,,"logistics.logistics_order.""rtsvscrt""",logistics.logistics_order
+rtsvspck,,"logistics.logistics_order.""rtsvspck""",logistics.logistics_order
+delage,,"logistics.logistics_order.""delage""",logistics.logistics_order
+cancel_secs,,"logistics.logistics_order.""cancel_secs""",logistics.logistics_order
+in_process_ageing,,"logistics.logistics_order.""in_process_ageing""",logistics.logistics_order
+rider_waiting,,"logistics.logistics_order.""rider_waiting""",logistics.logistics_order
+rider_assigning,,"logistics.logistics_order.""rider_assigning""",logistics.logistics_order
+pick_up_breached,,"logistics.logistics_order.""pick_up_breached""",logistics.logistics_order
+pick_up_tat_diff,,"logistics.logistics_order.""pick_up_tat_diff""",logistics.logistics_order
+rts_breached,,"logistics.logistics_order.""rts_breached""",logistics.logistics_order
+rts_tat_diff,,"logistics.logistics_order.""rts_tat_diff""",logistics.logistics_order
+"▼ logistics_order_bv   (view, 206 cols)",,,logistics.logistics_order_bv
+bap_id,,"logistics.logistics_order_bv.""bap_id""",logistics.logistics_order_bv
+bpp_id,,"logistics.logistics_order_bv.""bpp_id""",logistics.logistics_order_bv
+order_id,,"logistics.logistics_order_bv.""order_id""",logistics.logistics_order_bv
+transaction_id,,"logistics.logistics_order_bv.""transaction_id""",logistics.logistics_order_bv
+fulfillment_status,,"logistics.logistics_order_bv.""fulfillment_status""",logistics.logistics_order_bv
+fulfillment_type,,"logistics.logistics_order_bv.""fulfillment_type""",logistics.logistics_order_bv
+cod_order,,"logistics.logistics_order_bv.""cod_order""",logistics.logistics_order_bv
+date,,"logistics.logistics_order_bv.""date""",logistics.logistics_order_bv
+order_created_at,,"logistics.logistics_order_bv.""order_created_at""",logistics.logistics_order_bv
+cancellation_code,,"logistics.logistics_order_bv.""cancellation_code""",logistics.logistics_order_bv
+latest_order_status,,"logistics.logistics_order_bv.""latest_order_status""",logistics.logistics_order_bv
+retail_order_id,,"logistics.logistics_order_bv.""retail_order_id""",logistics.logistics_order_bv
+pick_up_pincode,,"logistics.logistics_order_bv.""pick_up_pincode""",logistics.logistics_order_bv
+delivery_pincode,,"logistics.logistics_order_bv.""delivery_pincode""",logistics.logistics_order_bv
+retail_category,,"logistics.logistics_order_bv.""retail_category""",logistics.logistics_order_bv
+shipment_type,,"logistics.logistics_order_bv.""shipment_type""",logistics.logistics_order_bv
+motorable_distance,,"logistics.logistics_order_bv.""motorable_distance""",logistics.logistics_order_bv
+provider_name,,"logistics.logistics_order_bv.""provider_name""",logistics.logistics_order_bv
+pickup_tat,,"logistics.logistics_order_bv.""pickup_tat""",logistics.logistics_order_bv
+rts_tat,,"logistics.logistics_order_bv.""rts_tat""",logistics.logistics_order_bv
+f_ready_to_ship_at_date,,"logistics.logistics_order_bv.""f_ready_to_ship_at_date""",logistics.logistics_order_bv
+f_at_pickup_from_date,,"logistics.logistics_order_bv.""f_at_pickup_from_date""",logistics.logistics_order_bv
+f_agent_assigned_at_date,,"logistics.logistics_order_bv.""f_agent_assigned_at_date""",logistics.logistics_order_bv
+delivered_date,,"logistics.logistics_order_bv.""delivered_date""",logistics.logistics_order_bv
+cancelled_date,,"logistics.logistics_order_bv.""cancelled_date""",logistics.logistics_order_bv
+picked_date,,"logistics.logistics_order_bv.""picked_date""",logistics.logistics_order_bv
+promised_time_to_deliver,,"logistics.logistics_order_bv.""promised_time_to_deliver""",logistics.logistics_order_bv
+buyer_np,,"logistics.logistics_order_bv.""buyer_np""",logistics.logistics_order_bv
+retail_snp,,"logistics.logistics_order_bv.""retail_snp""",logistics.logistics_order_bv
+Linked Orders,,"logistics.logistics_order_bv.""Linked Orders""",logistics.logistics_order_bv
+dedup,,"logistics.logistics_order_bv.""dedup""",logistics.logistics_order_bv
+order_count,,"logistics.logistics_order_bv.""order_count""",logistics.logistics_order_bv
+avg_del,,"logistics.logistics_order_bv.""avg_del""",logistics.logistics_order_bv
+del_tat_duration,,"logistics.logistics_order_bv.""del_tat_duration""",logistics.logistics_order_bv
+del_adherence,,"logistics.logistics_order_bv.""del_adherence""",logistics.logistics_order_bv
+del_breach_diff,,"logistics.logistics_order_bv.""del_breach_diff""",logistics.logistics_order_bv
+rtsvscrt,,"logistics.logistics_order_bv.""rtsvscrt""",logistics.logistics_order_bv
+rtsvspck,,"logistics.logistics_order_bv.""rtsvspck""",logistics.logistics_order_bv
+delage,,"logistics.logistics_order_bv.""delage""",logistics.logistics_order_bv
+cancel_secs,,"logistics.logistics_order_bv.""cancel_secs""",logistics.logistics_order_bv
+in_process_ageing,,"logistics.logistics_order_bv.""in_process_ageing""",logistics.logistics_order_bv
+rider_waiting,,"logistics.logistics_order_bv.""rider_waiting""",logistics.logistics_order_bv
+rider_assigning,,"logistics.logistics_order_bv.""rider_assigning""",logistics.logistics_order_bv
+Pickup TAT Breached,,"logistics.logistics_order_bv.""Pickup TAT Breached""",logistics.logistics_order_bv
+pick_up_tat_diff,,"logistics.logistics_order_bv.""pick_up_tat_diff""",logistics.logistics_order_bv
+RTS Breached,,"logistics.logistics_order_bv.""RTS Breached""",logistics.logistics_order_bv
+rts_tat_diff,,"logistics.logistics_order_bv.""rts_tat_diff""",logistics.logistics_order_bv
+order_status,,"logistics.logistics_order_bv.""order_status""",logistics.logistics_order_bv
+Order Category,,"logistics.logistics_order_bv.""Order Category""",logistics.logistics_order_bv
+Order Picked,,"logistics.logistics_order_bv.""Order Picked""",logistics.logistics_order_bv
+Rider Assignment Type,,"logistics.logistics_order_bv.""Rider Assignment Type""",logistics.logistics_order_bv
+confirmed,,"logistics.logistics_order_bv.""confirmed""",logistics.logistics_order_bv
+delivered,,"logistics.logistics_order_bv.""delivered""",logistics.logistics_order_bv
+cancelled,,"logistics.logistics_order_bv.""cancelled""",logistics.logistics_order_bv
+inprocess,,"logistics.logistics_order_bv.""inprocess""",logistics.logistics_order_bv
+logistics_cancelled,,"logistics.logistics_order_bv.""logistics_cancelled""",logistics.logistics_order_bv
+buyer_cancelled,,"logistics.logistics_order_bv.""buyer_cancelled""",logistics.logistics_order_bv
+seller_cancelled,,"logistics.logistics_order_bv.""seller_cancelled""",logistics.logistics_order_bv
+Confirmed with RTS,,"logistics.logistics_order_bv.""Confirmed with RTS""",logistics.logistics_order_bv
+confirmed with No RTS,,"logistics.logistics_order_bv.""confirmed with No RTS""",logistics.logistics_order_bv
+COD Orders,,"logistics.logistics_order_bv.""COD Orders""",logistics.logistics_order_bv
+Unique retail orders by snp,,"logistics.logistics_order_bv.""Unique retail orders by snp""",logistics.logistics_order_bv
+Promised TAT (in days),,"logistics.logistics_order_bv.""Promised TAT (in days)""",logistics.logistics_order_bv
+Avg Motorable Distance,,"logistics.logistics_order_bv.""Avg Motorable Distance""",logistics.logistics_order_bv
+No Motorable Distance,,"logistics.logistics_order_bv.""No Motorable Distance""",logistics.logistics_order_bv
+Within 0-3 kms,,"logistics.logistics_order_bv.""Within 0-3 kms""",logistics.logistics_order_bv
+Within 3-4 kms,,"logistics.logistics_order_bv.""Within 3-4 kms""",logistics.logistics_order_bv
+Within 4-5 kms,,"logistics.logistics_order_bv.""Within 4-5 kms""",logistics.logistics_order_bv
+Within 5-7 kms,,"logistics.logistics_order_bv.""Within 5-7 kms""",logistics.logistics_order_bv
+Within 7-10 kms,,"logistics.logistics_order_bv.""Within 7-10 kms""",logistics.logistics_order_bv
+Beyond 10 kms,,"logistics.logistics_order_bv.""Beyond 10 kms""",logistics.logistics_order_bv
+Adherence %,,"logistics.logistics_order_bv.""Adherence %""",logistics.logistics_order_bv
+Breached,,"logistics.logistics_order_bv.""Breached""",logistics.logistics_order_bv
+Breached 0-5 mins,,"logistics.logistics_order_bv.""Breached 0-5 mins""",logistics.logistics_order_bv
+Breached 5-10 mins,,"logistics.logistics_order_bv.""Breached 5-10 mins""",logistics.logistics_order_bv
+Breached 10-20 mins,,"logistics.logistics_order_bv.""Breached 10-20 mins""",logistics.logistics_order_bv
+Breached 20-30 mins,,"logistics.logistics_order_bv.""Breached 20-30 mins""",logistics.logistics_order_bv
+Breached > 30 mins,,"logistics.logistics_order_bv.""Breached > 30 mins""",logistics.logistics_order_bv
+Breached 0-15 mins,,"logistics.logistics_order_bv.""Breached 0-15 mins""",logistics.logistics_order_bv
+Breached 15-30 mins,,"logistics.logistics_order_bv.""Breached 15-30 mins""",logistics.logistics_order_bv
+Breached 30-60 mins,,"logistics.logistics_order_bv.""Breached 30-60 mins""",logistics.logistics_order_bv
+Breached 1-2 hrs,,"logistics.logistics_order_bv.""Breached 1-2 hrs""",logistics.logistics_order_bv
+Breached 2-6 hrs,,"logistics.logistics_order_bv.""Breached 2-6 hrs""",logistics.logistics_order_bv
+Breached >6 hrs,,"logistics.logistics_order_bv.""Breached >6 hrs""",logistics.logistics_order_bv
+Breached 0-1 day,,"logistics.logistics_order_bv.""Breached 0-1 day""",logistics.logistics_order_bv
+Breached 1-2 day,,"logistics.logistics_order_bv.""Breached 1-2 day""",logistics.logistics_order_bv
+Breached 2-3 day,,"logistics.logistics_order_bv.""Breached 2-3 day""",logistics.logistics_order_bv
+Breached 3-4 day,,"logistics.logistics_order_bv.""Breached 3-4 day""",logistics.logistics_order_bv
+Breached > 4 day,,"logistics.logistics_order_bv.""Breached > 4 day""",logistics.logistics_order_bv
+D TAT Breached,,"logistics.logistics_order_bv.""D TAT Breached""",logistics.logistics_order_bv
+Average Delivery Time for Intercity,,"logistics.logistics_order_bv.""Average Delivery Time for Intercity""",logistics.logistics_order_bv
+Average Delivery Time for Hyperlocal,,"logistics.logistics_order_bv.""Average Delivery Time for Hyperlocal""",logistics.logistics_order_bv
+Average Delivery Time for F&B,,"logistics.logistics_order_bv.""Average Delivery Time for F&B""",logistics.logistics_order_bv
+Picked Within 0-10 mins,,"logistics.logistics_order_bv.""Picked Within 0-10 mins""",logistics.logistics_order_bv
+Picked Within 10-20 mins,,"logistics.logistics_order_bv.""Picked Within 10-20 mins""",logistics.logistics_order_bv
+Picked Within 20-30 mins,,"logistics.logistics_order_bv.""Picked Within 20-30 mins""",logistics.logistics_order_bv
+Picked Within 30-60 mins,,"logistics.logistics_order_bv.""Picked Within 30-60 mins""",logistics.logistics_order_bv
+Picked Within 60-120 mins,,"logistics.logistics_order_bv.""Picked Within 60-120 mins""",logistics.logistics_order_bv
+Picked Beyond 120 mins,,"logistics.logistics_order_bv.""Picked Beyond 120 mins""",logistics.logistics_order_bv
+Picked Within 0-1 hrs,,"logistics.logistics_order_bv.""Picked Within 0-1 hrs""",logistics.logistics_order_bv
+Picked Within 1-3 hrs,,"logistics.logistics_order_bv.""Picked Within 1-3 hrs""",logistics.logistics_order_bv
+Picked Within 3-5 hrs,,"logistics.logistics_order_bv.""Picked Within 3-5 hrs""",logistics.logistics_order_bv
+Picked Within 5-10 hrs,,"logistics.logistics_order_bv.""Picked Within 5-10 hrs""",logistics.logistics_order_bv
+Picked Above 10 hrs,,"logistics.logistics_order_bv.""Picked Above 10 hrs""",logistics.logistics_order_bv
+Average Pickup Time,,"logistics.logistics_order_bv.""Average Pickup Time""",logistics.logistics_order_bv
+F&B Average Pickup Time (in mins),,"logistics.logistics_order_bv.""F&B Average Pickup Time (in mins)""",logistics.logistics_order_bv
+Hyperlocal Non F&B Average Pickup Time (in mins),,"logistics.logistics_order_bv.""Hyperlocal Non F&B Average Pickup Time (in mins)""",logistics.logistics_order_bv
+Intercity Average Pickup Time (in days),,"logistics.logistics_order_bv.""Intercity Average Pickup Time (in days)""",logistics.logistics_order_bv
+Intercity Average Pickup Time,,"logistics.logistics_order_bv.""Intercity Average Pickup Time""",logistics.logistics_order_bv
+Del 0-30 mins,,"logistics.logistics_order_bv.""Del 0-30 mins""",logistics.logistics_order_bv
+Del 30-35 mins,,"logistics.logistics_order_bv.""Del 30-35 mins""",logistics.logistics_order_bv
+Del 35-40 mins,,"logistics.logistics_order_bv.""Del 35-40 mins""",logistics.logistics_order_bv
+Del 40-45 mins,,"logistics.logistics_order_bv.""Del 40-45 mins""",logistics.logistics_order_bv
+Del 45-60 mins,,"logistics.logistics_order_bv.""Del 45-60 mins""",logistics.logistics_order_bv
+Del Above 60 mins,,"logistics.logistics_order_bv.""Del Above 60 mins""",logistics.logistics_order_bv
+Del > 10 days,,"logistics.logistics_order_bv.""Del > 10 days""",logistics.logistics_order_bv
+Del 0-3 days,,"logistics.logistics_order_bv.""Del 0-3 days""",logistics.logistics_order_bv
+Del 3-5 days,,"logistics.logistics_order_bv.""Del 3-5 days""",logistics.logistics_order_bv
+Del 5-7 days,,"logistics.logistics_order_bv.""Del 5-7 days""",logistics.logistics_order_bv
+Del 7-10 days,,"logistics.logistics_order_bv.""Del 7-10 days""",logistics.logistics_order_bv
+F&B Orders Average Delivery (in mins),,"logistics.logistics_order_bv.""F&B Orders Average Delivery (in mins)""",logistics.logistics_order_bv
+Intercity Orders Average Delivery (in days),,"logistics.logistics_order_bv.""Intercity Orders Average Delivery (in days)""",logistics.logistics_order_bv
+Hyperlocal Non F&B Orders Average Delivery (in mins),,"logistics.logistics_order_bv.""Hyperlocal Non F&B Orders Average Delivery (in mins)""",logistics.logistics_order_bv
+Average Delivery (in mins),,"logistics.logistics_order_bv.""Average Delivery (in mins)""",logistics.logistics_order_bv
+Pending Within 0-1 days,,"logistics.logistics_order_bv.""Pending Within 0-1 days""",logistics.logistics_order_bv
+Pending Within 1-2 days,,"logistics.logistics_order_bv.""Pending Within 1-2 days""",logistics.logistics_order_bv
+Pending Within 2-3 days,,"logistics.logistics_order_bv.""Pending Within 2-3 days""",logistics.logistics_order_bv
+Pending Within 3-4 days,,"logistics.logistics_order_bv.""Pending Within 3-4 days""",logistics.logistics_order_bv
+Pending Within 4-5 days,,"logistics.logistics_order_bv.""Pending Within 4-5 days""",logistics.logistics_order_bv
+Pending Beyond 5 days,,"logistics.logistics_order_bv.""Pending Beyond 5 days""",logistics.logistics_order_bv
+Pending Within 0-2 days,,"logistics.logistics_order_bv.""Pending Within 0-2 days""",logistics.logistics_order_bv
+Pending Within 2-5 days,,"logistics.logistics_order_bv.""Pending Within 2-5 days""",logistics.logistics_order_bv
+Pending Within 5-10 days,,"logistics.logistics_order_bv.""Pending Within 5-10 days""",logistics.logistics_order_bv
+Pending Beyond 10 days,,"logistics.logistics_order_bv.""Pending Beyond 10 days""",logistics.logistics_order_bv
+Waiting within 5 mins,,"logistics.logistics_order_bv.""Waiting within 5 mins""",logistics.logistics_order_bv
+Waiting 5-10 mins,,"logistics.logistics_order_bv.""Waiting 5-10 mins""",logistics.logistics_order_bv
+Waiting 10-20 mins,,"logistics.logistics_order_bv.""Waiting 10-20 mins""",logistics.logistics_order_bv
+Waiting 20-30 mins,,"logistics.logistics_order_bv.""Waiting 20-30 mins""",logistics.logistics_order_bv
+Above 30 mins,,"logistics.logistics_order_bv.""Above 30 mins""",logistics.logistics_order_bv
+Non F&B Orders Average Rider Waiting Time (in mins),,"logistics.logistics_order_bv.""Non F&B Orders Average Rider Waiting Time (in mins)""",logistics.logistics_order_bv
+F&B Orders Average Rider Waiting Time (in mins),,"logistics.logistics_order_bv.""F&B Orders Average Rider Waiting Time (in mins)""",logistics.logistics_order_bv
+Average Rider Waiting Time (in mins),,"logistics.logistics_order_bv.""Average Rider Waiting Time (in mins)""",logistics.logistics_order_bv
+RTS Breached 0-5 mins,,"logistics.logistics_order_bv.""RTS Breached 0-5 mins""",logistics.logistics_order_bv
+RTS Breached 5-10 mins,,"logistics.logistics_order_bv.""RTS Breached 5-10 mins""",logistics.logistics_order_bv
+RTS Breached 10-20 mins,,"logistics.logistics_order_bv.""RTS Breached 10-20 mins""",logistics.logistics_order_bv
+RTS Breached 20-30 mins,,"logistics.logistics_order_bv.""RTS Breached 20-30 mins""",logistics.logistics_order_bv
+RTS Breached Above 30 mins,,"logistics.logistics_order_bv.""RTS Breached Above 30 mins""",logistics.logistics_order_bv
+RTS Breached 0-1 days,,"logistics.logistics_order_bv.""RTS Breached 0-1 days""",logistics.logistics_order_bv
+RTS Breached 1-2 days,,"logistics.logistics_order_bv.""RTS Breached 1-2 days""",logistics.logistics_order_bv
+RTS Breached 2-3 days,,"logistics.logistics_order_bv.""RTS Breached 2-3 days""",logistics.logistics_order_bv
+RTS Breached 3-4 days,,"logistics.logistics_order_bv.""RTS Breached 3-4 days""",logistics.logistics_order_bv
+RTS Breached Above 4 days,,"logistics.logistics_order_bv.""RTS Breached Above 4 days""",logistics.logistics_order_bv
+F&B Order Average RTS (in mins),,"logistics.logistics_order_bv.""F&B Order Average RTS (in mins)""",logistics.logistics_order_bv
+Non F&B Hyperlocal Average RTS (in mins),,"logistics.logistics_order_bv.""Non F&B Hyperlocal Average RTS (in mins)""",logistics.logistics_order_bv
+Intercity Average Promised RTS (in mins),,"logistics.logistics_order_bv.""Intercity Average Promised RTS (in mins)""",logistics.logistics_order_bv
+Pickup Breached 0-5 mins,,"logistics.logistics_order_bv.""Pickup Breached 0-5 mins""",logistics.logistics_order_bv
+Pickup Breached 5-10 mins,,"logistics.logistics_order_bv.""Pickup Breached 5-10 mins""",logistics.logistics_order_bv
+Pickup Breached 10-20 mins,,"logistics.logistics_order_bv.""Pickup Breached 10-20 mins""",logistics.logistics_order_bv
+Pickup Breached 20-30 mins,,"logistics.logistics_order_bv.""Pickup Breached 20-30 mins""",logistics.logistics_order_bv
+Pickup Breached Above 30 mins,,"logistics.logistics_order_bv.""Pickup Breached Above 30 mins""",logistics.logistics_order_bv
+Pickup Breached 0-1 days,,"logistics.logistics_order_bv.""Pickup Breached 0-1 days""",logistics.logistics_order_bv
+Pickup Breached 1-2 days,,"logistics.logistics_order_bv.""Pickup Breached 1-2 days""",logistics.logistics_order_bv
+Pickup Breached 2-3 days,,"logistics.logistics_order_bv.""Pickup Breached 2-3 days""",logistics.logistics_order_bv
+Pickup Breached 3-4 days,,"logistics.logistics_order_bv.""Pickup Breached 3-4 days""",logistics.logistics_order_bv
+Pickup Breached 4-5 days,,"logistics.logistics_order_bv.""Pickup Breached 4-5 days""",logistics.logistics_order_bv
+Pickup Breached Above 5 days,,"logistics.logistics_order_bv.""Pickup Breached Above 5 days""",logistics.logistics_order_bv
+Intercity Order Average Pickup TAT (in days),,"logistics.logistics_order_bv.""Intercity Order Average Pickup TAT (in days)""",logistics.logistics_order_bv
+Hyperlocal Non F&B Order Average Pickup TAT (in mins),,"logistics.logistics_order_bv.""Hyperlocal Non F&B Order Average Pickup TAT (in mins)""",logistics.logistics_order_bv
+F&B Order Average Pickup TAT (in mins),,"logistics.logistics_order_bv.""F&B Order Average Pickup TAT (in mins)""",logistics.logistics_order_bv
+Assigned Within 0-1 mins,,"logistics.logistics_order_bv.""Assigned Within 0-1 mins""",logistics.logistics_order_bv
+Assigned Within 1-3 mins,,"logistics.logistics_order_bv.""Assigned Within 1-3 mins""",logistics.logistics_order_bv
+Assigned Within 3-5 mins,,"logistics.logistics_order_bv.""Assigned Within 3-5 mins""",logistics.logistics_order_bv
+Assigned Within 5-10 mins,,"logistics.logistics_order_bv.""Assigned Within 5-10 mins""",logistics.logistics_order_bv
+Assigned Beyond 10 mins,,"logistics.logistics_order_bv.""Assigned Beyond 10 mins""",logistics.logistics_order_bv
+Assigned Within 1 mins,,"logistics.logistics_order_bv.""Assigned Within 1 mins""",logistics.logistics_order_bv
+Assigned Within 1-3 hr,,"logistics.logistics_order_bv.""Assigned Within 1-3 hr""",logistics.logistics_order_bv
+Assign After RTS,,"logistics.logistics_order_bv.""Assign After RTS""",logistics.logistics_order_bv
+Assign Before RTS,,"logistics.logistics_order_bv.""Assign Before RTS""",logistics.logistics_order_bv
+Average time to Rider Assignment,,"logistics.logistics_order_bv.""Average time to Rider Assignment""",logistics.logistics_order_bv
+Rider Assignment (F&B),,"logistics.logistics_order_bv.""Rider Assignment (F&B)""",logistics.logistics_order_bv
+Hyperlocal Non F&B Average Rider Assignment (in mins),,"logistics.logistics_order_bv.""Hyperlocal Non F&B Average Rider Assignment (in mins)""",logistics.logistics_order_bv
+Intercity Rider Assignment (in mins),,"logistics.logistics_order_bv.""Intercity Rider Assignment (in mins)""",logistics.logistics_order_bv
+RTS Within 0-10 mins,,"logistics.logistics_order_bv.""RTS Within 0-10 mins""",logistics.logistics_order_bv
+RTS Within 10-20 mins,,"logistics.logistics_order_bv.""RTS Within 10-20 mins""",logistics.logistics_order_bv
+RTS Within 20-30 mins,,"logistics.logistics_order_bv.""RTS Within 20-30 mins""",logistics.logistics_order_bv
+RTS Within 30-60 mins,,"logistics.logistics_order_bv.""RTS Within 30-60 mins""",logistics.logistics_order_bv
+RTS Within 60-120 mins,,"logistics.logistics_order_bv.""RTS Within 60-120 mins""",logistics.logistics_order_bv
+RTS Above 120 mins,,"logistics.logistics_order_bv.""RTS Above 120 mins""",logistics.logistics_order_bv
+RTS Within 0-10 hrs,,"logistics.logistics_order_bv.""RTS Within 0-10 hrs""",logistics.logistics_order_bv
+RTS Within 10-24 hrs,,"logistics.logistics_order_bv.""RTS Within 10-24 hrs""",logistics.logistics_order_bv
+RTS Within 1 - 3 Days,,"logistics.logistics_order_bv.""RTS Within 1 - 3 Days""",logistics.logistics_order_bv
+RTS Within >3 Days,,"logistics.logistics_order_bv.""RTS Within >3 Days""",logistics.logistics_order_bv
+Average Ready To Ship,,"logistics.logistics_order_bv.""Average Ready To Ship""",logistics.logistics_order_bv
+F&B Average RTS (in mins),,"logistics.logistics_order_bv.""F&B Average RTS (in mins)""",logistics.logistics_order_bv
+Hyperlocal Average RTS (in mins),,"logistics.logistics_order_bv.""Hyperlocal Average RTS (in mins)""",logistics.logistics_order_bv
+Intercity Average RTS (in days),,"logistics.logistics_order_bv.""Intercity Average RTS (in days)""",logistics.logistics_order_bv
+Logistics Network Partner,,"logistics.logistics_order_bv.""Logistics Network Partner""",logistics.logistics_order_bv
+Seller NP,,"logistics.logistics_order_bv.""Seller NP""",logistics.logistics_order_bv
+Pick Up State,,"logistics.logistics_order_bv.""Pick Up State""",logistics.logistics_order_bv
+Delivery State,,"logistics.logistics_order_bv.""Delivery State""",logistics.logistics_order_bv
+Pick Up City,,"logistics.logistics_order_bv.""Pick Up City""",logistics.logistics_order_bv
+Delivery City,,"logistics.logistics_order_bv.""Delivery City""",logistics.logistics_order_bv
+Pick Up Tier,,"logistics.logistics_order_bv.""Pick Up Tier""",logistics.logistics_order_bv
+Delivery Tier,,"logistics.logistics_order_bv.""Delivery Tier""",logistics.logistics_order_bv
+Pick Up Zone,,"logistics.logistics_order_bv.""Pick Up Zone""",logistics.logistics_order_bv
+Delivery Zone,,"logistics.logistics_order_bv.""Delivery Zone""",logistics.logistics_order_bv
+"▼ logistics_order_dummy   (view, 48 cols)",,,logistics.logistics_order_dummy
+bap_id,,"logistics.logistics_order_dummy.""bap_id""",logistics.logistics_order_dummy
+bpp_id,,"logistics.logistics_order_dummy.""bpp_id""",logistics.logistics_order_dummy
+order_id,,"logistics.logistics_order_dummy.""order_id""",logistics.logistics_order_dummy
+transaction_id,,"logistics.logistics_order_dummy.""transaction_id""",logistics.logistics_order_dummy
+fulfillment_status,,"logistics.logistics_order_dummy.""fulfillment_status""",logistics.logistics_order_dummy
+fulfillment_type,,"logistics.logistics_order_dummy.""fulfillment_type""",logistics.logistics_order_dummy
+cod_order,,"logistics.logistics_order_dummy.""cod_order""",logistics.logistics_order_dummy
+date,,"logistics.logistics_order_dummy.""date""",logistics.logistics_order_dummy
+order_created_at,,"logistics.logistics_order_dummy.""order_created_at""",logistics.logistics_order_dummy
+cancellation_code,,"logistics.logistics_order_dummy.""cancellation_code""",logistics.logistics_order_dummy
+latest_order_status,,"logistics.logistics_order_dummy.""latest_order_status""",logistics.logistics_order_dummy
+retail_order_id,,"logistics.logistics_order_dummy.""retail_order_id""",logistics.logistics_order_dummy
+pick_up_pincode,,"logistics.logistics_order_dummy.""pick_up_pincode""",logistics.logistics_order_dummy
+delivery_pincode,,"logistics.logistics_order_dummy.""delivery_pincode""",logistics.logistics_order_dummy
+retail_category,,"logistics.logistics_order_dummy.""retail_category""",logistics.logistics_order_dummy
+shipment_type,,"logistics.logistics_order_dummy.""shipment_type""",logistics.logistics_order_dummy
+motorable_distance,,"logistics.logistics_order_dummy.""motorable_distance""",logistics.logistics_order_dummy
+provider_name,,"logistics.logistics_order_dummy.""provider_name""",logistics.logistics_order_dummy
+pickup_tat,,"logistics.logistics_order_dummy.""pickup_tat""",logistics.logistics_order_dummy
+rts_tat,,"logistics.logistics_order_dummy.""rts_tat""",logistics.logistics_order_dummy
+f_ready_to_ship_at_date,,"logistics.logistics_order_dummy.""f_ready_to_ship_at_date""",logistics.logistics_order_dummy
+f_at_pickup_from_date,,"logistics.logistics_order_dummy.""f_at_pickup_from_date""",logistics.logistics_order_dummy
+f_agent_assigned_at_date,,"logistics.logistics_order_dummy.""f_agent_assigned_at_date""",logistics.logistics_order_dummy
+delivered_date,,"logistics.logistics_order_dummy.""delivered_date""",logistics.logistics_order_dummy
+cancelled_date,,"logistics.logistics_order_dummy.""cancelled_date""",logistics.logistics_order_dummy
+picked_date,,"logistics.logistics_order_dummy.""picked_date""",logistics.logistics_order_dummy
+promised_time_to_deliver,,"logistics.logistics_order_dummy.""promised_time_to_deliver""",logistics.logistics_order_dummy
+awbnumber,,"logistics.logistics_order_dummy.""awbnumber""",logistics.logistics_order_dummy
+buyer_np,,"logistics.logistics_order_dummy.""buyer_np""",logistics.logistics_order_dummy
+retail_snp,,"logistics.logistics_order_dummy.""retail_snp""",logistics.logistics_order_dummy
+Linked Orders,,"logistics.logistics_order_dummy.""Linked Orders""",logistics.logistics_order_dummy
+dedup,,"logistics.logistics_order_dummy.""dedup""",logistics.logistics_order_dummy
+order_count,,"logistics.logistics_order_dummy.""order_count""",logistics.logistics_order_dummy
+avg_del,,"logistics.logistics_order_dummy.""avg_del""",logistics.logistics_order_dummy
+del_tat_duration,,"logistics.logistics_order_dummy.""del_tat_duration""",logistics.logistics_order_dummy
+del_adherence,,"logistics.logistics_order_dummy.""del_adherence""",logistics.logistics_order_dummy
+del_breach_diff,,"logistics.logistics_order_dummy.""del_breach_diff""",logistics.logistics_order_dummy
+rtsvscrt,,"logistics.logistics_order_dummy.""rtsvscrt""",logistics.logistics_order_dummy
+rtsvspck,,"logistics.logistics_order_dummy.""rtsvspck""",logistics.logistics_order_dummy
+delage,,"logistics.logistics_order_dummy.""delage""",logistics.logistics_order_dummy
+cancel_secs,,"logistics.logistics_order_dummy.""cancel_secs""",logistics.logistics_order_dummy
+in_process_ageing,,"logistics.logistics_order_dummy.""in_process_ageing""",logistics.logistics_order_dummy
+rider_waiting,,"logistics.logistics_order_dummy.""rider_waiting""",logistics.logistics_order_dummy
+rider_assigning,,"logistics.logistics_order_dummy.""rider_assigning""",logistics.logistics_order_dummy
+pick_up_breached,,"logistics.logistics_order_dummy.""pick_up_breached""",logistics.logistics_order_dummy
+pick_up_tat_diff,,"logistics.logistics_order_dummy.""pick_up_tat_diff""",logistics.logistics_order_dummy
+rts_breached,,"logistics.logistics_order_dummy.""rts_breached""",logistics.logistics_order_dummy
+rts_tat_diff,,"logistics.logistics_order_dummy.""rts_tat_diff""",logistics.logistics_order_dummy
+"▼ logistics_order_igm   (base table, 26 cols)",,,logistics.logistics_order_igm
+bap_id,,"logistics.logistics_order_igm.""bap_id""",logistics.logistics_order_igm
+bpp_id,,"logistics.logistics_order_igm.""bpp_id""",logistics.logistics_order_igm
+igm_key,,"logistics.logistics_order_igm.""igm_key""",logistics.logistics_order_igm
+ticket_created_date,,"logistics.logistics_order_igm.""ticket_created_date""",logistics.logistics_order_igm
+Date,,"logistics.logistics_order_igm.""Date""",logistics.logistics_order_igm
+domain,,"logistics.logistics_order_igm.""domain""",logistics.logistics_order_igm
+network_issue_id,,"logistics.logistics_order_igm.""network_issue_id""",logistics.logistics_order_igm
+ticket_category,,"logistics.logistics_order_igm.""ticket_category""",logistics.logistics_order_igm
+ticket_sub_category,,"logistics.logistics_order_igm.""ticket_sub_category""",logistics.logistics_order_igm
+Resolved,,"logistics.logistics_order_igm.""Resolved""",logistics.logistics_order_igm
+network_order_id,,"logistics.logistics_order_igm.""network_order_id""",logistics.logistics_order_igm
+ticket_key,,"logistics.logistics_order_igm.""ticket_key""",logistics.logistics_order_igm
+ticket_source,,"logistics.logistics_order_igm.""ticket_source""",logistics.logistics_order_igm
+ticket count,,"logistics.logistics_order_igm.""ticket count""",logistics.logistics_order_igm
+ticket_raiser,,"logistics.logistics_order_igm.""ticket_raiser""",logistics.logistics_order_igm
+ticket_expected_resolution_time,,"logistics.logistics_order_igm.""ticket_expected_resolution_time""",logistics.logistics_order_igm
+ticket_status,,"logistics.logistics_order_igm.""ticket_status""",logistics.logistics_order_igm
+Closed date,,"logistics.logistics_order_igm.""Closed date""",logistics.logistics_order_igm
+r_action_ticket_resolved_date,,"logistics.logistics_order_igm.""r_action_ticket_resolved_date""",logistics.logistics_order_igm
+on_issue_error_code,,"logistics.logistics_order_igm.""on_issue_error_code""",logistics.logistics_order_igm
+issue_sync_response,,"logistics.logistics_order_igm.""issue_sync_response""",logistics.logistics_order_igm
+tat_diff(open),,"logistics.logistics_order_igm.""tat_diff(open)""",logistics.logistics_order_igm
+sec_diff(open),,"logistics.logistics_order_igm.""sec_diff(open)""",logistics.logistics_order_igm
+min_diff(resolved),,"logistics.logistics_order_igm.""min_diff(resolved)""",logistics.logistics_order_igm
+tat_diff(res),,"logistics.logistics_order_igm.""tat_diff(res)""",logistics.logistics_order_igm
+modified_date,,"logistics.logistics_order_igm.""modified_date""",logistics.logistics_order_igm
+"▼ logistics_order_igm_stage   (base table, 25 cols)",,,logistics.logistics_order_igm_stage
+bap_id,,"logistics.logistics_order_igm_stage.""bap_id""",logistics.logistics_order_igm_stage
+bpp_id,,"logistics.logistics_order_igm_stage.""bpp_id""",logistics.logistics_order_igm_stage
+igm_key,,"logistics.logistics_order_igm_stage.""igm_key""",logistics.logistics_order_igm_stage
+ticket_created_date,,"logistics.logistics_order_igm_stage.""ticket_created_date""",logistics.logistics_order_igm_stage
+Date,,"logistics.logistics_order_igm_stage.""Date""",logistics.logistics_order_igm_stage
+domain,,"logistics.logistics_order_igm_stage.""domain""",logistics.logistics_order_igm_stage
+network_issue_id,,"logistics.logistics_order_igm_stage.""network_issue_id""",logistics.logistics_order_igm_stage
+ticket_category,,"logistics.logistics_order_igm_stage.""ticket_category""",logistics.logistics_order_igm_stage
+ticket_sub_category,,"logistics.logistics_order_igm_stage.""ticket_sub_category""",logistics.logistics_order_igm_stage
+Resolved,,"logistics.logistics_order_igm_stage.""Resolved""",logistics.logistics_order_igm_stage
+network_order_id,,"logistics.logistics_order_igm_stage.""network_order_id""",logistics.logistics_order_igm_stage
+ticket_key,,"logistics.logistics_order_igm_stage.""ticket_key""",logistics.logistics_order_igm_stage
+ticket_source,,"logistics.logistics_order_igm_stage.""ticket_source""",logistics.logistics_order_igm_stage
+ticket count,,"logistics.logistics_order_igm_stage.""ticket count""",logistics.logistics_order_igm_stage
+ticket_raiser,,"logistics.logistics_order_igm_stage.""ticket_raiser""",logistics.logistics_order_igm_stage
+ticket_expected_resolution_time,,"logistics.logistics_order_igm_stage.""ticket_expected_resolution_time""",logistics.logistics_order_igm_stage
+ticket_status,,"logistics.logistics_order_igm_stage.""ticket_status""",logistics.logistics_order_igm_stage
+Closed date,,"logistics.logistics_order_igm_stage.""Closed date""",logistics.logistics_order_igm_stage
+r_action_ticket_resolved_date,,"logistics.logistics_order_igm_stage.""r_action_ticket_resolved_date""",logistics.logistics_order_igm_stage
+on_issue_error_code,,"logistics.logistics_order_igm_stage.""on_issue_error_code""",logistics.logistics_order_igm_stage
+issue_sync_response,,"logistics.logistics_order_igm_stage.""issue_sync_response""",logistics.logistics_order_igm_stage
+tat_diff(open),,"logistics.logistics_order_igm_stage.""tat_diff(open)""",logistics.logistics_order_igm_stage
+sec_diff(open),,"logistics.logistics_order_igm_stage.""sec_diff(open)""",logistics.logistics_order_igm_stage
+min_diff(resolved),,"logistics.logistics_order_igm_stage.""min_diff(resolved)""",logistics.logistics_order_igm_stage
+tat_diff(res),,"logistics.logistics_order_igm_stage.""tat_diff(res)""",logistics.logistics_order_igm_stage
+"▼ logistics_order_inc_stage   (base table, 32 cols)",,,logistics.logistics_order_inc_stage
+bap_id,,"logistics.logistics_order_inc_stage.""bap_id""",logistics.logistics_order_inc_stage
+bpp_id,,"logistics.logistics_order_inc_stage.""bpp_id""",logistics.logistics_order_inc_stage
+order_id,,"logistics.logistics_order_inc_stage.""order_id""",logistics.logistics_order_inc_stage
+transaction_id,,"logistics.logistics_order_inc_stage.""transaction_id""",logistics.logistics_order_inc_stage
+fulfillment_status,,"logistics.logistics_order_inc_stage.""fulfillment_status""",logistics.logistics_order_inc_stage
+cod_order,,"logistics.logistics_order_inc_stage.""cod_order""",logistics.logistics_order_inc_stage
+date,,"logistics.logistics_order_inc_stage.""date""",logistics.logistics_order_inc_stage
+order_created_at,,"logistics.logistics_order_inc_stage.""order_created_at""",logistics.logistics_order_inc_stage
+cancellation_code,,"logistics.logistics_order_inc_stage.""cancellation_code""",logistics.logistics_order_inc_stage
+latest_order_status,,"logistics.logistics_order_inc_stage.""latest_order_status""",logistics.logistics_order_inc_stage
+retail_order_id,,"logistics.logistics_order_inc_stage.""retail_order_id""",logistics.logistics_order_inc_stage
+pick_up_pincode,,"logistics.logistics_order_inc_stage.""pick_up_pincode""",logistics.logistics_order_inc_stage
+delivery_pincode,,"logistics.logistics_order_inc_stage.""delivery_pincode""",logistics.logistics_order_inc_stage
+retail_category,,"logistics.logistics_order_inc_stage.""retail_category""",logistics.logistics_order_inc_stage
+shipment_type,,"logistics.logistics_order_inc_stage.""shipment_type""",logistics.logistics_order_inc_stage
+motorable_distance,,"logistics.logistics_order_inc_stage.""motorable_distance""",logistics.logistics_order_inc_stage
+provider_name,,"logistics.logistics_order_inc_stage.""provider_name""",logistics.logistics_order_inc_stage
+pickup_tat,,"logistics.logistics_order_inc_stage.""pickup_tat""",logistics.logistics_order_inc_stage
+rts_tat,,"logistics.logistics_order_inc_stage.""rts_tat""",logistics.logistics_order_inc_stage
+f_ready_to_ship_at_date,,"logistics.logistics_order_inc_stage.""f_ready_to_ship_at_date""",logistics.logistics_order_inc_stage
+f_at_pickup_from_date,,"logistics.logistics_order_inc_stage.""f_at_pickup_from_date""",logistics.logistics_order_inc_stage
+f_agent_assigned_at_date,,"logistics.logistics_order_inc_stage.""f_agent_assigned_at_date""",logistics.logistics_order_inc_stage
+delivered_date,,"logistics.logistics_order_inc_stage.""delivered_date""",logistics.logistics_order_inc_stage
+cancelled_date,,"logistics.logistics_order_inc_stage.""cancelled_date""",logistics.logistics_order_inc_stage
+picked_date,,"logistics.logistics_order_inc_stage.""picked_date""",logistics.logistics_order_inc_stage
+drop_row,,"logistics.logistics_order_inc_stage.""drop_row""",logistics.logistics_order_inc_stage
+row_updated,,"logistics.logistics_order_inc_stage.""row_updated""",logistics.logistics_order_inc_stage
+promised_time_to_deliver,,"logistics.logistics_order_inc_stage.""promised_time_to_deliver""",logistics.logistics_order_inc_stage
+fulfillment_type,,"logistics.logistics_order_inc_stage.""fulfillment_type""",logistics.logistics_order_inc_stage
+awb_number,,"logistics.logistics_order_inc_stage.""awb_number""",logistics.logistics_order_inc_stage
+pick_up_lat,,"logistics.logistics_order_inc_stage.""pick_up_lat""",logistics.logistics_order_inc_stage
+pick_up_long,,"logistics.logistics_order_inc_stage.""pick_up_long""",logistics.logistics_order_inc_stage
+"▼ logistics_order_new   (view, 46 cols)",,,logistics.logistics_order_new
+bap_id,,"logistics.logistics_order_new.""bap_id""",logistics.logistics_order_new
+bpp_id,,"logistics.logistics_order_new.""bpp_id""",logistics.logistics_order_new
+order_id,,"logistics.logistics_order_new.""order_id""",logistics.logistics_order_new
+transaction_id,,"logistics.logistics_order_new.""transaction_id""",logistics.logistics_order_new
+fulfillment_status,,"logistics.logistics_order_new.""fulfillment_status""",logistics.logistics_order_new
+fulfillment_type,,"logistics.logistics_order_new.""fulfillment_type""",logistics.logistics_order_new
+cod_order,,"logistics.logistics_order_new.""cod_order""",logistics.logistics_order_new
+date,,"logistics.logistics_order_new.""date""",logistics.logistics_order_new
+order_created_at,,"logistics.logistics_order_new.""order_created_at""",logistics.logistics_order_new
+cancellation_code,,"logistics.logistics_order_new.""cancellation_code""",logistics.logistics_order_new
+latest_order_status,,"logistics.logistics_order_new.""latest_order_status""",logistics.logistics_order_new
+retail_order_id,,"logistics.logistics_order_new.""retail_order_id""",logistics.logistics_order_new
+pick_up_pincode,,"logistics.logistics_order_new.""pick_up_pincode""",logistics.logistics_order_new
+delivery_pincode,,"logistics.logistics_order_new.""delivery_pincode""",logistics.logistics_order_new
+retail_category,,"logistics.logistics_order_new.""retail_category""",logistics.logistics_order_new
+shipment_type,,"logistics.logistics_order_new.""shipment_type""",logistics.logistics_order_new
+motorable_distance,,"logistics.logistics_order_new.""motorable_distance""",logistics.logistics_order_new
+provider_name,,"logistics.logistics_order_new.""provider_name""",logistics.logistics_order_new
+pickup_tat,,"logistics.logistics_order_new.""pickup_tat""",logistics.logistics_order_new
+rts_tat,,"logistics.logistics_order_new.""rts_tat""",logistics.logistics_order_new
+f_ready_to_ship_at_date,,"logistics.logistics_order_new.""f_ready_to_ship_at_date""",logistics.logistics_order_new
+f_at_pickup_from_date,,"logistics.logistics_order_new.""f_at_pickup_from_date""",logistics.logistics_order_new
+f_agent_assigned_at_date,,"logistics.logistics_order_new.""f_agent_assigned_at_date""",logistics.logistics_order_new
+delivered_date,,"logistics.logistics_order_new.""delivered_date""",logistics.logistics_order_new
+cancelled_date,,"logistics.logistics_order_new.""cancelled_date""",logistics.logistics_order_new
+picked_date,,"logistics.logistics_order_new.""picked_date""",logistics.logistics_order_new
+promised_time_to_deliver,,"logistics.logistics_order_new.""promised_time_to_deliver""",logistics.logistics_order_new
+awbnumber,,"logistics.logistics_order_new.""awbnumber""",logistics.logistics_order_new
+Linked Orders,,"logistics.logistics_order_new.""Linked Orders""",logistics.logistics_order_new
+dedup,,"logistics.logistics_order_new.""dedup""",logistics.logistics_order_new
+order_count,,"logistics.logistics_order_new.""order_count""",logistics.logistics_order_new
+avg_del,,"logistics.logistics_order_new.""avg_del""",logistics.logistics_order_new
+del_tat_duration,,"logistics.logistics_order_new.""del_tat_duration""",logistics.logistics_order_new
+del_adherence,,"logistics.logistics_order_new.""del_adherence""",logistics.logistics_order_new
+del_breach_diff,,"logistics.logistics_order_new.""del_breach_diff""",logistics.logistics_order_new
+rtsvscrt,,"logistics.logistics_order_new.""rtsvscrt""",logistics.logistics_order_new
+rtsvspck,,"logistics.logistics_order_new.""rtsvspck""",logistics.logistics_order_new
+delage,,"logistics.logistics_order_new.""delage""",logistics.logistics_order_new
+cancel_secs,,"logistics.logistics_order_new.""cancel_secs""",logistics.logistics_order_new
+in_process_ageing,,"logistics.logistics_order_new.""in_process_ageing""",logistics.logistics_order_new
+rider_waiting,,"logistics.logistics_order_new.""rider_waiting""",logistics.logistics_order_new
+rider_assigning,,"logistics.logistics_order_new.""rider_assigning""",logistics.logistics_order_new
+pick_up_breached,,"logistics.logistics_order_new.""pick_up_breached""",logistics.logistics_order_new
+pick_up_tat_diff,,"logistics.logistics_order_new.""pick_up_tat_diff""",logistics.logistics_order_new
+rts_breached,,"logistics.logistics_order_new.""rts_breached""",logistics.logistics_order_new
+rts_tat_diff,,"logistics.logistics_order_new.""rts_tat_diff""",logistics.logistics_order_new
+"▼ logistics_stck   (view, 20 cols)",,,logistics.logistics_stck
+bap_id,,"logistics.logistics_stck.""bap_id""",logistics.logistics_stck
+bpp_id,,"logistics.logistics_stck.""bpp_id""",logistics.logistics_stck
+order_id,,"logistics.logistics_stck.""order_id""",logistics.logistics_stck
+retail_order_id,,"logistics.logistics_stck.""retail_order_id""",logistics.logistics_stck
+transaction_id,,"logistics.logistics_stck.""transaction_id""",logistics.logistics_stck
+date,,"logistics.logistics_stck.""date""",logistics.logistics_stck
+order_created_at,,"logistics.logistics_stck.""order_created_at""",logistics.logistics_stck
+cancellation_code,,"logistics.logistics_stck.""cancellation_code""",logistics.logistics_stck
+latest_order_status,,"logistics.logistics_stck.""latest_order_status""",logistics.logistics_stck
+Linked,,"logistics.logistics_stck.""Linked""",logistics.logistics_stck
+shipment_type,,"logistics.logistics_stck.""shipment_type""",logistics.logistics_stck
+provider_name,,"logistics.logistics_stck.""provider_name""",logistics.logistics_stck
+pick_up_pincode,,"logistics.logistics_stck.""pick_up_pincode""",logistics.logistics_stck
+delivery_pincode,,"logistics.logistics_stck.""delivery_pincode""",logistics.logistics_stck
+retail_category,,"logistics.logistics_stck.""retail_category""",logistics.logistics_stck
+assigned,,"logistics.logistics_stck.""assigned""",logistics.logistics_stck
+cancelled_date,,"logistics.logistics_stck.""cancelled_date""",logistics.logistics_stck
+picked_date,,"logistics.logistics_stck.""picked_date""",logistics.logistics_stck
+dedup,,"logistics.logistics_stck.""dedup""",logistics.logistics_stck
+rn_order,,"logistics.logistics_stck.""rn_order""",logistics.logistics_stck
+"▼ logistics_stck_1   (view, 23 cols)",,,logistics.logistics_stck_1
+bap_id,,"logistics.logistics_stck_1.""bap_id""",logistics.logistics_stck_1
+bpp_id,,"logistics.logistics_stck_1.""bpp_id""",logistics.logistics_stck_1
+order_id,,"logistics.logistics_stck_1.""order_id""",logistics.logistics_stck_1
+transaction_id,,"logistics.logistics_stck_1.""transaction_id""",logistics.logistics_stck_1
+date,,"logistics.logistics_stck_1.""date""",logistics.logistics_stck_1
+order_created_at,,"logistics.logistics_stck_1.""order_created_at""",logistics.logistics_stck_1
+cancellation_code,,"logistics.logistics_stck_1.""cancellation_code""",logistics.logistics_stck_1
+retail_order_id,,"logistics.logistics_stck_1.""retail_order_id""",logistics.logistics_stck_1
+pick_up_pincode,,"logistics.logistics_stck_1.""pick_up_pincode""",logistics.logistics_stck_1
+delivery_pincode,,"logistics.logistics_stck_1.""delivery_pincode""",logistics.logistics_stck_1
+retail_category,,"logistics.logistics_stck_1.""retail_category""",logistics.logistics_stck_1
+shipment_type,,"logistics.logistics_stck_1.""shipment_type""",logistics.logistics_stck_1
+f_agent_assigned_at_date,,"logistics.logistics_stck_1.""f_agent_assigned_at_date""",logistics.logistics_stck_1
+cancelled_date,,"logistics.logistics_stck_1.""cancelled_date""",logistics.logistics_stck_1
+picked_date,,"logistics.logistics_stck_1.""picked_date""",logistics.logistics_stck_1
+delivered_date,,"logistics.logistics_stck_1.""delivered_date""",logistics.logistics_stck_1
+assigned,,"logistics.logistics_stck_1.""assigned""",logistics.logistics_stck_1
+latest_order_status,,"logistics.logistics_stck_1.""latest_order_status""",logistics.logistics_stck_1
+rn_order,,"logistics.logistics_stck_1.""rn_order""",logistics.logistics_stck_1
+stockout,,"logistics.logistics_stck_1.""stockout""",logistics.logistics_stck_1
+Linked,,"logistics.logistics_stck_1.""Linked""",logistics.logistics_stck_1
+dedup,,"logistics.logistics_stck_1.""dedup""",logistics.logistics_stck_1
+tech_dedup,,"logistics.logistics_stck_1.""tech_dedup""",logistics.logistics_stck_1
+"▼ logistics_stck_60_days   (view, 19 cols)",,,logistics.logistics_stck_60_days
+bap_id,,"logistics.logistics_stck_60_days.""bap_id""",logistics.logistics_stck_60_days
+bpp_id,,"logistics.logistics_stck_60_days.""bpp_id""",logistics.logistics_stck_60_days
+order_id,,"logistics.logistics_stck_60_days.""order_id""",logistics.logistics_stck_60_days
+transaction_id,,"logistics.logistics_stck_60_days.""transaction_id""",logistics.logistics_stck_60_days
+date,,"logistics.logistics_stck_60_days.""date""",logistics.logistics_stck_60_days
+order_created_at,,"logistics.logistics_stck_60_days.""order_created_at""",logistics.logistics_stck_60_days
+cancellation_code,,"logistics.logistics_stck_60_days.""cancellation_code""",logistics.logistics_stck_60_days
+latest_order_status,,"logistics.logistics_stck_60_days.""latest_order_status""",logistics.logistics_stck_60_days
+Linked,,"logistics.logistics_stck_60_days.""Linked""",logistics.logistics_stck_60_days
+shipment_type,,"logistics.logistics_stck_60_days.""shipment_type""",logistics.logistics_stck_60_days
+provider_name,,"logistics.logistics_stck_60_days.""provider_name""",logistics.logistics_stck_60_days
+pick_up_pincode,,"logistics.logistics_stck_60_days.""pick_up_pincode""",logistics.logistics_stck_60_days
+delivery_pincode,,"logistics.logistics_stck_60_days.""delivery_pincode""",logistics.logistics_stck_60_days
+retail_category,,"logistics.logistics_stck_60_days.""retail_category""",logistics.logistics_stck_60_days
+assigned,,"logistics.logistics_stck_60_days.""assigned""",logistics.logistics_stck_60_days
+cancelled_date,,"logistics.logistics_stck_60_days.""cancelled_date""",logistics.logistics_stck_60_days
+picked_date,,"logistics.logistics_stck_60_days.""picked_date""",logistics.logistics_stck_60_days
+dedup,,"logistics.logistics_stck_60_days.""dedup""",logistics.logistics_stck_60_days
+rn_order,,"logistics.logistics_stck_60_days.""rn_order""",logistics.logistics_stck_60_days
+"▼ logistics_stck_6_days   (view, 19 cols)",,,logistics.logistics_stck_6_days
+bap_id,,"logistics.logistics_stck_6_days.""bap_id""",logistics.logistics_stck_6_days
+bpp_id,,"logistics.logistics_stck_6_days.""bpp_id""",logistics.logistics_stck_6_days
+order_id,,"logistics.logistics_stck_6_days.""order_id""",logistics.logistics_stck_6_days
+transaction_id,,"logistics.logistics_stck_6_days.""transaction_id""",logistics.logistics_stck_6_days
+date,,"logistics.logistics_stck_6_days.""date""",logistics.logistics_stck_6_days
+order_created_at,,"logistics.logistics_stck_6_days.""order_created_at""",logistics.logistics_stck_6_days
+cancellation_code,,"logistics.logistics_stck_6_days.""cancellation_code""",logistics.logistics_stck_6_days
+latest_order_status,,"logistics.logistics_stck_6_days.""latest_order_status""",logistics.logistics_stck_6_days
+Linked,,"logistics.logistics_stck_6_days.""Linked""",logistics.logistics_stck_6_days
+shipment_type,,"logistics.logistics_stck_6_days.""shipment_type""",logistics.logistics_stck_6_days
+provider_name,,"logistics.logistics_stck_6_days.""provider_name""",logistics.logistics_stck_6_days
+pick_up_pincode,,"logistics.logistics_stck_6_days.""pick_up_pincode""",logistics.logistics_stck_6_days
+delivery_pincode,,"logistics.logistics_stck_6_days.""delivery_pincode""",logistics.logistics_stck_6_days
+retail_category,,"logistics.logistics_stck_6_days.""retail_category""",logistics.logistics_stck_6_days
+assigned,,"logistics.logistics_stck_6_days.""assigned""",logistics.logistics_stck_6_days
+cancelled_date,,"logistics.logistics_stck_6_days.""cancelled_date""",logistics.logistics_stck_6_days
+picked_date,,"logistics.logistics_stck_6_days.""picked_date""",logistics.logistics_stck_6_days
+dedup,,"logistics.logistics_stck_6_days.""dedup""",logistics.logistics_stck_6_days
+rn_order,,"logistics.logistics_stck_6_days.""rn_order""",logistics.logistics_stck_6_days
+"▼ logistics_stock_bv   (view, 95 cols)",,,logistics.logistics_stock_bv
+bap_id,,"logistics.logistics_stock_bv.""bap_id""",logistics.logistics_stock_bv
+bpp_id,,"logistics.logistics_stock_bv.""bpp_id""",logistics.logistics_stock_bv
+order_id,,"logistics.logistics_stock_bv.""order_id""",logistics.logistics_stock_bv
+transaction_id,,"logistics.logistics_stock_bv.""transaction_id""",logistics.logistics_stock_bv
+date,,"logistics.logistics_stock_bv.""date""",logistics.logistics_stock_bv
+order_created_at,,"logistics.logistics_stock_bv.""order_created_at""",logistics.logistics_stock_bv
+cancellation_code,,"logistics.logistics_stock_bv.""cancellation_code""",logistics.logistics_stock_bv
+latest_order_status,,"logistics.logistics_stock_bv.""latest_order_status""",logistics.logistics_stock_bv
+Linked,,"logistics.logistics_stock_bv.""Linked""",logistics.logistics_stock_bv
+shipment_type,,"logistics.logistics_stock_bv.""shipment_type""",logistics.logistics_stock_bv
+provider_name,,"logistics.logistics_stock_bv.""provider_name""",logistics.logistics_stock_bv
+pick_up_pincode,,"logistics.logistics_stock_bv.""pick_up_pincode""",logistics.logistics_stock_bv
+delivery_pincode,,"logistics.logistics_stock_bv.""delivery_pincode""",logistics.logistics_stock_bv
+retail_category,,"logistics.logistics_stock_bv.""retail_category""",logistics.logistics_stock_bv
+assigned,,"logistics.logistics_stock_bv.""assigned""",logistics.logistics_stock_bv
+cancelled_date,,"logistics.logistics_stock_bv.""cancelled_date""",logistics.logistics_stock_bv
+picked_date,,"logistics.logistics_stock_bv.""picked_date""",logistics.logistics_stock_bv
+dedup,,"logistics.logistics_stock_bv.""dedup""",logistics.logistics_stock_bv
+rn_order,,"logistics.logistics_stock_bv.""rn_order""",logistics.logistics_stock_bv
+Cancellation Attributed to,,"logistics.logistics_stock_bv.""Cancellation Attributed to""",logistics.logistics_stock_bv
+Cancellation By,,"logistics.logistics_stock_bv.""Cancellation By""",logistics.logistics_stock_bv
+Cancel sec,,"logistics.logistics_stock_bv.""Cancel sec""",logistics.logistics_stock_bv
+Logistics NP Name,,"logistics.logistics_stock_bv.""Logistics NP Name""",logistics.logistics_stock_bv
+LNP Mask,,"logistics.logistics_stock_bv.""LNP Mask""",logistics.logistics_stock_bv
+TSP Powered,,"logistics.logistics_stock_bv.""TSP Powered""",logistics.logistics_stock_bv
+Overall,,"logistics.logistics_stock_bv.""Overall""",logistics.logistics_stock_bv
+Overall Orders,,"logistics.logistics_stock_bv.""Overall Orders""",logistics.logistics_stock_bv
+Overall Orders Dedup,,"logistics.logistics_stock_bv.""Overall Orders Dedup""",logistics.logistics_stock_bv
+Overall Deduped,,"logistics.logistics_stock_bv.""Overall Deduped""",logistics.logistics_stock_bv
+Cancelled Overall,,"logistics.logistics_stock_bv.""Cancelled Overall""",logistics.logistics_stock_bv
+Driver Assigned,,"logistics.logistics_stock_bv.""Driver Assigned""",logistics.logistics_stock_bv
+Delivered Ded,,"logistics.logistics_stock_bv.""Delivered Ded""",logistics.logistics_stock_bv
+Post assgn Post Pickup SO Dedup Cancelled,,"logistics.logistics_stock_bv.""Post assgn Post Pickup SO Dedup Cancelled""",logistics.logistics_stock_bv
+Preassigned SO Dedup,,"logistics.logistics_stock_bv.""Preassigned SO Dedup""",logistics.logistics_stock_bv
+Pre Assigned SO,,"logistics.logistics_stock_bv.""Pre Assigned SO""",logistics.logistics_stock_bv
+Post Assigned SO Dedup,,"logistics.logistics_stock_bv.""Post Assigned SO Dedup""",logistics.logistics_stock_bv
+Confirmed,,"logistics.logistics_stock_bv.""Confirmed""",logistics.logistics_stock_bv
+Buyer Led SO Dedup PA,,"logistics.logistics_stock_bv.""Buyer Led SO Dedup PA""",logistics.logistics_stock_bv
+Merchant Led SO Dedup,,"logistics.logistics_stock_bv.""Merchant Led SO Dedup""",logistics.logistics_stock_bv
+Buyer Led SO Preassgn,,"logistics.logistics_stock_bv.""Buyer Led SO Preassgn""",logistics.logistics_stock_bv
+Buyer Led - Seller by,,"logistics.logistics_stock_bv.""Buyer Led - Seller by""",logistics.logistics_stock_bv
+Log By Pre Assigned SO,,"logistics.logistics_stock_bv.""Log By Pre Assigned SO""",logistics.logistics_stock_bv
+Logistics Led - Buyer by(PA),,"logistics.logistics_stock_bv.""Logistics Led - Buyer by(PA)""",logistics.logistics_stock_bv
+LSP Led SO (Postassgn) < 20 mins (Not Picked),,"logistics.logistics_stock_bv.""LSP Led SO (Postassgn) < 20 mins (Not Picked)""",logistics.logistics_stock_bv
+Merchant Led SO (Preassgn) 15-20 mins,,"logistics.logistics_stock_bv.""Merchant Led SO (Preassgn) 15-20 mins""",logistics.logistics_stock_bv
+Merchant Led SO (Preassgn) 10-15 mins,,"logistics.logistics_stock_bv.""Merchant Led SO (Preassgn) 10-15 mins""",logistics.logistics_stock_bv
+Merchant Led SO (Postassgn) > 2 mins (Not Picked),,"logistics.logistics_stock_bv.""Merchant Led SO (Postassgn) > 2 mins (Not Picked)""",logistics.logistics_stock_bv
+Merchant Led SO (Postassgn) > 2 mins (Picked),,"logistics.logistics_stock_bv.""Merchant Led SO (Postassgn) > 2 mins (Picked)""",logistics.logistics_stock_bv
+Log Led SO Postassgn,,"logistics.logistics_stock_bv.""Log Led SO Postassgn""",logistics.logistics_stock_bv
+Log By SO Postassgn,,"logistics.logistics_stock_bv.""Log By SO Postassgn""",logistics.logistics_stock_bv
+LSP Led SO (Postassgn) > 20 mins (Not Picked),,"logistics.logistics_stock_bv.""LSP Led SO (Postassgn) > 20 mins (Not Picked)""",logistics.logistics_stock_bv
+LSP Led SO (Preassgn) 0-2 mins,,"logistics.logistics_stock_bv.""LSP Led SO (Preassgn) 0-2 mins""",logistics.logistics_stock_bv
+LSP Led SO (Preassgn) 2-5 mins,,"logistics.logistics_stock_bv.""LSP Led SO (Preassgn) 2-5 mins""",logistics.logistics_stock_bv
+LSP Led SO (Preassgn) >5 mins,,"logistics.logistics_stock_bv.""LSP Led SO (Preassgn) >5 mins""",logistics.logistics_stock_bv
+LSP Led SO (Postassgn) 0-2 mins,,"logistics.logistics_stock_bv.""LSP Led SO (Postassgn) 0-2 mins""",logistics.logistics_stock_bv
+Merchant Led SO (Postassgn) 0-2 mins,,"logistics.logistics_stock_bv.""Merchant Led SO (Postassgn) 0-2 mins""",logistics.logistics_stock_bv
+Merchant Led SO (Preassgn) 20-30 mins,,"logistics.logistics_stock_bv.""Merchant Led SO (Preassgn) 20-30 mins""",logistics.logistics_stock_bv
+Merchant Led SO (Preassgn) >30 mins,,"logistics.logistics_stock_bv.""Merchant Led SO (Preassgn) >30 mins""",logistics.logistics_stock_bv
+Merchant Led SO (Preassgn) 6-10 mins,,"logistics.logistics_stock_bv.""Merchant Led SO (Preassgn) 6-10 mins""",logistics.logistics_stock_bv
+Merchant Led SO (Preassgn) 2-6 mins,,"logistics.logistics_stock_bv.""Merchant Led SO (Preassgn) 2-6 mins""",logistics.logistics_stock_bv
+Merchant Led SO (Preassgn) 0-2 mins,,"logistics.logistics_stock_bv.""Merchant Led SO (Preassgn) 0-2 mins""",logistics.logistics_stock_bv
+Logistics Led Post Assigned Cancel,,"logistics.logistics_stock_bv.""Logistics Led Post Assigned Cancel""",logistics.logistics_stock_bv
+Buyer Led - Seller by(PA),,"logistics.logistics_stock_bv.""Buyer Led - Seller by(PA)""",logistics.logistics_stock_bv
+Merchant Led - Seller by,,"logistics.logistics_stock_bv.""Merchant Led - Seller by""",logistics.logistics_stock_bv
+Merchant By Pre Assigned SO,,"logistics.logistics_stock_bv.""Merchant By Pre Assigned SO""",logistics.logistics_stock_bv
+Logistics Led - Seller by,,"logistics.logistics_stock_bv.""Logistics Led - Seller by""",logistics.logistics_stock_bv
+Merchant Led - Buyer by,,"logistics.logistics_stock_bv.""Merchant Led - Buyer by""",logistics.logistics_stock_bv
+Merchant Led - Logistics by (Post Assigned),,"logistics.logistics_stock_bv.""Merchant Led - Logistics by (Post Assigned)""",logistics.logistics_stock_bv
+Merchant Led - Buyer by (PA),,"logistics.logistics_stock_bv.""Merchant Led - Buyer by (PA)""",logistics.logistics_stock_bv
+Logistics Led - Logistics by,,"logistics.logistics_stock_bv.""Logistics Led - Logistics by""",logistics.logistics_stock_bv
+Logistics Led - Buyer by,,"logistics.logistics_stock_bv.""Logistics Led - Buyer by""",logistics.logistics_stock_bv
+Logistics Led - Seller by(PA),,"logistics.logistics_stock_bv.""Logistics Led - Seller by(PA)""",logistics.logistics_stock_bv
+Buyer Led - Logistics by(PA),,"logistics.logistics_stock_bv.""Buyer Led - Logistics by(PA)""",logistics.logistics_stock_bv
+Logistics By SO Dedup Preassigned,,"logistics.logistics_stock_bv.""Logistics By SO Dedup Preassigned""",logistics.logistics_stock_bv
+Buyer Led Post Assigned Cancel,,"logistics.logistics_stock_bv.""Buyer Led Post Assigned Cancel""",logistics.logistics_stock_bv
+Logistics Led - Logistics by(PA),,"logistics.logistics_stock_bv.""Logistics Led - Logistics by(PA)""",logistics.logistics_stock_bv
+Merchant Led Pre Assigned SO,,"logistics.logistics_stock_bv.""Merchant Led Pre Assigned SO""",logistics.logistics_stock_bv
+Buyer Led - Buyer by(PA),,"logistics.logistics_stock_bv.""Buyer Led - Buyer by(PA)""",logistics.logistics_stock_bv
+Buyer Led - Logistics by,,"logistics.logistics_stock_bv.""Buyer Led - Logistics by""",logistics.logistics_stock_bv
+Logistics Led SO Dedup,,"logistics.logistics_stock_bv.""Logistics Led SO Dedup""",logistics.logistics_stock_bv
+Merchant Led Post Assigned Cancel,,"logistics.logistics_stock_bv.""Merchant Led Post Assigned Cancel""",logistics.logistics_stock_bv
+Merchant Led SO Postassgn,,"logistics.logistics_stock_bv.""Merchant Led SO Postassgn""",logistics.logistics_stock_bv
+Merchant Led Preassigned SO,,"logistics.logistics_stock_bv.""Merchant Led Preassigned SO""",logistics.logistics_stock_bv
+Merchant Led - Logistics by,,"logistics.logistics_stock_bv.""Merchant Led - Logistics by""",logistics.logistics_stock_bv
+Buyer Led - Buyer by,,"logistics.logistics_stock_bv.""Buyer Led - Buyer by""",logistics.logistics_stock_bv
+Merchant Led - Seller by (Post),,"logistics.logistics_stock_bv.""Merchant Led - Seller by (Post)""",logistics.logistics_stock_bv
+Pick Up State,,"logistics.logistics_stock_bv.""Pick Up State""",logistics.logistics_stock_bv
+Delivery State,,"logistics.logistics_stock_bv.""Delivery State""",logistics.logistics_stock_bv
+Pick Up City,,"logistics.logistics_stock_bv.""Pick Up City""",logistics.logistics_stock_bv
+Delivery City,,"logistics.logistics_stock_bv.""Delivery City""",logistics.logistics_stock_bv
+Pick Up Tier,,"logistics.logistics_stock_bv.""Pick Up Tier""",logistics.logistics_stock_bv
+Delivery Tier,,"logistics.logistics_stock_bv.""Delivery Tier""",logistics.logistics_stock_bv
+Pick Up Zone,,"logistics.logistics_stock_bv.""Pick Up Zone""",logistics.logistics_stock_bv
+Delivery Zone,,"logistics.logistics_stock_bv.""Delivery Zone""",logistics.logistics_stock_bv
+Seller NP,,"logistics.logistics_stock_bv.""Seller NP""",logistics.logistics_stock_bv
+"▼ lsp_funnel_view   (view, 67 cols)",,,logistics.lsp_funnel_view
+bap_id,,"logistics.lsp_funnel_view.""bap_id""",logistics.lsp_funnel_view
+bpp_id,,"logistics.lsp_funnel_view.""bpp_id""",logistics.lsp_funnel_view
+date,,"logistics.lsp_funnel_view.""date""",logistics.lsp_funnel_view
+linked,,"logistics.lsp_funnel_view.""linked""",logistics.lsp_funnel_view
+pick_up_pincode,,"logistics.lsp_funnel_view.""pick_up_pincode""",logistics.lsp_funnel_view
+delivery_pincode,,"logistics.lsp_funnel_view.""delivery_pincode""",logistics.lsp_funnel_view
+retail_category,,"logistics.lsp_funnel_view.""retail_category""",logistics.lsp_funnel_view
+shipment_type,,"logistics.lsp_funnel_view.""shipment_type""",logistics.lsp_funnel_view
+fulfillment_type,,"logistics.lsp_funnel_view.""fulfillment_type""",logistics.lsp_funnel_view
+request,,"logistics.lsp_funnel_view.""request""",logistics.lsp_funnel_view
+unique_retail_order,,"logistics.lsp_funnel_view.""unique_retail_order""",logistics.lsp_funnel_view
+on_confirms,,"logistics.lsp_funnel_view.""on_confirms""",logistics.lsp_funnel_view
+confirmed_orders,,"logistics.lsp_funnel_view.""confirmed_orders""",logistics.lsp_funnel_view
+assigned,,"logistics.lsp_funnel_view.""assigned""",logistics.lsp_funnel_view
+delivered,,"logistics.lsp_funnel_view.""delivered""",logistics.lsp_funnel_view
+preassigned_cancel,,"logistics.lsp_funnel_view.""preassigned_cancel""",logistics.lsp_funnel_view
+precancel_buyer,,"logistics.lsp_funnel_view.""precancel_buyer""",logistics.lsp_funnel_view
+precancel_buyer_0_2,,"logistics.lsp_funnel_view.""precancel_buyer_0_2""",logistics.lsp_funnel_view
+precancel_buyer_3_5,,"logistics.lsp_funnel_view.""precancel_buyer_3_5""",logistics.lsp_funnel_view
+precancel_buyer_5_10,,"logistics.lsp_funnel_view.""precancel_buyer_5_10""",logistics.lsp_funnel_view
+precancel_buyer_10_15,,"logistics.lsp_funnel_view.""precancel_buyer_10_15""",logistics.lsp_funnel_view
+precancel_buyer_15_20,,"logistics.lsp_funnel_view.""precancel_buyer_15_20""",logistics.lsp_funnel_view
+precancel_buyer_gt_20,,"logistics.lsp_funnel_view.""precancel_buyer_gt_20""",logistics.lsp_funnel_view
+precancel_seller,,"logistics.lsp_funnel_view.""precancel_seller""",logistics.lsp_funnel_view
+precancel_seller_0_2,,"logistics.lsp_funnel_view.""precancel_seller_0_2""",logistics.lsp_funnel_view
+precancel_seller_3_5,,"logistics.lsp_funnel_view.""precancel_seller_3_5""",logistics.lsp_funnel_view
+precancel_seller_5_10,,"logistics.lsp_funnel_view.""precancel_seller_5_10""",logistics.lsp_funnel_view
+precancel_seller_10_15,,"logistics.lsp_funnel_view.""precancel_seller_10_15""",logistics.lsp_funnel_view
+precancel_seller_15_20,,"logistics.lsp_funnel_view.""precancel_seller_15_20""",logistics.lsp_funnel_view
+precancel_seller_gt_20,,"logistics.lsp_funnel_view.""precancel_seller_gt_20""",logistics.lsp_funnel_view
+precancel_logistics,,"logistics.lsp_funnel_view.""precancel_logistics""",logistics.lsp_funnel_view
+precancel_logistics_0_2,,"logistics.lsp_funnel_view.""precancel_logistics_0_2""",logistics.lsp_funnel_view
+precancel_logistics_3_5,,"logistics.lsp_funnel_view.""precancel_logistics_3_5""",logistics.lsp_funnel_view
+precancel_logistics_5_10,,"logistics.lsp_funnel_view.""precancel_logistics_5_10""",logistics.lsp_funnel_view
+precancel_logistics_10_15,,"logistics.lsp_funnel_view.""precancel_logistics_10_15""",logistics.lsp_funnel_view
+precancel_logistics_15_20,,"logistics.lsp_funnel_view.""precancel_logistics_15_20""",logistics.lsp_funnel_view
+precancel_logistics_gt_20,,"logistics.lsp_funnel_view.""precancel_logistics_gt_20""",logistics.lsp_funnel_view
+postassigned_cancel,,"logistics.lsp_funnel_view.""postassigned_cancel""",logistics.lsp_funnel_view
+postcancel_buyer,,"logistics.lsp_funnel_view.""postcancel_buyer""",logistics.lsp_funnel_view
+postcancel_buyer_prepickup,,"logistics.lsp_funnel_view.""postcancel_buyer_prepickup""",logistics.lsp_funnel_view
+postcancel_buyer_prepickup_0_2,,"logistics.lsp_funnel_view.""postcancel_buyer_prepickup_0_2""",logistics.lsp_funnel_view
+postcancel_buyer_prepickup_3_5,,"logistics.lsp_funnel_view.""postcancel_buyer_prepickup_3_5""",logistics.lsp_funnel_view
+postcancel_buyer_prepickup_5_10,,"logistics.lsp_funnel_view.""postcancel_buyer_prepickup_5_10""",logistics.lsp_funnel_view
+postcancel_buyer_prepickup_10_15,,"logistics.lsp_funnel_view.""postcancel_buyer_prepickup_10_15""",logistics.lsp_funnel_view
+postcancel_buyer_prepickup_15_20,,"logistics.lsp_funnel_view.""postcancel_buyer_prepickup_15_20""",logistics.lsp_funnel_view
+postcancel_buyer_prepickup_gt_20,,"logistics.lsp_funnel_view.""postcancel_buyer_prepickup_gt_20""",logistics.lsp_funnel_view
+postcancel_buyer_postpickup,,"logistics.lsp_funnel_view.""postcancel_buyer_postpickup""",logistics.lsp_funnel_view
+postcancel_seller,,"logistics.lsp_funnel_view.""postcancel_seller""",logistics.lsp_funnel_view
+postcancel_seller_prepickup,,"logistics.lsp_funnel_view.""postcancel_seller_prepickup""",logistics.lsp_funnel_view
+postcancel_seller_prepickup_0_2,,"logistics.lsp_funnel_view.""postcancel_seller_prepickup_0_2""",logistics.lsp_funnel_view
+postcancel_seller_prepickup_3_5,,"logistics.lsp_funnel_view.""postcancel_seller_prepickup_3_5""",logistics.lsp_funnel_view
+postcancel_seller_prepickup_5_10,,"logistics.lsp_funnel_view.""postcancel_seller_prepickup_5_10""",logistics.lsp_funnel_view
+postcancel_seller_prepickup_10_15,,"logistics.lsp_funnel_view.""postcancel_seller_prepickup_10_15""",logistics.lsp_funnel_view
+postcancel_seller_prepickup_15_20,,"logistics.lsp_funnel_view.""postcancel_seller_prepickup_15_20""",logistics.lsp_funnel_view
+postcancel_seller_prepickup_gt_20,,"logistics.lsp_funnel_view.""postcancel_seller_prepickup_gt_20""",logistics.lsp_funnel_view
+postcancel_seller_postpickup,,"logistics.lsp_funnel_view.""postcancel_seller_postpickup""",logistics.lsp_funnel_view
+postcancel_logistics,,"logistics.lsp_funnel_view.""postcancel_logistics""",logistics.lsp_funnel_view
+postcancel_logistics_prepickup,,"logistics.lsp_funnel_view.""postcancel_logistics_prepickup""",logistics.lsp_funnel_view
+postcancel_logistics_prepickup_0_2,,"logistics.lsp_funnel_view.""postcancel_logistics_prepickup_0_2""",logistics.lsp_funnel_view
+postcancel_logistics_prepickup_3_5,,"logistics.lsp_funnel_view.""postcancel_logistics_prepickup_3_5""",logistics.lsp_funnel_view
+postcancel_logistics_prepickup_5_10,,"logistics.lsp_funnel_view.""postcancel_logistics_prepickup_5_10""",logistics.lsp_funnel_view
+postcancel_logistics_prepickup_10_15,,"logistics.lsp_funnel_view.""postcancel_logistics_prepickup_10_15""",logistics.lsp_funnel_view
+postcancel_logistics_prepickup_15_20,,"logistics.lsp_funnel_view.""postcancel_logistics_prepickup_15_20""",logistics.lsp_funnel_view
+postcancel_logistics_prepickup_gt_20,,"logistics.lsp_funnel_view.""postcancel_logistics_prepickup_gt_20""",logistics.lsp_funnel_view
+postcancel_logistics_postpickup,,"logistics.lsp_funnel_view.""postcancel_logistics_postpickup""",logistics.lsp_funnel_view
+preassigned_open,,"logistics.lsp_funnel_view.""preassigned_open""",logistics.lsp_funnel_view
+postassigned_open,,"logistics.lsp_funnel_view.""postassigned_open""",logistics.lsp_funnel_view
+"▼ master_log   (base table, 32 cols)",,,logistics.master_log
+bap_id,,"logistics.master_log.""bap_id""",logistics.master_log
+bpp_id,,"logistics.master_log.""bpp_id""",logistics.master_log
+order_id,,"logistics.master_log.""order_id""",logistics.master_log
+transaction_id,,"logistics.master_log.""transaction_id""",logistics.master_log
+fulfillment_status,,"logistics.master_log.""fulfillment_status""",logistics.master_log
+cod_order,,"logistics.master_log.""cod_order""",logistics.master_log
+date,,"logistics.master_log.""date""",logistics.master_log
+order_created_at,,"logistics.master_log.""order_created_at""",logistics.master_log
+cancellation_code,,"logistics.master_log.""cancellation_code""",logistics.master_log
+latest_order_status,,"logistics.master_log.""latest_order_status""",logistics.master_log
+retail_order_id,,"logistics.master_log.""retail_order_id""",logistics.master_log
+pick_up_pincode,,"logistics.master_log.""pick_up_pincode""",logistics.master_log
+delivery_pincode,,"logistics.master_log.""delivery_pincode""",logistics.master_log
+retail_category,,"logistics.master_log.""retail_category""",logistics.master_log
+shipment_type,,"logistics.master_log.""shipment_type""",logistics.master_log
+motorable_distance,,"logistics.master_log.""motorable_distance""",logistics.master_log
+provider_name,,"logistics.master_log.""provider_name""",logistics.master_log
+pickup_tat,,"logistics.master_log.""pickup_tat""",logistics.master_log
+rts_tat,,"logistics.master_log.""rts_tat""",logistics.master_log
+f_ready_to_ship_at_date,,"logistics.master_log.""f_ready_to_ship_at_date""",logistics.master_log
+f_at_pickup_from_date,,"logistics.master_log.""f_at_pickup_from_date""",logistics.master_log
+f_agent_assigned_at_date,,"logistics.master_log.""f_agent_assigned_at_date""",logistics.master_log
+delivered_date,,"logistics.master_log.""delivered_date""",logistics.master_log
+cancelled_date,,"logistics.master_log.""cancelled_date""",logistics.master_log
+picked_date,,"logistics.master_log.""picked_date""",logistics.master_log
+drop_row,,"logistics.master_log.""drop_row""",logistics.master_log
+row_updated,,"logistics.master_log.""row_updated""",logistics.master_log
+promised_time_to_deliver,,"logistics.master_log.""promised_time_to_deliver""",logistics.master_log
+fulfillment_type,,"logistics.master_log.""fulfillment_type""",logistics.master_log
+awb_number,,"logistics.master_log.""awb_number""",logistics.master_log
+pick_up_lat,,"logistics.master_log.""pick_up_lat""",logistics.master_log
+pick_up_long,,"logistics.master_log.""pick_up_long""",logistics.master_log
+"▼ master_select_error   (base table, 0 cols)",,,logistics.master_select_error
+"▼ order_category_mapping   (base table, 2 cols)",,,logistics.order_category_mapping
+L1 Category,,"logistics.order_category_mapping.""L1 Category""",logistics.order_category_mapping
+network_retail_order_category,,"logistics.order_category_mapping.""network_retail_order_category""",logistics.order_category_mapping
+"▼ order_dummy   (view, 27 cols)",,,logistics.order_dummy
+Buyer NP,,"logistics.order_dummy.""Buyer NP""",logistics.order_dummy
+Seller NP,,"logistics.order_dummy.""Seller NP""",logistics.order_dummy
+Network order id,,"logistics.order_dummy.""Network order id""",logistics.order_dummy
+provider key,,"logistics.order_dummy.""provider key""",logistics.order_dummy
+Provider Id,,"logistics.order_dummy.""Provider Id""",logistics.order_dummy
+Seller Name,,"logistics.order_dummy.""Seller Name""",logistics.order_dummy
+Seller Pincode,,"logistics.order_dummy.""Seller Pincode""",logistics.order_dummy
+Delivery Pincode,,"logistics.order_dummy.""Delivery Pincode""",logistics.order_dummy
+linked,,"logistics.order_dummy.""linked""",logistics.order_dummy
+cancellation_code,,"logistics.order_dummy.""cancellation_code""",logistics.order_dummy
+Created at,,"logistics.order_dummy.""Created at""",logistics.order_dummy
+Date,,"logistics.order_dummy.""Date""",logistics.order_dummy
+domain,,"logistics.order_dummy.""domain""",logistics.order_dummy
+on-time-del,,"logistics.order_dummy.""on-time-del""",logistics.order_dummy
+Shipped at,,"logistics.order_dummy.""Shipped at""",logistics.order_dummy
+Ready to Ship,,"logistics.order_dummy.""Ready to Ship""",logistics.order_dummy
+Promised time,,"logistics.order_dummy.""Promised time""",logistics.order_dummy
+tat_dif,,"logistics.order_dummy.""tat_dif""",logistics.order_dummy
+tat_diff_days,,"logistics.order_dummy.""tat_diff_days""",logistics.order_dummy
+day_diff,,"logistics.order_dummy.""day_diff""",logistics.order_dummy
+min_diff,,"logistics.order_dummy.""min_diff""",logistics.order_dummy
+tat_time,,"logistics.order_dummy.""tat_time""",logistics.order_dummy
+no_key,,"logistics.order_dummy.""no_key""",logistics.order_dummy
+ONDC order_status,,"logistics.order_dummy.""ONDC order_status""",logistics.order_dummy
+Updated at,,"logistics.order_dummy.""Updated at""",logistics.order_dummy
+Category,,"logistics.order_dummy.""Category""",logistics.order_dummy
+Consolidated_category,,"logistics.order_dummy.""Consolidated_category""",logistics.order_dummy
+"▼ search_data_dec   (base table, 1 cols)",,,logistics.search_data_dec
+network_transaction_id,,"logistics.search_data_dec.""network_transaction_id""",logistics.search_data_dec

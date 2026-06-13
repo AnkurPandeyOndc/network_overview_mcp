@@ -7,13 +7,21 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    # Individual DB connection variables (preferred)
-    database_host: str = "localhost"
-    database_port: int = 5432
-    database_name: str = "ondc_analytics"
-    database_user: str = "ondc"
-    database_password: str = "ondc_secret"
-    database_schema: str = "opendata_nodata"
+    app_env: str = "prod"
+
+    # Production DB connection variables
+    prod_db_host: str = ""
+    prod_db_port: int = 5432
+    prod_db_database: str = ""
+    prod_db_user: str = ""
+    prod_db_password: str = ""
+
+    # Staging DB connection variables
+    stage_db_host: str = ""
+    stage_db_port: int = 5432
+    stage_db_database: str = ""
+    stage_db_user: str = ""
+    stage_db_password: str = ""
 
     # Composite URL — auto-built from individual vars if not set explicitly
     database_url: str = ""
@@ -24,10 +32,16 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def build_database_url(self) -> "Settings":
         if not self.database_url:
-            self.database_url = (
-                f"postgresql://{self.database_user}:{self.database_password}"
-                f"@{self.database_host}:{self.database_port}/{self.database_name}"
-            )
+            if self.app_env.lower() == "stage":
+                self.database_url = (
+                    f"postgresql://{self.stage_db_user}:{self.stage_db_password}"
+                    f"@{self.stage_db_host}:{self.stage_db_port}/{self.stage_db_database}"
+                )
+            else:
+                self.database_url = (
+                    f"postgresql://{self.prod_db_user}:{self.prod_db_password}"
+                    f"@{self.prod_db_host}:{self.prod_db_port}/{self.prod_db_database}"
+                )
         return self
 
     transport: str = "stdio"  # "stdio" or "http"
@@ -35,7 +49,7 @@ class Settings(BaseSettings):
     port: int = 8000
 
     max_query_rows: int = 1000
-    query_timeout_seconds: int = 30
+    query_timeout_seconds: int = 600
 
     log_level: str = "INFO"
     audit_log_path: str = "logs/audit.jsonl"
