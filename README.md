@@ -8,10 +8,10 @@ The server exposes **4 MCP tools** that an LLM (Claude, etc.) can call to explor
 
 | Tool | Description |
 |------|-------------|
-| `get_schema` | Returns table definitions, column types, domain/category mappings, and NP types |
+| `get_schema` | Returns global schema context and configurations |
 | `get_data_freshness` | Returns the latest `order_date` per table |
 | `run_safe_sql` | Validates and executes a read-only SQL query with safety guardrails |
-| `search_docs` | Searches indexed ONDC documents (RAG skeleton, no docs indexed yet) |
+| `search_schema` | Searches the FAISS index of 249 production tables using vector similarity to find relevant tables and their columns |
 
 ### SQL safety guardrails
 
@@ -21,8 +21,7 @@ Every query passed to `run_safe_sql` is validated before execution:
 - `SELECT *` is rejected — explicit column names required
 - `WHERE` clause with `order_date` filter is mandatory
 - `LIMIT` is auto-injected (default 1000) or capped if too high
-- Only tables defined in `schema/tables.yaml` are accessible
-- JOINs require an `ON` clause on allowed columns only
+- **Dynamic Access:** Queries can hit any of the 249 ingested tables. Table-allowlisting logic has been relaxed in favour of relying entirely on database roles and read-only transactions to enforce access bounds.
 - Multi-statement queries are rejected
 - All queries run in a read-only transaction with a statement timeout
 
@@ -37,27 +36,9 @@ Two roles are defined in `schema/tables.yaml`:
 
 Schema: `opendata_nodata`
 
-**`model_for_all_domain`** — Order counts by domain, category, and network participant
+The database contains over **249 dynamic tables**, tracking aggregated and granular order data across various domains. 
 
-| Column | Type | Description |
-|--------|------|-------------|
-| order_date | date | Order date |
-| buyer_np | varchar | Buyer network participant name |
-| seller_np | varchar | Seller network participant name |
-| category | varchar | Product/service category |
-| domain | varchar | Business domain (Retail B2C, Logistics, etc.) |
-| np_type | varchar | Network participant type: Inter NP, Intra NP, or null |
-| orders | int4 | Number of orders |
-
-**`model_for_all_domain_pincode`** — Order counts by domain and city
-
-| Column | Type | Description |
-|--------|------|-------------|
-| order_date | date | Order date |
-| domain | varchar | Business domain |
-| delivery_city | varchar | City where order is delivered |
-| seller_city | varchar | City where seller is located |
-| orders | int8 | Number of orders |
+Because of the vast size, static schema files are no longer used. Instead, the MCP server hosts a built-in FAISS vector index that maps semantic concepts directly to DDL schemas. LLMs use the `search_schema` tool to perform retrieval-augmented generation (RAG) to find exactly which tables and columns to query.
 
 ### Domains
 
@@ -240,10 +221,10 @@ ondc-analytics-mcp/
       sql_tool.py          # run_safe_sql implementation
       schema_tool.py       # get_schema implementation
       freshness_tool.py    # get_data_freshness implementation
-      rag_tool.py          # search_docs skeleton
+      search_tool.py       # search_schema implementation
     rag/
-      ingestion.py         # Document ingestion (skeleton)
-      search.py            # Document search (skeleton)
+      ingestion.py         # FAISS document ingestion & vectorization
+      import_docs.py       # Script to ingest production markdown into FAISS
   schema/
     tables.yaml            # Table metadata, domains, roles
     init.sql               # Seed data for local development

@@ -195,7 +195,7 @@ graph TB
         T1[run_safe_sql<br/>sql_tool.py]
         T2[get_schema<br/>schema_tool.py]
         T3[get_data_freshness<br/>freshness_tool.py]
-        T4[search_docs<br/>rag_tool.py]
+        T4[search_schema<br/>search_tool.py]
     end
 
     subgraph "Validation Layer"
@@ -216,9 +216,9 @@ graph TB
         CACHE[RedisCache<br/>redis_cache.py<br/>Graceful Degradation]
     end
 
-    subgraph "RAG Pipeline (Skeleton)"
-        ING[Ingestion<br/>ingestion.py]
-        SRCH[FAISS Search<br/>search.py]
+    subgraph "RAG Pipeline (FAISS)"
+        ING[Ingestion<br/>import_docs.py]
+        SRCH[FAISS Search<br/>search_tool.py]
     end
 
     subgraph "Configuration"
@@ -252,8 +252,8 @@ graph TB
 | SQL Tool | `tools/sql_tool.py` | Orchestrates validation → RBAC → cache → execute → audit |
 | Schema Tool | `tools/schema_tool.py` | Returns cached table metadata for LLM context |
 | Freshness Tool | `tools/freshness_tool.py` | Checks latest data date per table |
-| RAG Tool | `tools/rag_tool.py` | Document search skeleton |
-| SQL Validator | `validation/sql_validator.py` | 7-rule AST validation engine using sqlglot |
+| RAG Tool | `tools/search_tool.py` | FAISS vector DB for semantic schema search over 249 tables |
+| SQL Validator | `validation/sql_validator.py` | AST validation engine using sqlglot |
 | Role Access | `security/role_access.py` | Table-level RBAC check |
 | Query Logger | `security/query_logger.py` | Structured JSONL audit logging |
 | Connection Pool | `db/connection.py` | asyncpg pool with read-only enforcement |
@@ -298,9 +298,9 @@ Returns full schema metadata (table names, column names and types, domain/catego
 
 Queries `MAX(order_date)` from each table so the LLM knows the latest available data date. Useful for answering "how recent is the data?" and for constructing date filters.
 
-#### `search_docs(query)` — Document search (skeleton)
+#### `search_schema(query)` — Semantic Schema Search (FAISS)
 
-A placeholder for future RAG-based document search. Currently returns an empty result set with a message indicating no documents are indexed.
+A FAISS-backed RAG endpoint. It embeds the natural language query using `all-MiniLM-L6-v2` and searches the local vector store for the 5 most relevant tables out of the 249 ingested from production schema documentation. Returns exact DDL table structures, greatly saving context tokens.
 
 ### 4.3 SQL Validation Engine (`sql_validator.py` — 197 lines)
 
@@ -311,10 +311,10 @@ The core security component. Uses **sqlglot** to parse SQL into an Abstract Synt
 | 1 | **SELECT-only** | INSERT, UPDATE, DELETE, DROP, ALTER, CREATE | Checks `isinstance(statement, exp.Select)` |
 | 2 | **Single statement** | Multi-statement injection (`SELECT 1; DROP TABLE...`) | Checks `len(parsed) > 1` |
 | 3 | **No SELECT \*** | Full-table column exposure | Scans AST for `exp.Star` nodes |
-| 4 | **Allowed tables only** | Access to system tables, PII tables | Cross-references tables against `SchemaRegistry` |
-| 5 | **Date filter required** | Full-table scans without time bounds | Checks `WHERE` clause for `order_date` column reference |
-| 6 | **Join validation** | Cartesian joins, joins on non-indexed columns | Requires `ON` clause; restricts join columns to allowed list |
-| 7 | **LIMIT enforcement** | Unbounded result sets | Auto-injects `LIMIT 1000`; caps user-specified limits exceeding max |
+| 4 | **Date filter required** | Full-table scans without time bounds | Checks `WHERE` clause for `order_date` column reference |
+| 5 | **LIMIT enforcement** | Unbounded result sets | Auto-injects `LIMIT 1000`; caps user-specified limits exceeding max |
+
+*Note: Table allow-listing and JOIN checking rules were removed. The system now leverages 249 distinct tables, so it relies heavily on read-only database roles to prevent unauthorized access.*
 
 The validator returns a `ValidationResult` dataclass containing:
 - `valid: bool` — whether the query passed all rules
@@ -419,13 +419,13 @@ Key design decisions:
 - **Silent failure** — All cache operations catch exceptions and log warnings, never breaking the query flow
 - **Configurable TTLs** — Via `cache_query_ttl` and `cache_schema_ttl` settings
 
-### 4.7 RAG Pipeline (Skeleton)
+### 4.7 RAG Pipeline (FAISS Schema Index)
 
-The system includes a skeleton RAG (Retrieval-Augmented Generation) pipeline for future document search:
+The system includes an operational RAG pipeline to map queries to exact table DDLs across the 249 available tables.
 
-- **Ingestion** (`rag/ingestion.py` — 62 lines) — `chunk_text()` splits documents into overlapping chunks (500 chars, 50 overlap). `load_documents()` reads `.md` and `.txt` files. `ingest_to_faiss()` raises `NotImplementedError` pending `faiss-cpu` + `sentence-transformers` installation.
-- **Search** (`rag/search.py` — 24 lines) — `search_faiss()` raises `NotImplementedError` pending dependency installation.
-- **Dependencies** — Defined as optional Poetry group: `poetry install --with rag`
+- **Ingestion** (`rag/import_docs.py`) — Reads markdown tables, computes embeddings using `all-MiniLM-L6-v2` locally via HuggingFace's `sentence-transformers`, and saves them to a `faiss_index` artifact directory.
+- **Search** (`tools/search_tool.py`) — Re-embeds the incoming `query` string and performs an L2 distance similarity search on the FAISS index to find the 5 closest tables.
+- **Dependencies** — `faiss-cpu`, `sentence-transformers`, `numpy`.
 
 ---
 
